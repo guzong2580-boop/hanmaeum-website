@@ -634,20 +634,29 @@
 <script src="common.js"></script>
 <script>
   // ────────────────────────────────────────────
-  // 콘텐츠 동적 로딩 (Decap CMS 관리)
+  // 콘텐츠 동적 로딩 (Apps Script + Google Sheets)
   // ────────────────────────────────────────────
+  const API_URL = 'https://script.google.com/macros/s/AKfycby1ZxdK--mlfWXAEO5BJaIqPI7WjEsVwmrHM-tpVhwDNAT8CKvCVL2jZYNn7dTCI9AMXg/exec';
+
   function escapeHtml(s) {
     return String(s ?? '').replace(/[&<>"']/g, c => ({
       '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'
     }[c]));
   }
 
-  // 공지사항 렌더
-  fetch('content/notices.json', { cache: 'no-store' })
-    .then(r => r.json())
-    .then(data => {
+  function fetchList(type) {
+    return fetch(`${API_URL}?action=list&type=${type}`, { cache: 'no-store' })
+      .then(r => r.json())
+      .then(res => {
+        if (!res.success) throw new Error(res.error || 'Unknown error');
+        return res.items || [];
+      });
+  }
+
+  // ─── 공지사항 ───
+  fetchList('notices')
+    .then(items => {
       const list = document.getElementById('notice-list');
-      const items = data.items || [];
       if (!items.length) {
         list.innerHTML = '<li class="notice-row" style="justify-content:center;color:var(--text-muted);font-size:13px;padding:24px">등록된 공지가 없습니다.</li>';
         return;
@@ -673,15 +682,13 @@
         '<li class="notice-row" style="justify-content:center;color:var(--text-muted);font-size:13px;padding:24px">공지사항을 불러올 수 없습니다.</li>';
     });
 
-  // 자료실 렌더
+  // ─── 자료실 ───
   const fileTypeIcon = { PDF: '📄', HWP: '📝', DOC: '📝', ZIP: '📦', IMG: '🖼️' };
   const fileTypeClass = { PDF: 'pdf', HWP: 'hwp', DOC: 'doc', ZIP: 'zip', IMG: 'img' };
 
-  fetch('content/archive.json', { cache: 'no-store' })
-    .then(r => r.json())
-    .then(data => {
+  fetchList('archive')
+    .then(items => {
       const list = document.getElementById('archive-list');
-      const items = data.items || [];
       if (!items.length) {
         list.innerHTML = '<div style="text-align:center;color:var(--text-muted);font-size:13px;padding:40px 0">등록된 자료가 없습니다.</div>';
         return;
@@ -691,8 +698,10 @@
         const cls = fileTypeClass[type] || 'pdf';
         const ico = fileTypeIcon[type] || '📄';
         const meta = [item.size, item.date].filter(Boolean).join(' · ');
-        const dlHref = item.file ? escapeHtml(item.file) : '#';
-        const dlAttr = item.file ? 'download' : 'onclick="alert(\'파일이 아직 업로드되지 않았습니다.\\n관리자 페이지에서 파일을 업로드해주세요.\'); return false;"';
+        const url = item.fileUrl && String(item.fileUrl).trim();
+        const dlAttr = url
+          ? `href="${escapeHtml(url)}" target="_blank" rel="noopener"`
+          : `href="#" onclick="alert('파일 링크가 아직 등록되지 않았습니다.\\n관리자 페이지에서 파일 URL을 추가해주세요.'); return false;"`;
         return `
           <div class="archive-row ${cls}">
             <div class="archive-ico">${ico}</div>
@@ -701,7 +710,7 @@
               <p>${escapeHtml(item.description || '')}</p>
             </div>
             <div class="archive-meta"><b>${escapeHtml(type)}</b>${escapeHtml(meta)}</div>
-            <a href="${dlHref}" class="archive-dl" ${dlAttr}>⬇ 다운로드</a>
+            <a class="archive-dl" ${dlAttr}>⬇ 다운로드</a>
           </div>`;
       }).join('');
     })
@@ -711,7 +720,7 @@
         '<div style="text-align:center;color:var(--text-muted);font-size:13px;padding:40px 0">자료실을 불러올 수 없습니다.</div>';
     });
 
-  // 갤러리 렌더
+  // ─── 갤러리 ───
   const galleryColors = {
     lavender: 'linear-gradient(135deg,#EFE9FA 0%,#DCD3F0 100%)',
     pink:     'linear-gradient(135deg,#FFE6D5 0%,#F4C8B5 100%)',
@@ -720,21 +729,19 @@
     sky:      'linear-gradient(135deg,#E8EFFD 0%,#A8C6F0 100%)'
   };
 
-  fetch('content/gallery.json', { cache: 'no-store' })
-    .then(r => r.json())
-    .then(data => {
+  fetchList('gallery')
+    .then(items => {
       const grid = document.getElementById('gallery-grid');
-      const items = data.items || [];
       if (!items.length) {
         grid.innerHTML = '<div style="grid-column:1/-1;text-align:center;color:var(--text-muted);font-size:13px;padding:40px 0">등록된 사진이 없습니다.</div>';
         return;
       }
       grid.innerHTML = items.map(item => {
-        const hasImage = item.image && item.image.trim();
-        const bgStyle = hasImage
-          ? `background-image:url('${escapeHtml(item.image)}');background-size:cover;background-position:center`
+        const url = item.imageUrl && String(item.imageUrl).trim();
+        const bgStyle = url
+          ? `background-image:url('${escapeHtml(url)}');background-size:cover;background-position:center`
           : `background:${galleryColors[item.color] || galleryColors.lavender}`;
-        const ico = hasImage ? '' : `<div class="ico">${escapeHtml(item.emoji || '📷')}</div>`;
+        const ico = url ? '' : `<div class="ico">${escapeHtml(item.emoji || '📷')}</div>`;
         return `
           <div class="gallery-tile" style="${bgStyle}">
             ${ico}
