@@ -461,47 +461,13 @@
       한마음일터의 소식과 인증서·서류 등을 안내합니다.
     </p>
 
-    <ul class="notice-list">
-      <li class="notice-row">
-        <span class="num">5</span>
-        <span class="title"><span class="badge notice">공지</span>2026년 신년 인사말</span>
-        <span class="author">관리자</span>
-        <span class="date">2026-01-02</span>
-      </li>
-      <li class="notice-row">
-        <span class="num">4</span>
-        <span class="title"><span class="badge private">비공개</span>중증장애인 생산품 인증서</span>
-        <span class="author">관리자</span>
-        <span class="date">2025-12-15</span>
-      </li>
-      <li class="notice-row">
-        <span class="num">3</span>
-        <span class="title"><span class="badge private">비공개</span>직접생산 증명서</span>
-        <span class="author">관리자</span>
-        <span class="date">2025-11-20</span>
-      </li>
-      <li class="notice-row">
-        <span class="num">2</span>
-        <span class="title"><span class="badge private">비공개</span>사업자등록증 사본</span>
-        <span class="author">관리자</span>
-        <span class="date">2025-10-05</span>
-      </li>
-      <li class="notice-row">
-        <span class="num">1</span>
-        <span class="title"><span class="badge private">비공개</span>법인 통장 사본</span>
-        <span class="author">관리자</span>
-        <span class="date">2025-10-05</span>
-      </li>
+    <ul class="notice-list" id="notice-list" data-loading="true">
+      <li class="notice-row" style="justify-content:center;color:var(--text-muted);font-size:13px;padding:24px">불러오는 중...</li>
     </ul>
 
     <div class="admin-hint">
       🔒 <b>비공개 글</b>은 관리자 로그인 후 열람·다운로드할 수 있습니다.
-      &nbsp; <a href="admin.html">관리자 로그인 →</a>
-    </div>
-
-    <div class="empty-state" style="margin-top:24px">
-      <div class="ico">⚙️</div>
-      <p><b>게시판 백엔드 연동 준비 중</b><br>관리자 로그인 → Notion DB → 글 등록·수정·삭제 (Phase 2 작업)</p>
+      &nbsp; <a href="/admin/" target="_blank" rel="noopener">관리자 로그인 →</a>
     </div>
   </div>
 </section>
@@ -516,20 +482,8 @@
       한마음일터의 일상과 행사·나들이 등 함께한 순간들을 담았습니다.
     </p>
 
-    <div class="gallery-grid">
-      <div class="gallery-tile"><div class="ico">🌸</div><div class="info"><p>봄 나들이</p><span>2025-04</span></div></div>
-      <div class="gallery-tile" style="background:linear-gradient(135deg,#FFE6D5 0%,#F4C8B5 100%)"><div class="ico">🎂</div><div class="info"><p>이용자 생일잔치</p><span>2025-05</span></div></div>
-      <div class="gallery-tile" style="background:linear-gradient(135deg,#E8F4ED 0%,#A8BB93 100%)"><div class="ico">🌳</div><div class="info"><p>여름 캠프</p><span>2025-07</span></div></div>
-      <div class="gallery-tile" style="background:linear-gradient(135deg,#FFF4E0 0%,#FFD988 100%)"><div class="ico">🍁</div><div class="info"><p>가을 야유회</p><span>2025-10</span></div></div>
-      <div class="gallery-tile" style="background:linear-gradient(135deg,#E8EFFD 0%,#A8C6F0 100%)"><div class="ico">🎄</div><div class="info"><p>송년회</p><span>2025-12</span></div></div>
-      <div class="gallery-tile"><div class="ico">🤝</div><div class="info"><p>지역사회 봉사</p><span>2025-09</span></div></div>
-      <div class="gallery-tile" style="background:linear-gradient(135deg,#FFE6D5 0%,#F4C8B5 100%)"><div class="ico">🏆</div><div class="info"><p>장애인 체육대회</p><span>2025-08</span></div></div>
-      <div class="gallery-tile" style="background:linear-gradient(135deg,#E8F4ED 0%,#A8BB93 100%)"><div class="ico">🎁</div><div class="info"><p>후원품 전달식</p><span>2025-11</span></div></div>
-    </div>
-
-    <div class="empty-state" style="margin-top:24px">
-      <div class="ico">📷</div>
-      <p><b>이미지 업로드 연동 준비 중</b><br>관리자 로그인 → Cloudinary 업로드 → 갤러리 자동 표시 (Phase 3 작업)</p>
+    <div class="gallery-grid" id="gallery-grid" data-loading="true">
+      <div style="grid-column:1/-1;text-align:center;color:var(--text-muted);font-size:13px;padding:40px 0">불러오는 중...</div>
     </div>
   </div>
 </section>
@@ -544,93 +498,8 @@
       한마음일터의 사업 안내서, 신청서, 제품 카탈로그 등 다양한 자료를 다운로드하실 수 있습니다.
     </p>
 
-    <div class="archive-list">
-
-      <div class="archive-row pdf">
-        <div class="archive-ico">📄</div>
-        <div class="archive-body">
-          <h4>한마음일터 사업 안내서</h4>
-          <p>시설 소개, 직업재활 프로그램, 주요 사업 등 한마음일터의 전반적인 안내</p>
-        </div>
-        <div class="archive-meta"><b>PDF</b>2.4 MB · 2025.12</div>
-        <a href="#" class="archive-dl">⬇ 다운로드</a>
-      </div>
-
-      <div class="archive-row pdf">
-        <div class="archive-ico">📄</div>
-        <div class="archive-body">
-          <h4>제품 카탈로그</h4>
-          <p>인쇄·임가공 등 한마음일터에서 제작 가능한 모든 제품 카탈로그</p>
-        </div>
-        <div class="archive-meta"><b>PDF</b>5.8 MB · 2025.11</div>
-        <a href="#" class="archive-dl">⬇ 다운로드</a>
-      </div>
-
-      <div class="archive-row hwp">
-        <div class="archive-ico">📝</div>
-        <div class="archive-body">
-          <h4>이용 신청서</h4>
-          <p>장애인직업재활시설 이용을 위한 신청 양식</p>
-        </div>
-        <div class="archive-meta"><b>HWP</b>120 KB · 2025.10</div>
-        <a href="#" class="archive-dl">⬇ 다운로드</a>
-      </div>
-
-      <div class="archive-row hwp">
-        <div class="archive-ico">📝</div>
-        <div class="archive-body">
-          <h4>후원 신청서</h4>
-          <p>정기·일시 후원 신청 양식 (개인·법인 모두 사용 가능)</p>
-        </div>
-        <div class="archive-meta"><b>HWP</b>95 KB · 2025.10</div>
-        <a href="#" class="archive-dl">⬇ 다운로드</a>
-      </div>
-
-      <div class="archive-row hwp">
-        <div class="archive-ico">📝</div>
-        <div class="archive-body">
-          <h4>자원봉사 신청서</h4>
-          <p>개인·단체 자원봉사 활동 신청 양식</p>
-        </div>
-        <div class="archive-meta"><b>HWP</b>88 KB · 2025.10</div>
-        <a href="#" class="archive-dl">⬇ 다운로드</a>
-      </div>
-
-      <div class="archive-row pdf">
-        <div class="archive-ico">📄</div>
-        <div class="archive-body">
-          <h4>중증장애인 생산품 우선구매 안내</h4>
-          <p>공공기관 우선구매 제도 및 한마음일터 인증 정보</p>
-        </div>
-        <div class="archive-meta"><b>PDF</b>1.6 MB · 2025.09</div>
-        <a href="#" class="archive-dl">⬇ 다운로드</a>
-      </div>
-
-      <div class="archive-row zip">
-        <div class="archive-ico">📦</div>
-        <div class="archive-body">
-          <h4>로고 · CI 다운로드</h4>
-          <p>한마음일터 로고 (PNG·SVG·AI), 컬러 가이드 포함 패키지</p>
-        </div>
-        <div class="archive-meta"><b>ZIP</b>4.2 MB · 2025.08</div>
-        <a href="#" class="archive-dl">⬇ 다운로드</a>
-      </div>
-
-      <div class="archive-row img">
-        <div class="archive-ico">🖼️</div>
-        <div class="archive-body">
-          <h4>홍보용 이미지 모음</h4>
-          <p>시설·작업장·제품 사진 (보도자료·홍보 활용 가능)</p>
-        </div>
-        <div class="archive-meta"><b>ZIP</b>12.8 MB · 2025.07</div>
-        <a href="#" class="archive-dl">⬇ 다운로드</a>
-      </div>
-
-    </div>
-
-    <div class="admin-hint" style="margin-top:28px">
-      📁 자료 다운로드 링크는 관리자 백엔드 연동 후 활성화됩니다 (Phase 2). &nbsp;
-      현재는 양식이 필요하시면 <a href="tel:031-631-6680">031-631-6680</a> 으로 요청해주세요.
+    <div class="archive-list" id="archive-list" data-loading="true">
+      <div style="text-align:center;color:var(--text-muted);font-size:13px;padding:40px 0">불러오는 중...</div>
     </div>
   </div>
 </section>
@@ -764,6 +633,124 @@
 
 <script src="common.js"></script>
 <script>
+  // ────────────────────────────────────────────
+  // 콘텐츠 동적 로딩 (Decap CMS 관리)
+  // ────────────────────────────────────────────
+  function escapeHtml(s) {
+    return String(s ?? '').replace(/[&<>"']/g, c => ({
+      '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'
+    }[c]));
+  }
+
+  // 공지사항 렌더
+  fetch('content/notices.json', { cache: 'no-store' })
+    .then(r => r.json())
+    .then(data => {
+      const list = document.getElementById('notice-list');
+      const items = data.items || [];
+      if (!items.length) {
+        list.innerHTML = '<li class="notice-row" style="justify-content:center;color:var(--text-muted);font-size:13px;padding:24px">등록된 공지가 없습니다.</li>';
+        return;
+      }
+      list.innerHTML = items.map((item, i) => {
+        const num = items.length - i;
+        const isPrivate = item.type === '비공개';
+        return `
+          <li class="notice-row">
+            <span class="num">${num}</span>
+            <span class="title">
+              <span class="badge ${isPrivate ? 'private' : 'notice'}">${escapeHtml(item.type || '공지')}</span>
+              ${escapeHtml(item.title || '')}
+            </span>
+            <span class="author">관리자</span>
+            <span class="date">${escapeHtml(item.date || '')}</span>
+          </li>`;
+      }).join('');
+    })
+    .catch(err => {
+      console.error('공지사항 로드 실패:', err);
+      document.getElementById('notice-list').innerHTML =
+        '<li class="notice-row" style="justify-content:center;color:var(--text-muted);font-size:13px;padding:24px">공지사항을 불러올 수 없습니다.</li>';
+    });
+
+  // 자료실 렌더
+  const fileTypeIcon = { PDF: '📄', HWP: '📝', DOC: '📝', ZIP: '📦', IMG: '🖼️' };
+  const fileTypeClass = { PDF: 'pdf', HWP: 'hwp', DOC: 'doc', ZIP: 'zip', IMG: 'img' };
+
+  fetch('content/archive.json', { cache: 'no-store' })
+    .then(r => r.json())
+    .then(data => {
+      const list = document.getElementById('archive-list');
+      const items = data.items || [];
+      if (!items.length) {
+        list.innerHTML = '<div style="text-align:center;color:var(--text-muted);font-size:13px;padding:40px 0">등록된 자료가 없습니다.</div>';
+        return;
+      }
+      list.innerHTML = items.map(item => {
+        const type = (item.type || 'PDF').toUpperCase();
+        const cls = fileTypeClass[type] || 'pdf';
+        const ico = fileTypeIcon[type] || '📄';
+        const meta = [item.size, item.date].filter(Boolean).join(' · ');
+        const dlHref = item.file ? escapeHtml(item.file) : '#';
+        const dlAttr = item.file ? 'download' : 'onclick="alert(\'파일이 아직 업로드되지 않았습니다.\\n관리자 페이지에서 파일을 업로드해주세요.\'); return false;"';
+        return `
+          <div class="archive-row ${cls}">
+            <div class="archive-ico">${ico}</div>
+            <div class="archive-body">
+              <h4>${escapeHtml(item.title || '')}</h4>
+              <p>${escapeHtml(item.description || '')}</p>
+            </div>
+            <div class="archive-meta"><b>${escapeHtml(type)}</b>${escapeHtml(meta)}</div>
+            <a href="${dlHref}" class="archive-dl" ${dlAttr}>⬇ 다운로드</a>
+          </div>`;
+      }).join('');
+    })
+    .catch(err => {
+      console.error('자료실 로드 실패:', err);
+      document.getElementById('archive-list').innerHTML =
+        '<div style="text-align:center;color:var(--text-muted);font-size:13px;padding:40px 0">자료실을 불러올 수 없습니다.</div>';
+    });
+
+  // 갤러리 렌더
+  const galleryColors = {
+    lavender: 'linear-gradient(135deg,#EFE9FA 0%,#DCD3F0 100%)',
+    pink:     'linear-gradient(135deg,#FFE6D5 0%,#F4C8B5 100%)',
+    mint:     'linear-gradient(135deg,#E8F4ED 0%,#A8BB93 100%)',
+    yellow:   'linear-gradient(135deg,#FFF4E0 0%,#FFD988 100%)',
+    sky:      'linear-gradient(135deg,#E8EFFD 0%,#A8C6F0 100%)'
+  };
+
+  fetch('content/gallery.json', { cache: 'no-store' })
+    .then(r => r.json())
+    .then(data => {
+      const grid = document.getElementById('gallery-grid');
+      const items = data.items || [];
+      if (!items.length) {
+        grid.innerHTML = '<div style="grid-column:1/-1;text-align:center;color:var(--text-muted);font-size:13px;padding:40px 0">등록된 사진이 없습니다.</div>';
+        return;
+      }
+      grid.innerHTML = items.map(item => {
+        const hasImage = item.image && item.image.trim();
+        const bgStyle = hasImage
+          ? `background-image:url('${escapeHtml(item.image)}');background-size:cover;background-position:center`
+          : `background:${galleryColors[item.color] || galleryColors.lavender}`;
+        const ico = hasImage ? '' : `<div class="ico">${escapeHtml(item.emoji || '📷')}</div>`;
+        return `
+          <div class="gallery-tile" style="${bgStyle}">
+            ${ico}
+            <div class="info">
+              <p>${escapeHtml(item.title || '')}</p>
+              <span>${escapeHtml(item.date || '')}</span>
+            </div>
+          </div>`;
+      }).join('');
+    })
+    .catch(err => {
+      console.error('갤러리 로드 실패:', err);
+      document.getElementById('gallery-grid').innerHTML =
+        '<div style="grid-column:1/-1;text-align:center;color:var(--text-muted);font-size:13px;padding:40px 0">갤러리를 불러올 수 없습니다.</div>';
+    });
+
   function copyAccount() {
     const text = '농협 233060-55-001607';
     navigator.clipboard.writeText(text).then(() => {

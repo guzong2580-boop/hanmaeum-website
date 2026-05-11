@@ -1,0 +1,12 @@
+{
+  "items": [
+    { "title": "봄 나들이",       "date": "2025-04", "image": "", "color": "lavender", "emoji": "🌸" },
+    { "title": "이용자 생일잔치",  "date": "2025-05", "image": "", "color": "pink",     "emoji": "🎂" },
+    { "title": "여름 캠프",        "date": "2025-07", "image": "", "color": "mint",     "emoji": "🌳" },
+    { "title": "가을 야유회",      "date": "2025-10", "image": "", "color": "yellow",   "emoji": "🍁" },
+    { "title": "송년회",           "date": "2025-12", "image": "", "color": "sky",      "emoji": "🎄" },
+    { "title": "지역사회 봉사",    "date": "2025-09", "image": "", "color": "lavender", "emoji": "🤝" },
+    { "title": "장애인 체육대회",  "date": "2025-08", "image": "", "color": "pink",     "emoji": "🏆" },
+    { "title": "후원품 전달식",    "date": "2025-11", "image": "", "color": "mint",     "emoji": "🎁" }
+  ]
+}
