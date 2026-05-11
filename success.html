@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>결제 완료 — 한마음일터</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: { extend: { fontFamily: {
+        sans:    ['Pretendard','-apple-system','sans-serif'],
+        display: ['Pretendard','-apple-system','sans-serif'],
+        gmarket: ['Pretendard','-apple-system','sans-serif'],
+      }}}
+    }
+  </script>
+
+  <style>
+    @font-face { font-family:'Pretendard'; font-weight:400; font-display:swap; src:url('fonts/Pretendard-Regular.otf') format('opentype'); }
+    @font-face { font-family:'Pretendard'; font-weight:500; font-display:swap; src:url('fonts/Pretendard-Medium.otf') format('opentype'); }
+    @font-face { font-family:'Pretendard'; font-weight:600; font-display:swap; src:url('fonts/Pretendard-SemiBold.otf') format('opentype'); }
+    @font-face { font-family:'Pretendard'; font-weight:700; font-display:swap; src:url('fonts/Pretendard-Bold.otf') format('opentype'); }
+
+    :root {
+      --bg-cream:        #FAF9F6;
+      --bg-lavender:     #E8E2F5;
+      --bg-navy:         #1B2845;
+      --text-primary:    #1F2027;
+      --text-secondary:  #4A4A55;
+      --text-muted:      #8B8B95;
+      --text-purple-deep:#5849B8;
+      --accent-blue:     #4A6FE3;
+      --accent-blue-2:   #3D5DD0;
+      --border-soft:     rgba(28,29,25,.06);
+      --border:          rgba(28,29,25,.10);
+      --ease: cubic-bezier(.25,.46,.45,.94);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; }
+    body {
+      font-family: 'Pretendard',-apple-system,sans-serif;
+      background: linear-gradient(165deg, #EFE9FA 0%, #DCD3F0 60%, #C8BCE8 100%);
+      color: var(--text-primary);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      -webkit-font-smoothing: antialiased;
+      word-break: keep-all;
+      overflow-wrap: break-word;
+    }
+
+    .check-circle {
+      width: 96px; height: 96px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent-blue) 0%, var(--text-purple-deep) 100%);
+      margin: 0 auto 24px;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 12px 36px rgba(74,111,227,.30);
+      animation: popIn .6s var(--ease);
+    }
+    @keyframes popIn {
+      0%   { transform: scale(0) rotate(-45deg); opacity: 0; }
+      60%  { transform: scale(1.15) rotate(0); opacity: 1; }
+      100% { transform: scale(1); }
+    }
+
+    .pay-card {
+      background: rgba(255,255,255,.92);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,.6);
+      border-radius: 24px;
+      box-shadow: 0 12px 40px rgba(60,40,120,.10);
+    }
+
+    .info-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 12px 0;
+      gap: 16px;
+      font-size: 14px;
+      border-bottom: 1px dashed var(--border-soft);
+    }
+    .info-row:last-child { border-bottom: none; }
+    .info-row .k { color: var(--text-muted); flex-shrink: 0; }
+    .info-row .v { color: var(--text-primary); font-weight: 600; text-align: right; word-break: break-all; }
+    .info-row.total .v {
+      font-family: 'Pretendard',sans-serif; letter-spacing: -.01em;
+      font-weight: 700;
+      color: var(--text-purple-deep);
+      font-size: 20px;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 14px 30px;
+      background: var(--accent-blue);
+      color: #fff;
+      font-size: 14px;
+      font-weight: 700;
+      text-decoration: none;
+      border-radius: 9999px;
+      transition: background .2s var(--ease), transform .2s var(--ease);
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 4px 14px rgba(74,111,227,.25);
+    }
+    .btn-primary:hover { background: var(--accent-blue-2); transform: translateY(-1px); }
+    .btn-soft {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 13px 28px;
+      background: #fff;
+      color: var(--text-primary);
+      font-size: 13px; font-weight: 600;
+      text-decoration: none;
+      border: 1px solid var(--border);
+      border-radius: 9999px;
+      transition: all .2s var(--ease);
+    }
+    .btn-soft:hover { border-color: var(--text-primary); transform: translateY(-1px); }
+  </style>
+</head>
+<body>
+
+<main class="flex-1 flex items-center justify-center px-5 py-16">
+  <div class="max-w-xl w-full">
+
+    <!-- 체크 아이콘 -->
+    <div class="check-circle">
+      <svg width="44" height="44" fill="none" stroke="#fff" stroke-width="3" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/>
+      </svg>
+    </div>
+
+    <!-- 메시지 -->
+    <div class="text-center mb-8">
+      <h1 class="font-display mb-3" style="font-size:clamp(34px,5vw,52px);color:var(--text-purple-deep);line-height:1.2">
+        결제가 완료되었습니다
+      </h1>
+      <p style="font-size:15px;color:var(--text-secondary);line-height:1.7">
+        한마음일터에서 신속히 제작에 들어가겠습니다.<br>
+        진행 상황은 등록하신 연락처로 안내드립니다.
+      </p>
+    </div>
+
+    <!-- 결제 정보 -->
+    <div class="pay-card p-7 mb-7">
+      <p class="text-xs font-semibold mb-4" style="color:var(--accent-blue);letter-spacing:.18em">PAYMENT DETAILS</p>
+
+      <div class="info-row">
+        <span class="k">결제 일시</span>
+        <span class="v" id="r-time">-</span>
+      </div>
+      <div class="info-row">
+        <span class="k">주문 번호</span>
+        <span class="v" id="r-orderId">-</span>
+      </div>
+      <div class="info-row">
+        <span class="k">결제 키</span>
+        <span class="v text-xs" id="r-paymentKey" style="font-size:11px">-</span>
+      </div>
+      <div class="info-row">
+        <span class="k">결제 수단</span>
+        <span class="v" id="r-method">카드</span>
+      </div>
+      <div class="info-row total">
+        <span class="k font-bold" style="color:var(--text-primary)">결제 금액</span>
+        <span class="v" id="r-amount">0원</span>
+      </div>
+    </div>
+
+    <!-- 안내 -->
+    <div class="pay-card p-6 mb-7">
+      <h3 class="font-bold mb-3" style="font-size:14px;letter-spacing:-.015em">📦 다음 단계</h3>
+      <ul class="space-y-2 text-sm" style="color:var(--text-secondary);line-height:1.7">
+        <li class="flex gap-2">
+          <span style="color:var(--accent-blue)" class="font-bold">1.</span>
+          담당자가 제작 시안을 작성하여 검토 요청을 보냅니다.
+        </li>
+        <li class="flex gap-2">
+          <span style="color:var(--accent-blue)" class="font-bold">2.</span>
+          시안 확정 후 본격 제작에 들어갑니다.
+        </li>
+        <li class="flex gap-2">
+          <span style="color:var(--accent-blue)" class="font-bold">3.</span>
+          제작 완료 후 약속된 일정에 납품해 드립니다.
+        </li>
+      </ul>
+    </div>
+
+    <!-- 버튼 -->
+    <div class="flex flex-wrap items-center justify-center gap-3">
+      <a href="index.html" class="btn-primary">
+        메인으로 돌아가기
+        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" viewBox="0 0 24 24">
+          <path d="M5 12h14M12 5l7 7-7 7"/>
+        </svg>
+      </a>
+      <a href="tel:031-631-6680" class="btn-soft">
+        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round"
+            d="M3 5a2 2 0 012-2h3.28a1 1 0 01.95.68l1.49 4.49a1 1 0 01-.5 1.21l-2.26 1.13a11 11 0 005.52 5.52l1.13-2.26a1 1 0 011.21-.5l4.49 1.5a1 1 0 01.68.94V19a2 2 0 01-2 2h-1C9.72 21 3 14.28 3 6V5z"/>
+        </svg>
+        문의하기 031-631-6680
+      </a>
+    </div>
+
+    <p class="text-xs text-center mt-7" style="color:var(--text-secondary)">
+      📧 결제 영수증과 거래 내역은 등록하신 이메일/문자로 발송됩니다.
+    </p>
+  </div>
+</main>
+
+<script>
+// 토스페이먼츠가 success URL로 리다이렉트 시 다음 파라미터를 전달:
+//   - paymentKey
+//   - orderId
+//   - amount
+//   - paymentType (NORMAL/BRANDPAY 등)
+//
+// 운영 환경에서는 이 정보를 백엔드로 전송 → 토스 API '결제 승인' 호출 → DB 저장 필수
+// 백엔드 미구현 상태에선 화면 표시만 진행
+
+const params = new URLSearchParams(window.location.search);
+const paymentKey = params.get('paymentKey') || '-';
+const orderId    = params.get('orderId')    || '-';
+const amount     = parseInt(params.get('amount')) || 0;
+const paymentType= params.get('paymentType') || '카드';
+
+document.getElementById('r-orderId').textContent    = orderId;
+document.getElementById('r-paymentKey').textContent = paymentKey.slice(0, 24) + (paymentKey.length > 24 ? '...' : '');
+document.getElementById('r-amount').textContent     = amount.toLocaleString() + '원';
+document.getElementById('r-method').textContent     = paymentType === 'BRANDPAY' ? '간편결제' : '카드';
+
+// 현재 시간 표시
+const now = new Date();
+const fmt = (n) => String(n).padStart(2,'0');
+document.getElementById('r-time').textContent =
+  now.getFullYear() + '.' + fmt(now.getMonth()+1) + '.' + fmt(now.getDate())
+  + ' ' + fmt(now.getHours()) + ':' + fmt(now.getMinutes());
+
+// localStorage에 결제 정보 저장 + 견적 상태 업데이트 (관리자 페이지에서 조회 가능)
+try {
+  // 1. 결제 내역 추가
+  const payments = JSON.parse(localStorage.getItem('hanmaeum_payments')) || [];
+  // 중복 방지 (같은 paymentKey가 있으면 추가하지 않음)
+  if (!payments.find(p => p.paymentKey === paymentKey)) {
+    // 견적에서 신청자 이름 가져오기
+    const quotes = JSON.parse(localStorage.getItem('hanmaeum_quotes')) || [];
+    const quote  = quotes.find(q => q.orderId === orderId);
+    payments.unshift({
+      paymentKey,
+      orderId,
+      amount,
+      paidAt: now.toISOString(),
+      paymentType,
+      customerName: quote ? quote.name : '-'
+    });
+    localStorage.setItem('hanmaeum_payments', JSON.stringify(payments));
+
+    // 2. 견적 상태를 'paid'로 업데이트
+    if (quote) {
+      const idx = quotes.findIndex(q => q.orderId === orderId);
+      quotes[idx] = {
+        ...quote,
+        status: 'paid',
+        amount: amount,
+        paidAt: now.toISOString(),
+        paymentKey
+      };
+      localStorage.setItem('hanmaeum_quotes', JSON.stringify(quotes));
+    }
+  }
+} catch (err) {
+  console.warn('결제 정보 저장 실패:', err);
+}
+
+// TODO: 운영 시엔 백엔드로 결제 승인 요청 (보안상 필수)
+// fetch('/api/payment/confirm', {
+//   method:'POST',
+//   headers:{'Content-Type':'application/json'},
+//   body: JSON.stringify({ paymentKey, orderId, amount })
+// });
+</script>
+
+</body>
+</html>

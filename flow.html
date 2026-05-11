@@ -1,0 +1,795 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>전체 흐름도 — 한마음일터 홈페이지</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <style>
+    @font-face { font-family:'Pretendard'; font-weight:400; font-display:swap; src:url('fonts/Pretendard-Regular.otf') format('opentype'); }
+    @font-face { font-family:'Pretendard'; font-weight:500; font-display:swap; src:url('fonts/Pretendard-Medium.otf') format('opentype'); }
+    @font-face { font-family:'Pretendard'; font-weight:600; font-display:swap; src:url('fonts/Pretendard-SemiBold.otf') format('opentype'); }
+    @font-face { font-family:'Pretendard'; font-weight:700; font-display:swap; src:url('fonts/Pretendard-Bold.otf') format('opentype'); }
+    @font-face { font-family:'Pretendard'; font-weight:800; font-display:swap; src:url('fonts/Pretendard-ExtraBold.otf') format('opentype'); }
+
+    :root {
+      --bg-app:        #F8F7FB;
+      --bg-card:       #FFFFFF;
+      --customer:      #6B5BC9;
+      --customer-bg:   #EFE9FA;
+      --customer-soft: #F5F0FE;
+      --admin:         #1B2845;
+      --admin-bg:      #E8EAF1;
+      --admin-soft:    #F2F4F8;
+      --data:          #B5832B;
+      --data-bg:       #FFF4E0;
+      --success:       #3F8A5A;
+      --success-bg:    #E8F4ED;
+      --fail:          #E04848;
+      --fail-bg:       #FCE5E5;
+      --border:        rgba(28,29,25,.10);
+      --text-primary:  #1F2027;
+      --text-muted:    #8B8B95;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; }
+    body {
+      font-family: 'Pretendard',-apple-system,sans-serif;
+      background: var(--bg-app);
+      color: var(--text-primary);
+      -webkit-font-smoothing: antialiased;
+      word-break: keep-all;
+      padding: 40px 20px;
+      min-height: 100vh;
+    }
+    .display { font-family: 'Pretendard',sans-serif; font-weight: 900; letter-spacing: -.025em; }
+
+    /* === Header === */
+    .header-bar {
+      background: linear-gradient(135deg, #6B5BC9 0%, #4A6FE3 100%);
+      color: #fff;
+      border-radius: 24px;
+      padding: 28px 32px;
+      margin-bottom: 36px;
+      box-shadow: 0 8px 32px rgba(74,111,227,.20);
+    }
+
+    /* === Step card === */
+    .step {
+      background: var(--bg-card);
+      border-radius: 16px;
+      padding: 18px 20px;
+      box-shadow: 0 2px 12px rgba(40,40,80,.05);
+      border: 1px solid var(--border);
+      position: relative;
+      transition: transform .2s ease, box-shadow .2s ease;
+    }
+    .step:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 18px rgba(40,40,80,.08);
+    }
+    .step.customer { border-left: 4px solid var(--customer); }
+    .step.admin    { border-left: 4px solid var(--admin); }
+    .step.data     { border-left: 4px solid var(--data); background: var(--data-bg); }
+    .step.success  { border-left: 4px solid var(--success); background: var(--success-bg); }
+    .step.fail     { border-left: 4px solid var(--fail); background: var(--fail-bg); }
+
+    .step .ico {
+      width: 44px; height: 44px;
+      border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 22px;
+      flex-shrink: 0;
+    }
+    .step.customer .ico { background: var(--customer-bg); }
+    .step.admin    .ico { background: var(--admin-bg); }
+    .step.data     .ico { background: #fff; }
+    .step.success  .ico { background: #fff; }
+    .step.fail     .ico { background: #fff; }
+
+    .step-num {
+      position: absolute;
+      top: -10px; left: -10px;
+      width: 28px; height: 28px;
+      border-radius: 50%;
+      background: var(--text-primary);
+      color: #fff;
+      font-weight: 800;
+      font-size: 12px;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 2px 6px rgba(0,0,0,.2);
+    }
+    .step.customer .step-num { background: var(--customer); }
+    .step.admin    .step-num { background: var(--admin); }
+    .step.data     .step-num { background: var(--data); }
+
+    /* === Arrow === */
+    .arrow-down {
+      width: 2px;
+      height: 32px;
+      background: var(--customer);
+      margin: 0 auto;
+      position: relative;
+    }
+    .arrow-down::after {
+      content: '';
+      position: absolute;
+      bottom: -1px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 0; height: 0;
+      border-left: 6px solid transparent;
+      border-right: 6px solid transparent;
+      border-top: 8px solid var(--customer);
+    }
+    .arrow-down.admin { background: var(--admin); }
+    .arrow-down.admin::after { border-top-color: var(--admin); }
+    .arrow-down.dashed {
+      background: repeating-linear-gradient(180deg, var(--data) 0 4px, transparent 4px 8px);
+    }
+    .arrow-down.dashed::after { border-top-color: var(--data); }
+
+    /* === Connector === */
+    .connector {
+      width: 100%;
+      height: 60px;
+      position: relative;
+    }
+    .connector .label {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: #fff;
+      padding: 4px 12px;
+      border-radius: 9999px;
+      border: 1.5px solid var(--data);
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--data);
+      white-space: nowrap;
+      box-shadow: 0 2px 6px rgba(181,131,43,.15);
+    }
+
+    /* === Lane === */
+    .lane-header {
+      padding: 14px 20px;
+      border-radius: 14px;
+      margin-bottom: 18px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .lane-header.customer {
+      background: var(--customer-bg);
+      color: var(--customer);
+    }
+    .lane-header.admin {
+      background: var(--admin-bg);
+      color: var(--admin);
+    }
+    .lane-header.data {
+      background: var(--data-bg);
+      color: var(--data);
+    }
+
+    /* === Detail tag === */
+    .tag {
+      display: inline-block;
+      padding: 3px 9px;
+      background: rgba(28,29,25,.06);
+      color: var(--text-primary);
+      border-radius: 9999px;
+      font-size: 11px;
+      font-weight: 600;
+      margin: 2px 3px 2px 0;
+    }
+
+    /* === Branch (success/fail) === */
+    .branch {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      position: relative;
+    }
+    .branch::before {
+      content: '';
+      position: absolute;
+      top: -32px;
+      left: 25%; right: 25%;
+      height: 32px;
+      border-top: 2px solid var(--customer);
+      border-left: 2px solid var(--customer);
+      border-right: 2px solid var(--customer);
+      border-radius: 12px 12px 0 0;
+      border-bottom: none;
+    }
+
+    /* === Print === */
+    @media print {
+      body { background: #fff; padding: 20px; }
+      .no-print { display: none !important; }
+      .step:hover { transform: none; box-shadow: 0 2px 12px rgba(40,40,80,.05); }
+    }
+
+    /* === Layout === */
+    .canvas {
+      max-width: 1280px;
+      margin: 0 auto;
+    }
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 36px;
+    }
+    @media (max-width: 900px) {
+      .grid-2 { grid-template-columns: 1fr; }
+    }
+
+    /* === Legend === */
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+    }
+    .legend-dot {
+      width: 14px; height: 14px;
+      border-radius: 4px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="canvas">
+
+  <!-- ═══ Header ═══ -->
+  <div class="header-bar">
+    <div class="flex items-center justify-between flex-wrap gap-4">
+      <div>
+        <p class="text-xs font-semibold opacity-80 mb-1" style="letter-spacing:.18em">SITEMAP & FLOW</p>
+        <h1 class="display text-3xl md:text-4xl mb-2" style="line-height:1.1">한마음일터 홈페이지 전체 흐름도</h1>
+        <p class="text-sm opacity-90">고객의 견적 요청부터 결제 완료까지, 관리자의 처리 과정까지 한눈에 보기</p>
+      </div>
+      <div class="text-right">
+        <p class="text-xs opacity-70">총 페이지 5개 · 데이터 저장소 1개</p>
+        <p class="text-xs opacity-70 mt-1">2026년 5월 기준</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ Legend ═══ -->
+  <div class="bg-white rounded-2xl px-6 py-4 mb-9 flex flex-wrap items-center gap-6 border" style="border-color:var(--border)">
+    <p class="text-xs font-bold" style="color:var(--text-muted);letter-spacing:.05em">범례</p>
+    <div class="legend-item"><span class="legend-dot" style="background:var(--customer)"></span><span><b>고객 여정</b> (랜딩 → 결제)</span></div>
+    <div class="legend-item"><span class="legend-dot" style="background:var(--admin)"></span><span><b>관리자 여정</b> (운영 처리)</span></div>
+    <div class="legend-item"><span class="legend-dot" style="background:var(--data)"></span><span><b>데이터 저장</b> (localStorage)</span></div>
+    <div class="legend-item"><span class="legend-dot" style="background:var(--success)"></span><span><b>성공 분기</b></span></div>
+    <div class="legend-item"><span class="legend-dot" style="background:var(--fail)"></span><span><b>실패 분기</b></span></div>
+  </div>
+
+
+  <!-- ═══ 2-column lane: Customer | Admin ═══ -->
+  <div class="grid-2">
+
+    <!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
+    <!-- LEFT: 고객 여정                       -->
+    <!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
+    <div>
+      <div class="lane-header customer">
+        <span class="text-2xl">👤</span>
+        <div>
+          <p class="text-xs font-bold mb-0.5" style="letter-spacing:.1em">CUSTOMER</p>
+          <p class="font-bold text-base">고객 여정</p>
+        </div>
+      </div>
+
+      <!-- Step 1 -->
+      <div class="step customer">
+        <div class="step-num">1</div>
+        <div class="flex gap-3 items-start">
+          <div class="ico">🏠</div>
+          <div class="flex-1">
+            <div class="flex items-center justify-between mb-1">
+              <p class="font-bold text-base">메인 페이지 방문</p>
+              <span class="tag">index.html</span>
+            </div>
+            <p class="text-xs mb-2" style="color:var(--text-muted);line-height:1.6">
+              랜딩 페이지를 통해 한마음일터 소개·서비스·후기 등을 확인합니다.
+            </p>
+            <div class="flex flex-wrap">
+              <span class="tag">Hero</span>
+              <span class="tag">공지·소식</span>
+              <span class="tag">서비스 소개</span>
+              <span class="tag">갤러리</span>
+              <span class="tag">FAQ</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="arrow-down"></div>
+
+      <!-- Step 2 -->
+      <div class="step customer">
+        <div class="step-num">2</div>
+        <div class="flex gap-3 items-start">
+          <div class="ico">📝</div>
+          <div class="flex-1">
+            <div class="flex items-center justify-between mb-1">
+              <p class="font-bold text-base">견적 요청 폼 작성</p>
+              <span class="tag">CTA 섹션</span>
+            </div>
+            <p class="text-xs mb-2" style="color:var(--text-muted);line-height:1.6">
+              이름·전화·회사명 입력 + 제작 품목 선택 (15개 옵션 + 기타).
+            </p>
+            <div class="flex flex-wrap">
+              <span class="tag">📰 전단지</span>
+              <span class="tag">💼 명함</span>
+              <span class="tag">🛍️ 쇼핑백</span>
+              <span class="tag">+12개</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="arrow-down"></div>
+
+      <!-- Step 3 -->
+      <div class="step customer">
+        <div class="step-num">3</div>
+        <div class="flex gap-3 items-start">
+          <div class="ico">✅</div>
+          <div class="flex-1">
+            <div class="flex items-center justify-between mb-1">
+              <p class="font-bold text-base">접수 완료 확인</p>
+              <span class="tag">success state</span>
+            </div>
+            <p class="text-xs" style="color:var(--text-muted);line-height:1.6">
+              "1~3시간 내 견적 회신" 안내 + 데이터 자동 저장.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Connector to Data -->
+      <div class="connector">
+        <div class="absolute" style="left:50%;top:0;bottom:0;width:2px;background:repeating-linear-gradient(180deg,var(--data) 0 4px,transparent 4px 8px);transform:translateX(-50%)"></div>
+        <div class="label">💾 견적 데이터 저장</div>
+      </div>
+
+      <!-- Step 4: 카톡으로 결제 링크 받음 -->
+      <div class="step customer" style="border-style:dashed;background:var(--customer-soft)">
+        <div class="step-num" style="background:var(--data)">📨</div>
+        <div class="flex gap-3 items-start">
+          <div class="ico">💬</div>
+          <div class="flex-1">
+            <div class="flex items-center justify-between mb-1">
+              <p class="font-bold text-base">결제 링크 수신</p>
+              <span class="tag">카톡 / 이메일</span>
+            </div>
+            <p class="text-xs" style="color:var(--text-muted);line-height:1.6">
+              관리자가 견적 확정 후 발송한 결제 링크를 카카오톡/이메일/문자로 받습니다.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="arrow-down"></div>
+
+      <!-- Step 5: 결제 페이지 -->
+      <div class="step customer">
+        <div class="step-num">4</div>
+        <div class="flex gap-3 items-start">
+          <div class="ico">💳</div>
+          <div class="flex-1">
+            <div class="flex items-center justify-between mb-1">
+              <p class="font-bold text-base">결제 페이지</p>
+              <span class="tag">payment.html</span>
+            </div>
+            <p class="text-xs mb-2" style="color:var(--text-muted);line-height:1.6">
+              주문 정보 확인 후 토스페이먼츠로 안전 결제.
+            </p>
+            <div class="flex flex-wrap">
+              <span class="tag">카드</span>
+              <span class="tag">계좌이체</span>
+              <span class="tag">간편결제</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Branch -->
+      <div class="connector" style="height:50px">
+        <div class="absolute" style="left:50%;top:0;height:30px;width:2px;background:var(--customer);transform:translateX(-50%)"></div>
+      </div>
+
+      <div class="branch">
+        <!-- 성공 -->
+        <div class="step success">
+          <div class="flex gap-3 items-start">
+            <div class="ico">🎉</div>
+            <div class="flex-1">
+              <div class="flex items-center justify-between mb-1">
+                <p class="font-bold text-base">결제 성공</p>
+                <span class="tag">success.html</span>
+              </div>
+              <p class="text-xs" style="color:var(--text-muted);line-height:1.6">
+                결제 영수증 + 다음 단계 안내 표시.
+              </p>
+            </div>
+          </div>
+        </div>
+        <!-- 실패 -->
+        <div class="step fail">
+          <div class="flex gap-3 items-start">
+            <div class="ico">⚠️</div>
+            <div class="flex-1">
+              <div class="flex items-center justify-between mb-1">
+                <p class="font-bold text-base">결제 실패</p>
+                <span class="tag">fail.html</span>
+              </div>
+              <p class="text-xs" style="color:var(--text-muted);line-height:1.6">
+                오류 안내 + 다시 시도 / 문의.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Connector to Data (success only) -->
+      <div class="connector" style="margin-top:12px">
+        <div class="absolute" style="left:25%;top:0;bottom:0;width:2px;background:repeating-linear-gradient(180deg,var(--data) 0 4px,transparent 4px 8px)"></div>
+        <div class="label" style="left:25%">💾 결제 정보 저장</div>
+      </div>
+    </div>
+
+
+    <!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
+    <!-- RIGHT: 관리자 여정                    -->
+    <!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
+    <div>
+      <div class="lane-header admin">
+        <span class="text-2xl">⚙️</span>
+        <div>
+          <p class="text-xs font-bold mb-0.5" style="letter-spacing:.1em">ADMIN</p>
+          <p class="font-bold text-base">관리자 여정</p>
+        </div>
+      </div>
+
+      <!-- Step A1: 로그인 -->
+      <div class="step admin">
+        <div class="step-num">A</div>
+        <div class="flex gap-3 items-start">
+          <div class="ico">🔐</div>
+          <div class="flex-1">
+            <div class="flex items-center justify-between mb-1">
+              <p class="font-bold text-base">관리자 로그인</p>
+              <span class="tag">admin.html</span>
+            </div>
+            <p class="text-xs mb-2" style="color:var(--text-muted);line-height:1.6">
+              ID / 비밀번호로 인증 (현재 데모 계정).
+            </p>
+            <div class="flex flex-wrap">
+              <span class="tag">기본 ID: admin</span>
+              <span class="tag">PW: 1234</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="arrow-down admin"></div>
+
+      <!-- Step A2: 대시보드 -->
+      <div class="step admin">
+        <div class="step-num">B</div>
+        <div class="flex gap-3 items-start">
+          <div class="ico">📊</div>
+          <div class="flex-1">
+            <div class="flex items-center justify-between mb-1">
+              <p class="font-bold text-base">대시보드 통계</p>
+              <span class="tag">실시간</span>
+            </div>
+            <p class="text-xs mb-2" style="color:var(--text-muted);line-height:1.6">
+              신규 견적 / 결제 대기 / 결제 완료 / 총 매출 한눈에.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="arrow-down admin"></div>
+
+      <!-- Step A3: 견적 관리 -->
+      <div class="step admin">
+        <div class="step-num">C</div>
+        <div class="flex gap-3 items-start">
+          <div class="ico">📋</div>
+          <div class="flex-1">
+            <div class="flex items-center justify-between mb-1">
+              <p class="font-bold text-base">견적 관리 탭</p>
+              <span class="tag">메인 작업</span>
+            </div>
+            <p class="text-xs mb-2" style="color:var(--text-muted);line-height:1.6">
+              접수된 견적을 검색·필터링·상세 조회.
+            </p>
+            <div class="flex flex-wrap">
+              <span class="tag">🔍 검색</span>
+              <span class="tag">필터</span>
+              <span class="tag">CSV 내보내기</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="arrow-down admin"></div>
+
+      <!-- Step A4: 견적 입력 -->
+      <div class="step admin">
+        <div class="step-num">D</div>
+        <div class="flex gap-3 items-start">
+          <div class="ico">💰</div>
+          <div class="flex-1">
+            <div class="flex items-center justify-between mb-1">
+              <p class="font-bold text-base">견적 금액 입력</p>
+              <span class="tag">상세 모달</span>
+            </div>
+            <p class="text-xs mb-2" style="color:var(--text-muted);line-height:1.6">
+              품목별 금액 산정 + 메모 기록 + 상태 전환.
+            </p>
+            <div class="flex flex-wrap">
+              <span class="tag">금액 입력</span>
+              <span class="tag">메모</span>
+              <span class="tag">상태 변경</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="arrow-down admin"></div>
+
+      <!-- Step A5: 결제 링크 발송 -->
+      <div class="step admin">
+        <div class="step-num">E</div>
+        <div class="flex gap-3 items-start">
+          <div class="ico">🔗</div>
+          <div class="flex-1">
+            <div class="flex items-center justify-between mb-1">
+              <p class="font-bold text-base">결제 링크 생성·발송</p>
+              <span class="tag">자동 생성</span>
+            </div>
+            <p class="text-xs mb-2" style="color:var(--text-muted);line-height:1.6">
+              모달에서 "링크 복사" → 카톡/이메일로 고객에게 전달.
+            </p>
+            <div class="flex flex-wrap">
+              <span class="tag">📋 클립보드 복사</span>
+              <span class="tag">개별 링크</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 점선 화살표: 고객에게 -->
+      <div class="connector" style="height:80px">
+        <div class="absolute text-center" style="left:0;right:0;top:50%;transform:translateY(-50%)">
+          <p class="text-xs font-bold inline-block px-3 py-1 rounded-full"
+             style="background:#fff;border:1.5px solid var(--admin);color:var(--admin)">
+            ⮜ ⮜ 카톡·이메일·문자로 고객에게 발송
+          </p>
+        </div>
+      </div>
+
+      <!-- Step A6: 결제 관리 탭 -->
+      <div class="step admin">
+        <div class="step-num">F</div>
+        <div class="flex gap-3 items-start">
+          <div class="ico">💳</div>
+          <div class="flex-1">
+            <div class="flex items-center justify-between mb-1">
+              <p class="font-bold text-base">결제 관리 탭</p>
+              <span class="tag">결제 후</span>
+            </div>
+            <p class="text-xs mb-2" style="color:var(--text-muted);line-height:1.6">
+              결제 완료된 건 자동 표시. 결제키·금액·시각 조회.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="arrow-down admin"></div>
+
+      <!-- Step A7: 제작 진행 -->
+      <div class="step admin">
+        <div class="step-num">G</div>
+        <div class="flex gap-3 items-start">
+          <div class="ico">📦</div>
+          <div class="flex-1">
+            <div class="flex items-center justify-between mb-1">
+              <p class="font-bold text-base">제작 진행 · 납품</p>
+              <span class="tag">상태 전환</span>
+            </div>
+            <p class="text-xs mb-2" style="color:var(--text-muted);line-height:1.6">
+              제작중 → 납품완료까지 상태 업데이트.
+            </p>
+            <div class="flex flex-wrap">
+              <span class="tag" style="background:#E8EFFD;color:#3D5DD0">결제완료</span>
+              <span class="tag" style="background:#E8F4ED;color:#3F8A5A">제작중</span>
+              <span class="tag" style="background:#ECEDF0;color:#666">납품완료</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+
+  <!-- ═══ Bottom: 데이터 저장소 설명 ═══ -->
+  <div class="mt-14">
+    <div class="lane-header data">
+      <span class="text-2xl">💾</span>
+      <div>
+        <p class="text-xs font-bold mb-0.5" style="letter-spacing:.1em">DATA LAYER</p>
+        <p class="font-bold text-base">데이터 저장소 (localStorage)</p>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+
+      <div class="step data">
+        <div class="flex gap-3 items-start">
+          <div class="ico">📋</div>
+          <div class="flex-1">
+            <div class="flex items-center justify-between mb-1">
+              <p class="font-bold text-base">hanmaeum_quotes</p>
+              <span class="tag">JSON 배열</span>
+            </div>
+            <p class="text-xs mb-2" style="color:var(--text-muted);line-height:1.6">
+              견적 데이터 — 신청자 정보, 품목, 금액, 상태, 메모 등
+            </p>
+            <div class="flex flex-wrap">
+              <span class="tag">orderId</span>
+              <span class="tag">name·phone·company</span>
+              <span class="tag">items[]</span>
+              <span class="tag">amount</span>
+              <span class="tag">status</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="step data">
+        <div class="flex gap-3 items-start">
+          <div class="ico">💳</div>
+          <div class="flex-1">
+            <div class="flex items-center justify-between mb-1">
+              <p class="font-bold text-base">hanmaeum_payments</p>
+              <span class="tag">JSON 배열</span>
+            </div>
+            <p class="text-xs mb-2" style="color:var(--text-muted);line-height:1.6">
+              결제 데이터 — 토스 결제키, 금액, 시각, 결제 수단
+            </p>
+            <div class="flex flex-wrap">
+              <span class="tag">paymentKey</span>
+              <span class="tag">orderId</span>
+              <span class="tag">amount</span>
+              <span class="tag">paidAt</span>
+              <span class="tag">paymentType</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- 경고 박스 -->
+    <div class="mt-5 rounded-2xl p-5" style="background:#FFF8E0;border:1px solid #F4D88B;color:#7A5500">
+      <p class="text-sm font-bold mb-2">⚠️ 현재 한계 — 운영 시 백엔드 필수</p>
+      <ul class="text-xs space-y-1.5" style="line-height:1.7">
+        <li>· 데이터는 <b>현재 사용 중인 브라우저에만</b> 저장됩니다 (다른 PC/브라우저에서 안 보임).</li>
+        <li>· 운영 환경에서는 <b>서버 DB로 교체 필수</b> (카페24 + MySQL, 또는 Google Apps Script).</li>
+        <li>· 토스페이먼츠 결제는 보안상 <b>백엔드 결제 승인 API 호출이 반드시 필요</b>합니다.</li>
+        <li>· 카카오톡 알림 자동 발송은 백엔드(또는 Apps Script)에서 구현해야 합니다.</li>
+      </ul>
+    </div>
+  </div>
+
+
+  <!-- ═══ 페이지 목록 ═══ -->
+  <div class="mt-12">
+    <h2 class="display text-2xl mb-5" style="color:var(--customer)">📁 전체 파일 구조</h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
+
+      <div class="step" style="border-left-color:var(--customer)">
+        <div class="flex items-center gap-3 mb-1">
+          <span class="text-xl">🏠</span>
+          <div>
+            <p class="font-bold text-sm">index.html</p>
+            <p class="text-xs" style="color:var(--text-muted)">메인 랜딩 페이지</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="step" style="border-left-color:var(--customer)">
+        <div class="flex items-center gap-3 mb-1">
+          <span class="text-xl">💳</span>
+          <div>
+            <p class="font-bold text-sm">payment.html</p>
+            <p class="text-xs" style="color:var(--text-muted)">토스페이먼츠 결제</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="step" style="border-left-color:var(--success)">
+        <div class="flex items-center gap-3 mb-1">
+          <span class="text-xl">🎉</span>
+          <div>
+            <p class="font-bold text-sm">success.html</p>
+            <p class="text-xs" style="color:var(--text-muted)">결제 완료</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="step" style="border-left-color:var(--fail)">
+        <div class="flex items-center gap-3 mb-1">
+          <span class="text-xl">⚠️</span>
+          <div>
+            <p class="font-bold text-sm">fail.html</p>
+            <p class="text-xs" style="color:var(--text-muted)">결제 실패</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="step" style="border-left-color:var(--admin)">
+        <div class="flex items-center gap-3 mb-1">
+          <span class="text-xl">🔐</span>
+          <div>
+            <p class="font-bold text-sm">admin.html</p>
+            <p class="text-xs" style="color:var(--text-muted)">관리자 페이지</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="step" style="border-left-color:var(--data)">
+        <div class="flex items-center gap-3 mb-1">
+          <span class="text-xl">🗺️</span>
+          <div>
+            <p class="font-bold text-sm">flow.html</p>
+            <p class="text-xs" style="color:var(--text-muted)">이 흐름도</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+
+  <!-- ═══ Save guide ═══ -->
+  <div class="no-print mt-12 rounded-2xl p-6 text-center"
+       style="background:linear-gradient(135deg,#EFE9FA 0%,#DCD3F0 100%);color:var(--customer)">
+    <p class="text-sm font-bold mb-3">💡 이 흐름도를 PNG로 저장하는 방법</p>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs">
+      <div class="bg-white rounded-xl p-3" style="color:var(--text-primary)">
+        <p class="font-bold mb-1">방법 1: 스크린샷</p>
+        <p style="color:var(--text-muted)">Windows: Win + Shift + S<br>Mac: Cmd + Shift + 4</p>
+      </div>
+      <div class="bg-white rounded-xl p-3" style="color:var(--text-primary)">
+        <p class="font-bold mb-1">방법 2: 인쇄 → PDF</p>
+        <p style="color:var(--text-muted)">Ctrl/Cmd + P<br>대상: PDF로 저장</p>
+      </div>
+      <div class="bg-white rounded-xl p-3" style="color:var(--text-primary)">
+        <p class="font-bold mb-1">방법 3: 확장 프로그램</p>
+        <p style="color:var(--text-muted)">"GoFullPage" 등<br>전체 페이지 캡처</p>
+      </div>
+    </div>
+  </div>
+
+  <p class="text-center text-xs mt-9" style="color:var(--text-muted)">
+    한마음일터 · 2026 · 본 흐름도는 현재 구현 상태 기준이며, 운영 환경에서는 백엔드 연동이 필요합니다.
+  </p>
+
+</div>
+
+</body>
+</html>

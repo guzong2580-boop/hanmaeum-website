@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>결제 실패 — 한마음일터</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: { extend: { fontFamily: {
+        sans:    ['Pretendard','-apple-system','sans-serif'],
+        display: ['Pretendard','-apple-system','sans-serif'],
+      }}}
+    }
+  </script>
+
+  <style>
+    @font-face { font-family:'Pretendard'; font-weight:400; font-display:swap; src:url('fonts/Pretendard-Regular.otf') format('opentype'); }
+    @font-face { font-family:'Pretendard'; font-weight:500; font-display:swap; src:url('fonts/Pretendard-Medium.otf') format('opentype'); }
+    @font-face { font-family:'Pretendard'; font-weight:600; font-display:swap; src:url('fonts/Pretendard-SemiBold.otf') format('opentype'); }
+    @font-face { font-family:'Pretendard'; font-weight:700; font-display:swap; src:url('fonts/Pretendard-Bold.otf') format('opentype'); }
+
+    :root {
+      --text-primary:   #1F2027;
+      --text-secondary: #4A4A55;
+      --text-muted:     #8B8B95;
+      --accent-red:     #E04848;
+      --accent-blue:    #4A6FE3;
+      --accent-blue-2:  #3D5DD0;
+      --border:         rgba(28,29,25,.10);
+      --ease: cubic-bezier(.25,.46,.45,.94);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; }
+    body {
+      font-family: 'Pretendard',-apple-system,sans-serif;
+      background: linear-gradient(165deg, #FFF0F0 0%, #FCDFDF 60%, #F5C8C8 100%);
+      color: var(--text-primary);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      -webkit-font-smoothing: antialiased;
+      word-break: keep-all;
+      overflow-wrap: break-word;
+    }
+
+    .x-circle {
+      width: 96px; height: 96px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #FF8888 0%, var(--accent-red) 100%);
+      margin: 0 auto 24px;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 12px 36px rgba(224,72,72,.30);
+      animation: shake .6s var(--ease);
+    }
+    @keyframes shake {
+      0%,100% { transform: translateX(0); }
+      25%     { transform: translateX(-8px); }
+      75%     { transform: translateX(8px); }
+    }
+
+    .pay-card {
+      background: rgba(255,255,255,.92);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,.6);
+      border-radius: 24px;
+      box-shadow: 0 12px 40px rgba(120,40,40,.10);
+    }
+
+    .info-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 12px 0;
+      gap: 16px;
+      font-size: 14px;
+      border-bottom: 1px dashed rgba(28,29,25,.06);
+    }
+    .info-row:last-child { border-bottom: none; }
+    .info-row .k { color: var(--text-muted); flex-shrink: 0; }
+    .info-row .v { color: var(--text-primary); font-weight: 600; text-align: right; word-break: break-all; }
+
+    .btn-primary {
+      display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+      padding: 14px 30px;
+      background: var(--accent-blue);
+      color: #fff;
+      font-size: 14px; font-weight: 700;
+      text-decoration: none;
+      border-radius: 9999px;
+      transition: background .2s var(--ease), transform .2s var(--ease);
+      border: none; cursor: pointer;
+      box-shadow: 0 4px 14px rgba(74,111,227,.25);
+    }
+    .btn-primary:hover { background: var(--accent-blue-2); transform: translateY(-1px); }
+    .btn-soft {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 13px 28px;
+      background: #fff;
+      color: var(--text-primary);
+      font-size: 13px; font-weight: 600;
+      text-decoration: none;
+      border: 1px solid var(--border);
+      border-radius: 9999px;
+      transition: all .2s var(--ease);
+    }
+    .btn-soft:hover { border-color: var(--text-primary); transform: translateY(-1px); }
+  </style>
+</head>
+<body>
+
+<main class="flex-1 flex items-center justify-center px-5 py-16">
+  <div class="max-w-xl w-full">
+
+    <!-- X 아이콘 -->
+    <div class="x-circle">
+      <svg width="44" height="44" fill="none" stroke="#fff" stroke-width="3" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/>
+      </svg>
+    </div>
+
+    <!-- 메시지 -->
+    <div class="text-center mb-8">
+      <h1 class="font-display mb-3" style="font-size:clamp(34px,5vw,52px);color:var(--accent-red);line-height:1.2">
+        결제가 완료되지 않았습니다
+      </h1>
+      <p style="font-size:15px;color:var(--text-secondary);line-height:1.7">
+        결제 처리 중 문제가 발생했거나, 사용자가 취소하셨습니다.<br>
+        결제 정보를 확인하시고 다시 시도해 주세요.
+      </p>
+    </div>
+
+    <!-- 실패 정보 -->
+    <div class="pay-card p-7 mb-7">
+      <p class="text-xs font-semibold mb-4" style="color:var(--accent-red);letter-spacing:.18em">FAILURE DETAILS</p>
+
+      <div class="info-row">
+        <span class="k">발생 시간</span>
+        <span class="v" id="r-time">-</span>
+      </div>
+      <div class="info-row">
+        <span class="k">주문 번호</span>
+        <span class="v" id="r-orderId">-</span>
+      </div>
+      <div class="info-row">
+        <span class="k">오류 코드</span>
+        <span class="v" id="r-code">-</span>
+      </div>
+      <div class="info-row">
+        <span class="k">메시지</span>
+        <span class="v" id="r-message">결제가 취소되었습니다.</span>
+      </div>
+    </div>
+
+    <!-- 안내 -->
+    <div class="pay-card p-6 mb-7">
+      <h3 class="font-bold mb-3" style="font-size:14px;letter-spacing:-.015em">💡 무엇을 시도해 볼까요?</h3>
+      <ul class="space-y-2 text-sm" style="color:var(--text-secondary);line-height:1.7">
+        <li class="flex gap-2">
+          <span style="color:var(--accent-blue)" class="font-bold">·</span>
+          카드 정보가 정확한지 확인 후 다시 시도해 주세요.
+        </li>
+        <li class="flex gap-2">
+          <span style="color:var(--accent-blue)" class="font-bold">·</span>
+          한도 초과 또는 정지된 카드일 수 있습니다.
+        </li>
+        <li class="flex gap-2">
+          <span style="color:var(--accent-blue)" class="font-bold">·</span>
+          다른 결제 수단(계좌이체·간편결제)으로 다시 시도해 보세요.
+        </li>
+        <li class="flex gap-2">
+          <span style="color:var(--accent-blue)" class="font-bold">·</span>
+          문제가 반복되면 전화로 직접 문의해 주세요.
+        </li>
+      </ul>
+    </div>
+
+    <!-- 버튼 -->
+    <div class="flex flex-wrap items-center justify-center gap-3">
+      <button onclick="history.back()" class="btn-primary">
+        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" viewBox="0 0 24 24">
+          <path d="M19 12H5M12 19l-7-7 7-7"/>
+        </svg>
+        다시 결제하기
+      </button>
+      <a href="tel:031-631-6680" class="btn-soft">
+        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round"
+            d="M3 5a2 2 0 012-2h3.28a1 1 0 01.95.68l1.49 4.49a1 1 0 01-.5 1.21l-2.26 1.13a11 11 0 005.52 5.52l1.13-2.26a1 1 0 011.21-.5l4.49 1.5a1 1 0 01.68.94V19a2 2 0 01-2 2h-1C9.72 21 3 14.28 3 6V5z"/>
+        </svg>
+        문의 031-631-6680
+      </a>
+      <a href="index.html" class="btn-soft">메인으로</a>
+    </div>
+
+  </div>
+</main>
+
+<script>
+// 토스페이먼츠가 fail URL로 리다이렉트 시 다음 파라미터를 전달:
+//   - code (오류 코드)
+//   - message (오류 메시지)
+//   - orderId
+
+const params = new URLSearchParams(window.location.search);
+document.getElementById('r-orderId').textContent = params.get('orderId') || '-';
+document.getElementById('r-code').textContent    = params.get('code')    || 'USER_CANCEL';
+document.getElementById('r-message').textContent = params.get('message') || '결제가 취소되었습니다.';
+
+const now = new Date();
+const fmt = (n) => String(n).padStart(2,'0');
+document.getElementById('r-time').textContent =
+  now.getFullYear() + '.' + fmt(now.getMonth()+1) + '.' + fmt(now.getDate())
+  + ' ' + fmt(now.getHours()) + ':' + fmt(now.getMinutes());
+</script>
+
+</body>
+</html>

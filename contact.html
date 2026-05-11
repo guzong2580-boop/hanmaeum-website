@@ -1,0 +1,831 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>찾아오시는 길 — 한마음일터</title>
+  <meta name="description" content="한마음일터 오시는 길. 경기도 이천시 마장면 이장로256번길. 전화 031-631-6680.">
+
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <script>
+    tailwind.config = {
+      theme: { extend: { fontFamily: {
+        sans:    ['Pretendard','-apple-system','sans-serif'],
+        display: ['Pretendard','-apple-system','sans-serif'],
+        gmarket: ['Pretendard','-apple-system','sans-serif'],
+      }}}
+    }
+  </script>
+
+  <style>
+    /* ═══ Local fonts ═══ */
+    @font-face { font-family:'Pretendard'; font-weight:400; font-display:swap; src:url('fonts/Pretendard-Regular.otf') format('opentype'); }
+    @font-face { font-family:'Pretendard'; font-weight:500; font-display:swap; src:url('fonts/Pretendard-Medium.otf') format('opentype'); }
+    @font-face { font-family:'Pretendard'; font-weight:600; font-display:swap; src:url('fonts/Pretendard-SemiBold.otf') format('opentype'); }
+    @font-face { font-family:'Pretendard'; font-weight:700; font-display:swap; src:url('fonts/Pretendard-Bold.otf') format('opentype'); }
+    @font-face { font-family:'Pretendard'; font-weight:800; font-display:swap; src:url('fonts/Pretendard-ExtraBold.otf') format('opentype'); }
+
+    :root {
+      --bg-white:        #FFFFFF;
+      --bg-cream:        #FAF9F6;
+      --bg-lavender:     #E8E2F5;
+      --bg-navy:         #1B2845;
+      --text-primary:    #1F2027;
+      --text-secondary:  #4A4A55;
+      --text-muted:      #8B8B95;
+      --text-on-dark:    #F0EDE8;
+      --text-muted-dark: #A8B0C0;
+      --text-purple:     #6B5BC9;
+      --text-purple-deep:#5849B8;
+      --accent-blue:     #4A6FE3;
+      --accent-blue-2:   #3D5DD0;
+      --accent-yellow:   #FFD988;
+      --border:          rgba(28,29,25,.10);
+      --border-soft:     rgba(28,29,25,.06);
+      --ease: cubic-bezier(.25,.46,.45,.94);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Pretendard',-apple-system,sans-serif;
+      background: var(--bg-white);
+      color: var(--text-primary);
+      -webkit-font-smoothing: antialiased;
+      word-break: keep-all;
+      overflow-wrap: break-word;
+    }
+
+    /* ═══ Header ═══ */
+    #site-header {
+      position: sticky; top: 0; z-index: 50;
+      background: rgba(255,255,255,.92);
+      backdrop-filter: saturate(160%) blur(10px);
+      border-bottom: 1px solid var(--border-soft);
+    }
+    .nav-link {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text-secondary);
+      transition: color .2s var(--ease);
+      padding: 8px 0;
+      position: relative;
+      text-decoration: none;
+    }
+    .nav-link.active { color: var(--text-purple-deep); font-weight: 600; }
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      left: 50%; bottom: 2px;
+      transform: translateX(-50%);
+      width: 0; height: 2px;
+      background: var(--accent-blue);
+      transition: width .25s var(--ease);
+    }
+    .nav-link.active::after,
+    .nav-link:hover::after { width: 100%; }
+    .nav-link:hover { color: var(--text-purple-deep); }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 13px 28px;
+      background: var(--accent-blue);
+      color: #fff;
+      font-size: 13px;
+      font-weight: 700;
+      text-decoration: none;
+      border-radius: 9999px;
+      transition: background .2s var(--ease), transform .2s var(--ease);
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 4px 14px rgba(74,111,227,.25);
+    }
+    .btn-primary:hover { background: var(--accent-blue-2); transform: translateY(-1px); }
+
+    .btn-soft {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 12px 26px;
+      background: #fff;
+      color: var(--text-primary);
+      font-size: 13px; font-weight: 600;
+      text-decoration: none;
+      border: 1px solid var(--border);
+      border-radius: 9999px;
+      transition: all .2s var(--ease);
+    }
+    .btn-soft:hover { border-color: var(--text-primary); transform: translateY(-1px); }
+
+    .logo {
+      display: flex; align-items: center; gap: 10px;
+    }
+    .logo-mark {
+      width: 36px; height: 36px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, var(--text-purple) 0%, var(--accent-blue) 100%);
+      color: #fff;
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 700; font-size: 14px;
+    }
+
+    /* ═══ Hero title ═══ */
+    .page-hero {
+      text-align: center;
+      padding: 90px 24px 60px;
+      background: linear-gradient(180deg, #FAFAFE 0%, #fff 100%);
+    }
+    .page-title {
+      font-family: 'Pretendard',sans-serif;
+      font-weight: 900;
+      letter-spacing: -.03em;
+      font-size: clamp(56px, 9vw, 110px);
+      letter-spacing: -.02em;
+      color: var(--bg-navy);
+      line-height: 1.05;
+      margin-bottom: 18px;
+    }
+    .page-divider {
+      max-width: 1200px;
+      margin: 60px auto 0;
+      padding: 0 24px;
+    }
+    .page-divider hr {
+      border: none;
+      border-top: 1px solid var(--border);
+    }
+
+    /* ═══ Info card ═══ */
+    .info-card {
+      background: #fff;
+      border: 1px solid var(--border-soft);
+      border-radius: 20px;
+      padding: 32px 28px;
+      transition: transform .25s var(--ease), box-shadow .25s var(--ease);
+      box-shadow: 0 2px 12px rgba(40,40,80,.04);
+    }
+    .info-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 28px rgba(40,40,80,.08);
+    }
+    .info-ico {
+      width: 52px; height: 52px;
+      border-radius: 16px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 24px;
+      margin-bottom: 18px;
+    }
+
+    /* ═══ Map (Naver style placeholder) ═══ */
+    .map-wrap {
+      position: relative;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 8px 28px rgba(40,40,80,.08);
+      aspect-ratio: 16/9;
+      display: block;
+      text-decoration: none;
+      background: linear-gradient(135deg, #F1EDE3 0%, #E8E5DA 50%, #DCD5C2 100%);
+      cursor: pointer;
+      transition: box-shadow .25s var(--ease);
+    }
+    .map-wrap:hover { box-shadow: 0 12px 40px rgba(40,40,80,.15); }
+    .map-wrap:hover .map-overlay { background: rgba(255,255,255,.92); }
+    .map-wrap:hover .map-marker { transform: translate(-50%,-100%) scale(1.08); }
+
+    /* SVG 도로 패턴 배경 */
+    .map-svg {
+      position: absolute;
+      inset: 0;
+      width: 100%; height: 100%;
+      pointer-events: none;
+    }
+    .map-road-major { stroke: #E8E0CC; stroke-width: 14; fill: none; }
+    .map-road       { stroke: #F5F0E2; stroke-width: 6;  fill: none; }
+    .map-road-line  { stroke: #fff;    stroke-width: 1;  fill: none; stroke-dasharray: 6 4; }
+    .map-park       { fill: #D4E5C8; }
+    .map-water      { fill: #B7DDE8; }
+    .map-block      { fill: rgba(255,255,255,.4); }
+
+    /* 네이버 마커 (빨강 풍선) */
+    .map-marker {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -100%);
+      z-index: 2;
+      transition: transform .25s var(--ease);
+      filter: drop-shadow(0 4px 6px rgba(0,0,0,.20));
+    }
+    .map-marker svg { display: block; }
+    .map-marker .pulse {
+      position: absolute;
+      bottom: -4px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 18px;
+      height: 18px;
+      background: rgba(229,57,53,.35);
+      border-radius: 50%;
+      animation: pulseAnim 1.8s ease-out infinite;
+      z-index: -1;
+    }
+    @keyframes pulseAnim {
+      0%   { transform: translateX(-50%) scale(.6); opacity: .9; }
+      70%  { transform: translateX(-50%) scale(2.6); opacity: 0; }
+      100% { transform: translateX(-50%) scale(2.6); opacity: 0; }
+    }
+
+    /* 좌측 상단 네이버 지도 로고 */
+    .naver-logo-tag {
+      position: absolute;
+      top: 14px; left: 14px;
+      z-index: 3;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 12px;
+      background: #fff;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,.10);
+      font-size: 12px;
+      font-weight: 700;
+      color: #1F2027;
+    }
+    .naver-logo-tag .n {
+      width: 18px; height: 18px;
+      background: #03C75A;
+      color: #fff;
+      border-radius: 4px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 900;
+      font-size: 12px;
+      font-family: 'Pretendard',sans-serif;
+    }
+
+    /* 우측 상단 컨트롤 (가짜) */
+    .map-controls {
+      position: absolute;
+      top: 14px; right: 14px;
+      z-index: 3;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .map-ctrl-btn {
+      width: 32px; height: 32px;
+      background: #fff;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 2px 6px rgba(0,0,0,.10);
+      font-weight: 700;
+      font-size: 14px;
+      color: #444;
+    }
+
+    /* 우측 하단 축적 */
+    .map-scale {
+      position: absolute;
+      bottom: 14px; right: 14px;
+      z-index: 3;
+      background: rgba(255,255,255,.92);
+      padding: 6px 10px;
+      border-radius: 6px;
+      font-size: 11px;
+      font-weight: 600;
+      color: #555;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .map-scale-line {
+      display: inline-block;
+      width: 36px;
+      height: 2px;
+      background: #555;
+      position: relative;
+    }
+    .map-scale-line::before,
+    .map-scale-line::after {
+      content: '';
+      position: absolute;
+      top: -3px;
+      width: 2px;
+      height: 8px;
+      background: #555;
+    }
+    .map-scale-line::before { left: 0; }
+    .map-scale-line::after  { right: 0; }
+
+    /* 하단 정보 오버레이 */
+    .map-overlay {
+      position: absolute;
+      left: 50%;
+      bottom: 24px;
+      transform: translateX(-50%);
+      z-index: 3;
+      background: rgba(255,255,255,.95);
+      backdrop-filter: blur(8px);
+      padding: 16px 22px;
+      border-radius: 14px;
+      box-shadow: 0 6px 20px rgba(0,0,0,.15);
+      text-align: center;
+      transition: background .2s var(--ease);
+      min-width: 280px;
+      max-width: 90%;
+    }
+    .map-overlay-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 3px;
+      letter-spacing: -.015em;
+    }
+    .map-overlay-addr {
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+    }
+    .map-overlay-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 7px 14px;
+      background: #03C75A;
+      color: #fff;
+      border-radius: 9999px;
+      font-size: 11.5px;
+      font-weight: 700;
+      letter-spacing: -.01em;
+    }
+
+    /* 데모 안내 뱃지 */
+    .map-demo-badge {
+      position: absolute;
+      left: 14px;
+      bottom: 14px;
+      z-index: 3;
+      background: rgba(28,29,25,.65);
+      color: #fff;
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: -.01em;
+    }
+
+    /* ═══ Quick contact bar ═══ */
+    .quick-bar {
+      background: linear-gradient(135deg, var(--bg-navy) 0%, #243155 100%);
+      color: #fff;
+      border-radius: 24px;
+      padding: 36px 30px;
+    }
+
+    /* ═══ Mobile menu ═══ */
+    #mob-menu {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height .35s var(--ease);
+    }
+    #mob-menu.open { max-height: 480px; }
+  </style>
+</head>
+<body>
+
+<!-- ══════ Header ══════ -->
+<header id="site-header">
+  <div class="max-w-7xl mx-auto px-6 lg:px-10 h-16 lg:h-[72px] flex items-center justify-between">
+    <a href="index.html" class="logo">
+      <div class="logo-mark">한</div>
+      <div class="leading-tight">
+        <p class="font-bold text-[15px]" style="color:var(--text-primary);letter-spacing:-.02em">한마음일터</p>
+        <p class="text-[10px]" style="color:var(--text-muted);letter-spacing:.05em">장애인직업재활시설</p>
+      </div>
+    </a>
+
+    <nav class="hidden lg:flex items-center gap-8">
+      <a href="index.html#about"    class="nav-link">소개</a>
+      <a href="index.html#problem"  class="nav-link">서비스</a>
+      <a href="index.html#process"  class="nav-link">진행 과정</a>
+      <a href="index.html#gallery"  class="nav-link">작업장</a>
+      <a href="index.html#faq"      class="nav-link">FAQ</a>
+      <a href="contact.html"        class="nav-link active">찾아오시는 길</a>
+    </nav>
+
+    <div class="flex items-center gap-3">
+      <a href="index.html#cta" class="hidden lg:inline-flex btn-primary" style="padding:10px 22px;font-size:12px">
+        견적 요청
+      </a>
+      <button id="mob-toggle" class="lg:hidden w-10 h-10 flex items-center justify-center" aria-label="menu">
+        <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path d="M4 6h16M4 12h16M4 18h16"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <div id="mob-menu" class="lg:hidden border-t" style="border-color:var(--border-soft);background:#fff">
+    <nav class="flex flex-col px-6 py-4 gap-1">
+      <a href="index.html#about"    class="py-2.5 text-sm" style="color:var(--text-secondary)">소개</a>
+      <a href="index.html#problem"  class="py-2.5 text-sm" style="color:var(--text-secondary)">서비스</a>
+      <a href="index.html#process"  class="py-2.5 text-sm" style="color:var(--text-secondary)">진행 과정</a>
+      <a href="index.html#gallery"  class="py-2.5 text-sm" style="color:var(--text-secondary)">작업장</a>
+      <a href="index.html#faq"      class="py-2.5 text-sm" style="color:var(--text-secondary)">FAQ</a>
+      <a href="contact.html"        class="py-2.5 text-sm font-semibold" style="color:var(--text-purple-deep)">찾아오시는 길</a>
+      <a href="index.html#cta" class="btn-primary mt-3 justify-center" style="padding:11px 22px;font-size:12px">견적 요청하기</a>
+    </nav>
+  </div>
+</header>
+
+
+<!-- ══════ Page Hero ══════ -->
+<section class="page-hero">
+  <p class="text-xs font-semibold mb-3" style="color:var(--accent-blue);letter-spacing:.2em">CONTACT</p>
+  <h1 class="page-title">찾아오시는 길</h1>
+  <p style="font-size:15px;color:var(--text-secondary);line-height:1.7;max-width:520px;margin:0 auto">
+    한마음일터에 방문해 주시면 따뜻하게 맞이하겠습니다.<br>
+    상담·견적·시설 견학 모두 환영합니다.
+  </p>
+  <div class="page-divider">
+    <hr>
+  </div>
+</section>
+
+
+<!-- ══════ Info section ══════ -->
+<section class="py-12 lg:py-16">
+  <div class="max-w-5xl mx-auto px-6 lg:px-10">
+
+    <!-- 주소 -->
+    <div class="text-center mb-12">
+      <p class="text-xs font-bold mb-3" style="color:var(--text-purple-deep);letter-spacing:.15em">ADDRESS</p>
+      <p class="font-bold mb-2" style="font-size:clamp(20px,3vw,28px);color:var(--text-primary);letter-spacing:-.015em">
+        경기도 이천시 마장면 이장로256번길
+      </p>
+      <p class="text-sm" style="color:var(--text-muted);letter-spacing:.02em">
+        256, Ijang-ro, Majang-myeon, Icheon-si, Gyeonggi-do, Republic of Korea
+      </p>
+    </div>
+
+    <!-- 3 info cards -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-12">
+
+      <!-- 전화·팩스 -->
+      <div class="info-card text-center">
+        <div class="info-ico mx-auto" style="background:#EFE9FA;color:var(--text-purple-deep)">
+          📞
+        </div>
+        <p class="text-xs font-bold mb-2" style="color:var(--text-purple-deep);letter-spacing:.12em">TEL · FAX</p>
+        <p class="font-bold mb-1" style="font-size:17px;color:var(--text-primary);letter-spacing:-.015em">
+          031-631-6680
+        </p>
+        <p class="text-xs mb-3" style="color:var(--text-muted)">
+          팩스 · 031-631-6634
+        </p>
+        <a href="tel:031-631-6680" class="text-xs font-bold inline-flex items-center gap-1" style="color:var(--accent-blue)">
+          전화 걸기
+          <svg width="11" height="11" fill="none" stroke="currentColor" stroke-width="2.4" viewBox="0 0 24 24">
+            <path d="M5 12h14M12 5l7 7-7 7"/>
+          </svg>
+        </a>
+      </div>
+
+      <!-- 영업시간 -->
+      <div class="info-card text-center">
+        <div class="info-ico mx-auto" style="background:#E8F4ED;color:#3F8A5A">
+          🕐
+        </div>
+        <p class="text-xs font-bold mb-2" style="color:#3F8A5A;letter-spacing:.12em">HOURS</p>
+        <p class="font-bold mb-1" style="font-size:17px;color:var(--text-primary);letter-spacing:-.015em">
+          평일 09:00 ─ 18:00
+        </p>
+        <p class="text-xs mb-3" style="color:var(--text-muted);line-height:1.6">
+          점심시간 12:00 ─ 13:00<br>
+          주말·공휴일 휴무
+        </p>
+        <p class="text-xs font-bold" style="color:var(--accent-blue)">
+          상담 후 방문 권장
+        </p>
+      </div>
+
+      <!-- 이메일 -->
+      <div class="info-card text-center">
+        <div class="info-ico mx-auto" style="background:#E8EFFD;color:var(--accent-blue)">
+          ✉️
+        </div>
+        <p class="text-xs font-bold mb-2" style="color:var(--accent-blue);letter-spacing:.12em">EMAIL</p>
+        <p class="font-bold mb-1" style="font-size:15px;color:var(--text-primary);letter-spacing:-.015em">
+          info@hanmaeum.kr
+        </p>
+        <p class="text-xs mb-3" style="color:var(--text-muted);line-height:1.6">
+          24시간 접수 가능<br>
+          1영업일 내 회신
+        </p>
+        <a href="mailto:info@hanmaeum.kr" class="text-xs font-bold inline-flex items-center gap-1" style="color:var(--accent-blue)">
+          메일 보내기
+          <svg width="11" height="11" fill="none" stroke="currentColor" stroke-width="2.4" viewBox="0 0 24 24">
+            <path d="M5 12h14M12 5l7 7-7 7"/>
+          </svg>
+        </a>
+      </div>
+
+    </div>
+
+    <!-- 지도 -->
+    <div class="mb-12">
+      <div class="flex items-center justify-between mb-5 flex-wrap gap-3">
+        <div>
+          <p class="text-xs font-bold mb-1" style="color:var(--text-purple-deep);letter-spacing:.12em">MAP</p>
+          <h2 class="font-bold" style="font-size:22px;color:var(--text-primary);letter-spacing:-.02em">지도</h2>
+        </div>
+        <a href="https://map.naver.com/v5/search/경기도 이천시 마장면 이장로 256번길" target="_blank" rel="noopener"
+           class="btn-soft" style="padding:10px 20px;font-size:12px">
+          네이버 지도에서 보기
+          <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
+          </svg>
+        </a>
+      </div>
+
+      <!-- 네이버 지도 스타일 placeholder (샘플) -->
+      <a href="https://map.naver.com/v5/search/경기도 이천시 마장면 이장로 256번길"
+         target="_blank" rel="noopener" class="map-wrap" aria-label="네이버 지도에서 한마음일터 보기">
+
+        <!-- 가짜 지도 SVG: 도로/공원/물길 -->
+        <svg class="map-svg" viewBox="0 0 1000 562" preserveAspectRatio="xMidYMid slice">
+          <!-- 배경 블록 (건물 영역) -->
+          <rect class="map-block" x="40"  y="40"  width="200" height="120" rx="4"/>
+          <rect class="map-block" x="60"  y="200" width="160" height="100" rx="4"/>
+          <rect class="map-block" x="780" y="60"  width="180" height="140" rx="4"/>
+          <rect class="map-block" x="730" y="380" width="220" height="140" rx="4"/>
+
+          <!-- 공원 (녹지) -->
+          <ellipse class="map-park" cx="320" cy="170" rx="90" ry="55"/>
+          <ellipse class="map-park" cx="640" cy="430" rx="80" ry="50"/>
+
+          <!-- 물길 (강) -->
+          <path class="map-water" d="M -20 480 Q 200 440 420 470 T 850 460 L 850 580 L -20 580 Z" opacity=".8"/>
+
+          <!-- 주요 도로 (가로) -->
+          <path class="map-road-major" d="M -20 280 L 1020 280"/>
+          <path class="map-road-major" d="M -20 380 L 1020 380"/>
+
+          <!-- 주요 도로 (세로) -->
+          <path class="map-road-major" d="M 500 -20 L 500 600"/>
+
+          <!-- 보조 도로 -->
+          <path class="map-road" d="M -20 130 L 1020 130"/>
+          <path class="map-road" d="M -20 480 L 1020 480"/>
+          <path class="map-road" d="M 200 -20 L 200 600"/>
+          <path class="map-road" d="M 750 -20 L 750 600"/>
+          <path class="map-road" d="M 350 -20 L 350 600"/>
+
+          <!-- 도로 차선 -->
+          <path class="map-road-line" d="M -20 280 L 1020 280"/>
+          <path class="map-road-line" d="M -20 380 L 1020 380"/>
+          <path class="map-road-line" d="M 500 -20 L 500 600"/>
+        </svg>
+
+        <!-- 좌측 상단: 네이버 지도 로고 태그 -->
+        <div class="naver-logo-tag">
+          <span class="n">N</span>
+          지도
+        </div>
+
+        <!-- 우측 상단: 컨트롤 (가짜) -->
+        <div class="map-controls">
+          <div class="map-ctrl-btn">+</div>
+          <div class="map-ctrl-btn">−</div>
+        </div>
+
+        <!-- 중앙 마커 -->
+        <div class="map-marker">
+          <svg width="40" height="50" viewBox="0 0 40 50" fill="none">
+            <path d="M20 0 C 8.95 0 0 8.95 0 20 C 0 33 20 50 20 50 C 20 50 40 33 40 20 C 40 8.95 31.05 0 20 0 Z"
+                  fill="#E53935" stroke="#fff" stroke-width="2"/>
+            <circle cx="20" cy="20" r="6" fill="#fff"/>
+          </svg>
+          <span class="pulse"></span>
+        </div>
+
+        <!-- 우측 하단: 축적 -->
+        <div class="map-scale">
+          <span class="map-scale-line"></span>
+          100m
+        </div>
+
+        <!-- 좌측 하단: 데모 안내 -->
+        <div class="map-demo-badge">샘플 지도 · 클릭하면 네이버 지도로 이동</div>
+
+        <!-- 하단 정보 카드 -->
+        <div class="map-overlay">
+          <p class="map-overlay-title">한마음일터</p>
+          <p class="map-overlay-addr">경기도 이천시 마장면 이장로256번길</p>
+          <span class="map-overlay-btn">
+            <span class="n" style="width:14px;height:14px;background:#fff;color:#03C75A;border-radius:3px;font-size:10px;display:inline-flex;align-items:center;justify-content:center;font-weight:900">N</span>
+            네이버 지도에서 보기
+            <svg width="10" height="10" fill="none" stroke="currentColor" stroke-width="2.4" viewBox="0 0 24 24">
+              <path d="M5 12h14M12 5l7 7-7 7"/>
+            </svg>
+          </span>
+        </div>
+
+      </a>
+    </div>
+
+    <!-- 오시는 방법 -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mb-12">
+
+      <!-- 자가용 -->
+      <div class="info-card">
+        <div class="flex items-start gap-4">
+          <div class="info-ico" style="background:#FFF4E0;color:#B5832B;margin-bottom:0;flex-shrink:0">
+            🚗
+          </div>
+          <div class="flex-1">
+            <p class="text-xs font-bold mb-2" style="color:#B5832B;letter-spacing:.1em">BY CAR</p>
+            <h3 class="font-bold mb-3" style="font-size:17px;color:var(--text-primary);letter-spacing:-.015em">
+              자가용 이용 시
+            </h3>
+            <ul class="text-sm space-y-2" style="color:var(--text-secondary);line-height:1.7">
+              <li class="flex gap-2">
+                <span style="color:#B5832B;font-weight:700">·</span>
+                중부고속도로 <b>일죽 IC</b> → 약 15분
+              </li>
+              <li class="flex gap-2">
+                <span style="color:#B5832B;font-weight:700">·</span>
+                영동고속도로 <b>덕평 IC</b> → 약 20분
+              </li>
+              <li class="flex gap-2">
+                <span style="color:#B5832B;font-weight:700">·</span>
+                내비게이션 검색: <b>한마음일터</b> 또는 위 주소
+              </li>
+              <li class="flex gap-2">
+                <span style="color:#B5832B;font-weight:700">·</span>
+                시설 내 <b>주차 가능</b> (방문 차량 환영)
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- 대중교통 -->
+      <div class="info-card">
+        <div class="flex items-start gap-4">
+          <div class="info-ico" style="background:#E8F4FE;color:var(--accent-blue);margin-bottom:0;flex-shrink:0">
+            🚌
+          </div>
+          <div class="flex-1">
+            <p class="text-xs font-bold mb-2" style="color:var(--accent-blue);letter-spacing:.1em">BY TRANSIT</p>
+            <h3 class="font-bold mb-3" style="font-size:17px;color:var(--text-primary);letter-spacing:-.015em">
+              대중교통 이용 시
+            </h3>
+            <ul class="text-sm space-y-2" style="color:var(--text-secondary);line-height:1.7">
+              <li class="flex gap-2">
+                <span style="color:var(--accent-blue);font-weight:700">·</span>
+                <b>이천 종합터미널</b>에서 차로 약 15분
+              </li>
+              <li class="flex gap-2">
+                <span style="color:var(--accent-blue);font-weight:700">·</span>
+                지하철 경강선 <b>이천역</b>에서 차로 약 20분
+              </li>
+              <li class="flex gap-2">
+                <span style="color:var(--accent-blue);font-weight:700">·</span>
+                택시 이용 권장 (대중버스 배차 적음)
+              </li>
+              <li class="flex gap-2">
+                <span style="color:var(--accent-blue);font-weight:700">·</span>
+                미리 연락 주시면 <b>픽업 안내</b> 가능
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Quick CTA -->
+    <div class="quick-bar">
+      <div class="flex flex-col md:flex-row items-center justify-between gap-5">
+        <div class="text-center md:text-left">
+          <p class="text-xs font-bold mb-2" style="color:var(--accent-yellow);letter-spacing:.15em">QUICK CONTACT</p>
+          <h3 class="font-display mb-2" style="font-size:clamp(24px,3vw,32px);color:#fff;line-height:1.2">
+            먼저 연락 주시면 더 편하게 도와드릴게요
+          </h3>
+          <p class="text-sm" style="color:var(--text-muted-dark);line-height:1.7">
+            방문 전 미리 연락 주시면 담당자가 미리 자료를 준비해 두겠습니다.
+          </p>
+        </div>
+        <div class="flex flex-col md:flex-row gap-3 flex-shrink-0">
+          <a href="tel:031-631-6680" class="btn-primary" style="background:var(--accent-yellow);color:var(--bg-navy);box-shadow:0 4px 14px rgba(255,217,136,.30)">
+            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round"
+                d="M3 5a2 2 0 012-2h3.28a1 1 0 01.95.68l1.49 4.49a1 1 0 01-.5 1.21l-2.26 1.13a11 11 0 005.52 5.52l1.13-2.26a1 1 0 011.21-.5l4.49 1.5a1 1 0 01.68.94V19a2 2 0 01-2 2h-1C9.72 21 3 14.28 3 6V5z"/>
+            </svg>
+            전화하기
+          </a>
+          <a href="index.html#cta" class="btn-soft" style="background:rgba(255,255,255,.1);color:#fff;border-color:rgba(255,255,255,.25)">
+            견적 요청하기 →
+          </a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ══════ Footer ══════ -->
+<footer style="background:var(--bg-navy);color:var(--text-on-dark)">
+
+  <div class="border-b" style="border-color:rgba(255,255,255,.08)">
+    <div class="max-w-7xl mx-auto px-6 lg:px-10 py-6 flex flex-wrap justify-center items-center gap-x-10 gap-y-3">
+      <a href="#" class="text-xs font-medium" style="color:var(--text-muted-dark)">한국장애인고용공단</a>
+      <span style="color:rgba(255,255,255,.15)">·</span>
+      <a href="#" class="text-xs font-medium" style="color:var(--text-muted-dark)">한국장애인개발원</a>
+      <span style="color:rgba(255,255,255,.15)">·</span>
+      <a href="#" class="text-xs font-medium" style="color:var(--text-muted-dark)">경기도청</a>
+      <span style="color:rgba(255,255,255,.15)">·</span>
+      <a href="#" class="text-xs font-medium" style="color:var(--text-muted-dark)">이천시청</a>
+    </div>
+  </div>
+
+  <div class="max-w-7xl mx-auto px-6 lg:px-10 py-12">
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+
+      <div class="md:col-span-1">
+        <div class="flex items-center gap-2.5 mb-4">
+          <div class="logo-mark">한</div>
+          <p class="font-bold text-base" style="color:#fff">한마음일터</p>
+        </div>
+        <p class="text-sm leading-[1.7]" style="color:var(--text-muted-dark)">
+          장애인의 자립과 사회 참여를 돕는 직업재활시설.
+          따뜻한 손길로 만든 인쇄·홍보물.
+        </p>
+      </div>
+
+      <div>
+        <p class="text-xs font-bold uppercase mb-4" style="color:var(--accent-yellow);letter-spacing:.16em">서비스</p>
+        <ul class="space-y-2.5 text-sm" style="color:var(--text-muted-dark)">
+          <li><a href="index.html#problem"  class="hover:text-white transition-colors">서비스 소개</a></li>
+          <li><a href="index.html#process"  class="hover:text-white transition-colors">진행 과정</a></li>
+          <li><a href="index.html#gallery"  class="hover:text-white transition-colors">제작 사례</a></li>
+          <li><a href="index.html#faq"      class="hover:text-white transition-colors">자주 묻는 질문</a></li>
+          <li><a href="index.html#cta"      class="hover:text-white transition-colors">견적 요청</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <p class="text-xs font-bold uppercase mb-4" style="color:var(--accent-yellow);letter-spacing:.16em">연락처</p>
+        <ul class="space-y-2.5 text-sm" style="color:var(--text-muted-dark)">
+          <li class="flex gap-2"><span class="font-bold shrink-0" style="color:#fff">전화</span>031-631-6680</li>
+          <li class="flex gap-2"><span class="font-bold shrink-0" style="color:#fff">팩스</span>031-631-6634</li>
+          <li class="flex gap-2"><span class="font-bold shrink-0" style="color:#fff">주소</span>경기도 이천시 마장면 이장로256번길</li>
+        </ul>
+      </div>
+
+      <div>
+        <p class="text-xs font-bold uppercase mb-4" style="color:var(--accent-yellow);letter-spacing:.16em">법인 정보</p>
+        <ul class="space-y-2.5 text-sm" style="color:var(--text-muted-dark)">
+          <li class="flex gap-2"><span class="font-bold shrink-0" style="color:#fff">대표자</span>이병환</li>
+          <li class="flex gap-2"><span class="font-bold shrink-0" style="color:#fff">사업자</span>126-82-10484</li>
+          <li class="flex gap-2"><span class="font-bold shrink-0" style="color:#fff">계좌</span>농협 233060-55-001607</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="border-t" style="border-color:rgba(255,255,255,.08)">
+    <div class="max-w-7xl mx-auto px-6 lg:px-10 py-5 flex flex-col md:flex-row items-center justify-between gap-3">
+      <p class="text-xs" style="color:var(--text-muted-dark)">© 2026 한마음일터. All rights reserved.</p>
+      <div class="flex items-center gap-5 text-xs" style="color:var(--text-muted-dark)">
+        <a href="#" class="hover:text-white transition-colors">개인정보처리방침</a>
+        <span style="color:rgba(255,255,255,.15)">|</span>
+        <a href="#" class="hover:text-white transition-colors">이용약관</a>
+        <span style="color:rgba(255,255,255,.15)">|</span>
+        <a href="admin.html" class="hover:text-white transition-colors" style="opacity:.5">관리자</a>
+      </div>
+    </div>
+  </div>
+
+</footer>
+
+<script>
+  const mobToggle = document.getElementById('mob-toggle');
+  const mobMenu   = document.getElementById('mob-menu');
+  mobToggle.addEventListener('click', () => mobMenu.classList.toggle('open'));
+  mobMenu.querySelectorAll('a').forEach(a =>
+    a.addEventListener('click', () => mobMenu.classList.remove('open'))
+  );
+</script>
+
+</body>
+</html>

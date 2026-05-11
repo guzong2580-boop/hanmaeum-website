@@ -1,0 +1,756 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>인쇄 — 한마음일터</title>
+  <meta name="description" content="한마음일터 인쇄물 안내. 칼라인쇄·카탈로그·리플렛·전단지·명함·현수막·쇼핑백 제작.">
+  <link rel="stylesheet" href="common.css">
+
+  <style>
+    .section-block {
+      padding: 80px 0;
+      border-top: 1px solid var(--border-soft);
+    }
+    .section-block:first-of-type { border-top: none; }
+    .section-eyebrow {
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: .18em;
+      color: var(--text-purple-deep);
+      margin-bottom: 12px;
+    }
+    .section-title {
+      font-family: 'Pretendard',sans-serif;
+      font-weight: 900;
+      font-size: clamp(28px, 4vw, 40px);
+      color: var(--text-primary);
+      letter-spacing: -.025em;
+      line-height: 1.2;
+      margin-bottom: 18px;
+    }
+    .section-lead {
+      font-size: 16px;
+      color: var(--text-secondary);
+      line-height: 1.75;
+      max-width: 720px;
+      margin-bottom: 36px;
+    }
+
+    /* === 필터 바 (몽땅 스타일) === */
+    .filter-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px 28px;
+      justify-content: center;
+      padding: 28px 0 36px;
+      border-bottom: 1px solid var(--border-soft);
+      margin-bottom: 36px;
+    }
+    .filter-btn {
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 8px 4px;
+      font-family: inherit;
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--text-muted);
+      letter-spacing: -.01em;
+      transition: color .15s var(--ease);
+      position: relative;
+    }
+    .filter-btn:hover { color: var(--text-primary); }
+    .filter-btn.active { color: var(--text-primary); font-weight: 800; }
+    .filter-btn.active::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 24px;
+      height: 2px;
+      background: var(--accent-blue);
+    }
+
+    /* === 그룹 (소제목 + 갤러리) === */
+    .g-group { margin-bottom: 56px; }
+    .g-group.hidden { display: none; }
+    .g-subhead {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 14px;
+      font-weight: 800;
+      color: var(--text-purple-deep);
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      margin-bottom: 18px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--border-soft);
+    }
+    .g-subhead .ko {
+      font-size: 18px;
+      font-weight: 800;
+      color: var(--text-primary);
+      letter-spacing: -.015em;
+      text-transform: none;
+    }
+    .g-subhead .count {
+      margin-left: auto;
+      font-size: 12px;
+      color: var(--text-muted);
+      font-weight: 600;
+      letter-spacing: 0;
+    }
+
+    /* === 갤러리 그리드 === */
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+    }
+    @media (max-width: 1024px) { .gallery { grid-template-columns: repeat(3, 1fr); } }
+    @media (max-width: 768px)  { .gallery { grid-template-columns: repeat(2, 1fr); gap: 12px; } }
+    @media (max-width: 480px)  { .gallery { grid-template-columns: 1fr; } }
+
+    .g-item {
+      aspect-ratio: 1 / 1;
+      border-radius: 4px;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 96px;
+      transition: transform .25s var(--ease), box-shadow .25s var(--ease);
+      cursor: pointer;
+      position: relative;
+    }
+    .g-item:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 28px rgba(40,40,80,.12);
+    }
+    .g-item.hidden { display: none; }
+
+    /* 카드 컬러 팔레트 (몽땅 스타일 — 부드러운 톤) */
+    .g-item.c-cream    { background: #F5F1E6; }
+    .g-item.c-teal     { background: #2C7A7B; color: #fff; }
+    .g-item.c-mint     { background: #DCEEE2; }
+    .g-item.c-yellow   { background: #FCE48E; }
+    .g-item.c-sky      { background: #DAE7F5; }
+    .g-item.c-pink     { background: #FBE0DA; }
+    .g-item.c-lavender { background: #E5DFF7; }
+    .g-item.c-coral    { background: #F4A89D; color: #fff; }
+    .g-item.c-blue     { background: #4A6FE3; color: #fff; }
+    .g-item.c-grey     { background: #E5E7EB; }
+    .g-item.c-olive    { background: #B5C99A; }
+    .g-item.c-sand     { background: #EAD7B7; }
+
+    .cta-bar {
+      margin-top: 60px;
+      padding: 28px 32px;
+      background: var(--bg-navy);
+      border-radius: 18px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+    .cta-bar p { color: #fff; font-size: 17px; font-weight: 700; letter-spacing: -.01em; }
+    .cta-bar .small { color: var(--accent-yellow); font-size: 12px; font-weight: 700; letter-spacing: .14em; margin-bottom: 6px; display: block; }
+
+    /* === 상세 모달 === */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      z-index: 100;
+      background: rgba(20,18,40,.65);
+      backdrop-filter: blur(6px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      opacity: 0;
+      transition: opacity .2s var(--ease);
+    }
+    .modal-backdrop.open { display: flex; opacity: 1; }
+    .modal-card {
+      background: #fff;
+      border-radius: 22px;
+      max-width: 1180px;
+      width: 100%;
+      max-height: 92vh;
+      display: grid;
+      grid-template-columns: 1.05fr 1fr;
+      box-shadow: 0 24px 60px rgba(0,0,0,.30);
+      transform: scale(.96);
+      transition: transform .25s var(--ease);
+      overflow: hidden;
+    }
+    .modal-backdrop.open .modal-card { transform: scale(1); }
+    .modal-thumb {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 200px;
+      border-radius: 22px 0 0 22px;
+      min-height: 480px;
+    }
+    .modal-body {
+      padding: 40px 44px 36px;
+      display: flex;
+      flex-direction: column;
+      overflow-y: auto;
+    }
+    .modal-cat {
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: .14em;
+      color: var(--text-purple-deep);
+      margin-bottom: 8px;
+    }
+    .modal-title {
+      font-family: 'Pretendard',sans-serif;
+      font-weight: 900;
+      font-size: 30px;
+      color: var(--text-primary);
+      letter-spacing: -.025em;
+      margin-bottom: 18px;
+    }
+    .modal-section { margin-bottom: 18px; }
+    .modal-section h4 {
+      font-size: 11.5px;
+      font-weight: 800;
+      letter-spacing: .18em;
+      color: var(--text-purple-deep);
+      margin-bottom: 8px;
+      padding-bottom: 6px;
+      border-bottom: 1px solid var(--border-soft);
+    }
+    .modal-section p {
+      font-size: 14.5px;
+      color: var(--text-secondary);
+      line-height: 1.78;
+      letter-spacing: -.005em;
+    }
+    .modal-info {
+      list-style: none;
+      padding: 14px 18px;
+      margin: 4px 0 20px;
+      background: var(--bg-cream);
+      border-radius: 10px;
+      display: grid;
+      gap: 8px;
+    }
+    .modal-info li {
+      display: flex;
+      gap: 12px;
+      font-size: 13px;
+      line-height: 1.55;
+    }
+    .modal-info li b {
+      min-width: 70px;
+      color: var(--text-muted);
+      font-weight: 700;
+      letter-spacing: -.005em;
+    }
+    .modal-info li span { color: var(--text-primary); font-weight: 500; }
+    .modal-cta {
+      margin-top: auto;
+      display: flex;
+      gap: 10px;
+    }
+    .modal-cta a {
+      flex: 1;
+      text-align: center;
+      padding: 14px 18px;
+      border-radius: 10px;
+      font-weight: 700;
+      font-size: 14px;
+      text-decoration: none;
+      letter-spacing: -.01em;
+      transition: background .15s var(--ease);
+    }
+    .modal-cta .primary { background: var(--accent-blue); color: #fff; }
+    .modal-cta .primary:hover { background: var(--accent-blue-2); }
+    .modal-cta .ghost { background: var(--bg-cream); color: var(--text-primary); border: 1px solid var(--border); }
+    .modal-cta .ghost:hover { border-color: var(--text-primary); }
+
+    .modal-close {
+      position: absolute;
+      top: 20px; right: 20px;
+      width: 40px; height: 40px;
+      border-radius: 50%;
+      background: rgba(255,255,255,.95);
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      color: var(--text-primary);
+      box-shadow: 0 4px 14px rgba(0,0,0,.15);
+      transition: transform .15s var(--ease);
+      z-index: 1;
+    }
+    .modal-close:hover { transform: rotate(90deg); }
+
+    @media (max-width: 900px) {
+      .modal-card { grid-template-columns: 1fr; max-height: 94vh; }
+      .modal-thumb { min-height: 0; aspect-ratio: 16 / 10; border-radius: 22px 22px 0 0; font-size: 110px; }
+      .modal-body { padding: 26px 24px; }
+      .modal-title { font-size: 24px; margin-bottom: 14px; }
+      .modal-section { margin-bottom: 14px; }
+    }
+
+    /* 클릭 가능 표시 */
+    .g-item { cursor: pointer; user-select: none; }
+  </style>
+</head>
+
+<body>
+
+<!-- ══════════ HEADER (same as about.html) ══════════ -->
+<header id="site-header">
+  <div class="container" style="height:72px;display:flex;align-items:center;justify-content:space-between">
+    <a href="index.html" style="display:flex;align-items:center;text-decoration:none" aria-label="한마음일터 홈">
+      <img src="logo.png" alt="한마음일터 - 장애인직업재활시설" style="height:48px;width:auto;display:block">
+    </a>
+
+    <nav class="desktop-nav" style="display:flex;align-items:center;gap:28px">
+      <div class="nav-item">
+        <a href="about.html" class="nav-link">소개<svg class="nav-caret" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 5l3 3 3-3"/></svg></a>
+        <div class="nav-dropdown">
+          <a href="about.html#greeting">인사말</a>
+          <a href="about.html#history">설립목적 및 연혁</a>
+          <a href="about.html#facility">시설개요</a>
+          <a href="about.html#rehab">직업재활</a>
+          <a href="about.html#process">이용절차</a>
+          <a href="about.html#org">조직도</a>
+          <a href="about.html#location">찾아오시는 길</a>
+        </div>
+      </div>
+      <div class="nav-item">
+        <a href="print.html" class="nav-link active">인쇄<svg class="nav-caret" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 5l3 3 3-3"/></svg></a>
+        <div class="nav-dropdown">
+          <a href="#paper">인쇄물</a>
+          <a href="#banner-bag">현수막 및 쇼핑백</a>
+        </div>
+      </div>
+      <div class="nav-item">
+        <a href="processing.html" class="nav-link">임가공<svg class="nav-caret" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 5l3 3 3-3"/></svg></a>
+        <div class="nav-dropdown">
+          <a href="processing.html#fancom">팬콤</a>
+          <a href="processing.html#natural">네추럴밸리</a>
+          <a href="processing.html#feel">더필</a>
+          <a href="processing.html#scrubber">수세미</a>
+        </div>
+      </div>
+      <div class="nav-item">
+        <a href="community.html" class="nav-link">커뮤니티<svg class="nav-caret" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 5l3 3 3-3"/></svg></a>
+        <div class="nav-dropdown">
+          <a href="community.html#notice">공지사항</a>
+          <a href="community.html#gallery">갤러리</a>
+          <a href="community.html#archive">자료실</a>
+          <a href="community.html#donation">후원</a>
+          <a href="community.html#volunteer">자원봉사</a>
+        </div>
+      </div>
+      <a href="quote.html" class="nav-link">견적요청</a>
+    </nav>
+
+    <div style="display:flex;align-items:center;gap:12px">
+      <a href="quote.html" class="btn-primary desktop-cta" style="padding:10px 22px;font-size:12px">견적 요청</a>
+      <button id="mob-toggle" class="mob-toggle" aria-label="menu" style="width:40px;height:40px;display:none;align-items:center;justify-content:center;background:none;border:none;cursor:pointer">
+        <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <div id="mob-menu" class="hidden" style="border-top:1px solid var(--border-soft);background:#fff;max-height:calc(100vh - 72px);overflow-y:auto">
+    <nav style="display:flex;flex-direction:column;padding:8px 24px 16px">
+      <button class="mob-group-toggle" data-target="mg-about">소개<svg class="nav-caret" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 5l3 3 3-3"/></svg></button>
+      <div id="mg-about" class="mob-sub">
+        <a href="about.html">전체 보기</a>
+        <a href="about.html#greeting">인사말</a>
+        <a href="about.html#history">설립목적 및 연혁</a>
+        <a href="about.html#facility">시설개요</a>
+        <a href="about.html#rehab">직업재활</a>
+        <a href="about.html#process">이용절차</a>
+        <a href="about.html#org">조직도</a>
+        <a href="about.html#location">찾아오시는 길</a>
+      </div>
+      <button class="mob-group-toggle" data-target="mg-print">인쇄<svg class="nav-caret" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 5l3 3 3-3"/></svg></button>
+      <div id="mg-print" class="mob-sub">
+        <a href="print.html">전체 보기</a>
+        <a href="#paper">인쇄물</a>
+        <a href="#banner-bag">현수막 및 쇼핑백</a>
+      </div>
+      <button class="mob-group-toggle" data-target="mg-proc">임가공<svg class="nav-caret" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 5l3 3 3-3"/></svg></button>
+      <div id="mg-proc" class="mob-sub">
+        <a href="processing.html">전체 보기</a>
+        <a href="processing.html#fancom">팬콤</a>
+        <a href="processing.html#natural">네추럴밸리</a>
+        <a href="processing.html#feel">더필</a>
+        <a href="processing.html#scrubber">수세미</a>
+      </div>
+      <button class="mob-group-toggle" data-target="mg-comm">커뮤니티<svg class="nav-caret" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 5l3 3 3-3"/></svg></button>
+      <div id="mg-comm" class="mob-sub">
+        <a href="community.html">전체 보기</a>
+        <a href="community.html#notice">공지사항</a>
+        <a href="community.html#gallery">갤러리</a>
+        <a href="community.html#archive">자료실</a>
+        <a href="community.html#donation">후원</a>
+        <a href="community.html#volunteer">자원봉사</a>
+      </div>
+      <a href="quote.html" style="padding:14px 4px;font-size:14px;font-weight:600;color:var(--text-primary);text-decoration:none;border-top:1px solid var(--border-soft);margin-top:6px">견적요청</a>
+      <a href="quote.html" class="btn-primary" style="margin-top:14px;justify-content:center;padding:12px 22px;font-size:12px">견적 요청하기</a>
+    </nav>
+  </div>
+</header>
+
+<style>
+  @media (max-width: 1023px) {
+    .desktop-nav, .desktop-cta { display: none !important; }
+    .mob-toggle { display: flex !important; }
+  }
+</style>
+
+
+<!-- ══════════ PAGE HERO ══════════ -->
+<section class="page-hero">
+  <div class="container">
+    <span class="crumb">
+      <span style="width:6px;height:6px;border-radius:50%;background:var(--accent-blue)"></span>
+      PRINT
+    </span>
+    <h1>인쇄</h1>
+    <p class="lead">
+      칼라인쇄·카탈로그·리플렛·전단지·명함부터 현수막·쇼핑백까지.<br>
+      한마음일터에서 정성껏 제작합니다.
+    </p>
+  </div>
+</section>
+
+
+<!-- ══════════ 갤러리 (필터 + 그리드) ══════════ -->
+<section class="section-block" style="padding-top:0">
+  <div class="container">
+
+    <!-- 필터 바 -->
+    <div class="filter-bar">
+      <button class="filter-btn active" data-filter="all">ALL</button>
+      <button class="filter-btn" data-filter="color">CARD</button>
+      <button class="filter-btn" data-filter="catalog">CATALOG</button>
+      <button class="filter-btn" data-filter="leaflet">LEAFLET</button>
+      <button class="filter-btn" data-filter="poster">POSTER</button>
+      <button class="filter-btn" data-filter="namecard">NAMECARD</button>
+      <button class="filter-btn" data-filter="bind">BIND</button>
+      <button class="filter-btn" data-filter="banner">BANNER</button>
+      <button class="filter-btn" data-filter="bag">BAG</button>
+    </div>
+
+    <!-- 그룹 1: 인쇄물 -->
+    <div class="g-group" data-group="print">
+      <h3 class="g-subhead">
+        PRINT <span class="ko">인쇄물</span>
+        <span class="count"></span>
+      </h3>
+      <div class="gallery">
+
+        <div class="g-item c-cream" data-cat="color" data-title="칼라인쇄" data-tag="PRINT · COLOR"
+             data-bg="가장 기본이자 가장 정밀함이 요구되는 인쇄. 한마음일터의 인쇄팀은 색을 다루는 일에 오랜 시간을 들여왔으며, 한 부 한 부의 마감을 책임지고 있습니다."
+             data-design="인쇄물은 정보를 전달하는 매체이자 보낸 이의 마음을 대신하는 사물이라 믿습니다. 작은 인쇄물에도 정중한 색감과 정확한 정렬을 담고자 합니다."
+             data-info='[{"k":"작업 분야","v":"보고서·간행물·홍보물"},{"k":"매체","v":"단면·양면·다단"},{"k":"마감","v":"코팅·박·형압·미싱"}]'>📰</div>
+
+        <div class="g-item c-teal" data-cat="catalog" data-title="카탈로그" data-tag="PRINT · CATALOG"
+             data-bg="기관과 기업의 활동을 한 권의 책자로 정리하는 작업. 페이지의 흐름과 사진의 호흡을 함께 고민합니다."
+             data-design="표지부터 마지막 페이지까지 일관된 톤을 유지하면서, 각 섹션의 성격에 맞춰 호흡을 조절했습니다. 종이 한 장의 표면과 무게가 책 전체의 인상을 결정합니다."
+             data-info='[{"k":"작업 분야","v":"기업·기관 소개"},{"k":"제본","v":"무선·중철·스프링"},{"k":"평균 분량","v":"24~96P"}]'>📚</div>
+
+        <div class="g-item c-mint" data-cat="leaflet" data-title="리플렛" data-tag="PRINT · LEAFLET"
+             data-bg="짧은 시간 안에 핵심을 전달해야 하는 인쇄물. 접지 한 번에 흐름이 만들어지고, 마지막 면에서 메시지가 마무리됩니다."
+             data-design="정보의 위계를 시각적으로 명확하게 분류하면서, 동시에 종이를 펼치는 동작에서 자연스러운 발견의 즐거움을 전하고자 했습니다."
+             data-info='[{"k":"작업 분야","v":"행사·서비스 안내"},{"k":"형식","v":"2단·3단 접지"},{"k":"규격","v":"A4·A5 기준"}]'>📃</div>
+
+        <div class="g-item c-yellow" data-cat="poster" data-title="전단지" data-tag="PRINT · FLYER"
+             data-bg="가장 빠르게 시민의 손에 닿는 매체. 한 장의 종이로 메시지를 정확히 전해야 합니다."
+             data-design="강한 헤드라인과 정돈된 정보 배치로, 길게 머무르지 않고도 핵심이 남도록 설계했습니다. 색은 절제하고, 여백을 남기는 것이 더 강한 인상을 만든다고 봅니다."
+             data-info='[{"k":"작업 분야","v":"이벤트·홍보"},{"k":"형식","v":"단면·양면"},{"k":"규격","v":"A4·A5·B5"}]'>📄</div>
+
+        <div class="g-item c-sky" data-cat="namecard" data-title="명함" data-tag="PRINT · NAMECARD"
+             data-bg="가장 작은 인쇄물이지만 한 사람을 대표하는 매체. 종이의 결과 잉크의 깊이가 이 작업의 인상을 결정짓습니다."
+             data-design="조심스럽게 자른 모서리, 손에 닿는 무게, 색의 정확한 재현 — 작은 디테일이 모여 인상이 됩니다. 받는 사람의 손바닥 안에서 가장 오래 머무는 인쇄물이라 더 정성을 들입니다."
+             data-info='[{"k":"규격","v":"90×50mm 표준"},{"k":"마감","v":"일반·고급·특수 코팅"},{"k":"단위","v":"250매 박스"}]'>💳</div>
+
+        <div class="g-item c-pink" data-cat="bind" data-title="제본" data-tag="PRINT · BIND"
+             data-bg="흩어진 종이를 한 권으로 묶어내는 일. 보고서·매뉴얼·논문 등 오래 펼쳐 읽힐 인쇄물을 정성스럽게 마감합니다."
+             data-design="펼쳐진 면이 바닥에 잘 놓이도록 제본 방식을 선택하고, 표지 재질로 책의 인상을 결정합니다. 책장 한 켠에 오래 자리를 차지할 사물임을 항상 의식합니다."
+             data-info='[{"k":"제본 방식","v":"스프링·무선·중철·열제본"},{"k":"표지","v":"투명·하드·소프트"},{"k":"용도","v":"보고서·매뉴얼·논문"}]'>📓</div>
+
+        <div class="g-item c-lavender" data-cat="color" data-title="포토카드" data-tag="PRINT · COLOR"
+             data-bg="한 장의 사진이나 일러스트가 하나의 작품이 되는 인쇄물. 작은 크기 안에 색과 디테일이 모두 담겨야 합니다."
+             data-design="광택과 반광택 사이에서 가장 어울리는 마감을 선택하고, 사진의 분위기를 흩트리지 않는 절제된 인쇄로 제작합니다."
+             data-info='[{"k":"작업 분야","v":"기념품·굿즈"},{"k":"마감","v":"광택·반광택"},{"k":"규격","v":"54×86mm 또는 맞춤"}]'>🎨</div>
+
+        <div class="g-item c-coral" data-cat="catalog" data-title="브로슈어" data-tag="PRINT · CATALOG"
+             data-bg="기업과 브랜드의 정체성을 한 권의 인쇄물로 응축하는 작업. 두께와 무게가 곧 메시지가 됩니다."
+             data-design="두꺼운 표지와 절제된 후가공으로 격을 만들고, 내지의 여백으로 읽는 호흡을 조절합니다. 손에 들었을 때 가장 먼저 닿는 무게가 브랜드의 첫 인상이 됩니다."
+             data-info='[{"k":"작업 분야","v":"브랜드·기업 소개"},{"k":"용지","v":"고급용지 200~350g"},{"k":"후가공","v":"무광·UV·박"}]'>📖</div>
+
+        <div class="g-item c-pink" data-cat="leaflet" data-title="다단 리플렛" data-tag="PRINT · LEAFLET"
+             data-bg="정보가 많을수록 접지 횟수도 늘어납니다. 정보의 양과 동선을 동시에 고려한 접지 디자인입니다."
+             data-design="단을 펼칠 때마다 다음 정보가 자연스럽게 이어지도록 배치하여, 한 번의 접기·펼치기가 하나의 이야기가 되도록 했습니다."
+             data-info='[{"k":"접지 형식","v":"4단·6단·병풍·관음"},{"k":"분야","v":"상세 안내서"},{"k":"용지","v":"아트지 150~200g"}]'>📑</div>
+
+        <div class="g-item c-yellow" data-cat="poster" data-title="포스터" data-tag="PRINT · POSTER"
+             data-bg="공간 안에서 시선을 멈춰 세우는 인쇄물. 한 장의 종이가 하나의 풍경이 됩니다."
+             data-design="거리가 만드는 시선의 변화를 고려하여 레이아웃을 짜고, 인쇄물 자체가 공간의 일부가 되도록 했습니다. 멀리서 한 번, 가까이서 한 번 — 두 번 읽히는 인쇄물을 지향합니다."
+             data-info='[{"k":"분야","v":"행사·전시·캠페인"},{"k":"규격","v":"A2·A1·B1"},{"k":"용지","v":"아트지·합성지"}]'>🖼️</div>
+
+      </div>
+    </div>
+
+    <!-- 그룹 2: 현수막 -->
+    <div class="g-group" data-group="banner">
+      <h3 class="g-subhead">
+        BANNER <span class="ko">현수막</span>
+        <span class="count"></span>
+      </h3>
+      <div class="gallery">
+
+        <div class="g-item c-blue" data-cat="banner" data-title="실사 현수막" data-tag="BANNER · GENERAL"
+             data-bg="거리와 광장에서 가장 먼저 만나게 되는 매체. 짧은 시간 안에 메시지를 전해야 합니다."
+             data-design="멀리서도 읽히는 굵은 자체와 정확한 색감으로, 도시 풍경 속에서도 분명히 보이는 인쇄물을 만들고자 했습니다."
+             data-info='[{"k":"분야","v":"행사·홍보"},{"k":"마감","v":"사방 미싱 + 끈구멍"},{"k":"최대 사이즈","v":"폭 5m × 길이 무제한"}]'>🚩</div>
+
+        <div class="g-item c-grey" data-cat="banner" data-title="메쉬 현수막" data-tag="BANNER · MESH"
+             data-bg="바람이 통과하는 원단으로 제작하는 옥외용 현수막. 건물 외벽이나 고층 부착에 사용됩니다."
+             data-design="메쉬 특유의 격자감을 디자인 안에 자연스럽게 녹여내고, 멀리서도 또렷이 읽히는 글자 크기를 신경 썼습니다."
+             data-info='[{"k":"원단","v":"메쉬 (바람 통과)"},{"k":"용도","v":"옥외 대형·고층"},{"k":"마감","v":"사방 미싱 + 환강"}]'>🎌</div>
+
+        <div class="g-item c-olive" data-cat="banner" data-title="배너·X배너" data-tag="BANNER · STAND"
+             data-bg="매장과 행사장 입구에서 시선을 모으는 입식 인쇄물. 한정된 공간에서 메시지를 정리하는 일입니다."
+             data-design="위에서 아래로 흐르는 시선의 동선을 따라 정보의 위계를 정리하고, 거치대까지 함께 마감해 즉시 사용할 수 있도록 했습니다."
+             data-info='[{"k":"구성","v":"인쇄물 + 거치대"},{"k":"분야","v":"매장·행사"},{"k":"규격","v":"600×1800mm 또는 맞춤"}]'>📌</div>
+
+        <div class="g-item c-coral" data-cat="banner" data-title="미니 깃발" data-tag="BANNER · FLAG"
+             data-bg="행사 분위기를 살리는 작은 깃발. 형태와 색이 모여 하나의 풍경을 만듭니다."
+             data-design="다양한 모양과 사이즈로 제작 가능하며, 색의 채도와 마감 방식을 행사 콘셉트에 맞춰 조율합니다."
+             data-info='[{"k":"마감","v":"막대·끈 옵션"},{"k":"분야","v":"이벤트·매장"},{"k":"원단","v":"실사·메쉬"}]'>🏳️</div>
+
+      </div>
+    </div>
+
+    <!-- 그룹 3: 쇼핑백 -->
+    <div class="g-group" data-group="bag">
+      <h3 class="g-subhead">
+        BAG <span class="ko">쇼핑백</span>
+        <span class="count"></span>
+      </h3>
+      <div class="gallery">
+
+        <div class="g-item c-sand" data-cat="bag" data-title="일반 쇼핑백" data-tag="BAG · BASIC"
+             data-bg="매장에서 일상적으로 쓰이는 인쇄물. 자주 보이기 때문에 단정함이 더 중요해집니다."
+             data-design="사용자의 손에서 자주 흔들리는 매체임을 고려해 인쇄와 마감의 내구성을 함께 고민했습니다."
+             data-info='[{"k":"사이즈","v":"소·중·대·맞춤"},{"k":"형식","v":"끈·박스형"},{"k":"용지","v":"크라프트·아트지"}]'>🛍️</div>
+
+        <div class="g-item c-cream" data-cat="bag" data-title="기념품 쇼핑백" data-tag="BAG · PREMIUM"
+             data-bg="답례품과 기념품을 담는 쇼핑백. 받는 사람에게 처음 닿는 사물이기에 정중한 마감이 중요합니다."
+             data-design="두꺼운 용지와 절제된 후가공으로 안에 담길 물건의 격을 함께 만들어 줍니다."
+             data-info='[{"k":"분야","v":"답례품·기념품"},{"k":"후가공","v":"무광·UV·박"},{"k":"용지","v":"고급용지 200~300g"}]'>🎁</div>
+
+        <div class="g-item c-mint" data-cat="bag" data-title="맞춤 쇼핑백" data-tag="BAG · CUSTOM"
+             data-bg="브랜드 정체성을 그대로 담아내는 맞춤 쇼핑백. 사이즈·색상·재질 모두 자유롭게 선택할 수 있습니다."
+             data-design="브랜드의 고유색을 정확히 재현하면서, 손잡이부터 마감까지 일관된 톤으로 정리했습니다."
+             data-info='[{"k":"색상","v":"풀컬러"},{"k":"분야","v":"브랜드·매장"},{"k":"디자인","v":"로고·디자인 인쇄"}]'>📦</div>
+
+        <div class="g-item c-lavender" data-cat="bag" data-title="핸드백형 쇼핑백" data-tag="BAG · HANDLE"
+             data-bg="핸들이 강조된 형태의 쇼핑백. 부티크와 선물용으로 자주 활용됩니다."
+             data-design="손에 닿는 핸들의 폭과 무게중심을 고려해 형태를 다듬었습니다. 형태 자체가 곧 브랜드의 인상이 됩니다."
+             data-info='[{"k":"형태","v":"핸드백·박스형"},{"k":"분야","v":"부티크·선물"},{"k":"용지","v":"고급용지"}]'>👜</div>
+
+      </div>
+    </div>
+
+    <!-- CTA -->
+    <div class="cta-bar">
+      <div>
+        <span class="small">FREE QUOTE</span>
+        <p>인쇄물·현수막·쇼핑백 견적은 무료입니다</p>
+      </div>
+      <a href="quote.html" class="btn-primary" style="background:var(--accent-yellow);color:var(--bg-navy);box-shadow:0 4px 14px rgba(255,217,136,.30)">견적 요청 →</a>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ══════════ FOOTER ══════════ -->
+<footer id="site-footer">
+  <div class="footer-grid">
+    <div>
+      <div style="margin-bottom:14px;background:#fff;padding:10px 14px;border-radius:10px;display:inline-block">
+        <img src="logo.png" alt="한마음일터" style="height:42px;width:auto;display:block">
+      </div>
+      <p style="font-size:14px;line-height:1.7;color:var(--text-muted-dark);margin-bottom:18px">장애인의 자립과 사회 참여를 돕는 직업재활시설.<br>따뜻한 손길로 만든 인쇄·홍보물.</p>
+      <a href="tel:031-631-6680" style="display:inline-flex;align-items:center;gap:8px;font-size:14px;font-weight:700;color:#fff !important">📞 031-631-6680</a>
+    </div>
+    <div>
+      <h4>사이트맵</h4>
+      <ul style="list-style:none;padding:0;display:flex;flex-direction:column;gap:10px;font-size:14px">
+        <li><a href="about.html">소개</a></li>
+        <li><a href="print.html">인쇄</a></li>
+        <li><a href="processing.html">임가공</a></li>
+        <li><a href="community.html">커뮤니티</a></li>
+        <li><a href="quote.html">견적요청</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>연락처</h4>
+      <ul style="list-style:none;padding:0;display:flex;flex-direction:column;gap:10px;font-size:14px;color:var(--text-muted-dark)">
+        <li><b style="color:#fff">전화</b> &nbsp; 031-631-6680</li>
+        <li><b style="color:#fff">팩스</b> &nbsp; 031-631-6634</li>
+        <li><b style="color:#fff">주소</b> &nbsp; 경기도 이천시 마장면 이장로256번길</li>
+      </ul>
+    </div>
+    <div>
+      <h4>법인 정보</h4>
+      <ul style="list-style:none;padding:0;display:flex;flex-direction:column;gap:10px;font-size:14px;color:var(--text-muted-dark)">
+        <li><b style="color:#fff">대표자</b> &nbsp; 이병환</li>
+        <li><b style="color:#fff">사업자</b> &nbsp; 126-82-10484</li>
+        <li><b style="color:#fff">계좌</b> &nbsp; 농협 233060-55-001607</li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-bottom-inner">
+      <p>© 2026 한마음일터. All rights reserved.</p>
+      <div style="display:flex;gap:18px;font-size:12px">
+        <a href="#">개인정보처리방침</a>
+        <a href="#">이용약관</a>
+        <a href="admin.html" style="opacity:.5">관리자</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- 상세 모달 -->
+<div class="modal-backdrop" id="detail-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+  <div class="modal-card" style="position:relative">
+    <button class="modal-close" aria-label="닫기">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M3 3l10 10M13 3L3 13"/></svg>
+    </button>
+    <div class="modal-thumb" id="modal-thumb"></div>
+    <div class="modal-body">
+      <p class="modal-cat" id="modal-cat"></p>
+      <h3 class="modal-title" id="modal-title"></h3>
+
+      <div class="modal-section">
+        <h4>BACKGROUND</h4>
+        <p id="modal-bg"></p>
+      </div>
+
+      <div class="modal-section">
+        <h4>DESIGN</h4>
+        <p id="modal-design"></p>
+      </div>
+
+      <ul class="modal-info" id="modal-info"></ul>
+
+      <div class="modal-cta">
+        <a href="quote.html" class="primary">견적 요청 →</a>
+        <a href="tel:031-631-6680" class="ghost">📞 전화 문의</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="common.js"></script>
+<script>
+  // 인쇄물 갤러리 — 필터 + 그룹 자동 숨김
+  const filterBtns = document.querySelectorAll('.filter-btn');
+  const groups     = document.querySelectorAll('.g-group');
+
+  function applyFilter(filter) {
+    groups.forEach(group => {
+      const items = group.querySelectorAll('.g-item');
+      let visibleCount = 0;
+      items.forEach(item => {
+        const show = filter === 'all' || item.dataset.cat === filter;
+        item.classList.toggle('hidden', !show);
+        if (show) visibleCount++;
+      });
+      group.classList.toggle('hidden', visibleCount === 0);
+      const countEl = group.querySelector('.count');
+      if (countEl) countEl.textContent = visibleCount > 0 ? `${visibleCount}건` : '';
+    });
+  }
+
+  filterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      filterBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      applyFilter(btn.dataset.filter);
+    });
+  });
+
+  applyFilter('all');
+
+  // 상세 모달
+  const modal        = document.getElementById('detail-modal');
+  const modalThumb   = document.getElementById('modal-thumb');
+  const modalCat     = document.getElementById('modal-cat');
+  const modalTitle   = document.getElementById('modal-title');
+  const modalBg      = document.getElementById('modal-bg');
+  const modalDesign  = document.getElementById('modal-design');
+  const modalInfo    = document.getElementById('modal-info');
+  const modalClose   = modal.querySelector('.modal-close');
+
+  // 색상 클래스 → 배경색 추출 (모달 썸네일에 동일 색 적용)
+  const colorMap = {
+    'c-cream':'#F5F1E6','c-teal':'#2C7A7B','c-mint':'#DCEEE2','c-yellow':'#FCE48E',
+    'c-sky':'#DAE7F5','c-pink':'#FBE0DA','c-lavender':'#E5DFF7','c-coral':'#F4A89D',
+    'c-blue':'#4A6FE3','c-grey':'#E5E7EB','c-olive':'#B5C99A','c-sand':'#EAD7B7'
+  };
+  const lightOnDark = ['c-teal','c-coral','c-blue'];
+
+  function openModal(item) {
+    const colorClass = [...item.classList].find(c => c.startsWith('c-')) || 'c-cream';
+    modalThumb.style.background = colorMap[colorClass] || '#EFE9FA';
+    modalThumb.style.color = lightOnDark.includes(colorClass) ? '#fff' : '';
+    modalThumb.textContent  = item.textContent.trim();
+    modalCat.textContent    = item.dataset.tag    || '';
+    modalTitle.textContent  = item.dataset.title  || '';
+    modalBg.textContent     = item.dataset.bg     || '';
+    modalDesign.textContent = item.dataset.design || '';
+
+    modalInfo.innerHTML = '';
+    try {
+      const info = JSON.parse(item.dataset.info || '[]');
+      info.forEach(s => {
+        const li = document.createElement('li');
+        li.innerHTML = `<b>${s.k}</b><span>${s.v}</span>`;
+        modalInfo.appendChild(li);
+      });
+    } catch (e) {}
+
+    modal.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeModal() {
+    modal.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  document.querySelectorAll('.g-item').forEach(item => {
+    item.addEventListener('click', () => openModal(item));
+  });
+  modalClose.addEventListener('click', closeModal);
+  modal.addEventListener('click', e => { if (e.target === modal) closeModal(); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+</script>
+</body>
+</html>

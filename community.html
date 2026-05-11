@@ -1,0 +1,778 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>커뮤니티 — 한마음일터</title>
+  <meta name="description" content="한마음일터 커뮤니티. 공지사항·갤러리·후원·자원봉사 안내.">
+  <link rel="stylesheet" href="common.css">
+
+  <style>
+    .section-block {
+      padding: 80px 0;
+      border-top: 1px solid var(--border-soft);
+    }
+    .section-block:first-of-type { border-top: none; }
+    .section-eyebrow {
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: .18em;
+      color: var(--text-purple-deep);
+      margin-bottom: 12px;
+    }
+    .section-title {
+      font-family: 'Pretendard',sans-serif;
+      font-weight: 900;
+      font-size: clamp(28px, 4vw, 40px);
+      color: var(--text-primary);
+      letter-spacing: -.025em;
+      line-height: 1.2;
+      margin-bottom: 18px;
+    }
+    .section-lead {
+      font-size: 16px;
+      color: var(--text-secondary);
+      line-height: 1.75;
+      max-width: 720px;
+      margin-bottom: 36px;
+    }
+
+    /* 공지사항 리스트 */
+    .notice-list {
+      list-style: none;
+      padding: 0;
+      border-top: 2px solid var(--text-primary);
+    }
+    .notice-row {
+      display: grid;
+      grid-template-columns: 80px 1fr 100px 120px;
+      align-items: center;
+      gap: 16px;
+      padding: 18px 12px;
+      border-bottom: 1px solid var(--border-soft);
+      cursor: pointer;
+      transition: background .15s var(--ease);
+    }
+    .notice-row:hover { background: var(--bg-cream); }
+    .notice-row .num {
+      font-size: 13px;
+      color: var(--text-muted);
+      text-align: center;
+      font-weight: 600;
+    }
+    .notice-row .title {
+      font-size: 15px;
+      color: var(--text-primary);
+      font-weight: 600;
+      letter-spacing: -.01em;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .notice-row .badge {
+      font-size: 11px;
+      padding: 3px 8px;
+      border-radius: 999px;
+      font-weight: 700;
+      letter-spacing: .04em;
+    }
+    .badge.notice { background: var(--accent-blue); color: #fff; }
+    .badge.private { background: #FCE5E5; color: #E04848; }
+    .notice-row .author { font-size: 13px; color: var(--text-muted); text-align: center; }
+    .notice-row .date   { font-size: 13px; color: var(--text-muted); text-align: right; }
+    @media (max-width: 768px) {
+      .notice-row { grid-template-columns: 1fr; gap: 6px; }
+      .notice-row .num { display: none; }
+      .notice-row .author, .notice-row .date { text-align: left; font-size: 12px; }
+    }
+
+    .empty-state {
+      padding: 60px 24px;
+      text-align: center;
+      background: var(--bg-cream);
+      border-radius: 16px;
+      border: 1px dashed var(--border);
+    }
+    .empty-state .ico { font-size: 48px; opacity: .4; margin-bottom: 12px; }
+    .empty-state p { color: var(--text-muted); font-size: 14px; line-height: 1.6; }
+
+    /* 갤러리 */
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 16px;
+    }
+    .gallery-tile {
+      aspect-ratio: 4/3;
+      border-radius: 14px;
+      overflow: hidden;
+      position: relative;
+      background: linear-gradient(135deg, #EFE9FA 0%, #DCD3F0 100%);
+      cursor: pointer;
+      transition: transform .25s var(--ease);
+    }
+    .gallery-tile:hover { transform: translateY(-3px); }
+    .gallery-tile .ico {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 48px;
+      opacity: .55;
+    }
+    .gallery-tile .info {
+      position: absolute;
+      left: 0; right: 0; bottom: 0;
+      padding: 12px 16px;
+      background: linear-gradient(to top, rgba(0,0,0,.65), transparent);
+      color: #fff;
+    }
+    .gallery-tile .info p { font-size: 13px; font-weight: 600; }
+    .gallery-tile .info span { font-size: 11px; opacity: .8; }
+
+    /* 후원 / 자원봉사 카드 */
+    .info-block {
+      background: #fff;
+      border: 1px solid var(--border-soft);
+      border-radius: 18px;
+      padding: 36px;
+    }
+    .donate-card {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 28px;
+    }
+    .donate-info h3 {
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--text-primary);
+      letter-spacing: -.015em;
+      margin-bottom: 14px;
+    }
+    .donate-info p {
+      font-size: 15px;
+      color: var(--text-secondary);
+      line-height: 1.75;
+      margin-bottom: 14px;
+    }
+    .donate-account {
+      background: var(--bg-cream);
+      border-radius: 14px;
+      padding: 24px;
+    }
+    .donate-account .bank {
+      font-size: 13px;
+      color: var(--text-muted);
+      font-weight: 700;
+      letter-spacing: .08em;
+      margin-bottom: 10px;
+    }
+    .donate-account .num {
+      font-family: 'Pretendard',sans-serif;
+      font-size: 22px;
+      font-weight: 800;
+      color: var(--text-primary);
+      letter-spacing: -.005em;
+      margin-bottom: 6px;
+      cursor: pointer;
+    }
+    .donate-account .holder {
+      font-size: 14px;
+      color: var(--text-secondary);
+      margin-bottom: 18px;
+    }
+    .copy-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 14px;
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text-primary);
+      cursor: pointer;
+      transition: all .15s var(--ease);
+    }
+    .copy-btn:hover { border-color: var(--accent-blue); color: var(--accent-blue); }
+
+    @media (max-width: 768px) {
+      .donate-card { grid-template-columns: 1fr; }
+      .info-block { padding: 24px; }
+    }
+
+    /* 관리자 로그인 알림 박스 */
+    .admin-hint {
+      margin-top: 24px;
+      padding: 16px 20px;
+      background: #FFF8E1;
+      border-left: 4px solid #FFD988;
+      border-radius: 8px;
+      font-size: 13px;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+    .admin-hint a {
+      color: var(--accent-blue);
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    /* === 자료실 === */
+    .archive-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .archive-row {
+      display: grid;
+      grid-template-columns: 56px 1fr auto auto;
+      align-items: center;
+      gap: 16px;
+      padding: 18px 20px;
+      background: #fff;
+      border: 1px solid var(--border-soft);
+      border-radius: 14px;
+      transition: border-color .15s var(--ease), transform .15s var(--ease), box-shadow .15s var(--ease);
+    }
+    .archive-row:hover {
+      border-color: var(--accent-blue);
+      transform: translateY(-2px);
+      box-shadow: 0 10px 24px rgba(40,40,80,.08);
+    }
+    .archive-ico {
+      width: 56px; height: 56px;
+      border-radius: 12px;
+      background: var(--bg-cream);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 26px;
+      flex-shrink: 0;
+    }
+    .archive-row.pdf .archive-ico { background: #FCE5E5; }
+    .archive-row.hwp .archive-ico { background: #DAE7F5; }
+    .archive-row.doc .archive-ico { background: #DCEEE2; }
+    .archive-row.zip .archive-ico { background: #FCE48E; }
+    .archive-row.img .archive-ico { background: #E5DFF7; }
+
+    .archive-body h4 {
+      font-size: 15.5px;
+      font-weight: 700;
+      color: var(--text-primary);
+      letter-spacing: -.01em;
+      margin-bottom: 4px;
+    }
+    .archive-body p {
+      font-size: 12.5px;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+    .archive-meta {
+      font-size: 12px;
+      color: var(--text-muted);
+      text-align: right;
+      line-height: 1.5;
+      min-width: 80px;
+    }
+    .archive-meta b {
+      display: block;
+      font-size: 11px;
+      letter-spacing: .08em;
+      color: var(--text-purple-deep);
+      font-weight: 800;
+      margin-bottom: 2px;
+    }
+    .archive-dl {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 10px 16px;
+      background: var(--accent-blue);
+      color: #fff;
+      border-radius: 999px;
+      font-size: 12.5px;
+      font-weight: 700;
+      text-decoration: none;
+      letter-spacing: -.01em;
+      transition: background .15s var(--ease);
+      white-space: nowrap;
+    }
+    .archive-dl:hover { background: var(--accent-blue-2); }
+
+    @media (max-width: 720px) {
+      .archive-row {
+        grid-template-columns: 48px 1fr auto;
+        padding: 16px;
+        gap: 12px;
+      }
+      .archive-meta { display: none; }
+      .archive-ico { width: 48px; height: 48px; font-size: 22px; }
+    }
+  </style>
+</head>
+
+<body>
+
+<!-- ══════════ HEADER ══════════ -->
+<header id="site-header">
+  <div class="container" style="height:72px;display:flex;align-items:center;justify-content:space-between">
+    <a href="index.html" style="display:flex;align-items:center;text-decoration:none" aria-label="한마음일터 홈">
+      <img src="logo.png" alt="한마음일터 - 장애인직업재활시설" style="height:48px;width:auto;display:block">
+    </a>
+
+    <nav class="desktop-nav" style="display:flex;align-items:center;gap:28px">
+      <div class="nav-item">
+        <a href="about.html" class="nav-link">소개<svg class="nav-caret" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 5l3 3 3-3"/></svg></a>
+        <div class="nav-dropdown">
+          <a href="about.html#greeting">인사말</a>
+          <a href="about.html#history">설립목적 및 연혁</a>
+          <a href="about.html#facility">시설개요</a>
+          <a href="about.html#rehab">직업재활</a>
+          <a href="about.html#process">이용절차</a>
+          <a href="about.html#org">조직도</a>
+          <a href="about.html#location">찾아오시는 길</a>
+        </div>
+      </div>
+      <div class="nav-item">
+        <a href="print.html" class="nav-link">인쇄<svg class="nav-caret" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 5l3 3 3-3"/></svg></a>
+        <div class="nav-dropdown">
+          <a href="print.html#paper">인쇄물</a>
+          <a href="print.html#banner-bag">현수막 및 쇼핑백</a>
+        </div>
+      </div>
+      <div class="nav-item">
+        <a href="processing.html" class="nav-link">임가공<svg class="nav-caret" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 5l3 3 3-3"/></svg></a>
+        <div class="nav-dropdown">
+          <a href="processing.html#fancom">팬콤</a>
+          <a href="processing.html#natural">네추럴밸리</a>
+          <a href="processing.html#feel">더필</a>
+          <a href="processing.html#scrubber">수세미</a>
+        </div>
+      </div>
+      <div class="nav-item">
+        <a href="community.html" class="nav-link active">커뮤니티<svg class="nav-caret" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 5l3 3 3-3"/></svg></a>
+        <div class="nav-dropdown">
+          <a href="#notice">공지사항</a>
+          <a href="#gallery">갤러리</a>
+          <a href="#archive">자료실</a>
+          <a href="#donation">후원</a>
+          <a href="#volunteer">자원봉사</a>
+        </div>
+      </div>
+      <a href="quote.html" class="nav-link">견적요청</a>
+    </nav>
+
+    <div style="display:flex;align-items:center;gap:12px">
+      <a href="quote.html" class="btn-primary desktop-cta" style="padding:10px 22px;font-size:12px">견적 요청</a>
+      <button id="mob-toggle" class="mob-toggle" aria-label="menu" style="width:40px;height:40px;display:none;align-items:center;justify-content:center;background:none;border:none;cursor:pointer">
+        <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <div id="mob-menu" class="hidden" style="border-top:1px solid var(--border-soft);background:#fff;max-height:calc(100vh - 72px);overflow-y:auto">
+    <nav style="display:flex;flex-direction:column;padding:8px 24px 16px">
+      <button class="mob-group-toggle" data-target="mg-about">소개<svg class="nav-caret" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 5l3 3 3-3"/></svg></button>
+      <div id="mg-about" class="mob-sub">
+        <a href="about.html">전체 보기</a>
+        <a href="about.html#greeting">인사말</a>
+        <a href="about.html#history">설립목적 및 연혁</a>
+        <a href="about.html#facility">시설개요</a>
+        <a href="about.html#rehab">직업재활</a>
+        <a href="about.html#process">이용절차</a>
+        <a href="about.html#org">조직도</a>
+        <a href="about.html#location">찾아오시는 길</a>
+      </div>
+      <button class="mob-group-toggle" data-target="mg-print">인쇄<svg class="nav-caret" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 5l3 3 3-3"/></svg></button>
+      <div id="mg-print" class="mob-sub">
+        <a href="print.html">전체 보기</a>
+        <a href="print.html#paper">인쇄물</a>
+        <a href="print.html#banner-bag">현수막 및 쇼핑백</a>
+      </div>
+      <button class="mob-group-toggle" data-target="mg-proc">임가공<svg class="nav-caret" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 5l3 3 3-3"/></svg></button>
+      <div id="mg-proc" class="mob-sub">
+        <a href="processing.html">전체 보기</a>
+        <a href="processing.html#fancom">팬콤</a>
+        <a href="processing.html#natural">네추럴밸리</a>
+        <a href="processing.html#feel">더필</a>
+        <a href="processing.html#scrubber">수세미</a>
+      </div>
+      <button class="mob-group-toggle" data-target="mg-comm">커뮤니티<svg class="nav-caret" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 5l3 3 3-3"/></svg></button>
+      <div id="mg-comm" class="mob-sub">
+        <a href="community.html">전체 보기</a>
+        <a href="#notice">공지사항</a>
+        <a href="#gallery">갤러리</a>
+        <a href="#archive">자료실</a>
+        <a href="#donation">후원</a>
+        <a href="#volunteer">자원봉사</a>
+      </div>
+      <a href="quote.html" style="padding:14px 4px;font-size:14px;font-weight:600;color:var(--text-primary);text-decoration:none;border-top:1px solid var(--border-soft);margin-top:6px">견적요청</a>
+      <a href="quote.html" class="btn-primary" style="margin-top:14px;justify-content:center;padding:12px 22px;font-size:12px">견적 요청하기</a>
+    </nav>
+  </div>
+</header>
+
+<style>
+  @media (max-width: 1023px) {
+    .desktop-nav, .desktop-cta { display: none !important; }
+    .mob-toggle { display: flex !important; }
+  }
+</style>
+
+
+<!-- ══════════ PAGE HERO ══════════ -->
+<section class="page-hero">
+  <div class="container">
+    <span class="crumb">
+      <span style="width:6px;height:6px;border-radius:50%;background:var(--accent-blue)"></span>
+      COMMUNITY
+    </span>
+    <h1>커뮤니티</h1>
+    <p class="lead">
+      한마음일터의 소식과 함께하는 분들의 이야기를 전합니다.
+    </p>
+  </div>
+</section>
+
+
+<!-- ══════════ TAB NAV ══════════ -->
+<div class="tab-nav">
+  <div class="container">
+    <div class="tab-nav-inner">
+      <a href="#notice"    class="tab-link">공지사항</a>
+      <a href="#gallery"   class="tab-link">갤러리</a>
+      <a href="#archive"   class="tab-link">자료실</a>
+      <a href="#donation"  class="tab-link">후원</a>
+      <a href="#volunteer" class="tab-link">자원봉사</a>
+    </div>
+  </div>
+</div>
+
+
+<!-- ══════════ 공지사항 ══════════ -->
+<section id="notice" class="section-block">
+  <div class="container reveal">
+    <p class="section-eyebrow">NOTICE</p>
+    <h2 class="section-title">공지사항</h2>
+    <p class="section-lead">
+      한마음일터의 소식과 인증서·서류 등을 안내합니다.
+    </p>
+
+    <ul class="notice-list">
+      <li class="notice-row">
+        <span class="num">5</span>
+        <span class="title"><span class="badge notice">공지</span>2026년 신년 인사말</span>
+        <span class="author">관리자</span>
+        <span class="date">2026-01-02</span>
+      </li>
+      <li class="notice-row">
+        <span class="num">4</span>
+        <span class="title"><span class="badge private">비공개</span>중증장애인 생산품 인증서</span>
+        <span class="author">관리자</span>
+        <span class="date">2025-12-15</span>
+      </li>
+      <li class="notice-row">
+        <span class="num">3</span>
+        <span class="title"><span class="badge private">비공개</span>직접생산 증명서</span>
+        <span class="author">관리자</span>
+        <span class="date">2025-11-20</span>
+      </li>
+      <li class="notice-row">
+        <span class="num">2</span>
+        <span class="title"><span class="badge private">비공개</span>사업자등록증 사본</span>
+        <span class="author">관리자</span>
+        <span class="date">2025-10-05</span>
+      </li>
+      <li class="notice-row">
+        <span class="num">1</span>
+        <span class="title"><span class="badge private">비공개</span>법인 통장 사본</span>
+        <span class="author">관리자</span>
+        <span class="date">2025-10-05</span>
+      </li>
+    </ul>
+
+    <div class="admin-hint">
+      🔒 <b>비공개 글</b>은 관리자 로그인 후 열람·다운로드할 수 있습니다.
+      &nbsp; <a href="admin.html">관리자 로그인 →</a>
+    </div>
+
+    <div class="empty-state" style="margin-top:24px">
+      <div class="ico">⚙️</div>
+      <p><b>게시판 백엔드 연동 준비 중</b><br>관리자 로그인 → Notion DB → 글 등록·수정·삭제 (Phase 2 작업)</p>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════ 갤러리 ══════════ -->
+<section id="gallery" class="section-block" style="background:var(--bg-cream)">
+  <div class="container reveal">
+    <p class="section-eyebrow">GALLERY</p>
+    <h2 class="section-title">갤러리</h2>
+    <p class="section-lead">
+      한마음일터의 일상과 행사·나들이 등 함께한 순간들을 담았습니다.
+    </p>
+
+    <div class="gallery-grid">
+      <div class="gallery-tile"><div class="ico">🌸</div><div class="info"><p>봄 나들이</p><span>2025-04</span></div></div>
+      <div class="gallery-tile" style="background:linear-gradient(135deg,#FFE6D5 0%,#F4C8B5 100%)"><div class="ico">🎂</div><div class="info"><p>이용자 생일잔치</p><span>2025-05</span></div></div>
+      <div class="gallery-tile" style="background:linear-gradient(135deg,#E8F4ED 0%,#A8BB93 100%)"><div class="ico">🌳</div><div class="info"><p>여름 캠프</p><span>2025-07</span></div></div>
+      <div class="gallery-tile" style="background:linear-gradient(135deg,#FFF4E0 0%,#FFD988 100%)"><div class="ico">🍁</div><div class="info"><p>가을 야유회</p><span>2025-10</span></div></div>
+      <div class="gallery-tile" style="background:linear-gradient(135deg,#E8EFFD 0%,#A8C6F0 100%)"><div class="ico">🎄</div><div class="info"><p>송년회</p><span>2025-12</span></div></div>
+      <div class="gallery-tile"><div class="ico">🤝</div><div class="info"><p>지역사회 봉사</p><span>2025-09</span></div></div>
+      <div class="gallery-tile" style="background:linear-gradient(135deg,#FFE6D5 0%,#F4C8B5 100%)"><div class="ico">🏆</div><div class="info"><p>장애인 체육대회</p><span>2025-08</span></div></div>
+      <div class="gallery-tile" style="background:linear-gradient(135deg,#E8F4ED 0%,#A8BB93 100%)"><div class="ico">🎁</div><div class="info"><p>후원품 전달식</p><span>2025-11</span></div></div>
+    </div>
+
+    <div class="empty-state" style="margin-top:24px">
+      <div class="ico">📷</div>
+      <p><b>이미지 업로드 연동 준비 중</b><br>관리자 로그인 → Cloudinary 업로드 → 갤러리 자동 표시 (Phase 3 작업)</p>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════ 자료실 ══════════ -->
+<section id="archive" class="section-block">
+  <div class="container reveal">
+    <p class="section-eyebrow">ARCHIVE</p>
+    <h2 class="section-title">자료실</h2>
+    <p class="section-lead">
+      한마음일터의 사업 안내서, 신청서, 제품 카탈로그 등 다양한 자료를 다운로드하실 수 있습니다.
+    </p>
+
+    <div class="archive-list">
+
+      <div class="archive-row pdf">
+        <div class="archive-ico">📄</div>
+        <div class="archive-body">
+          <h4>한마음일터 사업 안내서</h4>
+          <p>시설 소개, 직업재활 프로그램, 주요 사업 등 한마음일터의 전반적인 안내</p>
+        </div>
+        <div class="archive-meta"><b>PDF</b>2.4 MB · 2025.12</div>
+        <a href="#" class="archive-dl">⬇ 다운로드</a>
+      </div>
+
+      <div class="archive-row pdf">
+        <div class="archive-ico">📄</div>
+        <div class="archive-body">
+          <h4>제품 카탈로그</h4>
+          <p>인쇄·임가공 등 한마음일터에서 제작 가능한 모든 제품 카탈로그</p>
+        </div>
+        <div class="archive-meta"><b>PDF</b>5.8 MB · 2025.11</div>
+        <a href="#" class="archive-dl">⬇ 다운로드</a>
+      </div>
+
+      <div class="archive-row hwp">
+        <div class="archive-ico">📝</div>
+        <div class="archive-body">
+          <h4>이용 신청서</h4>
+          <p>장애인직업재활시설 이용을 위한 신청 양식</p>
+        </div>
+        <div class="archive-meta"><b>HWP</b>120 KB · 2025.10</div>
+        <a href="#" class="archive-dl">⬇ 다운로드</a>
+      </div>
+
+      <div class="archive-row hwp">
+        <div class="archive-ico">📝</div>
+        <div class="archive-body">
+          <h4>후원 신청서</h4>
+          <p>정기·일시 후원 신청 양식 (개인·법인 모두 사용 가능)</p>
+        </div>
+        <div class="archive-meta"><b>HWP</b>95 KB · 2025.10</div>
+        <a href="#" class="archive-dl">⬇ 다운로드</a>
+      </div>
+
+      <div class="archive-row hwp">
+        <div class="archive-ico">📝</div>
+        <div class="archive-body">
+          <h4>자원봉사 신청서</h4>
+          <p>개인·단체 자원봉사 활동 신청 양식</p>
+        </div>
+        <div class="archive-meta"><b>HWP</b>88 KB · 2025.10</div>
+        <a href="#" class="archive-dl">⬇ 다운로드</a>
+      </div>
+
+      <div class="archive-row pdf">
+        <div class="archive-ico">📄</div>
+        <div class="archive-body">
+          <h4>중증장애인 생산품 우선구매 안내</h4>
+          <p>공공기관 우선구매 제도 및 한마음일터 인증 정보</p>
+        </div>
+        <div class="archive-meta"><b>PDF</b>1.6 MB · 2025.09</div>
+        <a href="#" class="archive-dl">⬇ 다운로드</a>
+      </div>
+
+      <div class="archive-row zip">
+        <div class="archive-ico">📦</div>
+        <div class="archive-body">
+          <h4>로고 · CI 다운로드</h4>
+          <p>한마음일터 로고 (PNG·SVG·AI), 컬러 가이드 포함 패키지</p>
+        </div>
+        <div class="archive-meta"><b>ZIP</b>4.2 MB · 2025.08</div>
+        <a href="#" class="archive-dl">⬇ 다운로드</a>
+      </div>
+
+      <div class="archive-row img">
+        <div class="archive-ico">🖼️</div>
+        <div class="archive-body">
+          <h4>홍보용 이미지 모음</h4>
+          <p>시설·작업장·제품 사진 (보도자료·홍보 활용 가능)</p>
+        </div>
+        <div class="archive-meta"><b>ZIP</b>12.8 MB · 2025.07</div>
+        <a href="#" class="archive-dl">⬇ 다운로드</a>
+      </div>
+
+    </div>
+
+    <div class="admin-hint" style="margin-top:28px">
+      📁 자료 다운로드 링크는 관리자 백엔드 연동 후 활성화됩니다 (Phase 2). &nbsp;
+      현재는 양식이 필요하시면 <a href="tel:031-631-6680">031-631-6680</a> 으로 요청해주세요.
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════ 후원 ══════════ -->
+<section id="donation" class="section-block" style="background:var(--bg-cream)">
+  <div class="container reveal">
+    <p class="section-eyebrow">DONATION</p>
+    <h2 class="section-title">후원 안내</h2>
+    <p class="section-lead">
+      여러분의 작은 정성이 장애인들의 자립을 응원합니다.
+      따뜻한 마음에 진심으로 감사드립니다.
+    </p>
+
+    <div class="info-block">
+      <div class="donate-card">
+        <div class="donate-info">
+          <h3>한마음일터를 후원해주세요</h3>
+          <p>
+            여러분의 후원금은 이용 장애인의 직업 훈련, 작업장 환경 개선,
+            여가·문화 활동 지원 등에 소중하게 사용됩니다.
+          </p>
+          <p>
+            <b style="color:var(--text-primary)">후원 문의</b><br>
+            전화 031-631-6680<br>
+            이메일 info@hanmaeum.kr
+          </p>
+        </div>
+        <div class="donate-account">
+          <p class="bank">후원 계좌</p>
+          <p class="num" id="acc-num">농협 233060-55-001607</p>
+          <p class="holder">예금주 · 한마음일터</p>
+          <button class="copy-btn" onclick="copyAccount()">
+            📋 계좌번호 복사
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════ 자원봉사 ══════════ -->
+<section id="volunteer" class="section-block">
+  <div class="container reveal">
+    <p class="section-eyebrow">VOLUNTEER</p>
+    <h2 class="section-title">자원봉사</h2>
+    <p class="section-lead">
+      한마음일터는 함께해 주실 자원봉사자를 언제나 환영합니다.
+      여러분의 시간과 재능이 큰 힘이 됩니다.
+    </p>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;margin-bottom:28px">
+      <div class="info-block" style="padding:24px">
+        <div style="font-size:36px;margin-bottom:12px">🤲</div>
+        <h3 style="font-size:17px;font-weight:700;color:var(--text-primary);margin-bottom:6px">작업 보조</h3>
+        <p style="font-size:14px;color:var(--text-secondary);line-height:1.6">인쇄·임가공 작업장에서 단순 업무 보조</p>
+      </div>
+      <div class="info-block" style="padding:24px">
+        <div style="font-size:36px;margin-bottom:12px">🚌</div>
+        <h3 style="font-size:17px;font-weight:700;color:var(--text-primary);margin-bottom:6px">나들이 인솔</h3>
+        <p style="font-size:14px;color:var(--text-secondary);line-height:1.6">시설 외부 활동·나들이 시 동행 봉사</p>
+      </div>
+      <div class="info-block" style="padding:24px">
+        <div style="font-size:36px;margin-bottom:12px">🎨</div>
+        <h3 style="font-size:17px;font-weight:700;color:var(--text-primary);margin-bottom:6px">재능 기부</h3>
+        <p style="font-size:14px;color:var(--text-secondary);line-height:1.6">미술·음악·체육 등 특기를 활용한 프로그램 진행</p>
+      </div>
+    </div>
+
+    <div class="info-block" style="display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px">
+      <div>
+        <p style="font-size:13px;color:var(--accent-blue);font-weight:700;letter-spacing:.14em;margin-bottom:6px">VOLUNTEER APPLY</p>
+        <p style="font-size:18px;color:var(--text-primary);font-weight:700">자원봉사 신청은 전화로 부탁드립니다</p>
+      </div>
+      <a href="tel:031-631-6680" class="btn-primary">📞 031-631-6680</a>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════ FOOTER ══════════ -->
+<footer id="site-footer">
+  <div class="footer-grid">
+    <div>
+      <div style="margin-bottom:14px;background:#fff;padding:10px 14px;border-radius:10px;display:inline-block">
+        <img src="logo.png" alt="한마음일터" style="height:42px;width:auto;display:block">
+      </div>
+      <p style="font-size:14px;line-height:1.7;color:var(--text-muted-dark);margin-bottom:18px">장애인의 자립과 사회 참여를 돕는 직업재활시설.<br>따뜻한 손길로 만든 인쇄·홍보물.</p>
+      <a href="tel:031-631-6680" style="display:inline-flex;align-items:center;gap:8px;font-size:14px;font-weight:700;color:#fff !important">📞 031-631-6680</a>
+    </div>
+    <div>
+      <h4>사이트맵</h4>
+      <ul style="list-style:none;padding:0;display:flex;flex-direction:column;gap:10px;font-size:14px">
+        <li><a href="about.html">소개</a></li>
+        <li><a href="print.html">인쇄</a></li>
+        <li><a href="processing.html">임가공</a></li>
+        <li><a href="community.html">커뮤니티</a></li>
+        <li><a href="quote.html">견적요청</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>연락처</h4>
+      <ul style="list-style:none;padding:0;display:flex;flex-direction:column;gap:10px;font-size:14px;color:var(--text-muted-dark)">
+        <li><b style="color:#fff">전화</b> &nbsp; 031-631-6680</li>
+        <li><b style="color:#fff">팩스</b> &nbsp; 031-631-6634</li>
+        <li><b style="color:#fff">주소</b> &nbsp; 경기도 이천시 마장면 이장로256번길</li>
+      </ul>
+    </div>
+    <div>
+      <h4>법인 정보</h4>
+      <ul style="list-style:none;padding:0;display:flex;flex-direction:column;gap:10px;font-size:14px;color:var(--text-muted-dark)">
+        <li><b style="color:#fff">대표자</b> &nbsp; 이병환</li>
+        <li><b style="color:#fff">사업자</b> &nbsp; 126-82-10484</li>
+        <li><b style="color:#fff">계좌</b> &nbsp; 농협 233060-55-001607</li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-bottom-inner">
+      <p>© 2026 한마음일터. All rights reserved.</p>
+      <div style="display:flex;gap:18px;font-size:12px">
+        <a href="#">개인정보처리방침</a>
+        <a href="#">이용약관</a>
+        <a href="admin.html" style="opacity:.5">관리자</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="common.js"></script>
+<script>
+  function copyAccount() {
+    const text = '농협 233060-55-001607';
+    navigator.clipboard.writeText(text).then(() => {
+      const btn = event.currentTarget;
+      const orig = btn.innerHTML;
+      btn.innerHTML = '✅ 복사됨';
+      setTimeout(() => { btn.innerHTML = orig; }, 1500);
+    });
+  }
+</script>
+</body>
+</html>

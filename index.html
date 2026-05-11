@@ -1,0 +1,2277 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>한마음일터 — 인쇄·홍보물 맞춤 제작</title>
+  <meta name="description" content="주문 한 번으로 견적부터 납품까지. 빠르고 정확한 맞춤 인쇄·홍보물 제작. 견적 무료, 1~3시간 내 응답.">
+
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans:    ['Pretendard','-apple-system','sans-serif'],
+            display: ['Pretendard','-apple-system','sans-serif'],
+            gmarket: ['Pretendard','-apple-system','sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* ═══ LOCAL FONTS ═══ */
+    @font-face {
+      font-family: 'Pretendard';
+      font-weight: 100;
+      font-style: normal;
+      font-display: swap;
+      src: url('fonts/Pretendard-Thin.otf') format('opentype');
+    }
+    @font-face {
+      font-family: 'Pretendard';
+      font-weight: 200;
+      font-style: normal;
+      font-display: swap;
+      src: url('fonts/Pretendard-ExtraLight.otf') format('opentype');
+    }
+    @font-face {
+      font-family: 'Pretendard';
+      font-weight: 300;
+      font-style: normal;
+      font-display: swap;
+      src: url('fonts/Pretendard-Light.otf') format('opentype');
+    }
+    @font-face {
+      font-family: 'Pretendard';
+      font-weight: 400;
+      font-style: normal;
+      font-display: swap;
+      src: url('fonts/Pretendard-Regular.otf') format('opentype');
+    }
+    @font-face {
+      font-family: 'Pretendard';
+      font-weight: 500;
+      font-style: normal;
+      font-display: swap;
+      src: url('fonts/Pretendard-Medium.otf') format('opentype');
+    }
+    @font-face {
+      font-family: 'Pretendard';
+      font-weight: 600;
+      font-style: normal;
+      font-display: swap;
+      src: url('fonts/Pretendard-SemiBold.otf') format('opentype');
+    }
+    @font-face {
+      font-family: 'Pretendard';
+      font-weight: 700;
+      font-style: normal;
+      font-display: swap;
+      src: url('fonts/Pretendard-Bold.otf') format('opentype');
+    }
+    @font-face {
+      font-family: 'Pretendard';
+      font-weight: 800;
+      font-style: normal;
+      font-display: swap;
+      src: url('fonts/Pretendard-ExtraBold.otf') format('opentype');
+    }
+    @font-face {
+      font-family: 'Pretendard';
+      font-weight: 900;
+      font-style: normal;
+      font-display: swap;
+      src: url('fonts/Pretendard-Black.otf') format('opentype');
+    }
+
+    /* ═══ DESIGN TOKENS ═══ */
+    :root {
+      /* Backgrounds */
+      --bg-white:      #FFFFFF;
+      --bg-cream:      #FAF9F6;
+      --bg-lavender:   #E8E2F5;
+      --bg-lavender-2: #DCD3F0;
+      --bg-blue:       #5B7FE8;
+      --bg-blue-2:     #4A6FE3;
+      --bg-light:      #F5F3EE;
+      --bg-navy:       #1B2845;
+      --bg-navy-2:     #243155;
+      --bg-dark-green: #2A3A24;
+
+      /* Text */
+      --text-primary:    #1F2027;
+      --text-secondary:  #4A4A55;
+      --text-muted:      #8B8B95;
+      --text-on-dark:    #F5F3EE;
+      --text-muted-dark: #A8B0C0;
+      --text-purple:     #6B5BC9;
+      --text-purple-deep:#5849B8;
+
+      /* Brand */
+      --p-300: #A8BB93;
+      --p-500: #6E7D5B;
+      --p-700: #3A4A30;
+
+      /* Accent */
+      --accent-blue:   #4A6FE3;
+      --accent-blue-2: #3D5DD0;
+      --accent-pink:   #F4C8B5;
+      --accent-yellow: #FFD988;
+
+      /* Lines */
+      --border:       rgba(28,29,25,.10);
+      --border-soft:  rgba(28,29,25,.06);
+      --border-dark:  rgba(255,255,255,.14);
+      --border-blue:  rgba(255,255,255,.30);
+
+      --ease: cubic-bezier(.25,.46,.45,.94);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Pretendard',-apple-system,'Apple SD Gothic Neo','맑은 고딕',sans-serif;
+      background: var(--bg-white);
+      color: var(--text-primary);
+      -webkit-font-smoothing: antialiased;
+      word-break: keep-all;
+      overflow-wrap: break-word;
+    }
+    .font-display {
+      font-family: 'Pretendard',sans-serif;
+      font-weight: 900;
+      letter-spacing: -.025em;
+    }
+    .font-gmarket {
+      font-family: 'Pretendard',sans-serif;
+      font-weight: 800;
+      letter-spacing: -.01em;
+    }
+
+    /* ═══ SIDE-LINE TITLE (양옆 가로선) ═══ */
+    .sec-title-flank {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 22px;
+      font-weight: 800;
+      letter-spacing: -.02em;
+    }
+    .sec-title-flank::before,
+    .sec-title-flank::after {
+      content: '';
+      width: 56px;
+      height: 1px;
+      background: currentColor;
+      opacity: .35;
+    }
+
+    /* ═══ BUTTONS ═══ */
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 30px;
+      background: var(--accent-blue);
+      color: #fff;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: -.01em;
+      text-decoration: none;
+      border-radius: 9999px;
+      transition: background .2s var(--ease), transform .2s var(--ease);
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 4px 14px rgba(74,111,227,.25);
+    }
+    .btn-primary:hover {
+      background: var(--accent-blue-2);
+      transform: translateY(-1px);
+    }
+    .btn-primary.green {
+      background: var(--p-500);
+      box-shadow: 0 4px 14px rgba(110,125,91,.25);
+    }
+    .btn-primary.green:hover { background: var(--p-700); }
+
+    .btn-soft {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 13px 28px;
+      background: #fff;
+      color: var(--text-primary);
+      font-size: 13px;
+      font-weight: 600;
+      text-decoration: none;
+      border: 1px solid var(--border);
+      border-radius: 9999px;
+      transition: all .2s var(--ease);
+    }
+    .btn-soft:hover {
+      border-color: var(--text-primary);
+      transform: translateY(-1px);
+    }
+
+    /* ═══ HEADER ═══ */
+    #site-header {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 50;
+      background: rgba(255,255,255,.92);
+      backdrop-filter: saturate(160%) blur(10px);
+      border-bottom: 1px solid var(--border-soft);
+      transition: box-shadow .3s var(--ease);
+    }
+    #site-header.scrolled {
+      box-shadow: 0 4px 18px rgba(0,0,0,.05);
+    }
+    .nav-link {
+      font-size: 22px;
+      font-weight: 600;
+      color: var(--text-secondary);
+      transition: color .2s var(--ease);
+      padding: 24px 0;
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      text-decoration: none;
+      cursor: pointer;
+      letter-spacing: -.015em;
+    }
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      left: 50%; bottom: 18px;
+      transform: translateX(-50%);
+      width: 0; height: 2px;
+      background: var(--accent-blue);
+      transition: width .25s var(--ease);
+    }
+    .nav-link:hover { color: var(--text-purple-deep); }
+    .nav-link:hover::after { width: 100%; }
+    .nav-link.active { color: var(--text-purple-deep); font-weight: 600; }
+    .nav-link.active::after { width: 100%; }
+    .nav-caret {
+      width: 14px; height: 14px;
+      transition: transform .2s var(--ease);
+    }
+
+    /* ═══ DROPDOWN NAV ═══ */
+    .nav-item { position: relative; }
+    .nav-dropdown {
+      position: absolute;
+      top: 100%; left: 50%;
+      transform: translateX(-50%) translateY(8px);
+      min-width: 230px;
+      background: #fff;
+      border: 1px solid var(--border-soft);
+      border-radius: 14px;
+      box-shadow: 0 12px 32px rgba(40,40,80,.10);
+      padding: 8px;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity .2s var(--ease), transform .2s var(--ease), visibility .2s;
+      z-index: 60;
+    }
+    .nav-item:hover .nav-dropdown,
+    .nav-item:focus-within .nav-dropdown {
+      opacity: 1;
+      visibility: visible;
+      transform: translateX(-50%) translateY(0);
+    }
+    .nav-item:hover .nav-caret {
+      transform: rotate(180deg);
+    }
+    .nav-dropdown a {
+      display: block;
+      padding: 13px 18px;
+      font-size: 17px;
+      font-weight: 500;
+      color: var(--text-secondary);
+      border-radius: 8px;
+      text-decoration: none;
+      transition: background .15s var(--ease), color .15s var(--ease);
+      white-space: nowrap;
+      letter-spacing: -.01em;
+    }
+    .nav-dropdown a:hover {
+      background: var(--bg-cream);
+      color: var(--text-purple-deep);
+    }
+
+    /* ═══ MOBILE NAV ═══ */
+    .mob-group-toggle {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 4px;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text-primary);
+      background: none;
+      border: none;
+      cursor: pointer;
+    }
+    .mob-group-toggle .nav-caret {
+      width: 12px; height: 12px;
+      transition: transform .2s var(--ease);
+    }
+    .mob-group-toggle.open .nav-caret { transform: rotate(180deg); }
+    .mob-sub {
+      display: none;
+      padding: 4px 0 8px 12px;
+      border-left: 2px solid var(--border-soft);
+      margin-left: 4px;
+    }
+    .mob-sub.open { display: block; }
+    .mob-sub a {
+      display: block;
+      padding: 8px 12px;
+      font-size: 13.5px;
+      color: var(--text-secondary);
+      text-decoration: none;
+      border-radius: 6px;
+    }
+    .mob-sub a:hover { background: var(--bg-cream); color: var(--text-purple-deep); }
+
+    /* ═══ HERO ═══ */
+    #hero {
+      position: relative;
+      min-height: 100svh;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 120px 0 80px;
+      background: linear-gradient(165deg, #EFE9FA 0%, #DCD3F0 55%, #C8BCE8 100%);
+    }
+    .hero-bg-image {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      background-image: url('한마음일터전경.jpg');
+      background-size: cover;
+      background-position: center;
+      opacity: .35;
+      filter: saturate(.85);
+      pointer-events: none;
+    }
+    .hero-bg-overlay {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      background:
+        linear-gradient(165deg, rgba(239,233,250,.55) 0%, rgba(220,211,240,.65) 55%, rgba(200,188,232,.7) 100%);
+      pointer-events: none;
+    }
+    .hero-pattern {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      background-image:
+        radial-gradient(circle at 12% 22%, rgba(255,255,255,.6) 14px, transparent 15px),
+        radial-gradient(circle at 86% 18%, rgba(255,255,255,.55) 22px, transparent 23px),
+        radial-gradient(circle at 8%  78%, rgba(255,255,255,.5)  18px, transparent 19px),
+        radial-gradient(circle at 92% 80%, rgba(255,255,255,.6) 16px, transparent 17px),
+        radial-gradient(circle, rgba(255,255,255,.3) 1.6px, transparent 2.2px);
+      background-size: 100% 100%, 100% 100%, 100% 100%, 100% 100%, 28px 28px;
+      pointer-events: none;
+    }
+    .hero-glow {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      background: radial-gradient(ellipse 60% 65% at 50% 35%, rgba(255,255,255,.4) 0%, transparent 65%);
+      pointer-events: none;
+    }
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      max-width: 920px;
+      padding: 0 24px;
+      text-align: center;
+    }
+    .hero-illust {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 90px;
+      z-index: 1;
+      background:
+        radial-gradient(ellipse 200px 50px at 12% 100%, #fff 0%, #fff 60%, transparent 62%),
+        radial-gradient(ellipse 280px 70px at 50% 100%, #fff 0%, #fff 65%, transparent 68%),
+        radial-gradient(ellipse 220px 55px at 88% 100%, #fff 0%, #fff 60%, transparent 62%);
+      pointer-events: none;
+    }
+    .hero-emoji {
+      position: absolute;
+      font-size: 48px;
+      opacity: .85;
+      z-index: 1;
+      filter: drop-shadow(0 4px 8px rgba(60,40,120,.15));
+    }
+    .hero-emoji.e1 { top: 18%; left: 8%; animation: float 6s ease-in-out infinite; }
+    .hero-emoji.e2 { top: 22%; right: 10%; font-size: 56px; animation: float 7s ease-in-out infinite .8s; }
+    .hero-emoji.e3 { bottom: 28%; left: 12%; font-size: 42px; animation: float 8s ease-in-out infinite 1.5s; }
+    .hero-emoji.e4 { bottom: 30%; right: 14%; animation: float 6.5s ease-in-out infinite .4s; }
+
+    @keyframes float {
+      0%,100% { transform: translateY(0); }
+      50%     { transform: translateY(-10px); }
+    }
+
+    /* ═══ ANIMATIONS ═══ */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(18px);
+      animation: fadeUp .9s var(--ease) forwards;
+    }
+    @keyframes fadeUp {
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .reveal {
+      opacity: 0;
+      transform: translateY(22px);
+      transition: opacity .8s var(--ease), transform .8s var(--ease);
+    }
+    .reveal.in {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ═══ SOFT CARD ═══ */
+    .soft-card {
+      background: #fff;
+      border-radius: 18px;
+      padding: 26px;
+      box-shadow: 0 4px 18px rgba(40,40,80,.05);
+      transition: transform .25s var(--ease), box-shadow .25s var(--ease);
+      border: 1px solid var(--border-soft);
+    }
+    .soft-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 28px rgba(40,40,80,.08);
+    }
+
+    /* ═══ MARQUEE ═══ */
+    .marquee {
+      display: flex;
+      overflow: hidden;
+      gap: 0;
+    }
+    .marquee-track {
+      display: flex;
+      flex-shrink: 0;
+      white-space: nowrap;
+      animation: scrollLeft 32s linear infinite;
+    }
+    @keyframes scrollLeft {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+
+    /* ═══ FAQ ═══ */
+    .faq-item {
+      border-bottom: 1px solid var(--border);
+    }
+    .faq-q {
+      width: 100%;
+      text-align: left;
+      padding: 22px 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 18px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--text-primary);
+      letter-spacing: -.015em;
+    }
+    .faq-q .ico {
+      width: 30px; height: 30px;
+      border-radius: 50%;
+      background: var(--bg-lavender);
+      color: var(--text-purple-deep);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 18px;
+      transition: transform .3s var(--ease), background .3s var(--ease);
+      flex-shrink: 0;
+    }
+    .faq-item.open .faq-q .ico {
+      transform: rotate(45deg);
+      background: var(--accent-blue);
+      color: #fff;
+    }
+    .faq-a {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height .35s var(--ease);
+    }
+    .faq-a-inner {
+      padding: 0 0 22px;
+      font-size: 15px;
+      line-height: 1.72;
+      color: var(--text-secondary);
+    }
+
+    /* ═══ MOBILE MENU ═══ */
+    #mob-menu.open { display: block; }
+
+    /* ═══ GALLERY ═══ */
+    .gallery-tile {
+      aspect-ratio: 4/3;
+      border-radius: 14px;
+      overflow: hidden;
+      position: relative;
+      cursor: pointer;
+      transition: transform .35s var(--ease);
+    }
+    .gallery-tile:hover { transform: translateY(-4px); }
+    .gallery-tile::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(0deg, rgba(0,0,0,.35), transparent 50%);
+      opacity: 0;
+      transition: opacity .3s var(--ease);
+    }
+    .gallery-tile:hover::after { opacity: 1; }
+    .gallery-label {
+      position: absolute;
+      left: 16px; bottom: 14px;
+      color: #fff;
+      font-size: 13px;
+      font-weight: 600;
+      opacity: 0;
+      transform: translateY(6px);
+      transition: opacity .3s var(--ease), transform .3s var(--ease);
+      z-index: 2;
+    }
+    .gallery-tile:hover .gallery-label {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ═══ NOTICE CURVE TOP ═══ */
+    .curved-top {
+      position: relative;
+    }
+    .curved-top::before {
+      content: '';
+      position: absolute;
+      top: -1px; left: 0; right: 0;
+      height: 24px;
+      background: inherit;
+      border-top-left-radius: 50% 24px;
+      border-top-right-radius: 50% 24px;
+      transform: translateY(-23px);
+    }
+
+    /* ═══ QUOTE FORM ═══ */
+    .quote-form {
+      background: rgba(255,255,255,.85);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(107,91,201,.18);
+      border-radius: 24px;
+      padding: 36px;
+      box-shadow: 0 12px 40px rgba(60,40,120,.10);
+    }
+    .form-label {
+      display: block;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--text-primary);
+      letter-spacing: -.01em;
+      margin-bottom: 8px;
+    }
+    .form-label .req { color: #E04848; margin-left: 2px; }
+    .form-input {
+      width: 100%;
+      padding: 13px 16px;
+      background: #fff;
+      border: 1.5px solid var(--border);
+      border-radius: 12px;
+      font-size: 15px;
+      font-family: inherit;
+      color: var(--text-primary);
+      transition: border-color .2s var(--ease), box-shadow .2s var(--ease);
+    }
+    .form-input::placeholder { color: var(--text-muted); }
+    .form-input:focus {
+      outline: none;
+      border-color: var(--accent-blue);
+      box-shadow: 0 0 0 3px rgba(74,111,227,.15);
+    }
+    .form-fieldset {
+      border: none;
+      padding: 0;
+      margin: 0;
+    }
+    .item-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 8px;
+    }
+    @media (min-width: 640px) { .item-grid { grid-template-columns: repeat(3, 1fr); } }
+    @media (min-width: 1024px) { .item-grid { grid-template-columns: repeat(4, 1fr); } }
+    .item-chip {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 14px;
+      background: #fff;
+      border: 1.5px solid var(--border);
+      border-radius: 12px;
+      cursor: pointer;
+      transition: all .2s var(--ease);
+      user-select: none;
+    }
+    .item-chip:hover {
+      border-color: var(--text-purple);
+      background: #FBFAFF;
+    }
+    .item-chip input { display: none; }
+    .item-chip .check-box {
+      width: 18px;
+      height: 18px;
+      border: 1.5px solid var(--border);
+      border-radius: 5px;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all .15s var(--ease);
+      background: #fff;
+    }
+    .item-chip .check-box svg {
+      opacity: 0;
+      transform: scale(.5);
+      transition: all .15s var(--ease);
+    }
+    .item-chip input:checked ~ .check-box {
+      background: var(--accent-blue);
+      border-color: var(--accent-blue);
+    }
+    .item-chip input:checked ~ .check-box svg { opacity: 1; transform: scale(1); }
+    .item-chip:has(input:checked) {
+      border-color: var(--accent-blue);
+      background: #F4F7FE;
+    }
+    .item-chip .label {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text-primary);
+      letter-spacing: -.01em;
+    }
+    .item-chip .emoji { font-size: 18px; }
+    #other-text-wrap {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height .3s var(--ease), margin-top .3s var(--ease);
+      margin-top: 0;
+    }
+    #other-text-wrap.show {
+      max-height: 60px;
+      margin-top: 10px;
+    }
+
+    /* ═══ 개인정보 동의 박스 ═══ */
+    .privacy-box {
+      background: #FAFAFC;
+      border: 1.5px solid var(--border);
+      border-radius: 12px;
+      padding: 16px 18px;
+      max-height: 180px;
+      overflow-y: auto;
+      margin-bottom: 12px;
+    }
+    .privacy-box::-webkit-scrollbar { width: 6px; }
+    .privacy-box::-webkit-scrollbar-track { background: transparent; }
+    .privacy-box::-webkit-scrollbar-thumb {
+      background: rgba(28,29,25,.15);
+      border-radius: 3px;
+    }
+    .privacy-check {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      cursor: pointer;
+      font-size: 13.5px;
+      color: var(--text-primary);
+      font-weight: 600;
+      letter-spacing: -.01em;
+      user-select: none;
+    }
+    .privacy-check input { display: none; }
+    .privacy-check .check-mark {
+      width: 20px; height: 20px;
+      border: 1.5px solid var(--border);
+      border-radius: 5px;
+      background: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      transition: all .15s var(--ease);
+    }
+    .privacy-check .check-mark svg {
+      opacity: 0;
+      transform: scale(.5);
+      transition: all .15s var(--ease);
+    }
+    .privacy-check input:checked ~ .check-mark {
+      background: var(--accent-blue);
+      border-color: var(--accent-blue);
+    }
+    .privacy-check input:checked ~ .check-mark svg {
+      opacity: 1;
+      transform: scale(1);
+    }
+    .form-success {
+      text-align: center;
+      padding: 40px 20px;
+    }
+    .form-success-icon {
+      width: 72px; height: 72px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent-blue) 0%, var(--text-purple-deep) 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 20px;
+      animation: popIn .5s var(--ease);
+    }
+    @keyframes popIn {
+      0%   { transform: scale(0); opacity: 0; }
+      60%  { transform: scale(1.1); opacity: 1; }
+      100% { transform: scale(1); }
+    }
+
+    /* ═══ HERO RESPONSIVE ═══ */
+    @media (max-width: 767px) {
+      #hero { padding: 110px 0 60px; }
+      .hero-emoji.e1 { top: 14%; left: 4%; font-size: 32px; }
+      .hero-emoji.e2 { top: 16%; right: 4%; font-size: 38px; }
+      .hero-emoji.e3 { bottom: 36%; left: 6%; font-size: 30px; }
+      .hero-emoji.e4 { bottom: 38%; right: 6%; font-size: 32px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ══════════════════════════════
+     HEADER
+══════════════════════════════ -->
+<header id="site-header">
+  <div class="max-w-7xl mx-auto px-6 lg:px-10 h-16 lg:h-[72px] flex items-center justify-between">
+    <a href="index.html" class="flex items-center" aria-label="한마음일터 홈">
+      <img src="logo.png" alt="한마음일터 - 장애인직업재활시설" style="height:48px;width:auto;display:block">
+    </a>
+
+    <nav class="hidden lg:flex items-center gap-7">
+      <div class="nav-item">
+        <a href="about.html" class="nav-link">
+          소개
+          <svg class="nav-caret" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 5l3 3 3-3"/></svg>
+        </a>
+        <div class="nav-dropdown">
+          <a href="about.html#greeting">인사말</a>
+          <a href="about.html#history">설립목적 및 연혁</a>
+          <a href="about.html#facility">시설개요</a>
+          <a href="about.html#rehab">직업재활</a>
+          <a href="about.html#process">이용절차</a>
+          <a href="about.html#org">조직도</a>
+          <a href="about.html#location">찾아오시는 길</a>
+        </div>
+      </div>
+      <div class="nav-item">
+        <a href="print.html" class="nav-link">
+          인쇄
+          <svg class="nav-caret" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 5l3 3 3-3"/></svg>
+        </a>
+        <div class="nav-dropdown">
+          <a href="print.html#paper">인쇄물</a>
+          <a href="print.html#banner-bag">현수막 및 쇼핑백</a>
+        </div>
+      </div>
+      <div class="nav-item">
+        <a href="processing.html" class="nav-link">
+          임가공
+          <svg class="nav-caret" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 5l3 3 3-3"/></svg>
+        </a>
+        <div class="nav-dropdown">
+          <a href="processing.html#fancom">팬콤</a>
+          <a href="processing.html#natural">네추럴밸리</a>
+          <a href="processing.html#feel">더필</a>
+          <a href="processing.html#scrubber">수세미</a>
+        </div>
+      </div>
+      <div class="nav-item">
+        <a href="community.html" class="nav-link">
+          커뮤니티
+          <svg class="nav-caret" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 5l3 3 3-3"/></svg>
+        </a>
+        <div class="nav-dropdown">
+          <a href="community.html#notice">공지사항</a>
+          <a href="community.html#gallery">갤러리</a>
+          <a href="community.html#archive">자료실</a>
+          <a href="community.html#donation">후원</a>
+          <a href="community.html#volunteer">자원봉사</a>
+        </div>
+      </div>
+      <a href="quote.html" class="nav-link">견적요청</a>
+    </nav>
+
+    <div class="flex items-center gap-3">
+      <a href="quote.html" class="hidden lg:inline-flex btn-primary" style="padding:10px 22px;font-size:12px">
+        견적 요청
+      </a>
+      <button id="mob-toggle" class="lg:hidden w-10 h-10 flex items-center justify-center" aria-label="menu">
+        <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path d="M4 6h16M4 12h16M4 18h16"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <div id="mob-menu" class="lg:hidden border-t hidden" style="border-color:var(--border-soft);background:#fff;max-height:calc(100vh - 64px);overflow-y:auto">
+    <nav class="flex flex-col px-6 py-3">
+      <button class="mob-group-toggle" data-target="mg-about">
+        소개
+        <svg class="nav-caret" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 5l3 3 3-3"/></svg>
+      </button>
+      <div id="mg-about" class="mob-sub">
+        <a href="about.html">전체 보기</a>
+        <a href="about.html#greeting">인사말</a>
+        <a href="about.html#history">설립목적 및 연혁</a>
+        <a href="about.html#facility">시설개요</a>
+        <a href="about.html#rehab">직업재활</a>
+        <a href="about.html#process">이용절차</a>
+        <a href="about.html#org">조직도</a>
+        <a href="about.html#location">찾아오시는 길</a>
+      </div>
+      <button class="mob-group-toggle" data-target="mg-print">
+        인쇄
+        <svg class="nav-caret" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 5l3 3 3-3"/></svg>
+      </button>
+      <div id="mg-print" class="mob-sub">
+        <a href="print.html">전체 보기</a>
+        <a href="print.html#paper">인쇄물</a>
+        <a href="print.html#banner-bag">현수막 및 쇼핑백</a>
+      </div>
+      <button class="mob-group-toggle" data-target="mg-proc">
+        임가공
+        <svg class="nav-caret" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 5l3 3 3-3"/></svg>
+      </button>
+      <div id="mg-proc" class="mob-sub">
+        <a href="processing.html">전체 보기</a>
+        <a href="processing.html#fancom">팬콤</a>
+        <a href="processing.html#natural">네추럴밸리</a>
+        <a href="processing.html#feel">더필</a>
+        <a href="processing.html#scrubber">수세미</a>
+      </div>
+      <button class="mob-group-toggle" data-target="mg-comm">
+        커뮤니티
+        <svg class="nav-caret" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 5l3 3 3-3"/></svg>
+      </button>
+      <div id="mg-comm" class="mob-sub">
+        <a href="community.html">전체 보기</a>
+        <a href="community.html#notice">공지사항</a>
+        <a href="community.html#gallery">갤러리</a>
+        <a href="community.html#archive">자료실</a>
+        <a href="community.html#donation">후원</a>
+        <a href="community.html#volunteer">자원봉사</a>
+      </div>
+      <a href="quote.html" class="py-3 text-sm font-semibold" style="color:var(--text-primary);border-top:1px solid var(--border-soft);margin-top:4px">견적요청</a>
+      <a href="quote.html" class="btn-primary mt-3 mb-2 justify-center" style="padding:12px 22px;font-size:12px">견적 요청하기</a>
+    </nav>
+  </div>
+</header>
+
+
+<!-- ══════════════════════════════
+     HERO  (Lavender)
+══════════════════════════════ -->
+<section id="hero">
+  <div class="hero-bg-image"></div>
+  <div class="hero-bg-overlay"></div>
+  <div class="hero-pattern"></div>
+  <div class="hero-glow"></div>
+
+  <span class="hero-emoji e1">📋</span>
+  <span class="hero-emoji e2">✨</span>
+  <span class="hero-emoji e3">🎨</span>
+  <span class="hero-emoji e4">📦</span>
+
+  <div class="hero-content">
+
+    <p class="fade-up text-xs font-bold mb-5 inline-flex items-center gap-2"
+       style="color:var(--text-purple-deep);letter-spacing:.18em;animation-delay:.05s;background:rgba(255,255,255,.6);padding:8px 18px;border-radius:9999px;backdrop-filter:blur(6px)">
+      <span class="w-1.5 h-1.5 rounded-full" style="background:var(--accent-blue)"></span>
+      장애인직업재활시설 · 경기 이천
+    </p>
+
+    <h1 class="fade-up font-display leading-[1.1] mb-5 whitespace-nowrap"
+        style="font-size:clamp(54px,10vw,118px);letter-spacing:-.01em;color:var(--text-purple-deep);animation-delay:.18s">
+      한마음일터
+    </h1>
+
+    <p class="fade-up font-bold mb-4"
+       style="font-size:clamp(20px,2.6vw,30px);color:var(--text-primary);letter-spacing:-.02em;line-height:1.4;animation-delay:.32s">
+      함께 만들고, 함께 나누는<br class="md:hidden">
+      <span class="md:inline"> 인쇄·홍보물의 새로운 기준</span>
+    </p>
+
+    <p class="fade-up mx-auto mb-9"
+       style="font-size:15px;color:var(--text-secondary);line-height:1.75;max-width:44ch;animation-delay:.46s">
+      주문 한 번으로 견적부터 납품까지.
+      빠르고 정확한 맞춤 제작으로 비용과 시간을 절감합니다.
+    </p>
+
+    <div class="fade-up flex items-center justify-center flex-wrap gap-3 mb-12" style="animation-delay:.6s">
+      <a href="#cta" class="btn-primary">
+        견적 요청하기
+        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" viewBox="0 0 24 24">
+          <path d="M5 12h14M12 5l7 7-7 7"/>
+        </svg>
+      </a>
+      <a href="#about" class="btn-soft">
+        서비스 알아보기
+      </a>
+    </div>
+
+    <div class="fade-up flex items-center justify-center flex-wrap gap-x-10 gap-y-4 pt-7"
+         style="animation-delay:.74s;border-top:1px solid rgba(107,91,201,.18)">
+      <div class="text-center">
+        <p class="text-2xl font-gmarket font-bold" style="color:var(--text-purple-deep)">
+          1,000<span style="color:var(--accent-blue)">+</span>
+        </p>
+        <p class="text-xs mt-1" style="color:var(--text-secondary);letter-spacing:.05em">누적 고객사</p>
+      </div>
+      <div style="width:1px;height:32px;background:rgba(107,91,201,.2)"></div>
+      <div class="text-center">
+        <p class="text-2xl font-gmarket font-bold" style="color:var(--text-purple-deep)">
+          3,000<span style="color:var(--accent-blue)">+</span>
+        </p>
+        <p class="text-xs mt-1" style="color:var(--text-secondary);letter-spacing:.05em">프로젝트</p>
+      </div>
+      <div style="width:1px;height:32px;background:rgba(107,91,201,.2)"></div>
+      <div class="text-center">
+        <p class="text-2xl font-gmarket font-bold" style="color:var(--text-purple-deep)">
+          85<span style="color:var(--accent-blue)">%</span>
+        </p>
+        <p class="text-xs mt-1" style="color:var(--text-secondary);letter-spacing:.05em">재계약률</p>
+      </div>
+      <div style="width:1px;height:32px;background:rgba(107,91,201,.2)"></div>
+      <div class="text-center">
+        <p class="text-2xl font-gmarket font-bold" style="color:var(--text-purple-deep)">
+          4.8<span style="color:var(--accent-blue)">/5</span>
+        </p>
+        <p class="text-xs mt-1" style="color:var(--text-secondary);letter-spacing:.05em">만족도</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-illust"></div>
+</section>
+
+
+<!-- ══════════════════════════════
+     공지 및 소식  (Blue)
+══════════════════════════════ -->
+<section id="news" class="curved-top relative -mt-1" style="background:var(--bg-blue);padding:96px 0 110px">
+  <div class="max-w-7xl mx-auto px-6 lg:px-10">
+
+    <div class="text-center mb-12 reveal" style="color:#fff">
+      <p class="text-xs font-semibold mb-3" style="color:#FFD988;letter-spacing:.2em">News & Updates</p>
+      <h2 class="sec-title-flank text-2xl md:text-3xl">공지 및 소식</h2>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+
+      <!-- 공지사항 카드 -->
+      <div class="soft-card reveal">
+        <div class="flex items-center justify-between mb-4">
+          <span class="text-xs font-bold px-3 py-1 rounded-full" style="background:var(--bg-lavender);color:var(--text-purple-deep)">
+            공지사항
+          </span>
+          <span class="text-xs" style="color:var(--text-muted)">2026.04</span>
+        </div>
+        <h3 class="font-bold mb-2" style="font-size:16px;color:var(--text-primary);letter-spacing:-.015em">
+          2026년 봄맞이 인쇄물 할인 이벤트
+        </h3>
+        <p class="text-sm leading-relaxed mb-5" style="color:var(--text-muted)">
+          신규 고객사 대상 첫 주문 10% 할인. 행사 기간 한정으로 진행됩니다.
+        </p>
+        <a href="#" class="text-xs font-bold inline-flex items-center gap-1.5" style="color:var(--accent-blue)">
+          자세히 보기
+          <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.4" viewBox="0 0 24 24">
+            <path d="M5 12h14M12 5l7 7-7 7"/>
+          </svg>
+        </a>
+      </div>
+
+      <!-- 자료실 카드 -->
+      <div class="soft-card reveal" style="transition-delay:.08s">
+        <div class="flex items-center justify-between mb-4">
+          <span class="text-xs font-bold px-3 py-1 rounded-full" style="background:#FFF4E0;color:#B5832B">
+            자료실
+          </span>
+          <span class="text-xs" style="color:var(--text-muted)">2026.03</span>
+        </div>
+        <h3 class="font-bold mb-2" style="font-size:16px;color:var(--text-primary);letter-spacing:-.015em">
+          제작 가능 품목 카탈로그 (PDF)
+        </h3>
+        <p class="text-sm leading-relaxed mb-5" style="color:var(--text-muted)">
+          전단지·포스터·쇼핑백·현수막 등 모든 제작 품목 견적표 다운로드.
+        </p>
+        <a href="#" class="text-xs font-bold inline-flex items-center gap-1.5" style="color:var(--accent-blue)">
+          다운로드
+          <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.4" viewBox="0 0 24 24">
+            <path d="M12 4v12m0 0l-5-5m5 5l5-5M5 20h14"/>
+          </svg>
+        </a>
+      </div>
+
+      <!-- 위치/연락 카드 -->
+      <div class="soft-card reveal" style="transition-delay:.16s">
+        <div class="flex items-center justify-between mb-4">
+          <span class="text-xs font-bold px-3 py-1 rounded-full" style="background:#E8F4ED;color:#3F8A5A">
+            오시는 길
+          </span>
+          <span class="text-xs" style="color:var(--text-muted)">방문 환영</span>
+        </div>
+        <h3 class="font-bold mb-2" style="font-size:16px;color:var(--text-primary);letter-spacing:-.015em">
+          한마음일터 본사
+        </h3>
+        <p class="text-sm leading-relaxed mb-2" style="color:var(--text-secondary)">
+          경기도 이천시 마장면 이장로256번길
+        </p>
+        <p class="text-sm font-bold mb-5" style="color:var(--text-primary)">
+          031-631-6680
+        </p>
+        <a href="tel:031-631-6680" class="text-xs font-bold inline-flex items-center gap-1.5" style="color:var(--accent-blue)">
+          전화 문의
+          <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.4" viewBox="0 0 24 24">
+            <path d="M5 12h14M12 5l7 7-7 7"/>
+          </svg>
+        </a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════
+     ABOUT  (Cream)
+══════════════════════════════ -->
+<section id="about" class="py-24" style="background:var(--bg-cream)">
+  <div class="max-w-4xl mx-auto px-6 lg:px-10 text-center">
+
+    <p class="text-xs font-semibold mb-3 reveal" style="color:var(--text-purple-deep);letter-spacing:.18em">About Us</p>
+
+    <h2 class="sec-title-flank font-bold mb-7 reveal" style="font-size:clamp(28px,3.6vw,42px);color:var(--text-primary)">
+      소개
+    </h2>
+
+    <p class="text-lg md:text-xl font-medium leading-[1.7] mb-8 reveal"
+       style="color:var(--text-secondary);letter-spacing:-.015em">
+      <span style="color:var(--text-purple-deep);font-weight:700">한마음일터</span>는 장애인 직업재활시설로,
+      인쇄·홍보물 제작 분야에서 <span style="color:var(--text-primary);font-weight:700">정직한 가격과 따뜻한 손길</span>로
+      고객의 브랜드를 만들어 갑니다.
+    </p>
+
+    <a href="#cta" class="btn-primary reveal">
+      견적 요청하기
+      <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" viewBox="0 0 24 24">
+        <path d="M5 12h14M12 5l7 7-7 7"/>
+      </svg>
+    </a>
+
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════
+     PROBLEM  (white)
+══════════════════════════════ -->
+<section id="problem" class="py-24" style="background:#fff">
+  <div class="max-w-7xl mx-auto px-6 lg:px-10">
+
+    <div class="text-center mb-14 reveal">
+      <p class="text-xs font-semibold mb-3" style="color:var(--accent-blue);letter-spacing:.18em">Why It Matters</p>
+      <h2 class="sec-title-flank font-bold" style="font-size:clamp(28px,3.6vw,40px);color:var(--text-primary)">
+        문제 인식
+      </h2>
+      <p class="mt-5 max-w-xl mx-auto" style="font-size:15px;color:var(--text-secondary);line-height:1.72">
+        인쇄·홍보물 발주, 아직도 이렇게 하고 계신가요?<br>
+        마케팅·홍보 담당자들이 매번 겪는 공통된 어려움입니다.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-5 mb-12">
+
+      <div class="soft-card reveal">
+        <div class="w-14 h-14 rounded-2xl mb-5 flex items-center justify-center"
+             style="background:var(--bg-lavender)">
+          <svg width="26" height="26" fill="none" stroke="var(--text-purple-deep)" stroke-width="1.8" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round"
+              d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 11h.01M12 11h.01M15 11h.01M4 20h16a2 2 0 002-2V6a2 2 0 00-2-2H4a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+          </svg>
+        </div>
+        <h3 class="font-bold text-lg mb-2.5" style="color:var(--text-primary);letter-spacing:-.02em">
+          견적 비교가 어렵다
+        </h3>
+        <p class="text-sm leading-[1.7]" style="color:var(--text-secondary)">
+          업체마다 가격이 달라 비교가 어렵고, 견적을 받기까지 며칠이 걸리기도 합니다.
+        </p>
+      </div>
+
+      <div class="soft-card reveal" style="transition-delay:.08s">
+        <div class="w-14 h-14 rounded-2xl mb-5 flex items-center justify-center"
+             style="background:#FFF4E0">
+          <svg width="26" height="26" fill="none" stroke="#B5832B" stroke-width="1.8" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round"
+              d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+          </svg>
+        </div>
+        <h3 class="font-bold text-lg mb-2.5" style="color:var(--text-primary);letter-spacing:-.02em">
+          제작이 번거롭고 느리다
+        </h3>
+        <p class="text-sm leading-[1.7]" style="color:var(--text-secondary)">
+          전화·이메일·방문을 반복하며 시간을 낭비합니다. 수정 요청마다 커뮤니케이션 비용이 늘어납니다.
+        </p>
+      </div>
+
+      <div class="soft-card reveal" style="transition-delay:.16s">
+        <div class="w-14 h-14 rounded-2xl mb-5 flex items-center justify-center"
+             style="background:#FCE5E5">
+          <svg width="26" height="26" fill="none" stroke="#C04848" stroke-width="1.8" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round"
+              d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
+          </svg>
+        </div>
+        <h3 class="font-bold text-lg mb-2.5" style="color:var(--text-primary);letter-spacing:-.02em">
+          품질·납기가 불안정하다
+        </h3>
+        <p class="text-sm leading-[1.7]" style="color:var(--text-secondary)">
+          완성물이 기대와 다른 경우가 생깁니다. 납기 지연으로 마케팅 일정이 흔들리는 위험도 있습니다.
+        </p>
+      </div>
+
+    </div>
+
+    <!-- Before/After -->
+    <div class="rounded-3xl p-8 lg:p-12 reveal" style="background:linear-gradient(135deg,var(--bg-navy) 0%,var(--bg-navy-2) 100%)">
+      <h3 class="text-xl md:text-2xl font-bold mb-9 text-center" style="color:#fff;letter-spacing:-.02em">
+        기존 방식 <span style="color:var(--accent-yellow)">vs</span> 한마음일터
+      </h3>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-0 relative">
+
+        <div class="md:pr-10">
+          <p class="text-xs font-bold uppercase mb-5" style="color:#F87171;letter-spacing:.18em">Before</p>
+          <ul class="space-y-3.5">
+            <li class="flex gap-3" style="font-size:15px;color:var(--text-muted-dark)">
+              <span class="text-red-400 shrink-0 mt-px text-base">✕</span>여러 업체에 견적 요청 → 며칠 대기
+            </li>
+            <li class="flex gap-3" style="font-size:15px;color:var(--text-muted-dark)">
+              <span class="text-red-400 shrink-0 mt-px text-base">✕</span>전화·방문 반복, 커뮤니케이션 과다
+            </li>
+            <li class="flex gap-3" style="font-size:15px;color:var(--text-muted-dark)">
+              <span class="text-red-400 shrink-0 mt-px text-base">✕</span>납기 지연, 품질 불일치 위험
+            </li>
+            <li class="flex gap-3" style="font-size:15px;color:var(--text-muted-dark)">
+              <span class="text-red-400 shrink-0 mt-px text-base">✕</span>가격 불투명, 재작업 비용 발생
+            </li>
+          </ul>
+        </div>
+
+        <div class="hidden md:block absolute inset-y-0 left-1/2 w-px" style="background:rgba(255,255,255,.12)"></div>
+
+        <div class="md:pl-10 pt-8 md:pt-0" style="border-top:1px solid rgba(255,255,255,.12)">
+          <p class="text-xs font-bold uppercase mb-5" style="color:var(--accent-yellow);letter-spacing:.18em">After</p>
+          <ul class="space-y-3.5">
+            <li class="flex gap-3" style="font-size:15px;color:#fff">
+              <span style="color:var(--accent-yellow)" class="shrink-0 mt-px text-base">✓</span>온라인 단일 요청 → 1~3시간 내 견적
+            </li>
+            <li class="flex gap-3" style="font-size:15px;color:#fff">
+              <span style="color:var(--accent-yellow)" class="shrink-0 mt-px text-base">✓</span>폼 작성 한 번으로 모든 과정 진행
+            </li>
+            <li class="flex gap-3" style="font-size:15px;color:#fff">
+              <span style="color:var(--accent-yellow)" class="shrink-0 mt-px text-base">✓</span>제작 전 검수, 안정적인 납기
+            </li>
+            <li class="flex gap-3" style="font-size:15px;color:#fff">
+              <span style="color:var(--accent-yellow)" class="shrink-0 mt-px text-base">✓</span>명확한 견적, 추가 비용 없음
+            </li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════
+     MARQUEE  (light)
+══════════════════════════════ -->
+<div class="py-7 overflow-hidden" style="background:var(--bg-cream);border-top:1px solid var(--border-soft);border-bottom:1px solid var(--border-soft)">
+  <div class="marquee">
+    <div class="marquee-track">
+      <span class="font-display text-3xl mx-8" style="color:var(--text-purple-deep);letter-spacing:.02em">한마음일터</span>
+      <span class="text-2xl mx-3" style="color:var(--accent-blue)">✦</span>
+      <span class="font-bold text-2xl mx-8" style="color:var(--text-primary);letter-spacing:.05em">맞춤 견적 시스템</span>
+      <span class="text-2xl mx-3" style="color:var(--accent-blue)">✦</span>
+      <span class="font-bold text-2xl mx-8" style="color:var(--text-primary);letter-spacing:.05em">원스톱 제작</span>
+      <span class="text-2xl mx-3" style="color:var(--accent-blue)">✦</span>
+      <span class="font-bold text-2xl mx-8" style="color:var(--text-primary);letter-spacing:.05em">빠른 납기</span>
+      <span class="text-2xl mx-3" style="color:var(--accent-blue)">✦</span>
+      <span class="font-bold text-2xl mx-8" style="color:var(--text-primary);letter-spacing:.05em">경기 이천</span>
+      <span class="text-2xl mx-3" style="color:var(--accent-blue)">✦</span>
+
+      <span class="font-display text-3xl mx-8" style="color:var(--text-purple-deep);letter-spacing:.02em">한마음일터</span>
+      <span class="text-2xl mx-3" style="color:var(--accent-blue)">✦</span>
+      <span class="font-bold text-2xl mx-8" style="color:var(--text-primary);letter-spacing:.05em">맞춤 견적 시스템</span>
+      <span class="text-2xl mx-3" style="color:var(--accent-blue)">✦</span>
+      <span class="font-bold text-2xl mx-8" style="color:var(--text-primary);letter-spacing:.05em">원스톱 제작</span>
+      <span class="text-2xl mx-3" style="color:var(--accent-blue)">✦</span>
+      <span class="font-bold text-2xl mx-8" style="color:var(--text-primary);letter-spacing:.05em">빠른 납기</span>
+      <span class="text-2xl mx-3" style="color:var(--accent-blue)">✦</span>
+      <span class="font-bold text-2xl mx-8" style="color:var(--text-primary);letter-spacing:.05em">경기 이천</span>
+      <span class="text-2xl mx-3" style="color:var(--accent-blue)">✦</span>
+    </div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════
+     SOLUTION & PROCESS  (white)
+══════════════════════════════ -->
+<section id="process" class="py-24" style="background:#fff">
+  <div class="max-w-7xl mx-auto px-6 lg:px-10">
+
+    <div class="text-center mb-14 reveal">
+      <p class="text-xs font-semibold mb-3" style="color:var(--p-500);letter-spacing:.18em">Our Process</p>
+      <h2 class="sec-title-flank font-bold" style="font-size:clamp(28px,3.6vw,40px);color:var(--text-primary)">
+        진행 과정
+      </h2>
+      <p class="mt-5 max-w-xl mx-auto" style="font-size:15px;color:var(--text-secondary);line-height:1.72">
+        주문부터 제작·납품까지<br class="md:hidden">
+        <span class="md:inline"> 단 4단계로 끝납니다.</span>
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
+
+      <div class="reveal text-center">
+        <div class="w-20 h-20 mx-auto mb-5 rounded-2xl flex items-center justify-center text-2xl font-gmarket font-bold"
+             style="background:linear-gradient(135deg,var(--bg-lavender) 0%,var(--bg-lavender-2) 100%);color:var(--text-purple-deep)">
+          01
+        </div>
+        <h3 class="font-bold text-lg mb-2" style="color:var(--text-primary);letter-spacing:-.02em">주문 의뢰 등록</h3>
+        <p class="text-sm leading-[1.7]" style="color:var(--text-secondary)">
+          웹 폼에서 품목·수량·납기 입력. 디자인 파일 첨부.
+        </p>
+      </div>
+
+      <div class="reveal text-center" style="transition-delay:.08s">
+        <div class="w-20 h-20 mx-auto mb-5 rounded-2xl flex items-center justify-center text-2xl font-gmarket font-bold"
+             style="background:#FFF4E0;color:#B5832B">
+          02
+        </div>
+        <h3 class="font-bold text-lg mb-2" style="color:var(--text-primary);letter-spacing:-.02em">담당자 견적 산출</h3>
+        <p class="text-sm leading-[1.7]" style="color:var(--text-secondary)">
+          1~3시간 내 맞춤 견적. 상세 내역과 납기 안내.
+        </p>
+      </div>
+
+      <div class="reveal text-center" style="transition-delay:.16s">
+        <div class="w-20 h-20 mx-auto mb-5 rounded-2xl flex items-center justify-center text-2xl font-gmarket font-bold"
+             style="background:#E8F4ED;color:#3F8A5A">
+          03
+        </div>
+        <h3 class="font-bold text-lg mb-2" style="color:var(--text-primary);letter-spacing:-.02em">고객 확인 · 결제</h3>
+        <p class="text-sm leading-[1.7]" style="color:var(--text-secondary)">
+          견적 확인 후 결제. 토스페이먼츠 안전 결제.
+        </p>
+      </div>
+
+      <div class="reveal text-center" style="transition-delay:.24s">
+        <div class="w-20 h-20 mx-auto mb-5 rounded-2xl flex items-center justify-center text-2xl font-gmarket font-bold"
+             style="background:#E8EFFD;color:var(--accent-blue-2)">
+          04
+        </div>
+        <h3 class="font-bold text-lg mb-2" style="color:var(--text-primary);letter-spacing:-.02em">제작 · 납품</h3>
+        <p class="text-sm leading-[1.7]" style="color:var(--text-secondary)">
+          검수 후 제작. 약속된 일정에 정확히 납품.
+        </p>
+      </div>
+
+    </div>
+
+    <!-- 차별 요소 3 -->
+    <div class="mt-16 grid grid-cols-1 md:grid-cols-3 gap-4">
+      <div class="flex items-center gap-4 p-5 rounded-2xl reveal" style="background:var(--bg-cream)">
+        <div class="w-11 h-11 rounded-xl flex items-center justify-center shrink-0" style="background:var(--accent-blue);color:#fff">
+          <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+          </svg>
+        </div>
+        <p class="text-sm font-bold" style="color:var(--text-primary);letter-spacing:-.015em">맞춤 견적 시스템</p>
+      </div>
+      <div class="flex items-center gap-4 p-5 rounded-2xl reveal" style="background:var(--bg-cream);transition-delay:.08s">
+        <div class="w-11 h-11 rounded-xl flex items-center justify-center shrink-0" style="background:var(--p-500);color:#fff">
+          <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path d="M13 10V3L4 14h7v7l9-11h-7z"/>
+          </svg>
+        </div>
+        <p class="text-sm font-bold" style="color:var(--text-primary);letter-spacing:-.015em">원스톱 제작 서비스</p>
+      </div>
+      <div class="flex items-center gap-4 p-5 rounded-2xl reveal" style="background:var(--bg-cream);transition-delay:.16s">
+        <div class="w-11 h-11 rounded-xl flex items-center justify-center shrink-0" style="background:#B5832B;color:#fff">
+          <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+          </svg>
+        </div>
+        <p class="text-sm font-bold" style="color:var(--text-primary);letter-spacing:-.015em">빠른 대응 · 납기</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════
+     VALUE  (light)
+══════════════════════════════ -->
+<section class="py-24" style="background:var(--bg-cream)">
+  <div class="max-w-7xl mx-auto px-6 lg:px-10">
+
+    <div class="text-center mb-14 reveal">
+      <p class="text-xs font-semibold mb-3" style="color:var(--accent-blue);letter-spacing:.18em">Value</p>
+      <h2 class="sec-title-flank font-bold" style="font-size:clamp(28px,3.6vw,40px);color:var(--text-primary)">
+        고객이 얻는 결과
+      </h2>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+
+      <div class="soft-card text-center reveal" style="background:linear-gradient(180deg,#fff 0%,#FAFAFE 100%)">
+        <p class="text-5xl font-gmarket font-bold mb-3" style="color:var(--text-purple-deep);letter-spacing:-.04em">
+          50<span style="font-size:.6em">%</span>
+        </p>
+        <p class="font-bold text-base mb-2" style="color:var(--text-primary);letter-spacing:-.015em">제작 시간 단축</p>
+        <p class="text-sm leading-[1.7]" style="color:var(--text-muted)">자동화된 견적 → 결제 → 제작 흐름</p>
+      </div>
+
+      <div class="soft-card text-center reveal" style="background:linear-gradient(180deg,#fff 0%,#FFFAF0 100%);transition-delay:.08s">
+        <p class="text-5xl font-gmarket font-bold mb-3" style="color:#B5832B;letter-spacing:-.04em">
+          70<span style="font-size:.6em">%</span>
+        </p>
+        <p class="font-bold text-base mb-2" style="color:var(--text-primary);letter-spacing:-.015em">커뮤니케이션 감소</p>
+        <p class="text-sm leading-[1.7]" style="color:var(--text-muted)">반복 문의 없이 한 번에 진행</p>
+      </div>
+
+      <div class="soft-card text-center reveal" style="background:linear-gradient(180deg,#fff 0%,#F4FAF6 100%);transition-delay:.16s">
+        <p class="text-5xl font-gmarket font-bold mb-3" style="color:#3F8A5A;letter-spacing:-.04em">
+          0<span style="font-size:.6em">건</span>
+        </p>
+        <p class="font-bold text-base mb-2" style="color:var(--text-primary);letter-spacing:-.015em">재작업 비용</p>
+        <p class="text-sm leading-[1.7]" style="color:var(--text-muted)">제작 전 검수로 오류 사전 차단</p>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════
+     GALLERY (작업장)
+══════════════════════════════ -->
+<section id="gallery" class="py-24" style="background:#fff">
+  <div class="max-w-7xl mx-auto px-6 lg:px-10">
+
+    <div class="text-center mb-14 reveal">
+      <p class="text-xs font-semibold mb-3" style="color:var(--text-purple-deep);letter-spacing:.18em">Gallery</p>
+      <h2 class="sec-title-flank font-bold" style="font-size:clamp(28px,3.6vw,40px);color:var(--text-primary)">
+        작업장 · 제작 사례
+      </h2>
+      <p class="mt-5 max-w-xl mx-auto" style="font-size:15px;color:var(--text-secondary);line-height:1.72">
+        한마음일터의 작업 현장과 다양한 제작 결과물을 만나보세요.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+
+      <div class="gallery-tile reveal" style="background:linear-gradient(135deg,#E8E2F5 0%,#C8BCE8 100%);display:flex;align-items:center;justify-content:center;font-size:48px">
+        🏭
+        <span class="gallery-label">작업장 전경</span>
+      </div>
+      <div class="gallery-tile reveal" style="background:linear-gradient(135deg,#FFE8D6 0%,#F4C8B5 100%);display:flex;align-items:center;justify-content:center;font-size:48px;transition-delay:.05s">
+        📦
+        <span class="gallery-label">쇼핑백 제작</span>
+      </div>
+      <div class="gallery-tile reveal" style="background:linear-gradient(135deg,#E8F0FE 0%,#B8C8F0 100%);display:flex;align-items:center;justify-content:center;font-size:48px;transition-delay:.1s">
+        📰
+        <span class="gallery-label">전단지 인쇄</span>
+      </div>
+      <div class="gallery-tile reveal" style="background:linear-gradient(135deg,#E8F4ED 0%,#A8C8B5 100%);display:flex;align-items:center;justify-content:center;font-size:48px;transition-delay:.15s">
+        🏷️
+        <span class="gallery-label">스티커 · 라벨</span>
+      </div>
+
+      <div class="gallery-tile reveal" style="background:linear-gradient(135deg,#FFF4D6 0%,#F4D88B 100%);display:flex;align-items:center;justify-content:center;font-size:48px;transition-delay:.2s">
+        📋
+        <span class="gallery-label">홍보 책자</span>
+      </div>
+      <div class="gallery-tile reveal" style="background:linear-gradient(135deg,#F0E8FE 0%,#C8B8F0 100%);display:flex;align-items:center;justify-content:center;font-size:48px;transition-delay:.25s">
+        🎨
+        <span class="gallery-label">맞춤 디자인</span>
+      </div>
+      <div class="gallery-tile reveal" style="background:linear-gradient(135deg,#FCE5E5 0%,#F0B8B8 100%);display:flex;align-items:center;justify-content:center;font-size:48px;transition-delay:.3s">
+        🚩
+        <span class="gallery-label">현수막 · 배너</span>
+      </div>
+      <div class="gallery-tile reveal" style="background:linear-gradient(135deg,#E0F0EE 0%,#A8D0CC 100%);display:flex;align-items:center;justify-content:center;font-size:48px;transition-delay:.35s">
+        💼
+        <span class="gallery-label">기업 굿즈</span>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════
+     SOCIAL PROOF  (Dark green)
+══════════════════════════════ -->
+<section class="py-24" style="background:var(--bg-dark-green)">
+  <div class="max-w-7xl mx-auto px-6 lg:px-10">
+
+    <div class="text-center mb-14 reveal" style="color:#fff">
+      <p class="text-xs font-semibold mb-3" style="color:var(--p-300);letter-spacing:.18em">Trust</p>
+      <h2 class="sec-title-flank font-bold" style="font-size:clamp(28px,3.6vw,40px);color:#fff">
+        고객 후기
+      </h2>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-5 mb-14">
+
+      <div class="rounded-2xl p-7 reveal" style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);backdrop-filter:blur(6px)">
+        <div class="flex gap-1 mb-4" style="color:var(--accent-yellow)">
+          ★★★★★
+        </div>
+        <p class="text-base leading-[1.75] mb-6" style="color:#fff">
+          "빠른 대응으로 일정을 맞출 수 있었습니다.
+          공공기관 행사 홍보물 제작에 큰 도움이 되었어요."
+        </p>
+        <div class="flex items-center gap-3 pt-5" style="border-top:1px solid rgba(255,255,255,.08)">
+          <div class="w-10 h-10 rounded-full flex items-center justify-center font-bold" style="background:var(--p-300);color:var(--p-700)">공</div>
+          <div>
+            <p class="text-sm font-bold" style="color:#fff">공공기관 홍보 담당자</p>
+            <p class="text-xs" style="color:var(--text-muted-dark)">경기도 시청</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="rounded-2xl p-7 reveal" style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);backdrop-filter:blur(6px);transition-delay:.08s">
+        <div class="flex gap-1 mb-4" style="color:var(--accent-yellow)">
+          ★★★★★
+        </div>
+        <p class="text-base leading-[1.75] mb-6" style="color:#fff">
+          "쇼핑백·전단지·홍보물을 한 번에 해결했습니다.
+          여러 업체를 다니지 않아도 돼서 편했어요."
+        </p>
+        <div class="flex items-center gap-3 pt-5" style="border-top:1px solid rgba(255,255,255,.08)">
+          <div class="w-10 h-10 rounded-full flex items-center justify-center font-bold" style="background:var(--accent-yellow);color:#7A5500">중</div>
+          <div>
+            <p class="text-sm font-bold" style="color:#fff">중소기업 총무팀</p>
+            <p class="text-xs" style="color:var(--text-muted-dark)">제조업</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="rounded-2xl p-7 reveal" style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);backdrop-filter:blur(6px);transition-delay:.16s">
+        <div class="flex gap-1 mb-4" style="color:var(--accent-yellow)">
+          ★★★★★
+        </div>
+        <p class="text-base leading-[1.75] mb-6" style="color:#fff">
+          "품질과 납기 모두 만족스러웠습니다.
+          학기 시작 전 모든 자료가 제때 도착했어요."
+        </p>
+        <div class="flex items-center gap-3 pt-5" style="border-top:1px solid rgba(255,255,255,.08)">
+          <div class="w-10 h-10 rounded-full flex items-center justify-center font-bold" style="background:var(--accent-pink);color:#7A4A30">교</div>
+          <div>
+            <p class="text-sm font-bold" style="color:#fff">교육기관 행정실</p>
+            <p class="text-xs" style="color:var(--text-muted-dark)">사립 학교</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- 신뢰 지표 (지원 고객군) -->
+    <div class="rounded-2xl p-8 reveal" style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08)">
+      <p class="text-center text-xs font-semibold mb-7" style="color:var(--p-300);letter-spacing:.18em">함께한 고객군</p>
+      <div class="flex flex-wrap items-center justify-center gap-x-12 gap-y-5">
+        <p class="text-base font-bold" style="color:#fff;opacity:.7">공공기관</p>
+        <p class="text-base font-bold" style="color:#fff;opacity:.7">중소기업</p>
+        <p class="text-base font-bold" style="color:#fff;opacity:.7">교육기관</p>
+        <p class="text-base font-bold" style="color:#fff;opacity:.7">행정기관</p>
+        <p class="text-base font-bold" style="color:#fff;opacity:.7">제조업</p>
+        <p class="text-base font-bold" style="color:#fff;opacity:.7">자영업자</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════
+     FAQ
+══════════════════════════════ -->
+<section id="faq" class="py-24" style="background:#fff">
+  <div class="max-w-3xl mx-auto px-6 lg:px-10">
+
+    <div class="text-center mb-12 reveal">
+      <p class="text-xs font-semibold mb-3" style="color:var(--accent-blue);letter-spacing:.18em">FAQ</p>
+      <h2 class="sec-title-flank font-bold" style="font-size:clamp(28px,3.6vw,40px);color:var(--text-primary)">
+        자주 묻는 질문
+      </h2>
+    </div>
+
+    <div class="reveal">
+      <div class="faq-item">
+        <button class="faq-q" type="button">
+          견적은 무료인가요?
+          <span class="ico">+</span>
+        </button>
+        <div class="faq-a">
+          <div class="faq-a-inner">
+            네, 견적은 100% 무료입니다. 폼 작성 후 평균 1~3시간 이내에 담당자가
+            맞춤 견적을 보내드리며, 견적 확인 후 진행 여부를 결정하시면 됩니다.
+          </div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" type="button">
+          제작 기간은 얼마나 걸리나요?
+          <span class="ico">+</span>
+        </button>
+        <div class="faq-a">
+          <div class="faq-a-inner">
+            품목과 수량에 따라 다르지만, 일반적인 인쇄물(전단지, 명함 등)은 영업일
+            기준 3~5일, 쇼핑백·현수막 등 가공이 필요한 품목은 5~10일 정도 소요됩니다.
+            급한 일정은 사전 협의로 단축 가능합니다.
+          </div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" type="button">
+          소량 주문도 가능한가요?
+          <span class="ico">+</span>
+        </button>
+        <div class="faq-a">
+          <div class="faq-a-inner">
+            네, 소량 주문도 가능합니다. 다만 디지털 인쇄와 실사 인쇄에 따라 최소 수량
+            기준이 다르므로, 견적 요청 시 정확한 수량을 입력해 주시면 적합한 방식으로
+            안내해 드립니다.
+          </div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" type="button">
+          디자인 파일이 없어도 제작 가능한가요?
+          <span class="ico">+</span>
+        </button>
+        <div class="faq-a">
+          <div class="faq-a-inner">
+            네, 디자인 파일이 없어도 진행 가능합니다. 간단한 텍스트·로고 배치 수준의
+            디자인은 무료로 도와드리며, 본격적인 디자인 작업이 필요한 경우 별도 견적으로
+            안내해 드립니다.
+          </div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" type="button">
+          결제 방식은 어떻게 되나요?
+          <span class="ico">+</span>
+        </button>
+        <div class="faq-a">
+          <div class="faq-a-inner">
+            견적 확정 후 토스페이먼츠를 통한 안전 결제(카드/계좌이체)와 세금계산서 발행
+            모두 지원합니다. 공공기관·기업의 경우 후불 정산도 협의 가능합니다.
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════
+     CTA  (Lavender)
+══════════════════════════════ -->
+<section id="cta" class="relative overflow-hidden py-24"
+         style="background:linear-gradient(165deg,#EFE9FA 0%,#DCD3F0 60%,#C8BCE8 100%)">
+  <div class="hero-pattern" style="opacity:.5"></div>
+
+  <div class="relative max-w-7xl mx-auto px-6 lg:px-10">
+
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14">
+
+      <!-- ════════ 좌측: 한마음일터 정보 ════════ -->
+      <aside class="lg:col-span-4 reveal">
+
+        <!-- 로고 + 이름 -->
+        <div class="flex items-center gap-3 mb-7">
+          <div class="w-12 h-12 rounded-2xl flex items-center justify-center text-white font-bold text-base"
+               style="background:linear-gradient(135deg,var(--text-purple) 0%,var(--accent-blue) 100%);box-shadow:0 8px 22px rgba(74,111,227,.30)">
+            한
+          </div>
+          <div class="leading-tight">
+            <p class="font-bold" style="font-size:18px;color:var(--text-primary);letter-spacing:-.02em">한마음일터</p>
+            <p class="text-xs" style="color:var(--text-muted);letter-spacing:.05em">장애인직업재활시설</p>
+          </div>
+        </div>
+
+        <!-- 큰 타이틀 -->
+        <p class="text-xs font-semibold mb-3" style="color:var(--text-purple-deep);letter-spacing:.18em">CONTACT</p>
+        <h2 class="font-display mb-6"
+            style="font-size:clamp(44px,5.5vw,72px);letter-spacing:-.01em;color:var(--bg-navy);line-height:1};">
+          견적 요청
+        </h2>
+
+        <!-- 설명 -->
+        <p class="mb-9" style="font-size:15px;color:var(--text-secondary);line-height:1.72">
+          필요한 인쇄·홍보물 정보를 알려주세요.<br>
+          평균 1~3시간 내 맞춤 견적으로 회신드립니다.<br>
+          <span style="color:var(--text-purple-deep);font-weight:600">견적은 100% 무료입니다.</span>
+        </p>
+
+        <!-- 연락처 정보 -->
+        <div class="space-y-3.5 mb-8">
+          <div class="flex items-start gap-3">
+            <div class="w-9 h-9 rounded-xl flex items-center justify-center shrink-0" style="background:#fff">
+              <svg width="15" height="15" fill="none" stroke="var(--text-purple-deep)" stroke-width="2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round"
+                  d="M3 5a2 2 0 012-2h3.28a1 1 0 01.95.68l1.49 4.49a1 1 0 01-.5 1.21l-2.26 1.13a11 11 0 005.52 5.52l1.13-2.26a1 1 0 011.21-.5l4.49 1.5a1 1 0 01.68.94V19a2 2 0 01-2 2h-1C9.72 21 3 14.28 3 6V5z"/>
+              </svg>
+            </div>
+            <div class="leading-tight pt-1">
+              <p class="text-xs" style="color:var(--text-muted)">전화 · 팩스</p>
+              <p class="font-bold text-sm" style="color:var(--text-primary)">031-631-6680</p>
+              <p class="text-xs" style="color:var(--text-muted)">팩스 · 031-631-6634</p>
+            </div>
+          </div>
+
+          <div class="flex items-start gap-3">
+            <div class="w-9 h-9 rounded-xl flex items-center justify-center shrink-0" style="background:#fff">
+              <svg width="15" height="15" fill="none" stroke="var(--text-purple-deep)" stroke-width="2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round"
+                  d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+              </svg>
+            </div>
+            <div class="leading-tight pt-1">
+              <p class="text-xs" style="color:var(--text-muted)">이메일</p>
+              <p class="font-bold text-sm" style="color:var(--text-primary)">info@hanmaeum.kr</p>
+            </div>
+          </div>
+
+          <div class="flex items-start gap-3">
+            <div class="w-9 h-9 rounded-xl flex items-center justify-center shrink-0" style="background:#fff">
+              <svg width="15" height="15" fill="none" stroke="var(--text-purple-deep)" stroke-width="2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round"
+                  d="M17.657 16.657L13.414 20.9a2 2 0 01-2.828 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+                <path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+              </svg>
+            </div>
+            <div class="leading-tight pt-1">
+              <p class="text-xs" style="color:var(--text-muted)">주소</p>
+              <p class="font-bold text-sm" style="color:var(--text-primary);line-height:1.5">
+                경기도 이천시 마장면 이장로256번길
+              </p>
+            </div>
+          </div>
+
+          <div class="flex items-start gap-3">
+            <div class="w-9 h-9 rounded-xl flex items-center justify-center shrink-0" style="background:#fff">
+              <svg width="15" height="15" fill="none" stroke="var(--text-purple-deep)" stroke-width="2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+              </svg>
+            </div>
+            <div class="leading-tight pt-1">
+              <p class="text-xs" style="color:var(--text-muted)">운영 시간</p>
+              <p class="font-bold text-sm" style="color:var(--text-primary)">평일 09:00 ─ 18:00</p>
+              <p class="text-xs" style="color:var(--text-muted)">주말·공휴일 휴무</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- 신뢰 지표 -->
+        <div class="flex flex-wrap gap-x-5 gap-y-2 pt-6" style="border-top:1px solid rgba(107,91,201,.18)">
+          <span class="flex items-center gap-1.5 text-xs font-semibold" style="color:var(--text-secondary)">
+            <svg width="14" height="14" fill="none" stroke="var(--accent-blue)" stroke-width="2.4" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/>
+            </svg>
+            견적 무료
+          </span>
+          <span class="flex items-center gap-1.5 text-xs font-semibold" style="color:var(--text-secondary)">
+            <svg width="14" height="14" fill="none" stroke="var(--accent-blue)" stroke-width="2.4" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/>
+            </svg>
+            1~3시간 응답
+          </span>
+          <span class="flex items-center gap-1.5 text-xs font-semibold" style="color:var(--text-secondary)">
+            <svg width="14" height="14" fill="none" stroke="var(--accent-blue)" stroke-width="2.4" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/>
+            </svg>
+            간단한 절차
+          </span>
+        </div>
+      </aside>
+
+
+      <!-- ════════ 우측: 폼 ════════ -->
+      <div class="lg:col-span-8 reveal">
+
+    <!-- 폼 -->
+    <form id="quote-form" class="quote-form" novalidate>
+
+      <!-- 기본 정보 -->
+      <div class="mb-5">
+        <label class="form-label" for="q-name">이름<span class="req">*</span></label>
+        <input id="q-name" name="name" type="text" class="form-input" placeholder="홍길동" required>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-5">
+        <div>
+          <label class="form-label" for="q-phone">연락처<span class="req">*</span></label>
+          <input id="q-phone" name="phone" type="tel" class="form-input" placeholder="010-0000-0000" required>
+        </div>
+        <div>
+          <label class="form-label" for="q-email">이메일</label>
+          <input id="q-email" name="email" type="email" class="form-input" placeholder="example@email.com">
+        </div>
+      </div>
+
+      <div class="mb-7">
+        <label class="form-label" for="q-company">회사명·기관명<span class="req">*</span></label>
+        <input id="q-company" name="company" type="text" class="form-input" placeholder="(주)한마음" required>
+      </div>
+
+      <!-- 품목 선택 -->
+      <fieldset class="form-fieldset mb-6">
+        <legend class="form-label mb-3" style="font-size:14px">제작 품목 <span class="req">*</span> <span style="color:var(--text-muted);font-weight:500">(복수 선택 가능)</span></legend>
+
+        <div class="item-grid">
+          <label class="item-chip">
+            <input type="checkbox" name="item" value="전단지">
+            <span class="check-box"><svg width="11" height="11" fill="none" stroke="#fff" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span>
+            <span class="emoji">📰</span>
+            <span class="label">전단지</span>
+          </label>
+          <label class="item-chip">
+            <input type="checkbox" name="item" value="명함">
+            <span class="check-box"><svg width="11" height="11" fill="none" stroke="#fff" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span>
+            <span class="emoji">💼</span>
+            <span class="label">명함</span>
+          </label>
+          <label class="item-chip">
+            <input type="checkbox" name="item" value="쇼핑백">
+            <span class="check-box"><svg width="11" height="11" fill="none" stroke="#fff" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span>
+            <span class="emoji">🛍️</span>
+            <span class="label">쇼핑백</span>
+          </label>
+          <label class="item-chip">
+            <input type="checkbox" name="item" value="현수막">
+            <span class="check-box"><svg width="11" height="11" fill="none" stroke="#fff" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span>
+            <span class="emoji">🚩</span>
+            <span class="label">현수막·배너</span>
+          </label>
+          <label class="item-chip">
+            <input type="checkbox" name="item" value="포스터">
+            <span class="check-box"><svg width="11" height="11" fill="none" stroke="#fff" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span>
+            <span class="emoji">🖼️</span>
+            <span class="label">포스터</span>
+          </label>
+          <label class="item-chip">
+            <input type="checkbox" name="item" value="스티커">
+            <span class="check-box"><svg width="11" height="11" fill="none" stroke="#fff" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span>
+            <span class="emoji">🏷️</span>
+            <span class="label">스티커·라벨</span>
+          </label>
+          <label class="item-chip">
+            <input type="checkbox" name="item" value="카탈로그">
+            <span class="check-box"><svg width="11" height="11" fill="none" stroke="#fff" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span>
+            <span class="emoji">📋</span>
+            <span class="label">카탈로그·책자</span>
+          </label>
+          <label class="item-chip">
+            <input type="checkbox" name="item" value="달력">
+            <span class="check-box"><svg width="11" height="11" fill="none" stroke="#fff" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span>
+            <span class="emoji">📅</span>
+            <span class="label">달력</span>
+          </label>
+          <label class="item-chip">
+            <input type="checkbox" name="item" value="메뉴판">
+            <span class="check-box"><svg width="11" height="11" fill="none" stroke="#fff" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span>
+            <span class="emoji">📜</span>
+            <span class="label">메뉴판</span>
+          </label>
+          <label class="item-chip">
+            <input type="checkbox" name="item" value="박스·패키지">
+            <span class="check-box"><svg width="11" height="11" fill="none" stroke="#fff" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span>
+            <span class="emoji">📦</span>
+            <span class="label">박스·패키지</span>
+          </label>
+          <label class="item-chip">
+            <input type="checkbox" name="item" value="사인물">
+            <span class="check-box"><svg width="11" height="11" fill="none" stroke="#fff" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span>
+            <span class="emoji">🪧</span>
+            <span class="label">사인물</span>
+          </label>
+          <label class="item-chip">
+            <input type="checkbox" name="item" value="굿즈">
+            <span class="check-box"><svg width="11" height="11" fill="none" stroke="#fff" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span>
+            <span class="emoji">🎁</span>
+            <span class="label">기업 굿즈</span>
+          </label>
+          <label class="item-chip">
+            <input type="checkbox" name="item" value="디자인">
+            <span class="check-box"><svg width="11" height="11" fill="none" stroke="#fff" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span>
+            <span class="emoji">🎨</span>
+            <span class="label">디자인 작업</span>
+          </label>
+          <label class="item-chip">
+            <input type="checkbox" name="item" value="기타" id="other-check">
+            <span class="check-box"><svg width="11" height="11" fill="none" stroke="#fff" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span>
+            <span class="emoji">✏️</span>
+            <span class="label">기타</span>
+          </label>
+        </div>
+
+        <!-- 기타 입력 필드 (체크 시 표시) -->
+        <div id="other-text-wrap">
+          <input id="other-text" name="other_detail" type="text" class="form-input"
+                 placeholder="기타 품목을 자유롭게 입력해 주세요">
+        </div>
+      </fieldset>
+
+      <!-- 문의사항 -->
+      <div class="mb-6">
+        <label class="form-label" for="q-message">
+          문의사항
+          <span style="color:var(--text-muted);font-weight:500;font-size:12px;margin-left:6px">
+            수량·납기·예산을 함께 남겨주세요
+          </span>
+        </label>
+        <textarea id="q-message" name="message" rows="4" class="form-input"
+                  placeholder="예) 전단지 1,000부 · A4 양면 · 5월 25일까지 납품 희망"
+                  style="resize:vertical;min-height:110px;font-family:inherit"></textarea>
+      </div>
+
+      <!-- 개인정보 수집 및 이용 동의 -->
+      <div class="mb-6">
+        <label class="form-label">
+          개인정보 수집 및 이용 동의<span class="req">*</span>
+        </label>
+        <div class="privacy-box">
+          <p class="font-bold mb-2" style="font-size:13px;color:var(--text-primary)">
+            한마음일터(이하 "회사")는 개인정보 보호법 제30조에 따라 정보 주체의 개인정보를 보호하고 이와 관련한 고충을 신속하고 원활하게 처리할 수 있도록 다음과 같이 개인정보 처리지침을 수립·공개합니다.
+          </p>
+          <p class="font-bold mt-3 mb-1" style="font-size:12px;color:var(--text-primary)">제1조 (개인정보의 처리목적)</p>
+          <p style="font-size:11.5px;color:var(--text-secondary);line-height:1.6">
+            회사는 다음의 목적을 위하여 개인정보를 처리합니다. 처리하고 있는 개인정보는 다음의 목적 이외의 용도로는 이용되지 않으며, 이용 목적이 변경되는 경우에는 개인정보보호법 제18조에 따라 별도의 동의를 받는 등 필요한 조치를 이행할 예정입니다.
+          </p>
+          <p class="font-bold mt-3 mb-1" style="font-size:12px;color:var(--text-primary)">제2조 (수집 항목)</p>
+          <p style="font-size:11.5px;color:var(--text-secondary);line-height:1.6">
+            · 필수: 이름, 연락처, 회사명·기관명, 제작 품목<br>
+            · 선택: 이메일, 문의사항
+          </p>
+          <p class="font-bold mt-3 mb-1" style="font-size:12px;color:var(--text-primary)">제3조 (보유 기간)</p>
+          <p style="font-size:11.5px;color:var(--text-secondary);line-height:1.6">
+            견적 요청일로부터 3년간 보관 후 즉시 파기합니다. 단, 상거래 관련 법령에 따라 보존이 필요한 경우 해당 기간 동안 보관합니다.
+          </p>
+          <p class="font-bold mt-3 mb-1" style="font-size:12px;color:var(--text-primary)">제4조 (동의 거부 권리)</p>
+          <p style="font-size:11.5px;color:var(--text-secondary);line-height:1.6">
+            귀하는 개인정보 수집·이용에 대한 동의를 거부할 권리가 있습니다. 다만 동의를 거부하실 경우 견적 요청 서비스 제공이 제한될 수 있습니다.
+          </p>
+        </div>
+        <label class="privacy-check">
+          <input type="checkbox" id="q-agree" required>
+          <span class="check-mark">
+            <svg width="11" height="11" fill="none" stroke="#fff" stroke-width="3" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/>
+            </svg>
+          </span>
+          <span>개인정보 수집 및 이용에 동의합니다.<span class="req">*</span></span>
+        </label>
+      </div>
+
+      <!-- 제출 버튼 -->
+      <div class="mt-7 flex flex-col items-stretch md:items-start gap-3">
+        <button type="submit" class="btn-primary w-full md:w-auto justify-center"
+                style="padding:16px 48px;font-size:14px">
+          견적 요청 보내기
+          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" viewBox="0 0 24 24">
+            <path d="M5 12h14M12 5l7 7-7 7"/>
+          </svg>
+        </button>
+        <p class="text-xs" style="color:var(--text-muted)">
+          ✱ 표시는 필수 입력 항목입니다. 제출 후 평균 1~3시간 내 담당자가 회신드립니다.
+        </p>
+      </div>
+
+    </form>
+
+      </div><!-- /우측 컬럼 -->
+    </div><!-- /grid -->
+
+    <!-- 성공 메시지 (제출 후 표시) -->
+    <div id="quote-success" class="quote-form reveal mt-12" style="max-width:720px;margin-left:auto;margin-right:auto" hidden>
+      <div class="form-success">
+        <div class="form-success-icon">
+          <svg width="36" height="36" fill="none" stroke="#fff" stroke-width="2.6" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/>
+          </svg>
+        </div>
+        <h3 class="font-display mb-3" style="font-size:30px;color:var(--text-purple-deep);line-height:1.2">
+          요청이 접수되었습니다!
+        </h3>
+        <p class="mb-7" style="font-size:15px;color:var(--text-secondary);line-height:1.7">
+          담당자가 평균 1~3시간 내에 맞춤 견적으로 회신드립니다.<br>
+          견적 확정 후 아래 결제 페이지에서 결제를 진행하실 수 있습니다.
+        </p>
+        <div class="flex flex-col md:flex-row items-center justify-center gap-3">
+          <a id="go-payment" href="payment.html" class="btn-primary" style="padding:14px 32px">
+            결제 페이지로 이동
+            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" viewBox="0 0 24 24">
+              <path d="M5 12h14M12 5l7 7-7 7"/>
+            </svg>
+          </a>
+          <a href="tel:031-631-6680" class="btn-soft">
+            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round"
+                d="M3 5a2 2 0 012-2h3.28a1 1 0 01.95.68l1.49 4.49a1 1 0 01-.5 1.21l-2.26 1.13a11 11 0 005.52 5.52l1.13-2.26a1 1 0 011.21-.5l4.49 1.5a1 1 0 01.68.94V19a2 2 0 01-2 2h-1C9.72 21 3 14.28 3 6V5z"/>
+            </svg>
+            031-631-6680
+          </a>
+        </div>
+        <p class="text-xs mt-5" style="color:var(--text-muted)">
+          ※ 실제 운영 시 담당자가 견적 확인 후 결제 링크를 발송해 드립니다.
+        </p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════
+     FOOTER  (Navy)
+══════════════════════════════ -->
+<footer style="background:var(--bg-navy);color:var(--text-on-dark)">
+
+  <!-- Top icon row -->
+  <div class="border-b" style="border-color:rgba(255,255,255,.08)">
+    <div class="max-w-7xl mx-auto px-6 lg:px-10 py-6 flex flex-wrap justify-center items-center gap-x-10 gap-y-3">
+      <a href="#" class="text-xs font-medium" style="color:var(--text-muted-dark)">한국장애인고용공단</a>
+      <span style="color:rgba(255,255,255,.15)">·</span>
+      <a href="#" class="text-xs font-medium" style="color:var(--text-muted-dark)">한국장애인개발원</a>
+      <span style="color:rgba(255,255,255,.15)">·</span>
+      <a href="#" class="text-xs font-medium" style="color:var(--text-muted-dark)">경기도청</a>
+      <span style="color:rgba(255,255,255,.15)">·</span>
+      <a href="#" class="text-xs font-medium" style="color:var(--text-muted-dark)">이천시청</a>
+      <span style="color:rgba(255,255,255,.15)">·</span>
+      <a href="#" class="text-xs font-medium" style="color:var(--text-muted-dark)">사회복지정보원</a>
+    </div>
+  </div>
+
+  <!-- Main footer grid -->
+  <div class="max-w-7xl mx-auto px-6 lg:px-10 py-14">
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-10">
+
+      <div class="md:col-span-1">
+        <div class="mb-4" style="background:#fff;padding:10px 14px;border-radius:10px;display:inline-block">
+          <img src="logo.png" alt="한마음일터" style="height:42px;width:auto;display:block">
+        </div>
+        <p class="text-sm leading-[1.7] mb-5" style="color:var(--text-muted-dark)">
+          장애인의 자립과 사회 참여를 돕는 직업재활시설.
+          따뜻한 손길로 만든 인쇄·홍보물.
+        </p>
+        <a href="tel:031-631-6680" class="inline-flex items-center gap-2 text-sm font-bold" style="color:#fff">
+          <svg width="14" height="14" fill="none" stroke="var(--accent-yellow)" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round"
+              d="M3 5a2 2 0 012-2h3.28a1 1 0 01.95.68l1.49 4.49a1 1 0 01-.5 1.21l-2.26 1.13a11 11 0 005.52 5.52l1.13-2.26a1 1 0 011.21-.5l4.49 1.5a1 1 0 01.68.94V19a2 2 0 01-2 2h-1C9.72 21 3 14.28 3 6V5z"/>
+          </svg>
+          031-631-6680
+        </a>
+      </div>
+
+      <div>
+        <p class="text-xs font-bold uppercase mb-4" style="color:var(--accent-yellow);letter-spacing:.16em">사이트맵</p>
+        <ul class="space-y-2.5 text-sm" style="color:var(--text-muted-dark)">
+          <li><a href="about.html"      class="hover:text-white transition-colors">소개</a></li>
+          <li><a href="print.html"      class="hover:text-white transition-colors">인쇄</a></li>
+          <li><a href="processing.html" class="hover:text-white transition-colors">임가공</a></li>
+          <li><a href="community.html"  class="hover:text-white transition-colors">커뮤니티</a></li>
+          <li><a href="quote.html"      class="hover:text-white transition-colors">견적요청</a></li>
+          <li><a href="about.html#location" class="hover:text-white transition-colors">찾아오시는 길</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <p class="text-xs font-bold uppercase mb-4" style="color:var(--accent-yellow);letter-spacing:.16em">연락처</p>
+        <ul class="space-y-2.5 text-sm" style="color:var(--text-muted-dark)">
+          <li class="flex gap-2">
+            <span class="font-bold shrink-0" style="color:#fff">전화</span>031-631-6680
+          </li>
+          <li class="flex gap-2">
+            <span class="font-bold shrink-0" style="color:#fff">팩스</span>031-631-6634
+          </li>
+          <li class="flex gap-2">
+            <span class="font-bold shrink-0" style="color:#fff">주소</span>경기도 이천시 마장면 이장로256번길
+          </li>
+        </ul>
+      </div>
+
+      <div>
+        <p class="text-xs font-bold uppercase mb-4" style="color:var(--accent-yellow);letter-spacing:.16em">법인 정보</p>
+        <ul class="space-y-2.5 text-sm" style="color:var(--text-muted-dark)">
+          <li class="flex gap-2">
+            <span class="font-bold shrink-0" style="color:#fff">대표자</span>이병환
+          </li>
+          <li class="flex gap-2">
+            <span class="font-bold shrink-0" style="color:#fff">사업자</span>126-82-10484
+          </li>
+          <li class="flex gap-2">
+            <span class="font-bold shrink-0" style="color:#fff">계좌</span>농협 233060-55-001607
+          </li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Bottom bar -->
+  <div class="border-t" style="border-color:rgba(255,255,255,.08)">
+    <div class="max-w-7xl mx-auto px-6 lg:px-10 py-5 flex flex-col md:flex-row items-center justify-between gap-3">
+      <p class="text-xs" style="color:var(--text-muted-dark)">
+        © 2026 한마음일터. All rights reserved.
+      </p>
+      <div class="flex items-center gap-5 text-xs" style="color:var(--text-muted-dark)">
+        <a href="#" class="hover:text-white transition-colors">개인정보처리방침</a>
+        <span style="color:rgba(255,255,255,.15)">|</span>
+        <a href="#" class="hover:text-white transition-colors">이용약관</a>
+        <span style="color:rgba(255,255,255,.15)">|</span>
+        <a href="admin.html" class="hover:text-white transition-colors" style="opacity:.5">관리자</a>
+      </div>
+    </div>
+  </div>
+
+</footer>
+
+
+<script>
+  // ── header scroll
+  const header = document.getElementById('site-header');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 30) header.classList.add('scrolled');
+    else header.classList.remove('scrolled');
+  });
+
+  // ── mobile menu
+  const mobToggle = document.getElementById('mob-toggle');
+  const mobMenu   = document.getElementById('mob-menu');
+  mobToggle.addEventListener('click', () => {
+    const isOpen = mobMenu.classList.toggle('open');
+    mobMenu.classList.toggle('hidden', !isOpen);
+  });
+  mobMenu.querySelectorAll('a').forEach(a =>
+    a.addEventListener('click', () => {
+      mobMenu.classList.remove('open');
+      mobMenu.classList.add('hidden');
+    })
+  );
+
+  // ── mobile menu group accordion
+  document.querySelectorAll('.mob-group-toggle').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const targetId = btn.getAttribute('data-target');
+      const sub = document.getElementById(targetId);
+      const isOpen = sub.classList.toggle('open');
+      btn.classList.toggle('open', isOpen);
+    });
+  });
+
+  // ── faq accordion (one open at a time)
+  document.querySelectorAll('.faq-q').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const item = btn.parentElement;
+      const open = item.classList.contains('open');
+      document.querySelectorAll('.faq-item.open').forEach(o => {
+        o.classList.remove('open');
+        o.querySelector('.faq-a').style.maxHeight = null;
+      });
+      if (!open) {
+        item.classList.add('open');
+        const a = item.querySelector('.faq-a');
+        a.style.maxHeight = a.scrollHeight + 'px';
+      }
+    });
+  });
+
+  // ── reveal on scroll
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('in');
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: .12 });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+  // ── 견적 요청 폼: 기타 토글
+  const otherCheck   = document.getElementById('other-check');
+  const otherWrap    = document.getElementById('other-text-wrap');
+  const otherInput   = document.getElementById('other-text');
+  if (otherCheck) {
+    otherCheck.addEventListener('change', () => {
+      if (otherCheck.checked) {
+        otherWrap.classList.add('show');
+        setTimeout(() => otherInput.focus(), 200);
+      } else {
+        otherWrap.classList.remove('show');
+        otherInput.value = '';
+      }
+    });
+  }
+
+  // ── 전화번호 자동 포맷 (010-0000-0000)
+  const phoneInput = document.getElementById('q-phone');
+  if (phoneInput) {
+    phoneInput.addEventListener('input', e => {
+      let v = e.target.value.replace(/\D/g, '').slice(0, 11);
+      if (v.length >= 7)      v = v.replace(/(\d{3})(\d{3,4})(\d{0,4}).*/, '$1-$2-$3').replace(/-$/, '');
+      else if (v.length >= 4) v = v.replace(/(\d{3})(\d{0,4}).*/, '$1-$2').replace(/-$/, '');
+      e.target.value = v;
+    });
+  }
+
+  // ── 폼 제출
+  const quoteForm    = document.getElementById('quote-form');
+  const quoteSuccess = document.getElementById('quote-success');
+  if (quoteForm) {
+    quoteForm.addEventListener('submit', e => {
+      e.preventDefault();
+
+      // 필수 항목 검증
+      const name    = document.getElementById('q-name').value.trim();
+      const phone   = document.getElementById('q-phone').value.trim();
+      const company = document.getElementById('q-company').value.trim();
+      const email   = document.getElementById('q-email').value.trim();
+      const message = document.getElementById('q-message').value.trim();
+      const agree   = document.getElementById('q-agree').checked;
+      if (!name || !phone || !company) {
+        alert('이름, 연락처, 회사명·기관명을 모두 입력해 주세요.');
+        return;
+      }
+
+      // 품목 1개 이상 선택 검증
+      const items = [...document.querySelectorAll('input[name="item"]:checked')].map(c => c.value);
+      if (items.length === 0) {
+        alert('제작 품목을 1개 이상 선택해 주세요.');
+        return;
+      }
+
+      // 기타 선택 시 상세 검증
+      if (items.includes('기타') && !otherInput.value.trim()) {
+        alert('기타를 선택하신 경우 상세 내용을 입력해 주세요.');
+        otherInput.focus();
+        return;
+      }
+
+      // 개인정보 동의 체크 검증
+      if (!agree) {
+        alert('개인정보 수집 및 이용에 동의해 주세요.');
+        document.getElementById('q-agree').focus();
+        return;
+      }
+
+      // 견적번호 생성 (Q-YYMMDD-XXXX)
+      const now = new Date();
+      const orderId = 'Q-' + now.getFullYear().toString().slice(-2)
+                          + String(now.getMonth() + 1).padStart(2, '0')
+                          + String(now.getDate()).padStart(2, '0')
+                          + '-' + String(now.getTime()).slice(-4);
+
+      // 데이터 수집
+      const itemList = items.filter(i => i !== '기타');
+      if (otherInput.value.trim()) itemList.push('기타: ' + otherInput.value.trim());
+
+      // localStorage에 견적 저장 (관리자 페이지에서 조회 가능)
+      const quote = {
+        orderId,
+        createdAt: new Date().toISOString(),
+        name, phone, company, email, message,
+        items: itemList,
+        status: 'pending',
+        amount: 0,
+        memo: '',
+        quotedAt: null,
+        paidAt: null,
+        paymentKey: ''
+      };
+      try {
+        const all = JSON.parse(localStorage.getItem('hanmaeum_quotes')) || [];
+        all.unshift(quote);
+        localStorage.setItem('hanmaeum_quotes', JSON.stringify(all));
+      } catch (err) {
+        console.warn('localStorage 저장 실패:', err);
+      }
+      console.log('견적 요청 저장:', quote);
+
+      // TODO: 백엔드 연결 시 아래 주석 해제 (이메일/카톡 알림 등)
+      // fetch('/api/quote', { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(quote) });
+
+      // 결제 페이지 URL 파라미터 설정 (실제 운영 시엔 견적 확정 후 amount 발송)
+      const paymentParams = new URLSearchParams({
+        orderId,
+        name,
+        phone,
+        company,
+        email,
+        items: itemList.join(', '),
+        amount: '0' // 데모: 0원 → payment.html에서 임시 금액 입력 가능
+      });
+      const paymentLink = document.getElementById('go-payment');
+      if (paymentLink) paymentLink.href = 'payment.html?' + paymentParams.toString();
+
+      // UI: 성공 화면으로 전환
+      quoteForm.hidden = true;
+      quoteSuccess.hidden = false;
+      quoteSuccess.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    });
+  }
+</script>
+
+</body>
+</html>

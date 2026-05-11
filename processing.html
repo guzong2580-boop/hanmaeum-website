@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>임가공 — 한마음일터</title>
+  <meta name="description" content="한마음일터 임가공 사업. 팬콤·네추럴밸리·더필·수세미 등 다양한 임가공 협력.">
+  <link rel="stylesheet" href="common.css">
+
+  <style>
+    .section-block {
+      padding: 80px 0;
+      border-top: 1px solid var(--border-soft);
+    }
+    .section-block:first-of-type { border-top: none; }
+    .section-eyebrow {
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: .18em;
+      color: var(--text-purple-deep);
+      margin-bottom: 12px;
+    }
+    .section-title {
+      font-family: 'Pretendard',sans-serif;
+      font-weight: 900;
+      font-size: clamp(28px, 4vw, 40px);
+      color: var(--text-primary);
+      letter-spacing: -.025em;
+      line-height: 1.2;
+      margin-bottom: 18px;
+    }
+    .section-lead {
+      font-size: 16px;
+      color: var(--text-secondary);
+      line-height: 1.75;
+      max-width: 720px;
+      margin-bottom: 36px;
+    }
+
+    .partner-card {
+      display: grid;
+      grid-template-columns: 280px 1fr;
+      gap: 36px;
+      align-items: start;
+      padding: 36px;
+      background: #fff;
+      border: 1px solid var(--border-soft);
+      border-radius: 20px;
+    }
+    .partner-thumb {
+      aspect-ratio: 1/1;
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 96px;
+      background: linear-gradient(135deg, #EFE9FA 0%, #DCD3F0 100%);
+    }
+    .partner-card.fancom .partner-thumb { background: linear-gradient(135deg,#FFE6D5 0%,#F4C8B5 100%); }
+    .partner-card.natural .partner-thumb { background: linear-gradient(135deg,#E8F4ED 0%,#A8BB93 100%); }
+    .partner-card.feel .partner-thumb { background: linear-gradient(135deg,#FFF4E0 0%,#FFD988 100%); }
+    .partner-card.scrubber .partner-thumb { background: linear-gradient(135deg,#E8EFFD 0%,#A8C6F0 100%); }
+
+    .partner-body h3 {
+      font-size: 24px;
+      font-weight: 800;
+      color: var(--text-primary);
+      letter-spacing: -.02em;
+      margin-bottom: 6px;
+    }
+    .partner-body .tag {
+      display: inline-block;
+      padding: 4px 10px;
+      background: var(--bg-cream);
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--text-purple-deep);
+      letter-spacing: .04em;
+      margin-bottom: 14px;
+    }
+    .partner-body p {
+      font-size: 14.5px;
+      color: var(--text-secondary);
+      line-height: 1.7;
+      margin-bottom: 20px;
+    }
+    .partner-meta {
+      display: grid;
+      grid-template-columns: repeat(auto-fit,minmax(140px,1fr));
+      gap: 12px;
+      padding-top: 20px;
+      border-top: 1px solid var(--border-soft);
+    }
+    .partner-meta div {
+      font-size: 13px;
+    }
+    .partner-meta div b {
+      display: block;
+      color: var(--text-muted);
+      font-weight: 700;
+      letter-spacing: .04em;
+      margin-bottom: 4px;
+      font-size: 11.5px;
+      text-transform: uppercase;
+    }
+    .partner-meta div span {
+      color: var(--text-primary);
+      font-weight: 600;
+    }
+
+    @media (max-width: 768px) {
+      .partner-card { grid-template-columns: 1fr; padding: 24px; gap: 24px; }
+      .partner-thumb { aspect-ratio: 16/10; font-size: 72px; }
+    }
+
+    .partners-list {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .stats-band {
+      margin-top: 28px;
+      padding: 28px 32px;
+      background: var(--bg-navy);
+      border-radius: 18px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit,minmax(160px,1fr));
+      gap: 24px;
+      text-align: center;
+    }
+    .stat-item .num {
+      font-family: 'Pretendard',sans-serif;
+      font-weight: 900;
+      font-size: 32px;
+      color: var(--accent-yellow);
+      letter-spacing: -.03em;
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+    .stat-item .label {
+      font-size: 12px;
+      color: var(--text-muted-dark);
+      letter-spacing: .08em;
+      font-weight: 600;
+    }
+  </style>
+</head>
+
+<body>
+
+<!-- ══════════ HEADER ══════════ -->
+<header id="site-header">
+  <div class="container" style="height:72px;display:flex;align-items:center;justify-content:space-between">
+    <a href="index.html" style="display:flex;align-items:center;text-decoration:none" aria-label="한마음일터 홈">
+      <img src="logo.png" alt="한마음일터 - 장애인직업재활시설" style="height:48px;width:auto;display:block">
+    </a>
+
+    <nav class="desktop-nav" style="display:flex;align-items:center;gap:28px">
+      <div class="nav-item">
+        <a href="about.html" class="nav-link">소개<svg class="nav-caret" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 5l3 3 3-3"/></svg></a>
+        <div class="nav-dropdown">
+          <a href="about.html#greeting">인사말</a>
+          <a href="about.html#history">설립목적 및 연혁</a>
+          <a href="about.html#facility">시설개요</a>
+          <a href="about.html#rehab">직업재활</a>
+          <a href="about.html#process">이용절차</a>
+          <a href="about.html#org">조직도</a>
+          <a href="about.html#location">찾아오시는 길</a>
+        </div>
+      </div>
+      <div class="nav-item">
+        <a href="print.html" class="nav-link">인쇄<svg class="nav-caret" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 5l3 3 3-3"/></svg></a>
+        <div class="nav-dropdown">
+          <a href="print.html#paper">인쇄물</a>
+          <a href="print.html#banner-bag">현수막 및 쇼핑백</a>
+        </div>
+      </div>
+      <div class="nav-item">
+        <a href="processing.html" class="nav-link active">임가공<svg class="nav-caret" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 5l3 3 3-3"/></svg></a>
+        <div class="nav-dropdown">
+          <a href="#fancom">팬콤</a>
+          <a href="#natural">네추럴밸리</a>
+          <a href="#feel">더필</a>
+          <a href="#scrubber">수세미</a>
+        </div>
+      </div>
+      <div class="nav-item">
+        <a href="community.html" class="nav-link">커뮤니티<svg class="nav-caret" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 5l3 3 3-3"/></svg></a>
+        <div class="nav-dropdown">
+          <a href="community.html#notice">공지사항</a>
+          <a href="community.html#gallery">갤러리</a>
+          <a href="community.html#archive">자료실</a>
+          <a href="community.html#donation">후원</a>
+          <a href="community.html#volunteer">자원봉사</a>
+        </div>
+      </div>
+      <a href="quote.html" class="nav-link">견적요청</a>
+    </nav>
+
+    <div style="display:flex;align-items:center;gap:12px">
+      <a href="quote.html" class="btn-primary desktop-cta" style="padding:10px 22px;font-size:12px">견적 요청</a>
+      <button id="mob-toggle" class="mob-toggle" aria-label="menu" style="width:40px;height:40px;display:none;align-items:center;justify-content:center;background:none;border:none;cursor:pointer">
+        <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <div id="mob-menu" class="hidden" style="border-top:1px solid var(--border-soft);background:#fff;max-height:calc(100vh - 72px);overflow-y:auto">
+    <nav style="display:flex;flex-direction:column;padding:8px 24px 16px">
+      <button class="mob-group-toggle" data-target="mg-about">소개<svg class="nav-caret" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 5l3 3 3-3"/></svg></button>
+      <div id="mg-about" class="mob-sub">
+        <a href="about.html">전체 보기</a>
+        <a href="about.html#greeting">인사말</a>
+        <a href="about.html#history">설립목적 및 연혁</a>
+        <a href="about.html#facility">시설개요</a>
+        <a href="about.html#rehab">직업재활</a>
+        <a href="about.html#process">이용절차</a>
+        <a href="about.html#org">조직도</a>
+        <a href="about.html#location">찾아오시는 길</a>
+      </div>
+      <button class="mob-group-toggle" data-target="mg-print">인쇄<svg class="nav-caret" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 5l3 3 3-3"/></svg></button>
+      <div id="mg-print" class="mob-sub">
+        <a href="print.html">전체 보기</a>
+        <a href="print.html#paper">인쇄물</a>
+        <a href="print.html#banner-bag">현수막 및 쇼핑백</a>
+      </div>
+      <button class="mob-group-toggle" data-target="mg-proc">임가공<svg class="nav-caret" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 5l3 3 3-3"/></svg></button>
+      <div id="mg-proc" class="mob-sub">
+        <a href="processing.html">전체 보기</a>
+        <a href="#fancom">팬콤</a>
+        <a href="#natural">네추럴밸리</a>
+        <a href="#feel">더필</a>
+        <a href="#scrubber">수세미</a>
+      </div>
+      <button class="mob-group-toggle" data-target="mg-comm">커뮤니티<svg class="nav-caret" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 5l3 3 3-3"/></svg></button>
+      <div id="mg-comm" class="mob-sub">
+        <a href="community.html">전체 보기</a>
+        <a href="community.html#notice">공지사항</a>
+        <a href="community.html#gallery">갤러리</a>
+        <a href="community.html#archive">자료실</a>
+        <a href="community.html#donation">후원</a>
+        <a href="community.html#volunteer">자원봉사</a>
+      </div>
+      <a href="quote.html" style="padding:14px 4px;font-size:14px;font-weight:600;color:var(--text-primary);text-decoration:none;border-top:1px solid var(--border-soft);margin-top:6px">견적요청</a>
+      <a href="quote.html" class="btn-primary" style="margin-top:14px;justify-content:center;padding:12px 22px;font-size:12px">견적 요청하기</a>
+    </nav>
+  </div>
+</header>
+
+<style>
+  @media (max-width: 1023px) {
+    .desktop-nav, .desktop-cta { display: none !important; }
+    .mob-toggle { display: flex !important; }
+  }
+</style>
+
+
+<!-- ══════════ PAGE HERO ══════════ -->
+<section class="page-hero">
+  <div class="container">
+    <span class="crumb">
+      <span style="width:6px;height:6px;border-radius:50%;background:var(--accent-blue)"></span>
+      SUBCONTRACTING
+    </span>
+    <h1>임가공</h1>
+    <p class="lead">
+      파트너 기업과 함께하는 임가공 사업.<br>
+      성실한 작업으로 신뢰받는 한마음일터입니다.
+    </p>
+  </div>
+</section>
+
+
+<!-- ══════════ TAB NAV ══════════ -->
+<div class="tab-nav">
+  <div class="container">
+    <div class="tab-nav-inner">
+      <a href="#fancom"   class="tab-link">팬콤</a>
+      <a href="#natural"  class="tab-link">네추럴밸리</a>
+      <a href="#feel"     class="tab-link">더필</a>
+      <a href="#scrubber" class="tab-link">수세미</a>
+    </div>
+  </div>
+</div>
+
+
+<!-- ══════════ 임가공 파트너 목록 ══════════ -->
+<section class="section-block">
+  <div class="container">
+
+    <div class="partners-list">
+
+      <!-- 팬콤 -->
+      <div id="fancom" class="partner-card fancom reveal">
+        <div class="partner-thumb">🔧</div>
+        <div class="partner-body">
+          <h3>팬콤</h3>
+          <span class="tag">PARTNER</span>
+          <p>
+            팬콤과 협력하여 부품 조립·포장 임가공을 수행하고 있습니다.
+            정확한 작업 매뉴얼과 검수 체계로 안정적인 품질을 유지합니다.
+          </p>
+          <div class="partner-meta">
+            <div><b>작업 유형</b><span>조립 · 포장</span></div>
+            <div><b>협력 기간</b><span>현재 진행 중</span></div>
+            <div><b>품질 관리</b><span>2단계 검수</span></div>
+            <div><b>참여 인원</b><span>이용 장애인</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 네추럴밸리 -->
+      <div id="natural" class="partner-card natural reveal">
+        <div class="partner-thumb">🌿</div>
+        <div class="partner-body">
+          <h3>네추럴밸리</h3>
+          <span class="tag">PARTNER</span>
+          <p>
+            네추럴밸리의 친환경 제품 포장·라벨링 작업을 담당합니다.
+            세심한 손길이 필요한 공정을 정성껏 진행합니다.
+          </p>
+          <div class="partner-meta">
+            <div><b>작업 유형</b><span>포장 · 라벨링</span></div>
+            <div><b>협력 기간</b><span>현재 진행 중</span></div>
+            <div><b>품질 관리</b><span>전수 검사</span></div>
+            <div><b>참여 인원</b><span>이용 장애인</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 더필 -->
+      <div id="feel" class="partner-card feel reveal">
+        <div class="partner-thumb">✨</div>
+        <div class="partner-body">
+          <h3>더필</h3>
+          <span class="tag">PARTNER</span>
+          <p>
+            더필 제품의 임가공 협력. 단순 반복 공정에서 정밀 작업까지
+            다양한 작업을 안정적으로 수행합니다.
+          </p>
+          <div class="partner-meta">
+            <div><b>작업 유형</b><span>가공 · 검수</span></div>
+            <div><b>협력 기간</b><span>현재 진행 중</span></div>
+            <div><b>품질 관리</b><span>샘플링 검사</span></div>
+            <div><b>참여 인원</b><span>이용 장애인</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 수세미 -->
+      <div id="scrubber" class="partner-card scrubber reveal">
+        <div class="partner-thumb">🧽</div>
+        <div class="partner-body">
+          <h3>수세미</h3>
+          <span class="tag">SELF-MADE</span>
+          <p>
+            한마음일터 직접 제작 수세미. 친환경 소재로 정성껏 만든 제품으로,
+            지역 단체·관공서의 우선구매 품목입니다.
+          </p>
+          <div class="partner-meta">
+            <div><b>작업 유형</b><span>직접 생산</span></div>
+            <div><b>판매처</b><span>관공서 · 단체</span></div>
+            <div><b>품질 관리</b><span>전수 검사</span></div>
+            <div><b>참여 인원</b><span>이용 장애인</span></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- 통계 -->
+    <div class="stats-band">
+      <div class="stat-item"><p class="num">4+</p><p class="label">협력 기업</p></div>
+      <div class="stat-item"><p class="num">10년+</p><p class="label">임가공 경력</p></div>
+      <div class="stat-item"><p class="num">100%</p><p class="label">납기 준수율</p></div>
+      <div class="stat-item"><p class="num">전수</p><p class="label">품질 검사</p></div>
+    </div>
+
+    <div style="margin-top:36px;padding:28px;background:var(--bg-cream);border-radius:18px;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px">
+      <div>
+        <p style="font-size:13px;color:var(--accent-blue);font-weight:700;letter-spacing:.14em;margin-bottom:6px">PARTNERSHIP</p>
+        <p style="font-size:18px;color:var(--text-primary);font-weight:700">임가공 협력을 원하시는 기업을 환영합니다</p>
+        <p style="font-size:14px;color:var(--text-muted);margin-top:6px">샘플 검토 후 가능 여부를 빠르게 회신드립니다.</p>
+      </div>
+      <a href="quote.html" class="btn-primary">협력 문의하기 →</a>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════ FOOTER ══════════ -->
+<footer id="site-footer">
+  <div class="footer-grid">
+    <div>
+      <div style="margin-bottom:14px;background:#fff;padding:10px 14px;border-radius:10px;display:inline-block">
+        <img src="logo.png" alt="한마음일터" style="height:42px;width:auto;display:block">
+      </div>
+      <p style="font-size:14px;line-height:1.7;color:var(--text-muted-dark);margin-bottom:18px">장애인의 자립과 사회 참여를 돕는 직업재활시설.<br>따뜻한 손길로 만든 인쇄·홍보물.</p>
+      <a href="tel:031-631-6680" style="display:inline-flex;align-items:center;gap:8px;font-size:14px;font-weight:700;color:#fff !important">📞 031-631-6680</a>
+    </div>
+    <div>
+      <h4>사이트맵</h4>
+      <ul style="list-style:none;padding:0;display:flex;flex-direction:column;gap:10px;font-size:14px">
+        <li><a href="about.html">소개</a></li>
+        <li><a href="print.html">인쇄</a></li>
+        <li><a href="processing.html">임가공</a></li>
+        <li><a href="community.html">커뮤니티</a></li>
+        <li><a href="quote.html">견적요청</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>연락처</h4>
+      <ul style="list-style:none;padding:0;display:flex;flex-direction:column;gap:10px;font-size:14px;color:var(--text-muted-dark)">
+        <li><b style="color:#fff">전화</b> &nbsp; 031-631-6680</li>
+        <li><b style="color:#fff">팩스</b> &nbsp; 031-631-6634</li>
+        <li><b style="color:#fff">주소</b> &nbsp; 경기도 이천시 마장면 이장로256번길</li>
+      </ul>
+    </div>
+    <div>
+      <h4>법인 정보</h4>
+      <ul style="list-style:none;padding:0;display:flex;flex-direction:column;gap:10px;font-size:14px;color:var(--text-muted-dark)">
+        <li><b style="color:#fff">대표자</b> &nbsp; 이병환</li>
+        <li><b style="color:#fff">사업자</b> &nbsp; 126-82-10484</li>
+        <li><b style="color:#fff">계좌</b> &nbsp; 농협 233060-55-001607</li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-bottom-inner">
+      <p>© 2026 한마음일터. All rights reserved.</p>
+      <div style="display:flex;gap:18px;font-size:12px">
+        <a href="#">개인정보처리방침</a>
+        <a href="#">이용약관</a>
+        <a href="admin.html" style="opacity:.5">관리자</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="common.js"></script>
+</body>
+</html>
