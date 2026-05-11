@@ -1,0 +1,347 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 1800" font-family="'Pretendard','Apple SD Gothic Neo','맑은 고딕',sans-serif">
+
+  <defs>
+    <!-- 그림자 -->
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="3"/>
+      <feOffset dx="0" dy="3" result="offsetblur"/>
+      <feComponentTransfer><feFuncA type="linear" slope="0.10"/></feComponentTransfer>
+      <feMerge>
+        <feMergeNode/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <!-- 화살표 마커 -->
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#4A6FE3"/>
+    </marker>
+    <marker id="arrow-double-start" viewBox="0 0 10 10" refX="2" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+      <path d="M 10 0 L 0 5 L 10 10 z" fill="#6E7D5B"/>
+    </marker>
+    <marker id="arrow-double-end" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#6E7D5B"/>
+    </marker>
+  </defs>
+
+  <!-- 배경 -->
+  <rect width="1400" height="1800" fill="#FAF9F6"/>
+
+  <!-- ═══════════ 헤더 ═══════════ -->
+  <text x="700" y="60" text-anchor="middle" font-size="34" font-weight="900" fill="#1F2027" letter-spacing="-1">
+    한마음일터 홈페이지 시스템 구조
+  </text>
+  <text x="700" y="90" text-anchor="middle" font-size="14" fill="#8B8B95" letter-spacing="2">
+    SITE  ·  ADMIN  ·  BACKEND
+  </text>
+
+
+  <!-- ═══════════ 1. 메인 페이지 ═══════════ -->
+  <g filter="url(#shadow)">
+    <rect x="580" y="130" width="240" height="80" rx="14" fill="#5849B8"/>
+    <text x="700" y="165" text-anchor="middle" font-size="20" font-weight="900" fill="#fff">메인 페이지</text>
+    <text x="700" y="190" text-anchor="middle" font-size="13" fill="#E5DFF7">index.html</text>
+  </g>
+
+  <!-- 메인에서 5개 카테고리로 가는 분기선 -->
+  <path d="M 700 210 L 700 240 M 180 240 L 1220 240 M 180 240 L 180 270 M 430 240 L 430 270 M 700 240 L 700 270 M 970 240 L 970 270 M 1220 240 L 1220 270" stroke="#A8B0C0" stroke-width="1.5" fill="none" stroke-dasharray="0"/>
+
+
+  <!-- ═══════════ 2. 5개 카테고리 페이지 ═══════════ -->
+
+  <!-- 소개 -->
+  <g filter="url(#shadow)">
+    <rect x="50" y="270" width="260" height="380" rx="14" fill="#fff" stroke="#E5DFF7" stroke-width="2"/>
+    <rect x="50" y="270" width="260" height="56" rx="14" fill="#E5DFF7"/>
+    <rect x="50" y="316" width="260" height="10" fill="#E5DFF7"/>
+    <text x="180" y="305" text-anchor="middle" font-size="18" font-weight="800" fill="#5849B8">📖 소개</text>
+    <text x="180" y="345" text-anchor="middle" font-size="11" fill="#8B8B95" letter-spacing="2">about.html</text>
+
+    <text x="70"  y="375" font-size="13" fill="#1F2027">·  인사말</text>
+    <text x="70"  y="400" font-size="13" fill="#1F2027">·  설립목적 및 연혁</text>
+    <text x="70"  y="425" font-size="13" fill="#1F2027">·  시설개요</text>
+    <text x="70"  y="450" font-size="13" fill="#1F2027">·  직업재활</text>
+    <text x="70"  y="475" font-size="13" fill="#1F2027">·  이용절차</text>
+    <text x="70"  y="500" font-size="13" fill="#1F2027">·  조직도</text>
+    <text x="70"  y="525" font-size="13" fill="#1F2027">·  찾아오시는 길</text>
+
+    <rect x="65" y="540" width="230" height="32" rx="8" fill="#FFE6D5"/>
+    <text x="180" y="561" text-anchor="middle" font-size="11.5" font-weight="700" fill="#B5832B">+ 카카오맵 임베드</text>
+
+    <rect x="65" y="582" width="230" height="32" rx="8" fill="#F5F1E6"/>
+    <text x="180" y="603" text-anchor="middle" font-size="11.5" font-weight="600" fill="#6E7D5B">7개 섹션 (sticky 탭)</text>
+  </g>
+
+  <!-- 인쇄 -->
+  <g filter="url(#shadow)">
+    <rect x="320" y="270" width="220" height="380" rx="14" fill="#fff" stroke="#F5F1E6" stroke-width="2"/>
+    <rect x="320" y="270" width="220" height="56" rx="14" fill="#F5F1E6"/>
+    <rect x="320" y="316" width="220" height="10" fill="#F5F1E6"/>
+    <text x="430" y="305" text-anchor="middle" font-size="18" font-weight="800" fill="#6E7D5B">📰 인쇄</text>
+    <text x="430" y="345" text-anchor="middle" font-size="11" fill="#8B8B95" letter-spacing="2">print.html</text>
+
+    <text x="340" y="375" font-size="13" fill="#1F2027">·  인쇄물 (10종)</text>
+    <text x="340" y="400" font-size="13" fill="#1F2027">·  현수막 (4종)</text>
+    <text x="340" y="425" font-size="13" fill="#1F2027">·  쇼핑백 (4종)</text>
+
+    <rect x="335" y="450" width="190" height="32" rx="8" fill="#E8F4ED"/>
+    <text x="430" y="471" text-anchor="middle" font-size="11.5" font-weight="700" fill="#3F8A5A">갤러리 그리드 + 필터</text>
+
+    <rect x="335" y="492" width="190" height="32" rx="8" fill="#E8F4ED"/>
+    <text x="430" y="513" text-anchor="middle" font-size="11.5" font-weight="700" fill="#3F8A5A">상세 모달 (BG·DESIGN)</text>
+
+    <rect x="335" y="534" width="190" height="32" rx="8" fill="#FFF4E0"/>
+    <text x="430" y="555" text-anchor="middle" font-size="11.5" font-weight="600" fill="#B5832B">카드 18개 (CRUD 가능)</text>
+  </g>
+
+  <!-- 임가공 -->
+  <g filter="url(#shadow)">
+    <rect x="550" y="270" width="220" height="380" rx="14" fill="#fff" stroke="#E8F4ED" stroke-width="2"/>
+    <rect x="550" y="270" width="220" height="56" rx="14" fill="#E8F4ED"/>
+    <rect x="550" y="316" width="220" height="10" fill="#E8F4ED"/>
+    <text x="660" y="305" text-anchor="middle" font-size="18" font-weight="800" fill="#3F8A5A">🔧 임가공</text>
+    <text x="660" y="345" text-anchor="middle" font-size="11" fill="#8B8B95" letter-spacing="2">processing.html</text>
+
+    <text x="570" y="375" font-size="13" fill="#1F2027">·  팬콤</text>
+    <text x="570" y="400" font-size="13" fill="#1F2027">·  네추럴밸리</text>
+    <text x="570" y="425" font-size="13" fill="#1F2027">·  더필</text>
+    <text x="570" y="450" font-size="13" fill="#1F2027">·  수세미</text>
+
+    <rect x="565" y="475" width="190" height="32" rx="8" fill="#FFF4E0"/>
+    <text x="660" y="496" text-anchor="middle" font-size="11.5" font-weight="700" fill="#B5832B">파트너 카드 4개</text>
+
+    <rect x="565" y="517" width="190" height="32" rx="8" fill="#1B2845"/>
+    <text x="660" y="538" text-anchor="middle" font-size="11.5" font-weight="700" fill="#FFD988">통계 배너</text>
+  </g>
+
+  <!-- 커뮤니티 -->
+  <g filter="url(#shadow)">
+    <rect x="780" y="270" width="270" height="380" rx="14" fill="#fff" stroke="#DAE7F5" stroke-width="2"/>
+    <rect x="780" y="270" width="270" height="56" rx="14" fill="#DAE7F5"/>
+    <rect x="780" y="316" width="270" height="10" fill="#DAE7F5"/>
+    <text x="915" y="305" text-anchor="middle" font-size="18" font-weight="800" fill="#3D5DD0">💬 커뮤니티</text>
+    <text x="915" y="345" text-anchor="middle" font-size="11" fill="#8B8B95" letter-spacing="2">community.html</text>
+
+    <text x="800" y="375" font-size="13" fill="#1F2027">·  공지사항       <tspan fill="#4A6FE3" font-weight="700" font-size="11">▸ 동적</tspan></text>
+    <text x="800" y="400" font-size="13" fill="#1F2027">·  갤러리         <tspan fill="#4A6FE3" font-weight="700" font-size="11">▸ 동적</tspan></text>
+    <text x="800" y="425" font-size="13" fill="#1F2027">·  자료실         <tspan fill="#4A6FE3" font-weight="700" font-size="11">▸ 동적</tspan></text>
+    <text x="800" y="450" font-size="13" fill="#1F2027">·  후원 (계좌안내)</text>
+    <text x="800" y="475" font-size="13" fill="#1F2027">·  자원봉사</text>
+
+    <rect x="795" y="500" width="240" height="32" rx="8" fill="#DAE7F5"/>
+    <text x="915" y="521" text-anchor="middle" font-size="11.5" font-weight="700" fill="#3D5DD0">▼ Apps Script에서 fetch</text>
+
+    <rect x="795" y="542" width="240" height="32" rx="8" fill="#FCE5E5"/>
+    <text x="915" y="563" text-anchor="middle" font-size="11.5" font-weight="700" fill="#C53030">관리자만 작성·수정·삭제</text>
+  </g>
+
+  <!-- 견적요청 -->
+  <g filter="url(#shadow)">
+    <rect x="1080" y="270" width="270" height="380" rx="14" fill="#fff" stroke="#FFF4E0" stroke-width="2"/>
+    <rect x="1080" y="270" width="270" height="56" rx="14" fill="#FFF4E0"/>
+    <rect x="1080" y="316" width="270" height="10" fill="#FFF4E0"/>
+    <text x="1215" y="305" text-anchor="middle" font-size="18" font-weight="800" fill="#B5832B">📋 견적요청</text>
+    <text x="1215" y="345" text-anchor="middle" font-size="11" fill="#8B8B95" letter-spacing="2">quote.html</text>
+
+    <text x="1100" y="375" font-size="13" fill="#1F2027">·  의뢰기관·담당자</text>
+    <text x="1100" y="400" font-size="13" fill="#1F2027">·  연락처·이메일</text>
+    <text x="1100" y="425" font-size="13" fill="#1F2027">·  상품 구분 (15+)</text>
+    <text x="1100" y="450" font-size="13" fill="#1F2027">·  수량·납기·내용</text>
+    <text x="1100" y="475" font-size="13" fill="#1F2027">·  파일 첨부</text>
+
+    <rect x="1095" y="500" width="240" height="32" rx="8" fill="#FCE5E5"/>
+    <text x="1215" y="521" text-anchor="middle" font-size="11.5" font-weight="700" fill="#C53030">⚠️ 백엔드 미연결 (alert)</text>
+
+    <rect x="1095" y="542" width="240" height="32" rx="8" fill="#F5F1E6"/>
+    <text x="1215" y="563" text-anchor="middle" font-size="11.5" font-weight="600" fill="#6E7D5B">3단계 진행 표시</text>
+  </g>
+
+
+  <!-- ═══════════ 3. 백엔드 인프라 (구분선) ═══════════ -->
+  <line x1="100" y1="720" x2="1300" y2="720" stroke="#E0E0E5" stroke-width="2" stroke-dasharray="6,4"/>
+  <text x="700" y="755" text-anchor="middle" font-size="13" font-weight="700" fill="#5849B8" letter-spacing="3">━━━  BACKEND INFRASTRUCTURE  ━━━</text>
+
+
+  <!-- 관리자 페이지 박스 -->
+  <g filter="url(#shadow)">
+    <rect x="80" y="800" width="320" height="220" rx="16" fill="#fff" stroke="#FCE5E5" stroke-width="2"/>
+    <rect x="80" y="800" width="320" height="60" rx="16" fill="#FCE5E5"/>
+    <rect x="80" y="850" width="320" height="10" fill="#FCE5E5"/>
+    <text x="240" y="836" text-anchor="middle" font-size="20" font-weight="900" fill="#C53030">🔐 관리자 페이지</text>
+    <text x="240" y="876" text-anchor="middle" font-size="11" fill="#8B8B95" letter-spacing="2">admin.html</text>
+
+    <text x="100" y="908" font-size="13.5" fill="#1F2027" font-weight="700">로그인</text>
+    <text x="100" y="930" font-size="12" fill="#4A4A55">└ 시트의 사용자 탭과 대조</text>
+
+    <text x="100" y="958" font-size="13.5" fill="#1F2027" font-weight="700">대시보드 (3 탭)</text>
+    <text x="100" y="980" font-size="12" fill="#4A4A55">└ 공지사항 / 자료실 / 갤러리</text>
+    <text x="100" y="1000" font-size="12" fill="#4A4A55">└ 작성·수정·삭제 (CRUD)</text>
+  </g>
+
+
+  <!-- Apps Script 박스 -->
+  <g filter="url(#shadow)">
+    <rect x="450" y="800" width="500" height="220" rx="16" fill="#1B2845"/>
+    <text x="700" y="836" text-anchor="middle" font-size="20" font-weight="900" fill="#FFD988">⚙️ Apps Script 웹앱</text>
+    <text x="700" y="858" text-anchor="middle" font-size="11" fill="#A8B0C0" letter-spacing="2">script.google.com/macros/.../exec</text>
+
+    <line x1="500" y1="876" x2="900" y2="876" stroke="rgba(255,255,255,.15)" stroke-width="1"/>
+
+    <text x="475" y="908" font-size="13" fill="#fff" font-weight="700">엔드포인트</text>
+    <text x="475" y="930" font-size="11.5" fill="#A8B0C0">·  ?action=login        — 로그인 (토큰 발급)</text>
+    <text x="475" y="950" font-size="11.5" fill="#A8B0C0">·  ?action=list&amp;type=  — 데이터 조회</text>
+    <text x="475" y="970" font-size="11.5" fill="#A8B0C0">·  ?action=create       — 글 작성 (인증 필요)</text>
+    <text x="475" y="990" font-size="11.5" fill="#A8B0C0">·  ?action=update       — 글 수정 (인증 필요)</text>
+    <text x="475" y="1010" font-size="11.5" fill="#A8B0C0">·  ?action=delete       — 글 삭제 (인증 필요)</text>
+  </g>
+
+
+  <!-- Google Sheets 박스 -->
+  <g filter="url(#shadow)">
+    <rect x="1000" y="800" width="320" height="220" rx="16" fill="#fff" stroke="#A8BB93" stroke-width="2"/>
+    <rect x="1000" y="800" width="320" height="60" rx="16" fill="#E8F4ED"/>
+    <rect x="1000" y="850" width="320" height="10" fill="#E8F4ED"/>
+    <text x="1160" y="836" text-anchor="middle" font-size="20" font-weight="900" fill="#3F8A5A">📊 Google Sheets</text>
+    <text x="1160" y="876" text-anchor="middle" font-size="11" fill="#8B8B95" letter-spacing="2">한마음일터-콘텐츠</text>
+
+    <text x="1020" y="908" font-size="13" fill="#1F2027">📑 사용자</text>
+    <text x="1180" y="908" font-size="11" fill="#8B8B95">id · password · name</text>
+
+    <text x="1020" y="935" font-size="13" fill="#1F2027">📑 공지사항</text>
+    <text x="1180" y="935" font-size="11" fill="#8B8B95">title · type · date · body</text>
+
+    <text x="1020" y="962" font-size="13" fill="#1F2027">📑 자료실</text>
+    <text x="1180" y="962" font-size="11" fill="#8B8B95">title · type · fileUrl ...</text>
+
+    <text x="1020" y="989" font-size="13" fill="#1F2027">📑 갤러리</text>
+    <text x="1180" y="989" font-size="11" fill="#8B8B95">title · imageUrl ...</text>
+  </g>
+
+
+  <!-- 연결선: admin → Apps Script -->
+  <path d="M 400 910 L 450 910" stroke="#4A6FE3" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+  <text x="425" y="900" text-anchor="middle" font-size="10" fill="#4A6FE3" font-weight="700">CRUD</text>
+
+  <!-- 연결선: Apps Script ↔ Google Sheets -->
+  <path d="M 950 910 L 1000 910" stroke="#6E7D5B" stroke-width="2" fill="none" marker-start="url(#arrow-double-start)" marker-end="url(#arrow-double-end)"/>
+  <text x="975" y="900" text-anchor="middle" font-size="10" fill="#6E7D5B" font-weight="700">R/W</text>
+
+  <!-- 연결선: 커뮤니티 → Apps Script (긴 곡선) -->
+  <path d="M 915 660 Q 915 720 700 760 Q 700 780 700 800" stroke="#3D5DD0" stroke-width="2" fill="none" stroke-dasharray="6,4" marker-end="url(#arrow)" opacity=".7"/>
+  <text x="700" y="780" text-anchor="middle" font-size="11" fill="#3D5DD0" font-weight="700">데이터 fetch</text>
+
+  <!-- 연결선: 소개 → 카카오맵 외부 (도식) -->
+  <path d="M 180 660 Q 180 700 240 760 Q 240 780 240 800" stroke="#B5832B" stroke-width="1.5" fill="none" stroke-dasharray="4,3" marker-end="url(#arrow)" opacity=".5"/>
+
+
+  <!-- ═══════════ 4. 외부 서비스 ═══════════ -->
+  <g filter="url(#shadow)">
+    <rect x="80" y="1080" width="320" height="120" rx="16" fill="#fff" stroke="#FFE6D5" stroke-width="2"/>
+    <text x="240" y="1115" text-anchor="middle" font-size="16" font-weight="800" fill="#B5832B">🗺️ 카카오맵 SDK</text>
+    <text x="240" y="1138" text-anchor="middle" font-size="11" fill="#8B8B95">about.html (찾아오시는 길)</text>
+    <text x="240" y="1162" text-anchor="middle" font-size="11" fill="#4A4A55">JavaScript 키 + Geocoder</text>
+    <text x="240" y="1182" text-anchor="middle" font-size="11" fill="#4A4A55">→ 주소→좌표 변환 + 마커</text>
+  </g>
+
+  <g filter="url(#shadow)">
+    <rect x="450" y="1080" width="500" height="120" rx="16" fill="#fff" stroke="#E5DFF7" stroke-width="2"/>
+    <text x="700" y="1115" text-anchor="middle" font-size="16" font-weight="800" fill="#5849B8">🌐 호스팅 환경</text>
+
+    <rect x="475" y="1130" width="220" height="55" rx="10" fill="#E8F4ED"/>
+    <text x="585" y="1152" text-anchor="middle" font-size="12" font-weight="700" fill="#3F8A5A">현재 (개발)</text>
+    <text x="585" y="1172" text-anchor="middle" font-size="11" fill="#4A4A55">Netlify + GitHub auto-deploy</text>
+
+    <rect x="705" y="1130" width="220" height="55" rx="10" fill="#FFF4E0"/>
+    <text x="815" y="1152" text-anchor="middle" font-size="12" font-weight="700" fill="#B5832B">정식 (예정)</text>
+    <text x="815" y="1172" text-anchor="middle" font-size="11" fill="#4A4A55">타 기관 FTP 호스팅 + 도메인</text>
+  </g>
+
+  <g filter="url(#shadow)">
+    <rect x="1000" y="1080" width="320" height="120" rx="16" fill="#fff" stroke="#A8C6F0" stroke-width="2"/>
+    <text x="1160" y="1115" text-anchor="middle" font-size="16" font-weight="800" fill="#3D5DD0">📧 이메일 알림</text>
+    <text x="1160" y="1138" text-anchor="middle" font-size="11" fill="#8B8B95">(Phase 2 예정)</text>
+    <text x="1160" y="1162" text-anchor="middle" font-size="11" fill="#4A4A55">Apps Script MailApp</text>
+    <text x="1160" y="1182" text-anchor="middle" font-size="11" fill="#4A4A55">→ 시설장·직원 동시 수신</text>
+  </g>
+
+
+  <!-- ═══════════ 5. 데이터 흐름 (요약) ═══════════ -->
+  <g filter="url(#shadow)">
+    <rect x="80" y="1260" width="1240" height="180" rx="16" fill="#FAF9F6" stroke="#E0E0E5" stroke-width="2"/>
+    <text x="700" y="1295" text-anchor="middle" font-size="16" font-weight="800" fill="#1F2027">📊 데이터 흐름 요약</text>
+
+    <!-- Flow 1 -->
+    <rect x="120" y="1320" width="200" height="40" rx="8" fill="#FCE5E5"/>
+    <text x="220" y="1345" text-anchor="middle" font-size="12.5" font-weight="700" fill="#C53030">관리자 admin.html</text>
+
+    <text x="335" y="1345" text-anchor="middle" font-size="14" fill="#4A4A55">→</text>
+
+    <rect x="350" y="1320" width="200" height="40" rx="8" fill="#1B2845"/>
+    <text x="450" y="1345" text-anchor="middle" font-size="12.5" font-weight="700" fill="#FFD988">Apps Script</text>
+
+    <text x="565" y="1345" text-anchor="middle" font-size="14" fill="#4A4A55">→</text>
+
+    <rect x="580" y="1320" width="200" height="40" rx="8" fill="#E8F4ED"/>
+    <text x="680" y="1345" text-anchor="middle" font-size="12.5" font-weight="700" fill="#3F8A5A">Google Sheets</text>
+
+    <text x="800" y="1345" text-anchor="middle" font-size="11" font-weight="700" fill="#8B8B95" letter-spacing="2">글 저장</text>
+
+    <!-- Flow 2 -->
+    <rect x="120" y="1380" width="200" height="40" rx="8" fill="#DAE7F5"/>
+    <text x="220" y="1405" text-anchor="middle" font-size="12.5" font-weight="700" fill="#3D5DD0">방문자 community.html</text>
+
+    <text x="335" y="1405" text-anchor="middle" font-size="14" fill="#4A4A55">→</text>
+
+    <rect x="350" y="1380" width="200" height="40" rx="8" fill="#1B2845"/>
+    <text x="450" y="1405" text-anchor="middle" font-size="12.5" font-weight="700" fill="#FFD988">Apps Script</text>
+
+    <text x="565" y="1405" text-anchor="middle" font-size="14" fill="#4A4A55">→</text>
+
+    <rect x="580" y="1380" width="200" height="40" rx="8" fill="#E8F4ED"/>
+    <text x="680" y="1405" text-anchor="middle" font-size="12.5" font-weight="700" fill="#3F8A5A">Google Sheets</text>
+
+    <text x="800" y="1405" text-anchor="middle" font-size="11" font-weight="700" fill="#8B8B95" letter-spacing="2">목록 fetch</text>
+
+    <!-- 화살표 (커브) -->
+    <path d="M 920 1340 Q 970 1340 970 1380 Q 970 1395 1010 1395" stroke="#4A6FE3" stroke-width="1.5" fill="none" marker-end="url(#arrow)" opacity=".4"/>
+    <text x="1100" y="1370" text-anchor="middle" font-size="11" font-weight="600" fill="#1F2027">한 곳에 저장된 데이터를</text>
+    <text x="1100" y="1390" text-anchor="middle" font-size="11" font-weight="600" fill="#1F2027">관리자/방문자 모두 접근</text>
+  </g>
+
+
+  <!-- ═══════════ 6. 범례 ═══════════ -->
+  <g>
+    <text x="80" y="1490" font-size="14" font-weight="800" fill="#1F2027" letter-spacing="2">LEGEND</text>
+
+    <rect x="80" y="1505" width="14" height="14" rx="3" fill="#E5DFF7"/>
+    <text x="100" y="1517" font-size="12" fill="#4A4A55">소개 / 라벤더 (보라 톤)</text>
+
+    <rect x="270" y="1505" width="14" height="14" rx="3" fill="#F5F1E6"/>
+    <text x="290" y="1517" font-size="12" fill="#4A4A55">인쇄 / 크림</text>
+
+    <rect x="430" y="1505" width="14" height="14" rx="3" fill="#E8F4ED"/>
+    <text x="450" y="1517" font-size="12" fill="#4A4A55">임가공·시트 / 민트</text>
+
+    <rect x="630" y="1505" width="14" height="14" rx="3" fill="#DAE7F5"/>
+    <text x="650" y="1517" font-size="12" fill="#4A4A55">커뮤니티 / 스카이</text>
+
+    <rect x="830" y="1505" width="14" height="14" rx="3" fill="#FFF4E0"/>
+    <text x="850" y="1517" font-size="12" fill="#4A4A55">견적 / 옐로우</text>
+
+    <rect x="990" y="1505" width="14" height="14" rx="3" fill="#FCE5E5"/>
+    <text x="1010" y="1517" font-size="12" fill="#4A4A55">관리자 / 핑크</text>
+
+    <rect x="1170" y="1505" width="14" height="14" rx="3" fill="#1B2845"/>
+    <text x="1190" y="1517" font-size="12" fill="#4A4A55">백엔드 / 네이비</text>
+  </g>
+
+  <!-- 푸터 -->
+  <text x="700" y="1570" text-anchor="middle" font-size="11" fill="#8B8B95">
+    한마음일터 (장애인직업재활시설) · 경기도 이천시 마장면 이장로256번길 · 031-631-6680
+  </text>
+  <text x="700" y="1590" text-anchor="middle" font-size="10" fill="#A8B0C0" letter-spacing="2">
+    structure diagram · 2026
+  </text>
+
+</svg>

@@ -7,6 +7,9 @@
   <meta name="description" content="장애인직업재활시설 한마음일터 소개. 인사말, 설립목적·연혁, 시설개요, 직업재활, 이용절차, 조직도, 찾아오시는 길.">
   <link rel="stylesheet" href="common.css">
 
+  <!-- 카카오맵 SDK (services 라이브러리: 주소→좌표 변환) -->
+  <script src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=3262d92256d1bc8a2559c8aaf446c752&libraries=services&autoload=false"></script>
+
   <style>
     /* === 페이지 전용 === */
     .section-block {
@@ -315,55 +318,49 @@
       color: var(--accent-blue);
       font-weight: 700;
     }
-    .map-link {
-      display: block;
-      aspect-ratio: 16/9;
-      background: linear-gradient(135deg, #E8F0FE 0%, #D6E4FB 100%);
+    /* 카카오맵 임베드 */
+    .kakao-map {
+      width: 100%;
+      height: 420px;
       border-radius: 16px;
-      position: relative;
-      overflow: hidden;
-      text-decoration: none;
       border: 1px solid var(--border-soft);
-      transition: transform .25s var(--ease), box-shadow .25s var(--ease);
-    }
-    .map-link:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 12px 28px rgba(40,40,80,.10);
-    }
-    .map-link::before {
-      content: '🗺️';
-      position: absolute;
-      inset: 0;
+      overflow: hidden;
+      background: linear-gradient(135deg, #E8F0FE 0%, #D6E4FB 100%);
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 56px;
-      opacity: .35;
+      color: var(--text-muted);
+      font-size: 14px;
     }
-    .map-link-overlay {
-      position: absolute;
-      bottom: 14px; left: 14px; right: 14px;
-      background: rgba(255,255,255,.96);
-      padding: 14px 18px;
-      border-radius: 10px;
-      backdrop-filter: blur(6px);
+    .map-actions {
+      display: flex;
+      gap: 8px;
+      margin-top: 12px;
+      flex-wrap: wrap;
     }
-    .map-link-overlay p { font-size: 14px; color: var(--text-primary); margin: 0; }
-    .map-link-overlay strong {
-      display: block;
-      font-size: 15px;
-      font-weight: 700;
-      margin-bottom: 4px;
-    }
-    .map-link-overlay span {
-      font-size: 12px;
-      color: var(--accent-blue);
-      font-weight: 700;
-      margin-top: 6px;
+    .map-actions a {
       display: inline-flex;
       align-items: center;
-      gap: 4px;
+      gap: 6px;
+      padding: 10px 18px;
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-primary);
+      text-decoration: none;
+      transition: all .15s var(--ease);
+      letter-spacing: -.01em;
     }
+    .map-actions a:hover {
+      border-color: var(--accent-blue);
+      color: var(--accent-blue);
+    }
+    .map-actions a.kakao { border-color: #FEE500; }
+    .map-actions a.kakao:hover { background: #FEE500; color: var(--text-primary); }
+    .map-actions a.naver { border-color: #03C75A; }
+    .map-actions a.naver:hover { background: #03C75A; color: #fff; }
     @media (max-width: 768px) {
       .location-grid { grid-template-columns: 1fr; }
     }
@@ -769,13 +766,12 @@
       상담·견적·시설 견학 모두 환영합니다.
     </p>
 
-    <a class="map-link" href="https://map.naver.com/v5/search/경기도 이천시 마장면 이장로 256번길" target="_blank" rel="noopener">
-      <div class="map-link-overlay">
-        <strong>한마음일터</strong>
-        <p>경기도 이천시 마장면 이장로256번길</p>
-        <span>네이버 지도에서 보기 →</span>
-      </div>
-    </a>
+    <div id="kakao-map" class="kakao-map">지도 불러오는 중...</div>
+    <div class="map-actions">
+      <a class="kakao" href="https://map.kakao.com/?q=경기도 이천시 마장면 이장로 256번길" target="_blank" rel="noopener">🗺️ 카카오맵에서 보기</a>
+      <a class="naver" href="https://map.naver.com/v5/search/경기도 이천시 마장면 이장로 256번길" target="_blank" rel="noopener">🗺️ 네이버 지도에서 보기</a>
+      <a href="https://map.kakao.com/link/to/한마음일터,37.270,127.450" target="_blank" rel="noopener" id="kakao-route">🚗 길찾기 (카카오맵)</a>
+    </div>
 
     <div class="location-grid">
       <div class="location-info-card">
@@ -878,5 +874,70 @@
 </footer>
 
 <script src="common.js"></script>
+<script>
+  // ─────────────────────────────────────
+  // 카카오맵 초기화
+  // ─────────────────────────────────────
+  (function initKakaoMap() {
+    if (typeof kakao === 'undefined' || !kakao.maps) {
+      console.warn('카카오맵 SDK 로드 실패');
+      const el = document.getElementById('kakao-map');
+      if (el) el.textContent = '지도를 불러올 수 없습니다.';
+      return;
+    }
+
+    kakao.maps.load(function () {
+      const container = document.getElementById('kakao-map');
+      if (!container) return;
+      container.textContent = '';
+
+      // 기본 좌표 (이천시 중심부 — geocoder 결과 받기 전 임시)
+      const defaultCoords = new kakao.maps.LatLng(37.272, 127.435);
+
+      const map = new kakao.maps.Map(container, {
+        center: defaultCoords,
+        level: 3,
+      });
+
+      // 컨트롤
+      map.addControl(new kakao.maps.ZoomControl(), kakao.maps.ControlPosition.RIGHT);
+      map.addControl(new kakao.maps.MapTypeControl(), kakao.maps.ControlPosition.TOPRIGHT);
+
+      // 주소 → 좌표 변환
+      const address = '경기도 이천시 마장면 이장로 256번길';
+      const geocoder = new kakao.maps.services.Geocoder();
+
+      geocoder.addressSearch(address, function (result, status) {
+        if (status !== kakao.maps.services.Status.OK || !result.length) {
+          console.warn('주소 변환 실패:', status);
+          // fallback: 기본 좌표에 마커
+          placeMarker(map, defaultCoords);
+          return;
+        }
+        const coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+        map.setCenter(coords);
+        placeMarker(map, coords);
+
+        // 길찾기 링크 좌표 업데이트
+        const routeLink = document.getElementById('kakao-route');
+        if (routeLink) {
+          routeLink.href = `https://map.kakao.com/link/to/한마음일터,${result[0].y},${result[0].x}`;
+        }
+      });
+    });
+
+    function placeMarker(map, coords) {
+      const marker = new kakao.maps.Marker({ map, position: coords });
+      const infowindow = new kakao.maps.InfoWindow({
+        content:
+          '<div style="padding:10px 14px;font-size:13px;line-height:1.5;font-weight:600;color:#1F2027;letter-spacing:-.01em">' +
+          '한마음일터<br><span style="font-size:11.5px;font-weight:500;color:#8B8B95">031-631-6680</span>' +
+          '</div>',
+        removable: false,
+      });
+      infowindow.open(map, marker);
+    }
+  })();
+</script>
 </body>
 </html>
