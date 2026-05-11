@@ -1957,11 +1957,11 @@
         </h3>
         <p class="mb-7" style="font-size:15px;color:var(--text-secondary);line-height:1.7">
           담당자가 평균 1~3시간 내에 맞춤 견적으로 회신드립니다.<br>
-          견적 확정 후 아래 결제 페이지에서 결제를 진행하실 수 있습니다.
+          영업 시간(평일 09:00~18:00) 외에는 다음 영업일에 회신드립니다.
         </p>
         <div class="flex flex-col md:flex-row items-center justify-center gap-3">
-          <a id="go-payment" href="payment.html" class="btn-primary" style="padding:14px 32px">
-            결제 페이지로 이동
+          <a href="quote.html" class="btn-primary" style="padding:14px 32px">
+            견적요청 페이지로
             <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" viewBox="0 0 24 24">
               <path d="M5 12h14M12 5l7 7-7 7"/>
             </svg>
@@ -2251,19 +2251,6 @@
 
       // TODO: 백엔드 연결 시 아래 주석 해제 (이메일/카톡 알림 등)
       // fetch('/api/quote', { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(quote) });
-
-      // 결제 페이지 URL 파라미터 설정 (실제 운영 시엔 견적 확정 후 amount 발송)
-      const paymentParams = new URLSearchParams({
-        orderId,
-        name,
-        phone,
-        company,
-        email,
-        items: itemList.join(', '),
-        amount: '0' // 데모: 0원 → payment.html에서 임시 금액 입력 가능
-      });
-      const paymentLink = document.getElementById('go-payment');
-      if (paymentLink) paymentLink.href = 'payment.html?' + paymentParams.toString();
 
       // UI: 성공 화면으로 전환
       quoteForm.hidden = true;
