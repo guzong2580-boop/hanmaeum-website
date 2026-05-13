@@ -7,9 +7,6 @@
   <meta name="description" content="장애인직업재활시설 한마음일터 소개. 인사말, 설립목적·연혁, 시설개요, 직업재활, 이용절차, 조직도, 찾아오시는 길.">
   <link rel="stylesheet" href="common.css">
 
-  <!-- 카카오맵 SDK (services 라이브러리: 주소→좌표 변환) -->
-  <script src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=3262d92256d1bc8a2559c8aaf446c752&libraries=services&autoload=false"></script>
-
   <style>
     /* === 페이지 전용 === */
     .section-block {
@@ -184,6 +181,63 @@
       color: var(--text-secondary);
       line-height: 1.65;
     }
+    .feature-card ul {
+      list-style: none;
+      padding: 0;
+      margin: 6px 0 0;
+    }
+    .feature-card ul li {
+      position: relative;
+      padding: 6px 0 6px 14px;
+      font-size: 14px;
+      color: var(--text-secondary);
+      line-height: 1.55;
+      border-bottom: 1px dashed var(--border-soft);
+    }
+    .feature-card ul li:last-child { border-bottom: none; }
+    .feature-card ul li::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 14px;
+      width: 5px; height: 5px;
+      border-radius: 50%;
+      background: var(--accent-blue);
+    }
+    /* 특별 프로그램 callout (중증장애인 직업재활지원사업) */
+    .feature-callout {
+      margin-top: 22px;
+      padding: 26px 30px;
+      background: linear-gradient(135deg, #EFE9FA 0%, #F3EEFB 100%);
+      border: 1px solid var(--border-soft);
+      border-radius: 16px;
+      display: flex;
+      gap: 22px;
+      align-items: flex-start;
+    }
+    .feature-callout .callout-ico {
+      flex-shrink: 0;
+      width: 52px; height: 52px;
+      border-radius: 14px;
+      background: #fff;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 24px;
+    }
+    .feature-callout h3 {
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--text-purple-deep);
+      margin-bottom: 6px;
+      letter-spacing: -.01em;
+    }
+    .feature-callout p {
+      font-size: 14px;
+      color: var(--text-secondary);
+      line-height: 1.7;
+      margin: 0;
+    }
+    @media (max-width: 560px) {
+      .feature-callout { flex-direction: column; padding: 22px; }
+    }
 
     /* 이용절차 step */
     .process-steps {
@@ -262,11 +316,110 @@
       border-color: var(--text-purple-deep);
       color: var(--text-purple-deep);
     }
+    .org-box .role-label {
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: .04em;
+      color: var(--text-muted);
+      margin-bottom: 4px;
+    }
+    .org-box.top .role-label { color: rgba(255,255,255,.78); }
+    .org-box.mid .role-label { color: var(--text-purple-deep); opacity: .65; }
+    .org-box .role-name {
+      font-size: 16px;
+      font-weight: 800;
+      letter-spacing: -.01em;
+    }
+    .org-box.top .role-name { font-size: 18px; }
     .org-connector {
       width: 2px;
       height: 28px;
       background: var(--border);
       margin: 0 auto;
+    }
+    /* 위원회 (오른쪽 분기) — 메인 수직선 옆에 위원회 그룹 박스 */
+    .org-side-section {
+      display: grid;
+      grid-template-columns: 1fr 2px 1fr;
+      align-items: center;
+      width: 100%;
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 6px 0;
+      min-height: 140px;
+    }
+    .org-side-trunk {
+      grid-column: 2;
+      align-self: stretch;
+      background: var(--border);
+    }
+    .org-side-committees {
+      grid-column: 3;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 14px;
+      padding-left: 44px;
+    }
+    .org-committee-group {
+      position: relative;
+      background: #fff;
+      border: 1.5px solid var(--accent-blue);
+      border-radius: 10px;
+      padding: 10px 16px;
+      max-width: 220px;
+      text-align: center;
+    }
+    .org-committee-group::before {
+      content: '';
+      position: absolute;
+      left: -44px;
+      top: 50%;
+      width: 44px;
+      height: 2px;
+      background: var(--border);
+      transform: translateY(-50%);
+    }
+    .org-committee-group p {
+      font-size: 13.5px;
+      font-weight: 600;
+      color: var(--accent-blue);
+      letter-spacing: -.01em;
+      margin: 0;
+      padding: 3px 0;
+    }
+    @media (max-width: 720px) {
+      .org-side-section {
+        grid-template-columns: 1fr;
+        min-height: 0;
+      }
+      .org-side-trunk { display: none; }
+      .org-side-committees {
+        grid-column: 1;
+        padding-left: 0;
+        align-items: center;
+      }
+      .org-committee-group::before { display: none; }
+    }
+    /* 팀 박스 */
+    .org-teams {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+      width: 100%;
+    }
+    @media (max-width: 900px) { .org-teams { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 540px) { .org-teams { grid-template-columns: 1fr; } }
+    .org-team {
+      background: #fff;
+      border: 2px solid var(--border);
+      border-radius: 14px;
+      padding: 18px 14px;
+      text-align: center;
+      font-weight: 700;
+      color: var(--text-primary);
+      font-size: 15px;
+      letter-spacing: -.01em;
     }
 
     /* 찾아오시는 길 */
@@ -318,19 +471,19 @@
       color: var(--accent-blue);
       font-weight: 700;
     }
-    /* 카카오맵 임베드 */
-    .kakao-map {
+    /* 지도 정적 이미지 */
+    .map-static {
       width: 100%;
-      height: 420px;
       border-radius: 16px;
       border: 1px solid var(--border-soft);
       overflow: hidden;
+      display: block;
       background: linear-gradient(135deg, #E8F0FE 0%, #D6E4FB 100%);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--text-muted);
-      font-size: 14px;
+    }
+    .map-static img {
+      width: 100%;
+      height: auto;
+      display: block;
     }
     .map-actions {
       display: flex;
@@ -587,27 +740,102 @@
         <h3 style="font-size:18px;font-weight:700;color:var(--text-purple-deep);margin-bottom:14px">연혁</h3>
         <div class="timeline">
           <div class="timeline-item">
-            <p class="timeline-year">2024</p>
-            <p class="timeline-text">홈페이지 리뉴얼 및 온라인 견적·주문 시스템 도입</p>
+            <p class="timeline-year">2026</p>
+            <p class="timeline-text">홈페이지 리뉴얼 · 온라인 견적·주문 시스템 도입</p>
           </div>
           <div class="timeline-item">
-            <p class="timeline-year">2020</p>
-            <p class="timeline-text">임가공 사업 확장 (팬콤·네추럴밸리·더필·수세미)</p>
+            <p class="timeline-year">2023</p>
+            <p class="timeline-text">장애인직업재활시설 평가 최우수기관 선정<br>종이재단기 구입</p>
+          </div>
+          <div class="timeline-item">
+            <p class="timeline-year">2022</p>
+            <p class="timeline-text">제2작업장(누리봄) 준공</p>
+          </div>
+          <div class="timeline-item">
+            <p class="timeline-year">2021</p>
+            <p class="timeline-text">04 · 이병환 원장 취임<br>6컬러 오프셋 대국전 UV인쇄기 설치</p>
+          </div>
+          <div class="timeline-item">
+            <p class="timeline-year">2019</p>
+            <p class="timeline-text">경기도 장애인직업재활시설 평가 최우수기관 선정<br>디지털 인쇄기 구입</p>
+          </div>
+          <div class="timeline-item">
+            <p class="timeline-year">2018</p>
+            <p class="timeline-text">접지기 구입</p>
+          </div>
+          <div class="timeline-item">
+            <p class="timeline-year">2017</p>
+            <p class="timeline-text">04 · 다원학교와 산학협약식 체결<br>무선제본기 구입(6콤머 한성)<br>KDB 나눔재단 현수막 출력기 설치</p>
+          </div>
+          <div class="timeline-item">
+            <p class="timeline-year">2016</p>
+            <p class="timeline-text">07 · 원준호 원장 취임<br>도무송 2호기 설치<br>클린사업장 선정 (한국산업안전보건공단)</p>
           </div>
           <div class="timeline-item">
             <p class="timeline-year">2015</p>
-            <p class="timeline-text">현수막·쇼핑백 제작 라인 추가</p>
+            <p class="timeline-text">08 · 박진효 원장 취임</p>
+          </div>
+          <div class="timeline-item">
+            <p class="timeline-year">2014</p>
+            <p class="timeline-text">사회복지시설평가 우수(A)<br>UV코팅기계 설치 · 조리실 조성</p>
+          </div>
+          <div class="timeline-item">
+            <p class="timeline-year">2013</p>
+            <p class="timeline-text">10 · 권대관 원장 취임<br>도무송 장비 설치</p>
+          </div>
+          <div class="timeline-item">
+            <p class="timeline-year">2012</p>
+            <p class="timeline-text">2층 작업장 증축 (639.24㎡)</p>
+          </div>
+          <div class="timeline-item">
+            <p class="timeline-year">2011</p>
+            <p class="timeline-text">ISO9001 품질경영 시스템 인증<br>디지털 인쇄기(컬러·흑백) · 중철기 · 현수막 출력기 · 명함 재단기 설치</p>
           </div>
           <div class="timeline-item">
             <p class="timeline-year">2010</p>
-            <p class="timeline-text">중증 장애인 생산품 우선구매 인증 획득</p>
+            <p class="timeline-text">중증장애인생산품 생산시설 지정<br>장애인생산품 인증<br>산학협력 체결 (경복대학 · 대원대학)</p>
+          </div>
+          <div class="timeline-item">
+            <p class="timeline-year">2009</p>
+            <p class="timeline-text">이천시정신보건센터와 자매결연 협약</p>
+          </div>
+          <div class="timeline-item">
+            <p class="timeline-year">2008</p>
+            <p class="timeline-text">옵셋 인쇄기 설치<br>(주)팬콤과 MOU 체결 (GS25 홍보물 제작·납품)</p>
+          </div>
+          <div class="timeline-item">
+            <p class="timeline-year">2007</p>
+            <p class="timeline-text">01 · 재가 장애인 출·퇴근차량 운행<br>11 · (주)빅프로덕트코리아와 협력 제휴 (볼펜·라이터 등)</p>
+          </div>
+          <div class="timeline-item">
+            <p class="timeline-year">2006</p>
+            <p class="timeline-text">02 · 지역주민 초청 무료검진 실시<br>03 · 친환경용품(EM활성액 · EM비누 · EM가루비누) 생산</p>
           </div>
           <div class="timeline-item">
             <p class="timeline-year">2005</p>
-            <p class="timeline-text">장애인직업재활시설 한마음일터 설립 · 칼라인쇄 사업 시작</p>
+            <p class="timeline-text">01 · 지역재가봉사활동 시작<br>09 · 지역주민과 함께하는 '가을밤의 음악회' 개최<br>12 · (주)대산케미텍(일본수출업체)와 OEM 계약 체결</p>
+          </div>
+          <div class="timeline-item">
+            <p class="timeline-year">2004</p>
+            <p class="timeline-text">01 · 원준호 원장 취임<br>08 · 신축 작업장(594㎡) 완공</p>
+          </div>
+          <div class="timeline-item">
+            <p class="timeline-year">2003</p>
+            <p class="timeline-text">05 · 직업재활기금사업 수행기관 선정</p>
+          </div>
+          <div class="timeline-item">
+            <p class="timeline-year">2002</p>
+            <p class="timeline-text">04 · 유석영 원장 취임</p>
+          </div>
+          <div class="timeline-item">
+            <p class="timeline-year">2001</p>
+            <p class="timeline-text">11 · 한마음일터 개원 (이용 정원 30명)<br>3M본드 및 임가공 포장 실시</p>
+          </div>
+          <div class="timeline-item">
+            <p class="timeline-year">1999</p>
+            <p class="timeline-text">사회복지법인 엘리엘동산 설립인가</p>
           </div>
         </div>
-        <p style="font-size:12px;color:var(--text-muted);margin-top:14px">※ 연혁은 임의 예시 — 실제 데이터로 교체 필요</p>
       </div>
     </div>
   </div>
@@ -622,14 +850,19 @@
 
     <table class="info-table">
       <tr><th>시설명</th><td>장애인직업재활시설 한마음일터</td></tr>
+      <tr><th>법인</th><td>사회복지법인 엘리엘동산</td></tr>
+      <tr><th>시설 유형</th><td>장애인 보호작업장</td></tr>
       <tr><th>대표자</th><td>이병환</td></tr>
-      <tr><th>설립연도</th><td>2005년</td></tr>
-      <tr><th>소재지</th><td>경기도 이천시 마장면 이장로256번길</td></tr>
+      <tr><th>설립연도</th><td>2001년 11월 14일</td></tr>
+      <tr><th>소재지</th><td>경기도 이천시 마장면 이장로 256번길 한마음일터</td></tr>
       <tr><th>대표전화</th><td>031-631-6680</td></tr>
       <tr><th>팩스</th><td>031-631-6634</td></tr>
       <tr><th>사업자등록번호</th><td>126-82-10484</td></tr>
       <tr><th>주요사업</th><td>칼라인쇄 · 카탈로그 · 리플렛 · 전단지 · 명함 · 현수막 · 쇼핑백 · 임가공</td></tr>
-      <tr><th>이용 정원</th><td>중증 장애인 직업 훈련 및 생산 활동</td></tr>
+      <tr><th>이용 정원 · 현원</th><td>정원 40명 · 현원 40명</td></tr>
+      <tr><th>이용 대상</th><td>18세 이상의 장애인</td></tr>
+      <tr><th>시설 면적</th><td>총 798.21㎡</td></tr>
+      <tr><th>내부 구성</th><td>작업장 216㎡ · 프로그램실 47.3㎡ · 상담실 15.8㎡ · 휴게실 61㎡ · 사무실 72㎡ · 샤워실 31.5㎡</td></tr>
       <tr><th>운영시간</th><td>평일 09:00 ~ 18:00 (점심 12:00 ~ 13:00, 주말·공휴일 휴무)</td></tr>
     </table>
   </div>
@@ -649,33 +882,38 @@
     <div class="feature-grid">
       <div class="feature-card">
         <div class="feature-ico">📋</div>
-        <h3>직업평가</h3>
-        <p>개인의 적성·능력·관심을 파악하여 적합한 직무를 매칭합니다.</p>
-      </div>
-      <div class="feature-card">
-        <div class="feature-ico">🎯</div>
-        <h3>직업적응 훈련</h3>
-        <p>실제 작업 환경에서 작업 태도·기술·대인관계 능력을 익힙니다.</p>
+        <h3>직업상담 및 평가</h3>
+        <ul>
+          <li>직업·사회능력 진단</li>
+          <li>직업재활상담 (훈련생·보호자 상담, 개별직업재활계획서 작성)</li>
+          <li>직업평가</li>
+        </ul>
       </div>
       <div class="feature-card">
         <div class="feature-ico">🛠️</div>
-        <h3>직무능력 향상</h3>
-        <p>인쇄·임가공 등 분야별 전문 기술을 단계적으로 습득합니다.</p>
+        <h3>직무기능훈련</h3>
+        <ul>
+          <li>직업수행 적응 훈련</li>
+          <li>직무능력 향상 훈련</li>
+          <li>직업 유지 적응 훈련</li>
+        </ul>
       </div>
       <div class="feature-card">
-        <div class="feature-ico">💼</div>
-        <h3>고용 지원</h3>
-        <p>훈련 종료 후 보호고용 또는 일반사업체 전이 고용을 지원합니다.</p>
+        <div class="feature-ico">🎯</div>
+        <h3>직업적응능력 향상</h3>
+        <ul>
+          <li>직업적응훈련 — 개인 사회생활적응훈련, 직업 준비 훈련</li>
+          <li>사회적응훈련 — 지역사회 이용, 여름캠프, 나들이, 체육대회</li>
+          <li>관외훈련 — 견학, 현장훈련 및 직무체험</li>
+        </ul>
       </div>
-      <div class="feature-card">
-        <div class="feature-ico">🤲</div>
-        <h3>사회적응 프로그램</h3>
-        <p>여가·사회성 활동을 통해 직장 외 일상 자립도 함께 키웁니다.</p>
-      </div>
-      <div class="feature-card">
-        <div class="feature-ico">📞</div>
-        <h3>사후 관리</h3>
-        <p>고용 후에도 정기적인 상담과 지원을 통해 안정적 정착을 돕습니다.</p>
+    </div>
+
+    <div class="feature-callout">
+      <div class="callout-ico">💼</div>
+      <div>
+        <h3>중증장애인 직업재활지원사업</h3>
+        <p>「장애인 고용촉진 및 직업재활법」 개정에 따라 모든 장애인에게 직업재활 서비스를 제공하는 사업으로, 본 시설은 <b>직업적응훈련을 중점</b>으로 수행하고 있습니다.</p>
       </div>
     </div>
   </div>
@@ -737,21 +975,38 @@
 
     <div class="org-chart" style="margin-top:36px">
       <div class="org-row">
-        <div class="org-box top">대표 (시설장)</div>
+        <div class="org-box top">원장</div>
       </div>
-      <div class="org-connector"></div>
-      <div class="org-row">
-        <div class="org-box mid">사무국</div>
+
+      <!-- 원장 → 사무국장 사이 위원회 분기 -->
+      <div class="org-side-section">
+        <div class="org-side-trunk"></div>
+        <div class="org-side-committees">
+          <div class="org-committee-group">
+            <p>운영위원회</p>
+            <p>노사협의회</p>
+          </div>
+          <div class="org-committee-group">
+            <p>인사위원회</p>
+            <p>징계위원회</p>
+            <p>고충처리위원회</p>
+          </div>
+        </div>
       </div>
-      <div class="org-connector"></div>
+
       <div class="org-row">
-        <div class="org-box">인쇄팀</div>
-        <div class="org-box">임가공팀</div>
-        <div class="org-box">직업재활팀</div>
-        <div class="org-box">행정·회계팀</div>
+        <div class="org-box mid">사무국장</div>
+      </div>
+
+      <div class="org-connector"></div>
+
+      <div class="org-teams" style="margin-top:8px">
+        <div class="org-team">재무 · 행정팀</div>
+        <div class="org-team">인쇄사업팀</div>
+        <div class="org-team">사업관리팀</div>
+        <div class="org-team">직업훈련팀</div>
       </div>
     </div>
-    <p style="font-size:12px;color:var(--text-muted);text-align:center;margin-top:18px">※ 조직도는 임의 예시 — 실제 구성으로 교체 필요</p>
   </div>
 </section>
 
@@ -766,18 +1021,20 @@
       상담·견적·시설 견학 모두 환영합니다.
     </p>
 
-    <div id="kakao-map" class="kakao-map">지도 불러오는 중...</div>
+    <div class="map-static">
+      <img src="map.png" alt="한마음일터 위치 — 경기도 이천시 마장면 이장로 256번길" loading="lazy">
+    </div>
     <div class="map-actions">
-      <a class="kakao" href="https://map.kakao.com/?q=경기도 이천시 마장면 이장로 256번길" target="_blank" rel="noopener">🗺️ 카카오맵에서 보기</a>
-      <a class="naver" href="https://map.naver.com/v5/search/경기도 이천시 마장면 이장로 256번길" target="_blank" rel="noopener">🗺️ 네이버 지도에서 보기</a>
-      <a href="https://map.kakao.com/link/to/한마음일터,37.270,127.450" target="_blank" rel="noopener" id="kakao-route">🚗 길찾기 (카카오맵)</a>
+      <a class="kakao" href="https://map.kakao.com/?q=경기도 이천시 마장면 이장로 256번길 한마음일터" target="_blank" rel="noopener">🗺️ 카카오맵에서 보기</a>
+      <a class="naver" href="https://map.naver.com/v5/search/경기도 이천시 마장면 이장로 256번길 한마음일터" target="_blank" rel="noopener">🗺️ 네이버 지도에서 보기</a>
+      <a href="https://map.kakao.com/link/to/한마음일터,37.262,127.418" target="_blank" rel="noopener">🚗 길찾기 (카카오맵)</a>
     </div>
 
     <div class="location-grid">
       <div class="location-info-card">
         <h4>📞 TEL · FAX · EMAIL</h4>
         <p class="big">031-631-6680</p>
-        <p class="sub">팩스 · 031-631-6634<br>이메일 · info@hanmaeum.kr</p>
+        <p class="sub">팩스 · 031-631-6634<br>이메일 · onemind6680@daum.net</p>
       </div>
       <div class="location-info-card">
         <h4>🕐 운영시간</h4>
@@ -848,12 +1105,13 @@
       <ul style="list-style:none;padding:0;display:flex;flex-direction:column;gap:10px;font-size:14px;color:var(--text-muted-dark)">
         <li><b style="color:#fff">전화</b> &nbsp; 031-631-6680</li>
         <li><b style="color:#fff">팩스</b> &nbsp; 031-631-6634</li>
-        <li><b style="color:#fff">주소</b> &nbsp; 경기도 이천시 마장면 이장로256번길</li>
+        <li><b style="color:#fff">주소</b> &nbsp; 경기도 이천시 마장면 이장로 256번길 한마음일터</li>
       </ul>
     </div>
     <div>
       <h4>법인 정보</h4>
       <ul style="list-style:none;padding:0;display:flex;flex-direction:column;gap:10px;font-size:14px;color:var(--text-muted-dark)">
+        <li><b style="color:#fff">법인</b> &nbsp; 사회복지법인 엘리엘동산</li>
         <li><b style="color:#fff">대표자</b> &nbsp; 이병환</li>
         <li><b style="color:#fff">사업자</b> &nbsp; 126-82-10484</li>
         <li><b style="color:#fff">계좌</b> &nbsp; 농협 233060-55-001607</li>
@@ -874,70 +1132,5 @@
 </footer>
 
 <script src="common.js"></script>
-<script>
-  // ─────────────────────────────────────
-  // 카카오맵 초기화
-  // ─────────────────────────────────────
-  (function initKakaoMap() {
-    if (typeof kakao === 'undefined' || !kakao.maps) {
-      console.warn('카카오맵 SDK 로드 실패');
-      const el = document.getElementById('kakao-map');
-      if (el) el.textContent = '지도를 불러올 수 없습니다.';
-      return;
-    }
-
-    kakao.maps.load(function () {
-      const container = document.getElementById('kakao-map');
-      if (!container) return;
-      container.textContent = '';
-
-      // 기본 좌표 (이천시 중심부 — geocoder 결과 받기 전 임시)
-      const defaultCoords = new kakao.maps.LatLng(37.272, 127.435);
-
-      const map = new kakao.maps.Map(container, {
-        center: defaultCoords,
-        level: 3,
-      });
-
-      // 컨트롤
-      map.addControl(new kakao.maps.ZoomControl(), kakao.maps.ControlPosition.RIGHT);
-      map.addControl(new kakao.maps.MapTypeControl(), kakao.maps.ControlPosition.TOPRIGHT);
-
-      // 주소 → 좌표 변환
-      const address = '경기도 이천시 마장면 이장로 256번길';
-      const geocoder = new kakao.maps.services.Geocoder();
-
-      geocoder.addressSearch(address, function (result, status) {
-        if (status !== kakao.maps.services.Status.OK || !result.length) {
-          console.warn('주소 변환 실패:', status);
-          // fallback: 기본 좌표에 마커
-          placeMarker(map, defaultCoords);
-          return;
-        }
-        const coords = new kakao.maps.LatLng(result[0].y, result[0].x);
-        map.setCenter(coords);
-        placeMarker(map, coords);
-
-        // 길찾기 링크 좌표 업데이트
-        const routeLink = document.getElementById('kakao-route');
-        if (routeLink) {
-          routeLink.href = `https://map.kakao.com/link/to/한마음일터,${result[0].y},${result[0].x}`;
-        }
-      });
-    });
-
-    function placeMarker(map, coords) {
-      const marker = new kakao.maps.Marker({ map, position: coords });
-      const infowindow = new kakao.maps.InfoWindow({
-        content:
-          '<div style="padding:10px 14px;font-size:13px;line-height:1.5;font-weight:600;color:#1F2027;letter-spacing:-.01em">' +
-          '한마음일터<br><span style="font-size:11.5px;font-weight:500;color:#8B8B95">031-631-6680</span>' +
-          '</div>',
-        removable: false,
-      });
-      infowindow.open(map, marker);
-    }
-  })();
-</script>
 </body>
 </html>
