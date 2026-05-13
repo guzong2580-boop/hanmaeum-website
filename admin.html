@@ -570,7 +570,7 @@
 // ════════════════════════════════════════════════════════════
 // 설정 — Apps Script 배포 후 아래 URL을 본인 값으로 교체
 // ════════════════════════════════════════════════════════════
-const API_URL = 'https://script.google.com/macros/s/AKfycby1ZxdK--mlfWXAEO5BJaIqPI7WjEsVwmrHM-tpVhwDNAT8CKvCVL2jZYNn7dTCI9AMXg/exec';
+const API_URL = 'https://script.google.com/macros/s/AKfycbyajgu_KD48Ptqw3k0O0lRz6F_SDAsBh17aHRoJyFM-FNQyhXIAnMNKogZuRIX8Yij2PA/exec';
 
 
 // ════════════════════════════════════════════════════════════
@@ -601,8 +601,9 @@ const FIELDS = {
         hint: '예: 2.4 MB' },
       { name: 'date',        label: '날짜',  type: 'text',     required: false,
         hint: '예: 2025-12 (월 단위 표기 가능)' },
-      { name: 'fileUrl',     label: '파일 URL', type: 'url',  required: false,
-        hint: 'Google Drive, Dropbox 등 공유 가능한 다운로드 링크' }
+      { name: 'fileUrl',     label: '파일',  type: 'upload',  required: false,
+        accept: '.pdf,.hwp,.hwpx,.doc,.docx,.zip,.png,.jpg,.jpeg',
+        hint: 'PDF·HWP·ZIP 등을 선택하면 Drive에 자동 업로드됩니다' }
     ]
   },
   gallery: {
@@ -612,8 +613,9 @@ const FIELDS = {
       { name: 'title',    label: '제목',     type: 'text', required: true },
       { name: 'date',     label: '날짜',     type: 'text', required: false,
         hint: '예: 2025-12' },
-      { name: 'imageUrl', label: '이미지 URL', type: 'url', required: false,
-        hint: '비워두면 색상+이모지로 표시됨' },
+      { name: 'imageUrl', label: '사진',     type: 'upload', required: false,
+        accept: 'image/*',
+        hint: '사진을 선택하면 Drive에 자동 업로드됩니다. 비워두면 색상+이모지로 표시.' },
       { name: 'color',    label: '(이미지 없을 때) 색상', type: 'select', required: false,
         options: ['lavender','pink','mint','yellow','sky'], default: 'lavender' },
       { name: 'emoji',    label: '(이미지 없을 때) 이모지', type: 'text', required: false,
@@ -894,8 +896,101 @@ function buildForm(item) {
     if (f.type === 'textarea') {
       return `<div class="field"><label>${escapeHtml(f.label)} ${req}</label><textarea name="${f.name}" ${f.required ? 'required' : ''}>${escapeHtml(val)}</textarea>${hint}</div>`;
     }
+    if (f.type === 'upload') {
+      const accept = f.accept || '';
+      const isImage = accept.includes('image');
+      const preview = val
+        ? (isImage
+            ? `<img src="${escapeHtml(val)}" alt="" style="margin-top:8px;max-width:100%;max-height:160px;border-radius:8px;border:1px solid var(--border-soft);display:block">`
+            : `<p style="margin-top:6px;font-size:12px;color:var(--text-muted)">📎 업로드됨: <a href="${escapeHtml(val)}" target="_blank" style="color:var(--accent-blue)">파일 보기</a></p>`)
+        : '';
+      return `
+        <div class="field" data-upload="${f.name}">
+          <label>${escapeHtml(f.label)} ${req}</label>
+          <input type="hidden" name="${f.name}" value="${escapeHtml(val)}">
+          <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
+            <label class="upload-btn" style="display:inline-flex;align-items:center;gap:6px;padding:9px 14px;background:var(--bg-cream);border:1px solid var(--border);border-radius:9px;font-size:13px;font-weight:600;cursor:pointer;transition:all .15s var(--ease)">
+              📎 파일 선택
+              <input type="file" accept="${escapeHtml(accept)}" data-upload-input="${f.name}" style="display:none">
+            </label>
+            <span class="upload-status" data-upload-status="${f.name}" style="font-size:12px;color:var(--text-muted)">${val ? '✅ 업로드됨' : '선택된 파일 없음'}</span>
+          </div>
+          <div class="upload-preview" data-upload-preview="${f.name}">${preview}</div>
+          ${hint}
+        </div>`;
+    }
     return `<div class="field"><label>${escapeHtml(f.label)} ${req}</label><input type="${f.type}" name="${f.name}" value="${escapeHtml(val)}" ${f.required ? 'required' : ''}>${hint}</div>`;
   }).join('');
+
+  // 업로드 input 이벤트 바인딩
+  modalFields.querySelectorAll('[data-upload-input]').forEach(input => {
+    input.addEventListener('change', () => uploadFile(input));
+  });
+}
+
+// 파일 → base64 → Apps Script 업로드 → 결과 URL을 hidden input에 저장
+async function uploadFile(input) {
+  const file = input.files[0];
+  if (!file) return;
+
+  const fieldName = input.dataset.uploadInput;
+  const statusEl = modalFields.querySelector(`[data-upload-status="${fieldName}"]`);
+  const previewEl = modalFields.querySelector(`[data-upload-preview="${fieldName}"]`);
+  const hiddenInput = modalForm.elements[fieldName];
+
+  // 파일 크기 제한 (Apps Script POST는 ~50MB가 한계, 안전하게 20MB)
+  if (file.size > 20 * 1024 * 1024) {
+    toast('파일이 너무 큽니다 (최대 20MB)', true);
+    input.value = '';
+    return;
+  }
+
+  statusEl.textContent = `⏳ 업로드 중... (${(file.size / 1024 / 1024).toFixed(1)} MB)`;
+  statusEl.style.color = 'var(--accent-blue)';
+
+  try {
+    // base64 변환
+    const base64 = await fileToBase64(file);
+
+    const res = await api('upload', {
+      body: { base64, mimeType: file.type, filename: file.name }
+    });
+
+    if (res.success) {
+      // 이미지면 imageUrl, 아니면 downloadUrl
+      const url = file.type.startsWith('image/') ? res.imageUrl : res.downloadUrl;
+      hiddenInput.value = url;
+      statusEl.textContent = `✅ 업로드 완료 (${(file.size / 1024 / 1024).toFixed(1)} MB)`;
+      statusEl.style.color = '#3F8A5A';
+
+      // 미리보기 갱신
+      if (file.type.startsWith('image/')) {
+        previewEl.innerHTML = `<img src="${url}" alt="" style="margin-top:8px;max-width:100%;max-height:160px;border-radius:8px;border:1px solid var(--border-soft);display:block">`;
+      } else {
+        previewEl.innerHTML = `<p style="margin-top:6px;font-size:12px;color:var(--text-muted)">📎 업로드됨: <a href="${url}" target="_blank" style="color:var(--accent-blue)">파일 보기</a></p>`;
+      }
+    } else {
+      statusEl.textContent = '❌ ' + (res.error || '업로드 실패');
+      statusEl.style.color = '#C53030';
+    }
+  } catch (err) {
+    statusEl.textContent = '❌ ' + err.message;
+    statusEl.style.color = '#C53030';
+  }
+}
+
+function fileToBase64(file) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = () => {
+      // dataURL에서 base64 부분만 추출
+      const result = reader.result;
+      const comma = result.indexOf(',');
+      resolve(result.substring(comma + 1));
+    };
+    reader.onerror = reject;
+    reader.readAsDataURL(file);
+  });
 }
 
 modalForm.addEventListener('submit', async (e) => {

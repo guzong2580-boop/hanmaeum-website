@@ -30,6 +30,9 @@ const QUOTE_HEADERS = ['id','company','dept','position','name','phone','email','
 // 알림 수신 이메일 (시설장)
 const NOTIFY_EMAIL = 'onemind6680@daum.net';
 
+// Drive 업로드 폴더 이름 (없으면 자동 생성)
+const UPLOAD_FOLDER_NAME = '한마음일터-업로드';
+
 
 // ════════════════════════════════════════════════════════════
 // 라우터 (모든 요청의 진입점)
@@ -59,6 +62,7 @@ function route(e, method) {
       case 'delete': return jsonResp(handleDelete(e.parameter.type, e.parameter.id, body));
       case 'verify': return jsonResp(handleVerifyToken(body.token));
       case 'quote':  return jsonResp(handleQuoteSubmit(body));
+      case 'upload': return jsonResp(handleImageUpload(body));
       default: return jsonResp({ success: false, error: 'Unknown action: ' + action });
     }
   } catch (err) {
@@ -341,6 +345,51 @@ function escapeHtml(s) {
 
 
 // ════════════════════════════════════════════════════════════
+// 시트 초기 셋업 (새 계정으로 처음 만들 때 한 번만 실행)
+// ════════════════════════════════════════════════════════════
+// 4개 탭(사용자/공지사항/자료실/갤러리) + 헤더 자동 생성
+// 함수 선택에서 setupSheets → ▶ 실행
+// ════════════════════════════════════════════════════════════
+
+function setupSheets() {
+  const ss = SpreadsheetApp.getActive();
+  if (!ss) {
+    Logger.log('❌ 활성 시트를 찾을 수 없습니다. 시트를 먼저 열고 확장 프로그램 → Apps Script로 들어가서 실행해주세요.');
+    return;
+  }
+
+  const tabs = [
+    { name: '사용자',   headers: ['id','password','name'],                                   bg: '#EFE9FA' },
+    { name: '공지사항', headers: ['id','title','type','date','body','createdAt'],            bg: '#DAE7F5' },
+    { name: '자료실',   headers: ['id','title','description','type','size','date','fileUrl','createdAt'], bg: '#FCE5E5' },
+    { name: '갤러리',   headers: ['id','title','date','imageUrl','color','emoji','createdAt'], bg: '#E8F4ED' }
+  ];
+
+  tabs.forEach(t => {
+    let sheet = ss.getSheetByName(t.name);
+    if (!sheet) sheet = ss.insertSheet(t.name);
+    sheet.clear();
+    sheet.getRange(1, 1, 1, t.headers.length)
+         .setValues([t.headers])
+         .setFontWeight('bold')
+         .setBackground(t.bg);
+    sheet.setFrozenRows(1);
+    sheet.autoResizeColumns(1, t.headers.length);
+  });
+
+  // 기본 '시트1' 삭제 (있다면)
+  const defaultSheet = ss.getSheetByName('시트1');
+  if (defaultSheet && ss.getSheets().length > 1) {
+    ss.deleteSheet(defaultSheet);
+  }
+
+  const msg = '✅ 4개 탭(사용자·공지사항·자료실·갤러리)이 생성되었습니다.\n다음 단계: setupQuoteSheet 실행';
+  Logger.log(msg);
+  safeAlert(msg);
+}
+
+
+// ════════════════════════════════════════════════════════════
 // 견적요청 시트 일회성 셋업 (한 번만 실행)
 // ════════════════════════════════════════════════════════════
 //
@@ -416,4 +465,59 @@ function safeAlert(msg) {
     // 시트가 안 열려있는 컨텍스트(예: 직접 script.google.com에서 실행)에서는 alert 불가
     // Logger.log로 대체 (호출한 쪽에서 이미 Logger.log 했으므로 여기선 무시)
   }
+}
+
+
+// ════════════════════════════════════════════════════════════
+// 이미지·파일 업로드 (관리자 인증 필요)
+// ════════════════════════════════════════════════════════════
+// admin.html에서 파일 선택 → base64 변환 → POST 전송 →
+// 이 함수가 Drive에 저장 + 공개 URL 반환 → 시트에 자동 입력
+// ════════════════════════════════════════════════════════════
+
+function handleImageUpload(body) {
+  const auth = verifyToken(body.token);
+  if (!auth) return { success: false, error: '로그인이 필요합니다.' };
+
+  if (!body.base64 || !body.mimeType || !body.filename) {
+    return { success: false, error: '파일 정보가 누락되었습니다.' };
+  }
+
+  try {
+    // 업로드 폴더 가져오기 (없으면 생성)
+    const folder = getOrCreateUploadFolder();
+
+    // base64 → Blob
+    const bytes = Utilities.base64Decode(body.base64);
+    const blob = Utilities.newBlob(bytes, body.mimeType, body.filename);
+
+    // Drive에 파일 생성
+    const file = folder.createFile(blob);
+
+    // 공개 읽기 권한 부여 (링크가 있는 모든 사람)
+    file.setSharing(DriveApp.Access.ANYONE_WITH_LINK, DriveApp.Permission.VIEW);
+
+    const fileId = file.getId();
+
+    return {
+      success: true,
+      fileId: fileId,
+      // 이미지 표시용 직접 URL (img src에 바로 사용 가능)
+      imageUrl: `https://lh3.googleusercontent.com/d/${fileId}`,
+      // 일반 다운로드 URL (PDF·HWP 등 자료실용)
+      downloadUrl: `https://drive.google.com/uc?id=${fileId}&export=download`,
+      // Drive 공유 링크 (참고용)
+      driveUrl: file.getUrl(),
+      filename: body.filename,
+      size: file.getSize()
+    };
+  } catch (err) {
+    return { success: false, error: '업로드 실패: ' + String(err) };
+  }
+}
+
+function getOrCreateUploadFolder() {
+  const folders = DriveApp.getFoldersByName(UPLOAD_FOLDER_NAME);
+  if (folders.hasNext()) return folders.next();
+  return DriveApp.createFolder(UPLOAD_FOLDER_NAME);
 }
