@@ -3,90 +3,89 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="index,follow,max-image-preview:large">
+  <meta name="google-site-verification" content="ETT5IUIwavmAYFV8AWNkwmkY8qhBgdNcmAeRlFyyJm8" />
+  <meta name="naver-site-verification" content="094bdc31c68badbf107a9bf45c20e8ca3f5ee515" />
   <title>한마음일터 — 인쇄·홍보물 맞춤 제작</title>
   <meta name="description" content="주문 한 번으로 견적부터 납품까지. 빠르고 정확한 맞춤 인쇄·홍보물 제작. 견적 무료, 신속한 응답.">
+  <!-- Open Graph / 카톡·페이스북 공유 -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="한마음일터">
+  <meta property="og:title" content="한마음일터 — 인쇄·홍보물 맞춤 제작">
+  <meta property="og:description" content="장애인직업재활시설 한마음일터. 칼라인쇄·카탈로그·리플렛·전단지·명함부터 임가공까지 정성껏 제작합니다. 무료 견적.">
+  <meta property="og:url" content="https://daprint.kr/">
+  <meta property="og:image" content="https://daprint.kr/한마음일터전경.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:locale" content="ko_KR">
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="한마음일터 — 인쇄·홍보물 맞춤 제작">
+  <meta name="twitter:description" content="장애인직업재활시설 한마음일터. 칼라인쇄·카탈로그·리플렛·전단지·명함부터 임가공까지 정성껏 제작합니다. 무료 견적.">
+  <meta name="twitter:image" content="https://daprint.kr/한마음일터전경.jpg">
+  <link rel="canonical" href="https://daprint.kr/">
 
-  <script src="https://cdn.tailwindcss.com"></script>
-
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          fontFamily: {
-            sans:    ['Pretendard','-apple-system','sans-serif'],
-            display: ['Pretendard','-apple-system','sans-serif'],
-            gmarket: ['Pretendard','-apple-system','sans-serif'],
-          }
-        }
-      }
+  <!-- 구조화 데이터 (LocalBusiness) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "@id": "https://daprint.kr/#org",
+    "name": "한마음일터",
+    "alternateName": "장애인직업재활시설 한마음일터",
+    "description": "장애인직업재활시설 한마음일터. 칼라인쇄·카탈로그·리플렛·전단지·명함부터 임가공까지 정성껏 제작합니다.",
+    "url": "https://daprint.kr",
+    "telephone": "+82-31-631-6680",
+    "faxNumber": "+82-31-631-6634",
+    "email": "onemind6680@daum.net",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "마장면 이장로 256번길",
+      "addressLocality": "이천시",
+      "addressRegion": "경기도",
+      "addressCountry": "KR"
+    },
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": 37.262,
+      "longitude": 127.418
+    },
+    "openingHoursSpecification": [{
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday"],
+      "opens": "09:00",
+      "closes": "18:00"
+    }],
+    "image": "https://daprint.kr/한마음일터전경.jpg",
+    "logo": "https://daprint.kr/logo.png",
+    "priceRange": "₩₩",
+    "areaServed": "KR",
+    "parentOrganization": {
+      "@type": "Organization",
+      "name": "사회복지법인 엘리엘동산"
     }
+  }
   </script>
 
+  <!-- LCP 핵심 자원 우선 로드 (responsive) -->
+  <link rel="preload" as="image"
+        imagesrcset="한마음일터전경-m.jpg 675w, 한마음일터전경.jpg 1086w"
+        imagesizes="100vw"
+        fetchpriority="high">
+
+  <link rel="stylesheet" href="tailwind-built.css">
+
   <style>
-    /* ═══ LOCAL FONTS ═══ */
-    @font-face {
-      font-family: 'Pretendard';
-      font-weight: 100;
-      font-style: normal;
-      font-display: swap;
-      src: url('fonts/Pretendard-Thin.otf') format('opentype');
-    }
-    @font-face {
-      font-family: 'Pretendard';
-      font-weight: 200;
-      font-style: normal;
-      font-display: swap;
-      src: url('fonts/Pretendard-ExtraLight.otf') format('opentype');
-    }
-    @font-face {)
-      font-family: 'Pretendard';
-      font-weight: 300;
-      font-style: normal;
-      font-display: swap;
-      src: url('fonts/Pretendard-Light.otf') format('opentype');
-    }
-    @font-face {
-      font-family: 'Pretendard';
-      font-weight: 400;
-      font-style: normal;
-      font-display: swap;
-      src: url('fonts/Pretendard-Regular.otf') format('opentype');
-    }
-    @font-face {
-      font-family: 'Pretendard';
-      font-weight: 500;
-      font-style: normal;
-      font-display: swap;
-      src: url('fonts/Pretendard-Medium.otf') format('opentype');
-    }
-    @font-face {
-      font-family: 'Pretendard';
-      font-weight: 600;
-      font-style: normal;
-      font-display: swap;
-      src: url('fonts/Pretendard-SemiBold.otf') format('opentype');
-    }
-    @font-face {
-      font-family: 'Pretendard';
-      font-weight: 700;
-      font-style: normal;
-      font-display: swap;
-      src: url('fonts/Pretendard-Bold.otf') format('opentype');
-    }
-    @font-face {
-      font-family: 'Pretendard';
-      font-weight: 800;
-      font-style: normal;
-      font-display: swap;
-      src: url('fonts/Pretendard-ExtraBold.otf') format('opentype');
-    }
-    @font-face {
-      font-family: 'Pretendard';
-      font-weight: 900;
-      font-style: normal;
-      font-display: swap;
-      src: url('fonts/Pretendard-Black.otf') format('opentype');
-    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 
     /* ═══ DESIGN TOKENS ═══ */
     :root {
@@ -132,6 +131,7 @@
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; }
+    .mx-auto { margin-left: auto !important; margin-right: auto !important; }
     html { scroll-behavior: smooth; }
 
     body {
@@ -345,51 +345,60 @@
     /* ═══ HERO ═══ */
     #hero {
       position: relative;
-      min-height: 100svh;
+      aspect-ratio: 8 / 3;
+      min-height: 320px;
       overflow: hidden;
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 120px 0 80px;
-      background: linear-gradient(165deg, #EFE9FA 0%, #DCD3F0 55%, #C8BCE8 100%);
+      padding: 80px 0 50px;
+      background: #EFE9FA;
     }
     .hero-bg-image {
       position: absolute;
       inset: 0;
       z-index: 0;
-      background-image: url('한마음일터전경.jpg');
-      background-size: cover;
-      background-position: center;
-      opacity: .35;
-      filter: saturate(.85);
       pointer-events: none;
+      overflow: hidden;
+    }
+    .hero-bg-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+    }
+    /* ── 크로스페이드 슬라이드 (2장, 4초 사이클) ── */
+    .hero-slide {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+      opacity: 0;
+      animation: heroFade 6s infinite ease-in-out;
+      will-change: opacity;
+    }
+    .hero-slide:nth-of-type(1) { animation-delay: 0s; }
+    .hero-slide:nth-of-type(2) { animation-delay: 3s; }
+    @keyframes heroFade {
+      0%   { opacity: 1; }
+      45%  { opacity: 1; }
+      55%  { opacity: 0; }
+      95%  { opacity: 0; }
+      100% { opacity: 1; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .hero-slide { animation: none; opacity: 1; }
+      .hero-slide:nth-of-type(2) { opacity: 0; }
     }
     .hero-bg-overlay {
       position: absolute;
       inset: 0;
       z-index: 0;
-      background:
-        linear-gradient(165deg, rgba(239,233,250,.55) 0%, rgba(220,211,240,.65) 55%, rgba(200,188,232,.7) 100%);
-      pointer-events: none;
-    }
-    .hero-pattern {
-      position: absolute;
-      inset: 0;
-      z-index: 1;
-      background-image:
-        radial-gradient(circle at 12% 22%, rgba(255,255,255,.6) 14px, transparent 15px),
-        radial-gradient(circle at 86% 18%, rgba(255,255,255,.55) 22px, transparent 23px),
-        radial-gradient(circle at 8%  78%, rgba(255,255,255,.5)  18px, transparent 19px),
-        radial-gradient(circle at 92% 80%, rgba(255,255,255,.6) 16px, transparent 17px),
-        radial-gradient(circle, rgba(255,255,255,.3) 1.6px, transparent 2.2px);
-      background-size: 100% 100%, 100% 100%, 100% 100%, 100% 100%, 28px 28px;
-      pointer-events: none;
-    }
-    .hero-glow {
-      position: absolute;
-      inset: 0;
-      z-index: 1;
-      background: radial-gradient(ellipse 60% 65% at 50% 35%, rgba(255,255,255,.4) 0%, transparent 65%);
+      background: rgba(0,0,0,.50);
       pointer-events: none;
     }
     .hero-content {
@@ -400,34 +409,15 @@
       padding: 0 24px;
       text-align: center;
     }
-    .hero-illust {
-      position: absolute;
-      bottom: 0; left: 0; right: 0;
-      height: 90px;
-      z-index: 1;
-      background:
-        radial-gradient(ellipse 200px 50px at 12% 100%, #fff 0%, #fff 60%, transparent 62%),
-        radial-gradient(ellipse 280px 70px at 50% 100%, #fff 0%, #fff 65%, transparent 68%),
-        radial-gradient(ellipse 220px 55px at 88% 100%, #fff 0%, #fff 60%, transparent 62%);
-      pointer-events: none;
+    .hero-tagline {
+      font-size: clamp(35px, 1.6vw, 38px);
+      font-weight: 600;
+      color: #FFF;
+      letter-spacing: -0.01em;
+      margin-bottom: 14px;
+      line-height: 1.4;
+      text-shadow: 0 2px 8px rgba(0,0,0,.5);
     }
-    .hero-emoji {
-      position: absolute;
-      font-size: 48px;
-      opacity: .85;
-      z-index: 1;
-      filter: drop-shadow(0 4px 8px rgba(60,40,120,.15));
-    }
-    .hero-emoji.e1 { top: 18%; left: 8%; animation: float 6s ease-in-out infinite; }
-    .hero-emoji.e2 { top: 22%; right: 10%; font-size: 56px; animation: float 7s ease-in-out infinite .8s; }
-    .hero-emoji.e3 { bottom: 28%; left: 12%; font-size: 42px; animation: float 8s ease-in-out infinite 1.5s; }
-    .hero-emoji.e4 { bottom: 30%; right: 14%; animation: float 6.5s ease-in-out infinite .4s; }
-
-    @keyframes float {
-      0%,100% { transform: translateY(0); }
-      50%     { transform: translateY(-10px); }
-    }
-
     /* ═══ ANIMATIONS ═══ */
     .fade-up {
       opacity: 0;
@@ -461,107 +451,10 @@
       box-shadow: 0 12px 28px rgba(40,40,80,.08);
     }
 
-    /* ═══ MARQUEE ═══ */
-    .marquee {
-      display: flex;
-      overflow: hidden;
-      gap: 0;
-    }
-    .marquee-track {
-      display: flex;
-      flex-shrink: 0;
-      white-space: nowrap;
-      animation: scrollLeft 32s linear infinite;
-    }
-    @keyframes scrollLeft {
-      from { transform: translateX(0); }
-      to   { transform: translateX(-50%); }
-    }
-
-    /* ═══ FAQ ═══ */
-    .faq-item {
-      border-bottom: 1px solid var(--border);
-    }
-    .faq-q {
-      width: 100%;
-      text-align: left;
-      padding: 22px 0;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 18px;
-      background: none;
-      border: none;
-      cursor: pointer;
-      font-size: 16px;
-      font-weight: 600;
-      color: var(--text-primary);
-      letter-spacing: -.015em;
-    }
-    .faq-q .ico {
-      width: 30px; height: 30px;
-      border-radius: 50%;
-      background: var(--bg-lavender);
-      color: var(--text-purple-deep);
-      display: flex; align-items: center; justify-content: center;
-      font-size: 18px;
-      transition: transform .3s var(--ease), background .3s var(--ease);
-      flex-shrink: 0;
-    }
-    .faq-item.open .faq-q .ico {
-      transform: rotate(45deg);
-      background: var(--accent-blue);
-      color: #fff;
-    }
-    .faq-a {
-      max-height: 0;
-      overflow: hidden;
-      transition: max-height .35s var(--ease);
-    }
-    .faq-a-inner {
-      padding: 0 0 22px;
-      font-size: 15px;
-      line-height: 1.72;
-      color: var(--text-secondary);
-    }
+    /* ═══ MARQUEE 삭제됨 · 2026-05-27 ═══ */
 
     /* ═══ MOBILE MENU ═══ */
     #mob-menu.open { display: block; }
-
-    /* ═══ GALLERY ═══ */
-    .gallery-tile {
-      aspect-ratio: 4/3;
-      border-radius: 14px;
-      overflow: hidden;
-      position: relative;
-      cursor: pointer;
-      transition: transform .35s var(--ease);
-    }
-    .gallery-tile:hover { transform: translateY(-4px); }
-    .gallery-tile::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(0deg, rgba(0,0,0,.35), transparent 50%);
-      opacity: 0;
-      transition: opacity .3s var(--ease);
-    }
-    .gallery-tile:hover::after { opacity: 1; }
-    .gallery-label {
-      position: absolute;
-      left: 16px; bottom: 14px;
-      color: #fff;
-      font-size: 13px;
-      font-weight: 600;
-      opacity: 0;
-      transform: translateY(6px);
-      transition: opacity .3s var(--ease), transform .3s var(--ease);
-      z-index: 2;
-    }
-    .gallery-tile:hover .gallery-label {
-      opacity: 1;
-      transform: translateY(0);
-    }
 
     /* ═══ NOTICE CURVE TOP ═══ */
     .curved-top {
@@ -577,196 +470,156 @@
       border-top-right-radius: 50% 24px;
       transform: translateY(-23px);
     }
-
-    /* ═══ QUOTE FORM ═══ */
-    .quote-form {
-      background: rgba(255,255,255,.85);
-      backdrop-filter: blur(10px);
-      border: 1px solid rgba(107,91,201,.18);
-      border-radius: 24px;
-      padding: 36px;
-      box-shadow: 0 12px 40px rgba(60,40,120,.10);
-    }
-    .form-label {
-      display: block;
-      font-size: 13px;
-      font-weight: 700;
-      color: var(--text-primary);
-      letter-spacing: -.01em;
-      margin-bottom: 8px;
-    }
-    .form-label .req { color: #E04848; margin-left: 2px; }
-    .form-input {
-      width: 100%;
-      padding: 13px 16px;
-      background: #fff;
-      border: 1.5px solid var(--border);
-      border-radius: 12px;
-      font-size: 15px;
-      font-family: inherit;
-      color: var(--text-primary);
-      transition: border-color .2s var(--ease), box-shadow .2s var(--ease);
-    }
-    .form-input::placeholder { color: var(--text-muted); }
-    .form-input:focus {
-      outline: none;
-      border-color: var(--accent-blue);
-      box-shadow: 0 0 0 3px rgba(74,111,227,.15);
-    }
-    .form-fieldset {
-      border: none;
-      padding: 0;
-      margin: 0;
-    }
-    .item-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 8px;
-    }
-    @media (min-width: 640px) { .item-grid { grid-template-columns: repeat(3, 1fr); } }
-    @media (min-width: 1024px) { .item-grid { grid-template-columns: repeat(4, 1fr); } }
-    .item-chip {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      padding: 12px 14px;
-      background: #fff;
-      border: 1.5px solid var(--border);
-      border-radius: 12px;
-      cursor: pointer;
-      transition: all .2s var(--ease);
-      user-select: none;
-    }
-    .item-chip:hover {
-      border-color: var(--text-purple);
-      background: #FBFAFF;
-    }
-    .item-chip input { display: none; }
-    .item-chip .check-box {
-      width: 18px;
-      height: 18px;
-      border: 1.5px solid var(--border);
-      border-radius: 5px;
-      flex-shrink: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: all .15s var(--ease);
-      background: #fff;
-    }
-    .item-chip .check-box svg {
-      opacity: 0;
-      transform: scale(.5);
-      transition: all .15s var(--ease);
-    }
-    .item-chip input:checked ~ .check-box {
-      background: var(--accent-blue);
-      border-color: var(--accent-blue);
-    }
-    .item-chip input:checked ~ .check-box svg { opacity: 1; transform: scale(1); }
-    .item-chip:has(input:checked) {
-      border-color: var(--accent-blue);
-      background: #F4F7FE;
-    }
-    .item-chip .label {
-      font-size: 14px;
-      font-weight: 600;
-      color: var(--text-primary);
-      letter-spacing: -.01em;
-    }
-    .item-chip .emoji { font-size: 18px; }
-    #other-text-wrap {
-      max-height: 0;
-      overflow: hidden;
-      transition: max-height .3s var(--ease), margin-top .3s var(--ease);
-      margin-top: 0;
-    }
-    #other-text-wrap.show {
-      max-height: 60px;
-      margin-top: 10px;
-    }
-
-    /* ═══ 개인정보 동의 박스 ═══ */
-    .privacy-box {
-      background: #FAFAFC;
-      border: 1.5px solid var(--border);
-      border-radius: 12px;
-      padding: 16px 18px;
-      max-height: 180px;
-      overflow-y: auto;
-      margin-bottom: 12px;
-    }
-    .privacy-box::-webkit-scrollbar { width: 6px; }
-    .privacy-box::-webkit-scrollbar-track { background: transparent; }
-    .privacy-box::-webkit-scrollbar-thumb {
-      background: rgba(28,29,25,.15);
-      border-radius: 3px;
-    }
-    .privacy-check {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      cursor: pointer;
-      font-size: 13.5px;
-      color: var(--text-primary);
-      font-weight: 600;
-      letter-spacing: -.01em;
-      user-select: none;
-    }
-    .privacy-check input { display: none; }
-    .privacy-check .check-mark {
-      width: 20px; height: 20px;
-      border: 1.5px solid var(--border);
-      border-radius: 5px;
-      background: #fff;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-      transition: all .15s var(--ease);
-    }
-    .privacy-check .check-mark svg {
-      opacity: 0;
-      transform: scale(.5);
-      transition: all .15s var(--ease);
-    }
-    .privacy-check input:checked ~ .check-mark {
-      background: var(--accent-blue);
-      border-color: var(--accent-blue);
-    }
-    .privacy-check input:checked ~ .check-mark svg {
-      opacity: 1;
-      transform: scale(1);
-    }
-    .form-success {
-      text-align: center;
-      padding: 40px 20px;
-    }
-    .form-success-icon {
-      width: 72px; height: 72px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, var(--accent-blue) 0%, var(--text-purple-deep) 100%);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin: 0 auto 20px;
-      animation: popIn .5s var(--ease);
-    }
-    @keyframes popIn {
-      0%   { transform: scale(0); opacity: 0; }
-      60%  { transform: scale(1.1); opacity: 1; }
-      100% { transform: scale(1); }
-    }
-
     /* ═══ HERO RESPONSIVE ═══ */
     @media (max-width: 767px) {
-      #hero { padding: 110px 0 60px; }
-      .hero-emoji.e1 { top: 14%; left: 4%; font-size: 32px; }
-      .hero-emoji.e2 { top: 16%; right: 4%; font-size: 38px; }
-      .hero-emoji.e3 { bottom: 36%; left: 6%; font-size: 30px; }
-      .hero-emoji.e4 { bottom: 38%; right: 6%; font-size: 32px; }
+      #hero {
+        aspect-ratio: 2 / 1;
+        min-height: 350px;
+        padding: 75px 0 40px;
+      }
+    }
+
+    /* 관련 기관 marquee (푸터 위, 투명 배경) */
+    .partners-marquee {
+      overflow: hidden;
+      padding: 32px 0;
+      background: transparent;
+      border-top: 1px solid var(--border-soft);
+      border-bottom: 1px solid var(--border-soft);
+      -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 8%, #000 92%, transparent 100%);
+              mask-image: linear-gradient(90deg, transparent 0%, #000 8%, #000 92%, transparent 100%);
+    }
+    .partners-track {
+      display: flex;
+      gap: 56px;
+      width: max-content;
+      animation: partners-marquee 36s linear infinite;
+    }
+    .partners-marquee:hover .partners-track { animation-play-state: paused; }
+    .partner-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      padding: 10px 18px;
+      background: transparent;
+      border-radius: 0;
+      color: var(--text-primary);
+      font-size: 16px;
+      font-weight: 700;
+      letter-spacing: -.01em;
+      text-decoration: none;
+      white-space: nowrap;
+      transition: transform .25s var(--ease), opacity .25s var(--ease);
+      opacity: .85;
+    }
+    .partner-logo {
+      width: 52px;
+      height: 52px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .partner-logo img {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+    }
+    .partner-link:hover { transform: translateY(-2px); opacity: 1; }
+    @keyframes partners-marquee {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .partners-track { animation: none; }
+    }
+
+    /* ══════════════════════════════
+       WORKS 섹션 (제작 사례 갤러리)
+       ══════════════════════════════ */
+    .works-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 300px);
+      gap: 36px;
+      justify-content: center;
+      justify-items: center;
+      max-width: 100%;
+    }
+    @media (min-width: 640px) {
+      .works-grid { grid-template-columns: repeat(2, 300px); gap: 36px; }
+    }
+    @media (min-width: 1024px) {
+      .works-grid { grid-template-columns: repeat(3, 300px); gap: 40px; }
+    }
+    .work-card {
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+      text-align: center;
+      text-decoration: none;
+      color: inherit;
+      background: #fff;
+      border: 1px solid var(--border-soft);
+      border-radius: 14px;
+      overflow: hidden;
+      padding: 0;
+      width: 100%;
+      max-width: 300px;
+      margin: 0 auto;
+      transition: transform .35s var(--ease), box-shadow .35s var(--ease), border-color .35s var(--ease);
+    }
+    .work-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 18px 40px -18px rgba(46, 62, 36, .22);
+      border-color: var(--text-purple-deep);
+    }
+    .work-thumb {
+      position: relative;
+      width: 300px;
+      height: 300px;
+      max-width: 100%;
+      aspect-ratio: 1 / 1;
+      margin: 0;
+      border-radius: 0;
+      overflow: hidden;
+      background: #f4f1ea;
+    }
+    .work-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform .5s var(--ease);
+    }
+    .work-card:hover .work-thumb img { transform: scale(1.04); }
+    .work-meta {
+      padding: 14px 12px 18px;
+      text-align: center;
+    }
+    .work-title {
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--text-primary);
+      letter-spacing: -.015em;
+      margin: 0 0 6px;
+      line-height: 1.4;
+    }
+    .work-sub {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-secondary);
+      letter-spacing: -.005em;
+      margin: 0;
+    }
+    .work-sub .dot {
+      display: inline-block;
+      margin: 0 7px;
+      opacity: .5;
     }
   </style>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.css">
 </head>
 <body>
 
@@ -782,7 +635,7 @@
     <nav class="hidden lg:flex items-center gap-7">
       <div class="nav-item">
         <a href="about.html" class="nav-link">
-          소개
+          기관 소개
           <svg class="nav-caret" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 5l3 3 3-3"/></svg>
         </a>
         <div class="nav-dropdown">
@@ -797,12 +650,26 @@
       </div>
       <div class="nav-item">
         <a href="print.html" class="nav-link">
-          인쇄
+          포트폴리오
           <svg class="nav-caret" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 5l3 3 3-3"/></svg>
         </a>
         <div class="nav-dropdown">
-          <a href="print.html#paper">인쇄물</a>
-          <a href="print.html#banner-bag">현수막 및 쇼핑백</a>
+          <a href="print.html?cat=leaflet">LEAFLET</a>
+          <a href="print.html?cat=book">BOOK</a>
+          <a href="print.html?cat=poster">POSTER</a>
+          <a href="print.html?cat=shoppingbag">SHOPPING BAG</a>
+          <a href="print.html?cat=banner">BANNER</a>
+          <a href="print.html?cat=etc">ETC</a>
+        </div>
+      </div>
+      <div class="nav-item">
+        <a href="quote.html" class="nav-link">
+          견적 및 주문
+          <svg class="nav-caret" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 5l3 3 3-3"/></svg>
+        </a>
+        <div class="nav-dropdown">
+          <a href="quote.html#faq">FAQ</a>
+          <a href="quote.html#form">온라인 견적 문의</a>
         </div>
       </div>
       <div class="nav-item">
@@ -811,10 +678,8 @@
           <svg class="nav-caret" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 5l3 3 3-3"/></svg>
         </a>
         <div class="nav-dropdown">
-          <a href="processing.html#fancom">팬콤</a>
-          <a href="processing.html#natural">네추럴밸리</a>
-          <a href="processing.html#feel">더필</a>
-          <a href="processing.html#scrubber">수세미</a>
+          <a href="processing.html#overview">사업개요</a>
+          <a href="processing.html#process">생산과정</a>
         </div>
       </div>
       <div class="nav-item">
@@ -830,7 +695,6 @@
           <a href="community.html#volunteer">자원봉사</a>
         </div>
       </div>
-      <a href="quote.html" class="nav-link">견적요청</a>
     </nav>
 
     <div class="flex items-center gap-3">
@@ -848,7 +712,7 @@
   <div id="mob-menu" class="lg:hidden border-t hidden" style="border-color:var(--border-soft);background:#fff;max-height:calc(100vh - 64px);overflow-y:auto">
     <nav class="flex flex-col px-6 py-3">
       <button class="mob-group-toggle" data-target="mg-about">
-        소개
+        기관 소개
         <svg class="nav-caret" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 5l3 3 3-3"/></svg>
       </button>
       <div id="mg-about" class="mob-sub">
@@ -861,14 +725,27 @@
         <a href="about.html#org">조직도</a>
         <a href="about.html#location">찾아오시는 길</a>
       </div>
-      <button class="mob-group-toggle" data-target="mg-print">
-        인쇄
+      <button class="mob-group-toggle" data-target="mg-portfolio">
+        포트폴리오
         <svg class="nav-caret" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 5l3 3 3-3"/></svg>
       </button>
-      <div id="mg-print" class="mob-sub">
+      <div id="mg-portfolio" class="mob-sub">
         <a href="print.html">전체 보기</a>
-        <a href="print.html#paper">인쇄물</a>
-        <a href="print.html#banner-bag">현수막 및 쇼핑백</a>
+        <a href="print.html?cat=leaflet">LEAFLET</a>
+        <a href="print.html?cat=book">BOOK</a>
+        <a href="print.html?cat=poster">POSTER</a>
+        <a href="print.html?cat=shoppingbag">SHOPPING BAG</a>
+        <a href="print.html?cat=banner">BANNER</a>
+        <a href="print.html?cat=etc">ETC</a>
+      </div>
+      <button class="mob-group-toggle" data-target="mg-order">
+        견적 및 주문
+        <svg class="nav-caret" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 5l3 3 3-3"/></svg>
+      </button>
+      <div id="mg-order" class="mob-sub">
+        <a href="quote.html">전체 보기</a>
+        <a href="quote.html#faq">FAQ</a>
+        <a href="quote.html#form">온라인 견적 문의</a>
       </div>
       <button class="mob-group-toggle" data-target="mg-proc">
         임가공
@@ -876,10 +753,8 @@
       </button>
       <div id="mg-proc" class="mob-sub">
         <a href="processing.html">전체 보기</a>
-        <a href="processing.html#fancom">팬콤</a>
-        <a href="processing.html#natural">네추럴밸리</a>
-        <a href="processing.html#feel">더필</a>
-        <a href="processing.html#scrubber">수세미</a>
+        <a href="processing.html#overview">사업개요</a>
+        <a href="processing.html#process">생산과정</a>
       </div>
       <button class="mob-group-toggle" data-target="mg-comm">
         커뮤니티
@@ -893,7 +768,6 @@
         <a href="community.html#donation">후원</a>
         <a href="community.html#volunteer">자원봉사</a>
       </div>
-      <a href="quote.html" class="py-3 text-sm font-semibold" style="color:var(--text-primary);border-top:1px solid var(--border-soft);margin-top:4px">견적요청</a>
       <a href="quote.html" class="btn-primary mt-3 mb-2 justify-center" style="padding:12px 22px;font-size:12px">견적 요청하기</a>
     </nav>
   </div>
@@ -904,56 +778,43 @@
      HERO  (Lavender)
 ══════════════════════════════ -->
 <section id="hero">
-  <div class="hero-bg-image"></div>
+  <div class="hero-bg-image">
+    <img class="hero-slide"
+         src="한마음일터전경.jpg"
+         srcset="한마음일터전경-m.jpg 675w, 한마음일터전경.jpg 1086w"
+         sizes="100vw"
+         alt=""
+         fetchpriority="high"
+         decoding="async">
+    <img class="hero-slide"
+         src="images/인쇄카테고리배경대체.jpg"
+         alt=""
+         loading="lazy"
+         decoding="async">
+  </div>
   <div class="hero-bg-overlay"></div>
-  <div class="hero-pattern"></div>
-  <div class="hero-glow"></div>
-
-  <span class="hero-emoji e1">📋</span>
-  <span class="hero-emoji e2">✨</span>
-  <span class="hero-emoji e3">🎨</span>
-  <span class="hero-emoji e4">📦</span>
 
   <div class="hero-content">
 
-    <p class="fade-up text-xs font-bold mb-5 inline-flex items-center gap-2"
-       style="color:var(--text-purple-deep);letter-spacing:.18em;animation-delay:.05s;background:rgba(255,255,255,.6);padding:8px 18px;border-radius:9999px;backdrop-filter:blur(6px)">
-      <span class="w-1.5 h-1.5 rounded-full" style="background:var(--accent-blue)"></span>
-      장애인직업재활시설 · 경기 이천
+    <p class="fade-up hero-tagline" style="animation-delay:.02s">
+      재활의 꿈을 인쇄하는 장애인직업재활시설
     </p>
 
-    <h1 class="fade-up font-display leading-[1.1] mb-5 whitespace-nowrap"
-        style="font-size:clamp(54px,10vw,118px);letter-spacing:-.01em;color:var(--text-purple-deep);animation-delay:.18s">
+    <h1 class="fade-up font-display leading-[1.1] mb-9 whitespace-nowrap"
+        style="font-size:clamp(54px,10vw,118px);letter-spacing:0.3em;text-indent:0.3em;color:#FFF;animation-delay:.18s;text-shadow:0 2px 8px rgba(0,0,0,.5)">
       한마음일터
     </h1>
 
-    <p class="fade-up font-bold mb-4"
-       style="font-size:clamp(20px,2.6vw,30px);color:var(--text-primary);letter-spacing:-.02em;line-height:1.4;animation-delay:.32s">
-      함께 만들고, 함께 나누는<br class="md:hidden">
-      <span class="md:inline"> 인쇄·홍보물의 새로운 기준</span>
-    </p>
-
-    <p class="fade-up mx-auto mb-9"
-       style="font-size:15px;color:var(--text-secondary);line-height:1.75;max-width:44ch;animation-delay:.46s">
-      주문 한 번으로 견적부터 납품까지.
-      빠르고 정확한 맞춤 제작으로 비용과 시간을 절감합니다.
-    </p>
-
-    <div class="fade-up flex items-center justify-center flex-wrap gap-3 mb-12" style="animation-delay:.6s">
-      <a href="#cta" class="btn-primary">
-        견적 요청하기
-        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" viewBox="0 0 24 24">
+    <div class="fade-up flex items-center justify-center flex-wrap gap-3 mb-12" style="animation-delay:.6s;margin-top:48px">
+      <a href="about.html#process" class="btn-primary" style="font-size:18px;padding:18px 38px;gap:10px">
+        이용절차 알아보기
+        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.4" viewBox="0 0 24 24">
           <path d="M5 12h14M12 5l7 7-7 7"/>
         </svg>
-      </a>
-      <a href="#about" class="btn-soft">
-        서비스 알아보기
       </a>
     </div>
 
   </div>
-
-  <div class="hero-illust"></div>
 </section>
 
 
@@ -976,8 +837,8 @@
       고객의 브랜드를 만들어 갑니다.
     </p>
 
-    <a href="#cta" class="btn-primary reveal">
-      견적 요청하기
+    <a href="about.html#greeting" class="btn-primary reveal">
+      한마음일터 더 알아보기
       <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" viewBox="0 0 24 24">
         <path d="M5 12h14M12 5l7 7-7 7"/>
       </svg>
@@ -988,128 +849,94 @@
 
 
 <!-- ══════════════════════════════
-     MARQUEE  (light)
+     WORKS · 제작 사례 (2026-05-27 추가)
+     · 6개 카드 · 클릭 시 print.html 이동
+     · 카드 데이터: 제목 / 종류 · 연도 / 이미지
 ══════════════════════════════ -->
-<div class="py-7 overflow-hidden" style="background:var(--bg-cream);border-top:1px solid var(--border-soft);border-bottom:1px solid var(--border-soft)">
-  <div class="marquee">
-    <div class="marquee-track">
-      <span class="font-display text-3xl mx-8" style="color:var(--text-purple-deep);letter-spacing:.02em">한마음일터</span>
-      <span class="text-2xl mx-3" style="color:var(--accent-blue)">✦</span>
-      <span class="font-bold text-2xl mx-8" style="color:var(--text-primary);letter-spacing:.05em">맞춤 견적 시스템</span>
-      <span class="text-2xl mx-3" style="color:var(--accent-blue)">✦</span>
-      <span class="font-bold text-2xl mx-8" style="color:var(--text-primary);letter-spacing:.05em">원스톱 제작</span>
-      <span class="text-2xl mx-3" style="color:var(--accent-blue)">✦</span>
-      <span class="font-bold text-2xl mx-8" style="color:var(--text-primary);letter-spacing:.05em">빠른 납기</span>
-      <span class="text-2xl mx-3" style="color:var(--accent-blue)">✦</span>
-      <span class="font-bold text-2xl mx-8" style="color:var(--text-primary);letter-spacing:.05em">경기 이천</span>
-      <span class="text-2xl mx-3" style="color:var(--accent-blue)">✦</span>
+<section id="works" class="py-24" style="background:#fff">
+  <div class="max-w-6xl mx-auto px-6 lg:px-10">
 
-      <span class="font-display text-3xl mx-8" style="color:var(--text-purple-deep);letter-spacing:.02em">한마음일터</span>
-      <span class="text-2xl mx-3" style="color:var(--accent-blue)">✦</span>
-      <span class="font-bold text-2xl mx-8" style="color:var(--text-primary);letter-spacing:.05em">맞춤 견적 시스템</span>
-      <span class="text-2xl mx-3" style="color:var(--accent-blue)">✦</span>
-      <span class="font-bold text-2xl mx-8" style="color:var(--text-primary);letter-spacing:.05em">원스톱 제작</span>
-      <span class="text-2xl mx-3" style="color:var(--accent-blue)">✦</span>
-      <span class="font-bold text-2xl mx-8" style="color:var(--text-primary);letter-spacing:.05em">빠른 납기</span>
-      <span class="text-2xl mx-3" style="color:var(--accent-blue)">✦</span>
-      <span class="font-bold text-2xl mx-8" style="color:var(--text-primary);letter-spacing:.05em">경기 이천</span>
-      <span class="text-2xl mx-3" style="color:var(--accent-blue)">✦</span>
-    </div>
-  </div>
-</div>
-
-
-<!-- ══════════════════════════════
-     SOLUTION & PROCESS  (white)
-══════════════════════════════ -->
-<section id="process" class="py-24" style="background:#fff">
-  <div class="max-w-7xl mx-auto px-6 lg:px-10">
-
-    <div class="text-center mb-14 reveal">
-      <p class="text-xs font-semibold mb-3" style="color:var(--p-500);letter-spacing:.18em">Our Process</p>
-      <h2 class="sec-title-flank font-bold" style="font-size:clamp(28px,3.6vw,40px);color:var(--text-primary)">
-        진행 과정
+    <div class="text-center mb-14">
+      <p class="text-xs font-semibold mb-3 reveal" style="color:var(--text-purple-deep);letter-spacing:.18em">Our Works</p>
+      <h2 class="sec-title-flank font-bold mb-5 reveal" style="font-size:clamp(28px,3.6vw,42px);color:var(--text-primary)">
+        제작 사례
       </h2>
-      <p class="mt-5 max-w-xl mx-auto" style="font-size:15px;color:var(--text-secondary);line-height:1.72">
-        주문부터 제작·납품까지<br class="md:hidden">
-        <span class="md:inline"> 단 4단계로 끝납니다.</span>
+      <p class="text-base md:text-lg font-medium reveal" style="color:var(--text-secondary);letter-spacing:-.01em">
+        한마음일터가 함께한 인쇄·홍보물 작업을 소개합니다.
       </p>
     </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
+    <div class="works-grid reveal">
 
-      <div class="reveal text-center">
-        <div class="w-20 h-20 mx-auto mb-5 rounded-2xl flex items-center justify-center text-2xl font-gmarket font-bold"
-             style="background:linear-gradient(135deg,var(--bg-lavender) 0%,var(--bg-lavender-2) 100%);color:var(--text-purple-deep)">
-          01
+      <a href="print.html?cat=leaflet&item=e0ba1109" class="work-card">
+        <div class="work-thumb">
+          <img src="https://lh3.googleusercontent.com/d/1iDujtnRdB_Gmfue1sSRNVuAvaq4vve2_=w900-rw" alt="이천시청 관광과 — 이천도자기축제 리플렛" loading="lazy" decoding="async">
         </div>
-        <h3 class="font-bold text-lg mb-2" style="color:var(--text-primary);letter-spacing:-.02em">주문 의뢰 등록</h3>
-        <p class="text-sm leading-[1.7]" style="color:var(--text-secondary)">
-          웹 폼에서 품목·수량·납기 입력. 디자인 파일 첨부.
-        </p>
-      </div>
+        <div class="work-meta">
+          <h3 class="work-title">이천시청 관광과</h3>
+          <p class="work-sub">LEAFLET<span class="dot">·</span>이천도자기축제<span class="dot">·</span>2023</p>
+        </div>
+      </a>
 
-      <div class="reveal text-center" style="transition-delay:.08s">
-        <div class="w-20 h-20 mx-auto mb-5 rounded-2xl flex items-center justify-center text-2xl font-gmarket font-bold"
-             style="background:#FFF4E0;color:#B5832B">
-          02
+      <a href="print.html?cat=leaflet&item=567bd015" class="work-card">
+        <div class="work-thumb">
+          <img src="https://lh3.googleusercontent.com/d/1I8WNprO1hyXSzpckzlGGJlrmGyh6LNaK=w900-rw" alt="이천농업기술센터 — 이천쌀문화축제 리플렛" loading="lazy" decoding="async">
         </div>
-        <h3 class="font-bold text-lg mb-2" style="color:var(--text-primary);letter-spacing:-.02em">담당자 견적 산출</h3>
-        <p class="text-sm leading-[1.7]" style="color:var(--text-secondary)">
-          맞춤 견적. 상세 내역과 납기 안내.
-        </p>
-      </div>
+        <div class="work-meta">
+          <h3 class="work-title">이천농업기술센터</h3>
+          <p class="work-sub">LEAFLET<span class="dot">·</span>이천쌀문화축제<span class="dot">·</span>2022</p>
+        </div>
+      </a>
 
-      <div class="reveal text-center" style="transition-delay:.16s">
-        <div class="w-20 h-20 mx-auto mb-5 rounded-2xl flex items-center justify-center text-2xl font-gmarket font-bold"
-             style="background:#E8F4ED;color:#3F8A5A">
-          03
+      <a href="print.html?cat=leaflet&item=9006c522" class="work-card">
+        <div class="work-thumb">
+          <img src="https://lh3.googleusercontent.com/d/1HQ7eoDxCZYKQTXQLBnFyyd8sEoCg2ktN=w900-rw" alt="이천문화재단 — 이천도자기축제 리플렛" loading="lazy" decoding="async">
         </div>
-        <h3 class="font-bold text-lg mb-2" style="color:var(--text-primary);letter-spacing:-.02em">고객 확인 · 결제</h3>
-        <p class="text-sm leading-[1.7]" style="color:var(--text-secondary)">
-          견적 확인 후 결제. 토스페이먼츠 안전 결제.
-        </p>
-      </div>
+        <div class="work-meta">
+          <h3 class="work-title">이천문화재단</h3>
+          <p class="work-sub">LEAFLET<span class="dot">·</span>이천도자기축제<span class="dot">·</span>2022</p>
+        </div>
+      </a>
 
-      <div class="reveal text-center" style="transition-delay:.24s">
-        <div class="w-20 h-20 mx-auto mb-5 rounded-2xl flex items-center justify-center text-2xl font-gmarket font-bold"
-             style="background:#E8EFFD;color:var(--accent-blue-2)">
-          04
+      <a href="print.html?cat=leaflet&item=e3b1ee78" class="work-card">
+        <div class="work-thumb">
+          <img src="https://lh3.googleusercontent.com/d/1MiiwPA72xj17MCUyz_P11oQY3MblR-Io=w900-rw" alt="이천문화재단 — 신년음악회 리플렛" loading="lazy" decoding="async">
         </div>
-        <h3 class="font-bold text-lg mb-2" style="color:var(--text-primary);letter-spacing:-.02em">제작 · 납품</h3>
-        <p class="text-sm leading-[1.7]" style="color:var(--text-secondary)">
-          검수 후 제작. 약속된 일정에 정확히 납품.
-        </p>
-      </div>
+        <div class="work-meta">
+          <h3 class="work-title">이천문화재단</h3>
+          <p class="work-sub">LEAFLET<span class="dot">·</span>신년음악회<span class="dot">·</span>2022</p>
+        </div>
+      </a>
+
+      <a href="print.html?cat=leaflet&item=f26ffbb7" class="work-card">
+        <div class="work-thumb">
+          <img src="https://lh3.googleusercontent.com/d/1EHOGjix9bDLoZkCE9NuPJ51ZUSJGNyRF=w900-rw" alt="이천문화재단 — 4단접지 리플렛" loading="lazy" decoding="async">
+        </div>
+        <div class="work-meta">
+          <h3 class="work-title">이천문화재단</h3>
+          <p class="work-sub">LEAFLET<span class="dot">·</span>4단접지<span class="dot">·</span>2021</p>
+        </div>
+      </a>
+
+      <a href="print.html?cat=leaflet&item=cbb7733d" class="work-card">
+        <div class="work-thumb">
+          <img src="https://lh3.googleusercontent.com/d/1Dg7MLFDcuajSSXOdszvIhBDZuP2XJ4RU=w900-rw" alt="이천문화재단 — 가을 애 이천스테이지 리플렛" loading="lazy" decoding="async">
+        </div>
+        <div class="work-meta">
+          <h3 class="work-title">이천문화재단</h3>
+          <p class="work-sub">LEAFLET<span class="dot">·</span>가을 애 이천스테이지<span class="dot">·</span>2021</p>
+        </div>
+      </a>
 
     </div>
 
-    <!-- 차별 요소 3 -->
-    <div class="mt-16 grid grid-cols-1 md:grid-cols-3 gap-4">
-      <div class="flex items-center gap-4 p-5 rounded-2xl reveal" style="background:var(--bg-cream)">
-        <div class="w-11 h-11 rounded-xl flex items-center justify-center shrink-0" style="background:var(--accent-blue);color:#fff">
-          <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-            <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
-          </svg>
-        </div>
-        <p class="text-sm font-bold" style="color:var(--text-primary);letter-spacing:-.015em">맞춤 견적 시스템</p>
-      </div>
-      <div class="flex items-center gap-4 p-5 rounded-2xl reveal" style="background:var(--bg-cream);transition-delay:.08s">
-        <div class="w-11 h-11 rounded-xl flex items-center justify-center shrink-0" style="background:var(--p-500);color:#fff">
-          <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-            <path d="M13 10V3L4 14h7v7l9-11h-7z"/>
-          </svg>
-        </div>
-        <p class="text-sm font-bold" style="color:var(--text-primary);letter-spacing:-.015em">원스톱 제작 서비스</p>
-      </div>
-      <div class="flex items-center gap-4 p-5 rounded-2xl reveal" style="background:var(--bg-cream);transition-delay:.16s">
-        <div class="w-11 h-11 rounded-xl flex items-center justify-center shrink-0" style="background:#B5832B;color:#fff">
-          <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-            <path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
-          </svg>
-        </div>
-        <p class="text-sm font-bold" style="color:var(--text-primary);letter-spacing:-.015em">빠른 대응 · 납기</p>
-      </div>
+    <div class="reveal" style="text-align:center;margin-top:48px;">
+      <a href="print.html" class="btn-primary">
+        포트폴리오 더보기
+        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" viewBox="0 0 24 24">
+          <path d="M5 12h14M12 5l7 7-7 7"/>
+        </svg>
+      </a>
     </div>
 
   </div>
@@ -1117,532 +944,49 @@
 
 
 <!-- ══════════════════════════════
-     GALLERY (작업장)
+     MARQUEE 컨테이너 통째 삭제 · 2026-05-27
 ══════════════════════════════ -->
-<section id="gallery" class="py-24" style="background:#fff">
-  <div class="max-w-7xl mx-auto px-6 lg:px-10">
-
-    <div class="text-center mb-14 reveal">
-      <p class="text-xs font-semibold mb-3" style="color:var(--text-purple-deep);letter-spacing:.18em">Gallery</p>
-      <h2 class="sec-title-flank font-bold" style="font-size:clamp(28px,3.6vw,40px);color:var(--text-primary)">
-        작업장 · 제작 사례
-      </h2>
-      <p class="mt-5 max-w-xl mx-auto" style="font-size:15px;color:var(--text-secondary);line-height:1.72">
-        한마음일터의 작업 현장과 다양한 제작 결과물을 만나보세요.
-      </p>
-    </div>
-
-    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-
-      <div class="gallery-tile reveal" style="background:linear-gradient(135deg,#E8E2F5 0%,#C8BCE8 100%);display:flex;align-items:center;justify-content:center;font-size:48px">
-        🏭
-        <span class="gallery-label">작업장 전경</span>
-      </div>
-      <div class="gallery-tile reveal" style="background:linear-gradient(135deg,#FFE8D6 0%,#F4C8B5 100%);display:flex;align-items:center;justify-content:center;font-size:48px;transition-delay:.05s">
-        📦
-        <span class="gallery-label">쇼핑백 제작</span>
-      </div>
-      <div class="gallery-tile reveal" style="background:linear-gradient(135deg,#E8F0FE 0%,#B8C8F0 100%);display:flex;align-items:center;justify-content:center;font-size:48px;transition-delay:.1s">
-        📰
-        <span class="gallery-label">전단지 인쇄</span>
-      </div>
-      <div class="gallery-tile reveal" style="background:linear-gradient(135deg,#E8F4ED 0%,#A8C8B5 100%);display:flex;align-items:center;justify-content:center;font-size:48px;transition-delay:.15s">
-        🏷️
-        <span class="gallery-label">스티커 · 라벨</span>
-      </div>
-
-      <div class="gallery-tile reveal" style="background:linear-gradient(135deg,#FFF4D6 0%,#F4D88B 100%);display:flex;align-items:center;justify-content:center;font-size:48px;transition-delay:.2s">
-        📋
-        <span class="gallery-label">홍보 책자</span>
-      </div>
-      <div class="gallery-tile reveal" style="background:linear-gradient(135deg,#F0E8FE 0%,#C8B8F0 100%);display:flex;align-items:center;justify-content:center;font-size:48px;transition-delay:.25s">
-        🎨
-        <span class="gallery-label">맞춤 디자인</span>
-      </div>
-      <div class="gallery-tile reveal" style="background:linear-gradient(135deg,#FCE5E5 0%,#F0B8B8 100%);display:flex;align-items:center;justify-content:center;font-size:48px;transition-delay:.3s">
-        🚩
-        <span class="gallery-label">현수막 · 배너</span>
-      </div>
-      <div class="gallery-tile reveal" style="background:linear-gradient(135deg,#E0F0EE 0%,#A8D0CC 100%);display:flex;align-items:center;justify-content:center;font-size:48px;transition-delay:.35s">
-        💼
-        <span class="gallery-label">기업 굿즈</span>
-      </div>
-
-    </div>
-
-  </div>
-</section>
 
 
 <!-- ══════════════════════════════
-     FAQ
+     [삭제됨 · 2026-05-27]
+     · 진행 과정(id=process)
+     · 자주 묻는 질문(id=faq)
+     · 견적 요청 CTA(id=cta) · 인라인 폼
+     → 견적은 quote.html 에서 처리
 ══════════════════════════════ -->
-<section id="faq" class="py-24" style="background:#fff">
-  <div class="max-w-3xl mx-auto px-6 lg:px-10">
-
-    <div class="text-center mb-12 reveal">
-      <p class="text-xs font-semibold mb-3" style="color:var(--accent-blue);letter-spacing:.18em">FAQ</p>
-      <h2 class="sec-title-flank font-bold" style="font-size:clamp(28px,3.6vw,40px);color:var(--text-primary)">
-        자주 묻는 질문
-      </h2>
-    </div>
-
-    <div class="reveal">
-      <div class="faq-item">
-        <button class="faq-q" type="button">
-          견적은 무료인가요?
-          <span class="ico">+</span>
-        </button>
-        <div class="faq-a">
-          <div class="faq-a-inner">
-            네, 견적은 100% 무료입니다. 폼 작성 후 영업일 내에 담당자가
-            맞춤 견적을 보내드리며, 견적 확인 후 진행 여부를 결정하시면 됩니다.
-          </div>
-        </div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-q" type="button">
-          제작 기간은 얼마나 걸리나요?
-          <span class="ico">+</span>
-        </button>
-        <div class="faq-a">
-          <div class="faq-a-inner">
-            품목과 수량에 따라 다르지만, 일반적인 인쇄물(전단지, 명함 등)은 영업일
-            기준 3~5일, 쇼핑백·현수막 등 가공이 필요한 품목은 5~10일 정도 소요됩니다.
-            급한 일정은 사전 협의로 단축 가능합니다.
-          </div>
-        </div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-q" type="button">
-          소량 주문도 가능한가요?
-          <span class="ico">+</span>
-        </button>
-        <div class="faq-a">
-          <div class="faq-a-inner">
-            네, 소량 주문도 가능합니다. 다만 디지털 인쇄와 실사 인쇄에 따라 최소 수량
-            기준이 다르므로, 견적 요청 시 정확한 수량을 입력해 주시면 적합한 방식으로
-            안내해 드립니다.
-          </div>
-        </div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-q" type="button">
-          디자인 파일이 없어도 제작 가능한가요?
-          <span class="ico">+</span>
-        </button>
-        <div class="faq-a">
-          <div class="faq-a-inner">
-            네, 디자인 파일이 없어도 진행 가능합니다. 간단한 텍스트·로고 배치 수준의
-            디자인은 무료로 도와드리며, 본격적인 디자인 작업이 필요한 경우 별도 견적으로
-            안내해 드립니다.
-          </div>
-        </div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-q" type="button">
-          결제 방식은 어떻게 되나요?
-          <span class="ico">+</span>
-        </button>
-        <div class="faq-a">
-          <div class="faq-a-inner">
-            견적 확정 후 토스페이먼츠를 통한 안전 결제(카드/계좌이체)와 세금계산서 발행
-            모두 지원합니다. 공공기관·기업의 경우 후불 정산도 협의 가능합니다.
-          </div>
-        </div>
-      </div>
-    </div>
-
-  </div>
-</section>
 
 
 <!-- ══════════════════════════════
-     CTA  (Lavender)
+     관련 기관 marquee (푸터 위, 투명 배경)
 ══════════════════════════════ -->
-<section id="cta" class="relative overflow-hidden py-24"
-         style="background:linear-gradient(165deg,#EFE9FA 0%,#DCD3F0 60%,#C8BCE8 100%)">
-  <div class="hero-pattern" style="opacity:.5"></div>
-
-  <div class="relative max-w-7xl mx-auto px-6 lg:px-10">
-
-    <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14">
-
-      <!-- ════════ 좌측: 한마음일터 정보 ════════ -->
-      <aside class="lg:col-span-4 reveal">
-
-        <!-- 로고 + 이름 -->
-        <div class="flex items-center gap-3 mb-7">
-          <div class="w-12 h-12 rounded-2xl flex items-center justify-center text-white font-bold text-base"
-               style="background:linear-gradient(135deg,var(--text-purple) 0%,var(--accent-blue) 100%);box-shadow:0 8px 22px rgba(74,111,227,.30)">
-            한
-          </div>
-          <div class="leading-tight">
-            <p class="font-bold" style="font-size:18px;color:var(--text-primary);letter-spacing:-.02em">한마음일터</p>
-            <p class="text-xs" style="color:var(--text-muted);letter-spacing:.05em">장애인직업재활시설</p>
-          </div>
-        </div>
-
-        <!-- 큰 타이틀 -->
-        <p class="text-xs font-semibold mb-3" style="color:var(--text-purple-deep);letter-spacing:.18em">CONTACT</p>
-        <h2 class="font-display mb-6"
-            style="font-size:clamp(44px,5.5vw,72px);letter-spacing:-.01em;color:var(--bg-navy);line-height:1};">
-          견적 요청
-        </h2>
-
-        <!-- 설명 -->
-        <p class="mb-9" style="font-size:15px;color:var(--text-secondary);line-height:1.72">
-          필요한 인쇄·홍보물 정보를 알려주세요.<br>
-          영업일 내 맞춤 견적으로 회신드립니다.<br>
-          <span style="color:var(--text-purple-deep);font-weight:600">견적은 100% 무료입니다.</span>
-        </p>
-
-        <!-- 연락처 정보 -->
-        <div class="space-y-3.5 mb-8">
-          <div class="flex items-start gap-3">
-            <div class="w-9 h-9 rounded-xl flex items-center justify-center shrink-0" style="background:#fff">
-              <svg width="15" height="15" fill="none" stroke="var(--text-purple-deep)" stroke-width="2" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round"
-                  d="M3 5a2 2 0 012-2h3.28a1 1 0 01.95.68l1.49 4.49a1 1 0 01-.5 1.21l-2.26 1.13a11 11 0 005.52 5.52l1.13-2.26a1 1 0 011.21-.5l4.49 1.5a1 1 0 01.68.94V19a2 2 0 01-2 2h-1C9.72 21 3 14.28 3 6V5z"/>
-              </svg>
-            </div>
-            <div class="leading-tight pt-1">
-              <p class="text-xs" style="color:var(--text-muted)">전화 · 팩스</p>
-              <p class="font-bold text-sm" style="color:var(--text-primary)">031-631-6680</p>
-              <p class="text-xs" style="color:var(--text-muted)">팩스 · 031-631-6634</p>
-            </div>
-          </div>
-
-          <div class="flex items-start gap-3">
-            <div class="w-9 h-9 rounded-xl flex items-center justify-center shrink-0" style="background:#fff">
-              <svg width="15" height="15" fill="none" stroke="var(--text-purple-deep)" stroke-width="2" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round"
-                  d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
-              </svg>
-            </div>
-            <div class="leading-tight pt-1">
-              <p class="text-xs" style="color:var(--text-muted)">이메일</p>
-              <p class="font-bold text-sm" style="color:var(--text-primary)">onemind6680@daum.net</p>
-            </div>
-          </div>
-
-          <div class="flex items-start gap-3">
-            <div class="w-9 h-9 rounded-xl flex items-center justify-center shrink-0" style="background:#fff">
-              <svg width="15" height="15" fill="none" stroke="var(--text-purple-deep)" stroke-width="2" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round"
-                  d="M17.657 16.657L13.414 20.9a2 2 0 01-2.828 0l-4.244-4.243a8 8 0 1111.314 0z"/>
-                <path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
-              </svg>
-            </div>
-            <div class="leading-tight pt-1">
-              <p class="text-xs" style="color:var(--text-muted)">주소</p>
-              <p class="font-bold text-sm" style="color:var(--text-primary);line-height:1.5">
-                경기도 이천시 마장면 이장로 256번길 한마음일터
-              </p>
-            </div>
-          </div>
-
-          <div class="flex items-start gap-3">
-            <div class="w-9 h-9 rounded-xl flex items-center justify-center shrink-0" style="background:#fff">
-              <svg width="15" height="15" fill="none" stroke="var(--text-purple-deep)" stroke-width="2" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
-              </svg>
-            </div>
-            <div class="leading-tight pt-1">
-              <p class="text-xs" style="color:var(--text-muted)">운영 시간</p>
-              <p class="font-bold text-sm" style="color:var(--text-primary)">평일 09:00 ─ 18:00</p>
-              <p class="text-xs" style="color:var(--text-muted)">주말·공휴일 휴무</p>
-            </div>
-          </div>
-        </div>
-
-        <!-- 신뢰 지표 -->
-        <div class="flex flex-wrap gap-x-5 gap-y-2 pt-6" style="border-top:1px solid rgba(107,91,201,.18)">
-          <span class="flex items-center gap-1.5 text-xs font-semibold" style="color:var(--text-secondary)">
-            <svg width="14" height="14" fill="none" stroke="var(--accent-blue)" stroke-width="2.4" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/>
-            </svg>
-            견적 무료
-          </span>
-          <span class="flex items-center gap-1.5 text-xs font-semibold" style="color:var(--text-secondary)">
-            <svg width="14" height="14" fill="none" stroke="var(--accent-blue)" stroke-width="2.4" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/>
-            </svg>
-            신속 응답
-          </span>
-          <span class="flex items-center gap-1.5 text-xs font-semibold" style="color:var(--text-secondary)">
-            <svg width="14" height="14" fill="none" stroke="var(--accent-blue)" stroke-width="2.4" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/>
-            </svg>
-            간단한 절차
-          </span>
-        </div>
-      </aside>
-
-
-      <!-- ════════ 우측: 폼 ════════ -->
-      <div class="lg:col-span-8 reveal">
-
-    <!-- 폼 -->
-    <form id="quote-form" class="quote-form" novalidate>
-
-      <!-- 기본 정보 -->
-      <div class="mb-5">
-        <label class="form-label" for="q-name">이름<span class="req">*</span></label>
-        <input id="q-name" name="name" type="text" class="form-input" placeholder="홍길동" required>
-      </div>
-
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-5">
-        <div>
-          <label class="form-label" for="q-phone">연락처<span class="req">*</span></label>
-          <input id="q-phone" name="phone" type="tel" class="form-input" placeholder="010-0000-0000" required>
-        </div>
-        <div>
-          <label class="form-label" for="q-email">이메일</label>
-          <input id="q-email" name="email" type="email" class="form-input" placeholder="example@email.com">
-        </div>
-      </div>
-
-      <div class="mb-7">
-        <label class="form-label" for="q-company">회사명·기관명<span class="req">*</span></label>
-        <input id="q-company" name="company" type="text" class="form-input" placeholder="(주)한마음" required>
-      </div>
-
-      <!-- 품목 선택 -->
-      <fieldset class="form-fieldset mb-6">
-        <legend class="form-label mb-3" style="font-size:14px">제작 품목 <span class="req">*</span> <span style="color:var(--text-muted);font-weight:500">(복수 선택 가능)</span></legend>
-
-        <div class="item-grid">
-          <label class="item-chip">
-            <input type="checkbox" name="item" value="전단지">
-            <span class="check-box"><svg width="11" height="11" fill="none" stroke="#fff" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span>
-            <span class="emoji">📰</span>
-            <span class="label">전단지</span>
-          </label>
-          <label class="item-chip">
-            <input type="checkbox" name="item" value="명함">
-            <span class="check-box"><svg width="11" height="11" fill="none" stroke="#fff" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span>
-            <span class="emoji">💼</span>
-            <span class="label">명함</span>
-          </label>
-          <label class="item-chip">
-            <input type="checkbox" name="item" value="쇼핑백">
-            <span class="check-box"><svg width="11" height="11" fill="none" stroke="#fff" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span>
-            <span class="emoji">🛍️</span>
-            <span class="label">쇼핑백</span>
-          </label>
-          <label class="item-chip">
-            <input type="checkbox" name="item" value="현수막">
-            <span class="check-box"><svg width="11" height="11" fill="none" stroke="#fff" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span>
-            <span class="emoji">🚩</span>
-            <span class="label">현수막·배너</span>
-          </label>
-          <label class="item-chip">
-            <input type="checkbox" name="item" value="포스터">
-            <span class="check-box"><svg width="11" height="11" fill="none" stroke="#fff" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span>
-            <span class="emoji">🖼️</span>
-            <span class="label">포스터</span>
-          </label>
-          <label class="item-chip">
-            <input type="checkbox" name="item" value="스티커">
-            <span class="check-box"><svg width="11" height="11" fill="none" stroke="#fff" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span>
-            <span class="emoji">🏷️</span>
-            <span class="label">스티커·라벨</span>
-          </label>
-          <label class="item-chip">
-            <input type="checkbox" name="item" value="카탈로그">
-            <span class="check-box"><svg width="11" height="11" fill="none" stroke="#fff" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span>
-            <span class="emoji">📋</span>
-            <span class="label">카탈로그·책자</span>
-          </label>
-          <label class="item-chip">
-            <input type="checkbox" name="item" value="달력">
-            <span class="check-box"><svg width="11" height="11" fill="none" stroke="#fff" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span>
-            <span class="emoji">📅</span>
-            <span class="label">달력</span>
-          </label>
-          <label class="item-chip">
-            <input type="checkbox" name="item" value="메뉴판">
-            <span class="check-box"><svg width="11" height="11" fill="none" stroke="#fff" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span>
-            <span class="emoji">📜</span>
-            <span class="label">메뉴판</span>
-          </label>
-          <label class="item-chip">
-            <input type="checkbox" name="item" value="박스·패키지">
-            <span class="check-box"><svg width="11" height="11" fill="none" stroke="#fff" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span>
-            <span class="emoji">📦</span>
-            <span class="label">박스·패키지</span>
-          </label>
-          <label class="item-chip">
-            <input type="checkbox" name="item" value="사인물">
-            <span class="check-box"><svg width="11" height="11" fill="none" stroke="#fff" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span>
-            <span class="emoji">🪧</span>
-            <span class="label">사인물</span>
-          </label>
-          <label class="item-chip">
-            <input type="checkbox" name="item" value="굿즈">
-            <span class="check-box"><svg width="11" height="11" fill="none" stroke="#fff" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span>
-            <span class="emoji">🎁</span>
-            <span class="label">기업 굿즈</span>
-          </label>
-          <label class="item-chip">
-            <input type="checkbox" name="item" value="디자인">
-            <span class="check-box"><svg width="11" height="11" fill="none" stroke="#fff" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span>
-            <span class="emoji">🎨</span>
-            <span class="label">디자인 작업</span>
-          </label>
-          <label class="item-chip">
-            <input type="checkbox" name="item" value="기타" id="other-check">
-            <span class="check-box"><svg width="11" height="11" fill="none" stroke="#fff" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span>
-            <span class="emoji">✏️</span>
-            <span class="label">기타</span>
-          </label>
-        </div>
-
-        <!-- 기타 입력 필드 (체크 시 표시) -->
-        <div id="other-text-wrap">
-          <input id="other-text" name="other_detail" type="text" class="form-input"
-                 placeholder="기타 품목을 자유롭게 입력해 주세요">
-        </div>
-      </fieldset>
-
-      <!-- 문의사항 -->
-      <div class="mb-6">
-        <label class="form-label" for="q-message">
-          문의사항
-          <span style="color:var(--text-muted);font-weight:500;font-size:12px;margin-left:6px">
-            수량·납기·예산을 함께 남겨주세요
-          </span>
-        </label>
-        <textarea id="q-message" name="message" rows="4" class="form-input"
-                  placeholder="예) 전단지 1,000부 · A4 양면 · 5월 25일까지 납품 희망"
-                  style="resize:vertical;min-height:110px;font-family:inherit"></textarea>
-      </div>
-
-      <!-- 개인정보 수집 및 이용 동의 -->
-      <div class="mb-6">
-        <label class="form-label">
-          개인정보 수집 및 이용 동의<span class="req">*</span>
-        </label>
-        <div class="privacy-box">
-          <p class="font-bold mb-2" style="font-size:13px;color:var(--text-primary)">
-            한마음일터(이하 "회사")는 개인정보 보호법 제30조에 따라 정보 주체의 개인정보를 보호하고 이와 관련한 고충을 신속하고 원활하게 처리할 수 있도록 다음과 같이 개인정보 처리지침을 수립·공개합니다.
-          </p>
-          <p class="font-bold mt-3 mb-1" style="font-size:12px;color:var(--text-primary)">제1조 (개인정보의 처리목적)</p>
-          <p style="font-size:11.5px;color:var(--text-secondary);line-height:1.6">
-            회사는 다음의 목적을 위하여 개인정보를 처리합니다. 처리하고 있는 개인정보는 다음의 목적 이외의 용도로는 이용되지 않으며, 이용 목적이 변경되는 경우에는 개인정보보호법 제18조에 따라 별도의 동의를 받는 등 필요한 조치를 이행할 예정입니다.
-          </p>
-          <p class="font-bold mt-3 mb-1" style="font-size:12px;color:var(--text-primary)">제2조 (수집 항목)</p>
-          <p style="font-size:11.5px;color:var(--text-secondary);line-height:1.6">
-            · 필수: 이름, 연락처, 회사명·기관명, 제작 품목<br>
-            · 선택: 이메일, 문의사항
-          </p>
-          <p class="font-bold mt-3 mb-1" style="font-size:12px;color:var(--text-primary)">제3조 (보유 기간)</p>
-          <p style="font-size:11.5px;color:var(--text-secondary);line-height:1.6">
-            견적 요청일로부터 3년간 보관 후 즉시 파기합니다. 단, 상거래 관련 법령에 따라 보존이 필요한 경우 해당 기간 동안 보관합니다.
-          </p>
-          <p class="font-bold mt-3 mb-1" style="font-size:12px;color:var(--text-primary)">제4조 (동의 거부 권리)</p>
-          <p style="font-size:11.5px;color:var(--text-secondary);line-height:1.6">
-            귀하는 개인정보 수집·이용에 대한 동의를 거부할 권리가 있습니다. 다만 동의를 거부하실 경우 견적 요청 서비스 제공이 제한될 수 있습니다.
-          </p>
-        </div>
-        <label class="privacy-check">
-          <input type="checkbox" id="q-agree" required>
-          <span class="check-mark">
-            <svg width="11" height="11" fill="none" stroke="#fff" stroke-width="3" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/>
-            </svg>
-          </span>
-          <span>개인정보 수집 및 이용에 동의합니다.<span class="req">*</span></span>
-        </label>
-      </div>
-
-      <!-- 제출 버튼 -->
-      <div class="mt-7 flex flex-col items-stretch md:items-start gap-3">
-        <button type="submit" class="btn-primary w-full md:w-auto justify-center"
-                style="padding:16px 48px;font-size:14px">
-          견적 요청 보내기
-          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" viewBox="0 0 24 24">
-            <path d="M5 12h14M12 5l7 7-7 7"/>
-          </svg>
-        </button>
-        <p class="text-xs" style="color:var(--text-muted)">
-          ✱ 표시는 필수 입력 항목입니다. 제출 후 영업일 내 담당자가 회신드립니다.
-        </p>
-      </div>
-
-    </form>
-
-      </div><!-- /우측 컬럼 -->
-    </div><!-- /grid -->
-
-    <!-- 성공 메시지 (제출 후 표시) -->
-    <div id="quote-success" class="quote-form reveal mt-12" style="max-width:720px;margin-left:auto;margin-right:auto" hidden>
-      <div class="form-success">
-        <div class="form-success-icon">
-          <svg width="36" height="36" fill="none" stroke="#fff" stroke-width="2.6" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/>
-          </svg>
-        </div>
-        <h3 class="font-display mb-3" style="font-size:30px;color:var(--text-purple-deep);line-height:1.2">
-          요청이 접수되었습니다!
-        </h3>
-        <p class="mb-7" style="font-size:15px;color:var(--text-secondary);line-height:1.7">
-          담당자가 영업일 내에 맞춤 견적으로 회신드립니다.<br>
-          영업 시간(평일 09:00~18:00) 외에는 다음 영업일에 회신드립니다.
-        </p>
-        <div class="flex flex-col md:flex-row items-center justify-center gap-3">
-          <a href="quote.html" class="btn-primary" style="padding:14px 32px">
-            견적요청 페이지로
-            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" viewBox="0 0 24 24">
-              <path d="M5 12h14M12 5l7 7-7 7"/>
-            </svg>
-          </a>
-          <a href="tel:031-631-6680" class="btn-soft">
-            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round"
-                d="M3 5a2 2 0 012-2h3.28a1 1 0 01.95.68l1.49 4.49a1 1 0 01-.5 1.21l-2.26 1.13a11 11 0 005.52 5.52l1.13-2.26a1 1 0 011.21-.5l4.49 1.5a1 1 0 01.68.94V19a2 2 0 01-2 2h-1C9.72 21 3 14.28 3 6V5z"/>
-            </svg>
-            031-631-6680
-          </a>
-        </div>
-        <p class="text-xs mt-5" style="color:var(--text-muted)">
-          ※ 실제 운영 시 담당자가 견적 확인 후 결제 링크를 발송해 드립니다.
-        </p>
-      </div>
-    </div>
-
+<section class="partners-marquee" aria-label="관련 기관">
+  <div class="partners-track">
+    <a href="https://www.kead.or.kr/" class="partner-link" target="_blank" rel="noopener"><span class="partner-logo"><img src="images/partners/kead.svg" alt=""></span>한국장애인고용공단</a>
+    <a href="https://www.koddi.or.kr/" class="partner-link" target="_blank" rel="noopener"><span class="partner-logo"><img src="images/partners/koddi_h1_logo2.png" alt=""></span>한국장애인개발원</a>
+    <a href="https://www.gg.go.kr/" class="partner-link" target="_blank" rel="noopener"><span class="partner-logo"><img src="images/partners/gg.jpg" alt=""></span>경기도청</a>
+    <a href="https://www.icheon.go.kr/" class="partner-link" target="_blank" rel="noopener"><span class="partner-logo"><img src="images/partners/icheon_fav.ico" alt=""></span>이천시청</a>
+    <a href="https://www.bokjiro.go.kr/" class="partner-link" target="_blank" rel="noopener"><span class="partner-logo"><img src="images/partners/ssis_logo.png" alt=""></span>한국사회보장정보원</a>
+    <a href="https://www.kead.or.kr/" class="partner-link" target="_blank" rel="noopener" aria-hidden="true"><span class="partner-logo"><img src="images/partners/kead.svg" alt=""></span>한국장애인고용공단</a>
+    <a href="https://www.koddi.or.kr/" class="partner-link" target="_blank" rel="noopener" aria-hidden="true"><span class="partner-logo"><img src="images/partners/koddi_h1_logo2.png" alt=""></span>한국장애인개발원</a>
+    <a href="https://www.gg.go.kr/" class="partner-link" target="_blank" rel="noopener" aria-hidden="true"><span class="partner-logo"><img src="images/partners/gg.jpg" alt=""></span>경기도청</a>
+    <a href="https://www.icheon.go.kr/" class="partner-link" target="_blank" rel="noopener" aria-hidden="true"><span class="partner-logo"><img src="images/partners/icheon_fav.ico" alt=""></span>이천시청</a>
+    <a href="https://www.bokjiro.go.kr/" class="partner-link" target="_blank" rel="noopener" aria-hidden="true"><span class="partner-logo"><img src="images/partners/ssis_logo.png" alt=""></span>한국사회보장정보원</a>
   </div>
 </section>
-
 
 <!-- ══════════════════════════════
      FOOTER  (Navy)
 ══════════════════════════════ -->
 <footer style="background:var(--bg-navy);color:var(--text-on-dark)">
 
-  <!-- Top icon row -->
-  <div class="border-b" style="border-color:rgba(255,255,255,.08)">
-    <div class="max-w-7xl mx-auto px-6 lg:px-10 py-6 flex flex-wrap justify-center items-center gap-x-10 gap-y-3">
-      <a href="#" class="text-xs font-medium" style="color:var(--text-muted-dark)">한국장애인고용공단</a>
-      <span style="color:rgba(255,255,255,.15)">·</span>
-      <a href="#" class="text-xs font-medium" style="color:var(--text-muted-dark)">한국장애인개발원</a>
-      <span style="color:rgba(255,255,255,.15)">·</span>
-      <a href="#" class="text-xs font-medium" style="color:var(--text-muted-dark)">경기도청</a>
-      <span style="color:rgba(255,255,255,.15)">·</span>
-      <a href="#" class="text-xs font-medium" style="color:var(--text-muted-dark)">이천시청</a>
-      <span style="color:rgba(255,255,255,.15)">·</span>
-      <a href="#" class="text-xs font-medium" style="color:var(--text-muted-dark)">사회복지정보원</a>
-    </div>
-  </div>
-
   <!-- Main footer grid -->
   <div class="max-w-7xl mx-auto px-6 lg:px-10 py-14">
-    <div class="grid grid-cols-1 md:grid-cols-4 gap-10">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
 
       <div class="md:col-span-1">
-        <div class="mb-4" style="background:#fff;padding:10px 14px;border-radius:10px;display:inline-block">
-          <img src="logo.png" alt="한마음일터" style="height:42px;width:auto;display:block">
+        <div class="mb-4">
+          <img src="한마음로고 하단위치로고.png" alt="한마음일터" style="height:56px;width:auto;display:block">
         </div>
         <p class="text-sm leading-[1.7] mb-5" style="color:var(--text-muted-dark)">
           장애인의 자립과 사회 참여를 돕는 직업재활시설.
@@ -1655,18 +999,6 @@
           </svg>
           031-631-6680
         </a>
-      </div>
-
-      <div>
-        <p class="text-xs font-bold uppercase mb-4" style="color:var(--accent-yellow);letter-spacing:.16em">사이트맵</p>
-        <ul class="space-y-2.5 text-sm" style="color:var(--text-muted-dark)">
-          <li><a href="about.html"      class="hover:text-white transition-colors">소개</a></li>
-          <li><a href="print.html"      class="hover:text-white transition-colors">인쇄</a></li>
-          <li><a href="processing.html" class="hover:text-white transition-colors">임가공</a></li>
-          <li><a href="community.html"  class="hover:text-white transition-colors">커뮤니티</a></li>
-          <li><a href="quote.html"      class="hover:text-white transition-colors">견적요청</a></li>
-          <li><a href="about.html#location" class="hover:text-white transition-colors">찾아오시는 길</a></li>
-        </ul>
       </div>
 
       <div>
@@ -1712,9 +1044,9 @@
         © 2026 한마음일터. All rights reserved.
       </p>
       <div class="flex items-center gap-5 text-xs" style="color:var(--text-muted-dark)">
-        <a href="#" class="hover:text-white transition-colors">개인정보처리방침</a>
+        <a href="privacy.html" class="hover:text-white transition-colors">개인정보처리방침</a>
         <span style="color:rgba(255,255,255,.15)">|</span>
-        <a href="#" class="hover:text-white transition-colors">이용약관</a>
+        <a href="terms.html" class="hover:text-white transition-colors">이용약관</a>
         <span style="color:rgba(255,255,255,.15)">|</span>
         <a href="admin.html" class="hover:text-white transition-colors" style="opacity:.5">관리자</a>
       </div>
@@ -1756,23 +1088,6 @@
     });
   });
 
-  // ── faq accordion (one open at a time)
-  document.querySelectorAll('.faq-q').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const item = btn.parentElement;
-      const open = item.classList.contains('open');
-      document.querySelectorAll('.faq-item.open').forEach(o => {
-        o.classList.remove('open');
-        o.querySelector('.faq-a').style.maxHeight = null;
-      });
-      if (!open) {
-        item.classList.add('open');
-        const a = item.querySelector('.faq-a');
-        a.style.maxHeight = a.scrollHeight + 'px';
-      }
-    });
-  });
-
   // ── reveal on scroll
   const io = new IntersectionObserver(entries => {
     entries.forEach(e => {
@@ -1783,129 +1098,6 @@
     });
   }, { threshold: .12 });
   document.querySelectorAll('.reveal').forEach(el => io.observe(el));
-
-  // ── 견적 요청 폼: 기타 토글
-  const otherCheck   = document.getElementById('other-check');
-  const otherWrap    = document.getElementById('other-text-wrap');
-  const otherInput   = document.getElementById('other-text');
-  if (otherCheck) {
-    otherCheck.addEventListener('change', () => {
-      if (otherCheck.checked) {
-        otherWrap.classList.add('show');
-        setTimeout(() => otherInput.focus(), 200);
-      } else {
-        otherWrap.classList.remove('show');
-        otherInput.value = '';
-      }
-    });
-  }
-
-  // ── 전화번호 자동 포맷 (010-0000-0000)
-  const phoneInput = document.getElementById('q-phone');
-  if (phoneInput) {
-    phoneInput.addEventListener('input', e => {
-      let v = e.target.value.replace(/\D/g, '').slice(0, 11);
-      if (v.length >= 7)      v = v.replace(/(\d{3})(\d{3,4})(\d{0,4}).*/, '$1-$2-$3').replace(/-$/, '');
-      else if (v.length >= 4) v = v.replace(/(\d{3})(\d{0,4}).*/, '$1-$2').replace(/-$/, '');
-      e.target.value = v;
-    });
-  }
-
-  // ── 폼 제출 (Apps Script 연결 — quote.html과 같은 백엔드)
-  const QUOTE_API_URL = 'https://script.google.com/macros/s/AKfycbyajgu_KD48Ptqw3k0O0lRz6F_SDAsBh17aHRoJyFM-FNQyhXIAnMNKogZuRIX8Yij2PA/exec';
-
-  const quoteForm    = document.getElementById('quote-form');
-  const quoteSuccess = document.getElementById('quote-success');
-  if (quoteForm) {
-    const submitBtn = quoteForm.querySelector('button[type="submit"]');
-
-    quoteForm.addEventListener('submit', async e => {
-      e.preventDefault();
-
-      // 필수 항목 검증
-      const name    = document.getElementById('q-name').value.trim();
-      const phone   = document.getElementById('q-phone').value.trim();
-      const company = document.getElementById('q-company').value.trim();
-      const email   = document.getElementById('q-email').value.trim();
-      const message = document.getElementById('q-message').value.trim();
-      const agree   = document.getElementById('q-agree').checked;
-      if (!name || !phone || !company) {
-        alert('이름, 연락처, 회사명·기관명을 모두 입력해 주세요.');
-        return;
-      }
-
-      // 품목 1개 이상 선택 검증
-      const items = [...document.querySelectorAll('input[name="item"]:checked')].map(c => c.value);
-      if (items.length === 0) {
-        alert('제작 품목을 1개 이상 선택해 주세요.');
-        return;
-      }
-
-      // 기타 선택 시 상세 검증
-      if (items.includes('기타') && !otherInput.value.trim()) {
-        alert('기타를 선택하신 경우 상세 내용을 입력해 주세요.');
-        otherInput.focus();
-        return;
-      }
-
-      // 개인정보 동의 체크 검증
-      if (!agree) {
-        alert('개인정보 수집 및 이용에 동의해 주세요.');
-        document.getElementById('q-agree').focus();
-        return;
-      }
-
-      // 품목 정리 (기타 상세 포함)
-      const itemList = items.filter(i => i !== '기타');
-      if (otherInput.value.trim()) itemList.push('기타: ' + otherInput.value.trim());
-      const productStr = itemList.join(', ');
-
-      // Apps Script로 보낼 데이터 (시트 견적요청 탭 컬럼과 매핑)
-      const body = {
-        company:     company,
-        dept:        '',
-        position:    '',
-        name:        name,
-        phone:       phone,
-        email:       email || '(미입력)',
-        product:     productStr,
-        title:       '[메인] ' + productStr.substring(0, 40),
-        qty:         '(미입력 — 메인 인라인 폼)',
-        due:         '',
-        detail:      message || '(메인 인라인 폼 — 상세 미입력)',
-        memo:        ''
-      };
-
-      // 제출 중 상태
-      const originalText = submitBtn.innerHTML;
-      submitBtn.disabled = true;
-      submitBtn.innerHTML = '접수 중...';
-
-      try {
-        const res = await fetch(QUOTE_API_URL + '?action=quote', {
-          method: 'POST',
-          body: JSON.stringify(body)
-        });
-        const data = await res.json();
-
-        if (data.success) {
-          // UI: 성공 화면으로 전환
-          quoteForm.hidden = true;
-          quoteSuccess.hidden = false;
-          quoteSuccess.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        } else {
-          alert('❌ 접수 실패\n\n' + (data.error || '알 수 없는 오류') + '\n\n급하시면 031-631-6680 으로 전화 부탁드립니다.');
-          submitBtn.disabled = false;
-          submitBtn.innerHTML = originalText;
-        }
-      } catch (err) {
-        console.error('견적 요청 실패:', err);
-        alert('❌ 네트워크 오류\n\n' + err.message + '\n\n급하시면 031-631-6680 으로 전화 부탁드립니다.');
-        submitBtn.disabled = false;
-        submitBtn.innerHTML = originalText;
-      }
-    });
-  }
 </script>
 
 </body>

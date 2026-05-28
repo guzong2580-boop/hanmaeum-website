@@ -5,6 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>관리자 — 한마음일터</title>
   <meta name="robots" content="noindex">
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.css">
   <link rel="stylesheet" href="common.css">
 
   <style>
@@ -522,6 +524,8 @@
       <button class="dash-tab active" data-type="notices">📢 공지사항</button>
       <button class="dash-tab" data-type="archive">📁 자료실</button>
       <button class="dash-tab" data-type="gallery">📷 갤러리</button>
+      <button class="dash-tab" data-type="print">🖨️ 인쇄물</button>
+      <button class="dash-tab" data-type="quote">📨 견적요청</button>
     </div>
   </header>
 
@@ -586,7 +590,13 @@ const FIELDS = {
         options: ['공지', '비공개'], default: '공지' },
       { name: 'date',   label: '날짜',  type: 'date',     required: true },
       { name: 'body',   label: '내용',  type: 'textarea', required: false,
-        hint: '상세 본문 (현재 목록에는 표시되지 않으나 향후 상세 화면에서 사용)' }
+        hint: '본문 텍스트 (커뮤니티 페이지의 글 상세에 표시)' },
+      { name: 'imageUrls', label: '본문 이미지', type: 'upload-multi', required: false,
+        accept: 'image/*', kind: 'image',
+        hint: '여러 장 선택 가능 (Ctrl·Shift). 본문 아래 그리드로 표시됩니다.' },
+      { name: 'fileUrls',  label: '첨부 파일',   type: 'upload-multi', required: false,
+        accept: '.pdf,.hwp,.hwpx,.doc,.docx,.zip,.xlsx,.xls,.ppt,.pptx', kind: 'file',
+        hint: 'PDF·HWP·DOC·ZIP 등 여러 파일. 다운로드 버튼으로 표시됩니다.' }
     ]
   },
   archive: {
@@ -603,7 +613,15 @@ const FIELDS = {
         hint: '예: 2025-12 (월 단위 표기 가능)' },
       { name: 'fileUrl',     label: '파일',  type: 'upload',  required: false,
         accept: '.pdf,.hwp,.hwpx,.doc,.docx,.zip,.png,.jpg,.jpeg',
-        hint: 'PDF·HWP·ZIP 등을 선택하면 Drive에 자동 업로드됩니다' }
+        hint: 'PDF·HWP·ZIP 등을 선택하면 Drive에 자동 업로드됩니다' },
+      { name: 'body',        label: '본문',  type: 'textarea', required: false,
+        hint: '자료 상세 페이지에 표시될 설명 본문 (비워두면 description만 표시)' },
+      { name: 'imageUrls',   label: '본문 이미지', type: 'upload-multi', required: false,
+        accept: 'image/*', kind: 'image',
+        hint: '여러 장 선택 가능 (Ctrl·Shift). 상세 페이지에 그리드로 표시' },
+      { name: 'fileUrls',    label: '추가 첨부파일', type: 'upload-multi', required: false,
+        accept: '.pdf,.hwp,.hwpx,.doc,.docx,.zip,.xlsx,.xls,.ppt,.pptx', kind: 'file',
+        hint: '대표 파일(fileUrl) 외 추가 파일들. 상세 페이지에서 다운로드 버튼으로 표시' }
     ]
   },
   gallery: {
@@ -613,14 +631,53 @@ const FIELDS = {
       { name: 'title',    label: '제목',     type: 'text', required: true },
       { name: 'date',     label: '날짜',     type: 'text', required: false,
         hint: '예: 2025-12' },
-      { name: 'imageUrl', label: '사진',     type: 'upload', required: false,
-        accept: 'image/*',
-        hint: '사진을 선택하면 Drive에 자동 업로드됩니다. 비워두면 색상+이모지로 표시.' },
+      { name: 'imageUrls', label: '사진 (여러 장 선택 가능)', type: 'upload-multi', required: false,
+        accept: 'image/*', kind: 'image',
+        hint: 'Ctrl·Shift 로 여러 장 선택. 첫 장이 갤러리 카드 썸네일이 되고, 모든 장은 상세 페이지에 그리드로 표시됩니다. 비워두면 색상+이모지로 표시.' },
       { name: 'color',    label: '(이미지 없을 때) 색상', type: 'select', required: false,
         options: ['lavender','pink','mint','yellow','sky'], default: 'lavender' },
       { name: 'emoji',    label: '(이미지 없을 때) 이모지', type: 'text', required: false,
-        default: '📷' }
+        default: '📷' },
+      { name: 'body',     label: '본문',     type: 'textarea', required: false,
+        hint: '사진 상세 페이지에 표시될 설명 (비워두면 제목·날짜만 표시)' },
+      { name: 'fileUrls', label: '첨부 파일', type: 'upload-multi', required: false,
+        accept: '.pdf,.hwp,.hwpx,.doc,.docx,.zip,.xlsx,.xls,.ppt,.pptx', kind: 'file',
+        hint: 'PDF·HWP·DOC 등. 상세 페이지에서 다운로드 버튼으로 표시' }
     ]
+  },
+  print: {
+    label: '인쇄물',
+    title: (item) => item ? '인쇄물 수정' : '새 인쇄물',
+    fields: [
+      { name: 'category', label: '카테고리', type: 'select', required: true,
+        options: ['leaflet','book','poster','shoppingbag','banner','etc'], default: 'leaflet',
+        hint: 'leaflet=리플렛·접지물 / book=카탈로그·책자 / poster=포스터 / shoppingbag=쇼핑백 / banner=현수막·배너 / etc=기타' },
+      { name: 'title',    label: '큰제목 (작품명)', type: 'text', required: true },
+      { name: 'tag',      label: '소제목 (분류·형식)', type: 'text', required: false,
+        hint: '예: LEAFLET · 3단 접지 / CATALOG · BOOKLET / POSTER · CAMPAIGN' },
+      { name: 'color',    label: '카드 컬러칩', type: 'select', required: false,
+        options: ['c-cream','c-coral','c-yellow','c-blue','c-sky','c-pink','c-lavender','c-mint','c-teal','c-grey','c-olive','c-sand'],
+        default: 'c-cream',
+        hint: '이미지 로딩 실패 시 배경 색상' },
+      { name: 'imageUrl', label: '썸네일 (갤러리 카드)', type: 'upload', required: false,
+        accept: 'image/*',
+        hint: '갤러리 카드에 표시될 1장. 정사각형 비율 권장' },
+      { name: 'imagesJson', label: '상세 이미지 (여러 장)', type: 'upload-multi', required: false,
+        accept: 'image/*', kind: 'image',
+        hint: '카드 클릭 시 상세 페이지에 세로로 배치됨. 여러 장 한 번에 선택 가능 (Ctrl·Shift). 비우면 썸네일 1장만 표시' },
+      { name: 'bg',       label: '제작 배경', type: 'textarea', required: false,
+        hint: '과거 데이터 보존용 — 현재 상세뷰엔 표시 안 됨' },
+      { name: 'design',   label: '디자인 의도', type: 'textarea', required: false,
+        hint: '과거 데이터 보존용' },
+      { name: 'info',     label: '스펙 정보 (JSON)', type: 'textarea', required: false,
+        hint: '과거 데이터 보존용. 예: [{"k":"형식","v":"3단 접지"},{"k":"용지","v":"아트지 150g"}]' },
+      { name: 'sortOrder', label: '정렬 순서', type: 'text', required: false,
+        hint: '숫자가 낮을수록 먼저 표시. 비우면 createdAt 기준 최신순' }
+    ]
+  },
+  quote: {
+    label: '견적요청',
+    readonly: true
   }
 };
 
@@ -754,6 +811,8 @@ document.querySelectorAll('.dash-tab').forEach(btn => {
     btn.classList.add('active');
     currentType = btn.dataset.type;
     document.getElementById('bar-title').firstChild.textContent = FIELDS[currentType].label + ' ';
+    // 읽기 전용 탭(견적요청)은 "+ 새 글 작성" 버튼 숨김
+    document.getElementById('btn-new').style.display = FIELDS[currentType].readonly ? 'none' : '';
     loadList();
   });
 });
@@ -767,7 +826,9 @@ const listArea = document.getElementById('list-area');
 async function loadList() {
   listArea.innerHTML = '<div class="empty"><div class="ico">⏳</div><p>불러오는 중...</p></div>';
   try {
-    const res = await api('list', { method: 'GET', type: currentType });
+    const res = currentType === 'quote'
+      ? await api('quote-list', { body: {} })
+      : await api('list', { method: 'GET', type: currentType });
     if (!res.success) {
       listArea.innerHTML = `<div class="empty"><div class="ico">⚠️</div><p>${escapeHtml(res.error || '불러오기 실패')}</p></div>`;
       return;
@@ -790,6 +851,8 @@ function renderList() {
     if (currentType === 'notices')  return renderNotice(item);
     if (currentType === 'archive')  return renderArchive(item);
     if (currentType === 'gallery')  return renderGallery(item);
+    if (currentType === 'print')    return renderPrint(item);
+    if (currentType === 'quote')    return renderQuote(item);
   }).join('');
 
   listArea.querySelectorAll('button.edit').forEach(btn => {
@@ -798,6 +861,57 @@ function renderList() {
   listArea.querySelectorAll('button.del').forEach(btn => {
     btn.addEventListener('click', () => doDelete(btn.dataset.id));
   });
+  listArea.querySelectorAll('button.btn-respond').forEach(btn => {
+    btn.addEventListener('click', () => doQuoteResponse(btn));
+  });
+}
+
+async function doQuoteResponse(btn) {
+  const card = btn.closest('[data-quote-id]');
+  if (!card) return;
+  const id = btn.dataset.id;
+  const amountInput = card.querySelector('.quote-amount');
+  const memoInput   = card.querySelector('.quote-memo');
+  const amount = Number(amountInput.value);
+  const memo   = memoInput.value.trim();
+
+  if (!amount || amount < 100) {
+    toast('견적 금액을 100원 이상 입력해주세요.', true);
+    amountInput.focus();
+    return;
+  }
+  if (!confirm(`견적 ${amount.toLocaleString('ko-KR')}원으로 결제 링크를 발송할까요?\n(고객 이메일이 등록된 경우 자동 발송)`)) return;
+
+  btn.disabled = true;
+  const startMs = Date.now();
+  btn.textContent = '메일 발송 중…';
+  toast('결제 링크 발송 요청 — 메일 라우팅에 3~8초 소요됩니다.');
+  // 경과초 카운터 (체감 UX 개선)
+  const tick = setInterval(() => {
+    const sec = Math.floor((Date.now() - startMs) / 1000);
+    btn.textContent = `메일 발송 중… ${sec}s`;
+  }, 1000);
+  try {
+    const res = await api('quote-response', { body: { id, amount, memo } });
+    clearInterval(tick);
+    if (res.success) {
+      toast(`결제 링크 생성 완료${res.emailSent ? ' · 메일 발송됨' : ' (메일 미발송 — 이메일 없음)'}`);
+      // 결제 URL 클립보드 복사 옵션
+      if (res.payUrl && confirm('결제 링크를 클립보드에 복사할까요?\n' + res.payUrl)) {
+        navigator.clipboard.writeText(res.payUrl).catch(() => {});
+      }
+      loadList();  // 새로고침 → status 업데이트
+    } else {
+      toast(res.error || '발송 실패', true);
+      btn.disabled = false;
+      btn.textContent = '결제 링크 발송';
+    }
+  } catch (err) {
+    clearInterval(tick);
+    toast(err.message || '서버 오류', true);
+    btn.disabled = false;
+    btn.textContent = '결제 링크 발송';
+  }
 }
 
 function renderNotice(item) {
@@ -849,6 +963,80 @@ function renderGallery(item) {
     </div>`;
 }
 
+function renderPrint(item) {
+  const catLabel = { leaflet: 'LEAFLET', book: 'BOOK', poster: 'POSTER', shoppingbag: 'SHOPPING BAG', banner: 'BANNER', etc: 'ETC' }[item.category] || item.category || '';
+  const thumb = item.imageUrl
+    ? `<div class="item-thumb"><img src="${escapeHtml(item.imageUrl)}" alt=""></div>`
+    : `<div class="item-thumb">🖨️</div>`;
+  return `
+    <div class="item-card">
+      ${thumb}
+      <span class="item-badge">${escapeHtml(catLabel)}</span>
+      <div class="item-info">
+        <h4>${escapeHtml(item.title || '')}</h4>
+        <p>${escapeHtml(item.tag || '')} ${item.sortOrder ? '· 순서 ' + escapeHtml(item.sortOrder) : ''}</p>
+      </div>
+      <div class="item-actions">
+        <button class="edit" data-id="${escapeHtml(item.id)}">수정</button>
+        <button class="del" data-id="${escapeHtml(item.id)}">삭제</button>
+      </div>
+    </div>`;
+}
+
+function renderQuote(item) {
+  const phoneDigits = String(item.phone ?? '').replace(/[^0-9]/g, '');
+  const isPlaceholder = (s) => !s || /^\(미입력|^\(메인 인라인/.test(String(s));
+  const hasDetail = !isPlaceholder(item.detail);
+  const hasMemo   = !isPlaceholder(item.memo);
+  const status = item.status || '접수';
+  const statusColor = {
+    '접수':       { bg: '#FFF4E0', fg: '#A67C00' },
+    '견적 회신':  { bg: '#E0EAFB', fg: '#2A4D8F' },
+    '결제완료':   { bg: '#DCF3E2', fg: '#1F6F3B' },
+  }[status] || { bg: '#F0F0F2', fg: '#666' };
+  const amountStr = item.amount ? Number(item.amount).toLocaleString('ko-KR') + '원' : '';
+
+  return `
+    <div class="item-card" style="align-items:flex-start" data-quote-id="${escapeHtml(item.id)}">
+      <div class="item-info" style="flex:1">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px">
+          <span style="display:inline-block;padding:3px 10px;border-radius:999px;background:${statusColor.bg};color:${statusColor.fg};font-size:11px;font-weight:700;letter-spacing:.04em">${escapeHtml(status)}</span>
+          ${amountStr ? `<span style="font-size:13px;font-weight:700;color:#4A6FE3">${amountStr}</span>` : ''}
+        </div>
+        <h4>${escapeHtml(item.title || '(제목 없음)')}</h4>
+        <p style="margin-top:6px;font-size:14px">
+          <b>${escapeHtml(item.company || '-')}</b>
+          ${item.dept ? ' · ' + escapeHtml(item.dept) : ''}
+          ${item.position ? ' · ' + escapeHtml(item.position) : ''}
+          &nbsp;·&nbsp; ${escapeHtml(item.name || '-')}
+        </p>
+        <p style="margin-top:4px;font-size:13px">
+          📞 <a href="tel:${phoneDigits}" style="color:#4A6FE3;text-decoration:none;font-weight:600">${escapeHtml(item.phone || '-')}</a>
+          ${item.email && !isPlaceholder(item.email) ? ' &nbsp;·&nbsp; ✉️ <a href="mailto:' + escapeHtml(item.email) + '" style="color:#4A6FE3;text-decoration:none">' + escapeHtml(item.email) + '</a>' : ''}
+        </p>
+        <p style="margin-top:6px;font-size:13px;color:#666">
+          ${escapeHtml(item.product || '-')}
+          ${item.qty && !isPlaceholder(item.qty) ? ' · ' + escapeHtml(item.qty) : ''}
+          ${item.due ? ' · 납기 ' + escapeHtml(item.due) : ''}
+        </p>
+        ${hasDetail ? `<div style="margin-top:10px;padding:12px 14px;background:#FAF9F6;border-left:3px solid #4A6FE3;border-radius:8px;font-size:13px;line-height:1.6;white-space:pre-wrap">${escapeHtml(item.detail)}</div>` : ''}
+        ${hasMemo ? `<div style="margin-top:8px;padding:10px 14px;background:#F4F4F6;border-radius:8px;font-size:12px;color:#666;white-space:pre-wrap">📝 ${escapeHtml(item.memo)}</div>` : ''}
+        ${item.orderId ? `<p style="margin-top:8px;font-size:12px;color:#666">주문번호 <code style="background:#F4F4F6;padding:2px 6px;border-radius:4px">${escapeHtml(item.orderId)}</code></p>` : ''}
+        <p style="margin-top:8px;font-size:12px;color:#A8B0C0">접수 ${escapeHtml(item.createdAt || '')}${item.paidAt ? ' · 결제 ' + escapeHtml(item.paidAt) : ''}</p>
+
+        ${status === '접수' ? `
+          <div style="margin-top:14px;padding:14px;background:#F8F8FB;border-radius:10px">
+            <div style="display:flex;gap:8px;align-items:center;margin-bottom:8px">
+              <input type="number" min="0" step="100" placeholder="견적 금액 (원)" class="quote-amount" style="flex:1;padding:9px 12px;border:1px solid #E0E0E5;border-radius:8px;font-size:14px">
+              <button class="btn-respond" data-id="${escapeHtml(item.id)}" style="padding:9px 16px;background:#4A6FE3;color:#fff;border:none;border-radius:8px;font-weight:700;font-size:13px;cursor:pointer;white-space:nowrap">결제 링크 발송</button>
+            </div>
+            <textarea placeholder="메모(선택) — 옵션·납기 등" class="quote-memo" rows="2" style="width:100%;padding:9px 12px;border:1px solid #E0E0E5;border-radius:8px;font-size:13px;resize:vertical;font-family:inherit"></textarea>
+          </div>
+        ` : ''}
+      </div>
+    </div>`;
+}
+
 
 // ════════════════════════════════════════════════════════════
 // 모달 (생성·수정)
@@ -864,10 +1052,19 @@ document.getElementById('btn-cancel').addEventListener('click', closeModal);
 modal.addEventListener('click', e => { if (e.target === modal) closeModal(); });
 document.addEventListener('keydown', e => { if (e.key === 'Escape' && modal.classList.contains('open')) closeModal(); });
 
+function resetSaveBtn() {
+  const b = document.getElementById('btn-save');
+  if (!b) return;
+  b.disabled = false;
+  b.textContent = '저장';
+  b.dataset.uploading = '0';
+}
+
 function openCreate() {
   editingId = null;
   modalTitle.textContent = FIELDS[currentType].title(null);
   buildForm({});
+  resetSaveBtn();
   modal.classList.add('open');
 }
 
@@ -877,12 +1074,24 @@ function openEdit(id) {
   editingId = id;
   modalTitle.textContent = FIELDS[currentType].title(item);
   buildForm(item);
+  resetSaveBtn();
   modal.classList.add('open');
 }
 
-function closeModal() { modal.classList.remove('open'); }
+function closeModal() { modal.classList.remove('open'); resetSaveBtn(); }
 
 function buildForm(item) {
+  // 갤러리 마이그레이션: 과거에 imageUrl(단수) 만 저장된 항목을 imageUrls 배열의 첫 항목으로 합쳐서 표시
+  if (currentType === 'gallery') {
+    item = Object.assign({}, item);
+    let existing = [];
+    try { existing = item.imageUrls ? JSON.parse(item.imageUrls) : []; } catch (e) { existing = []; }
+    if (!Array.isArray(existing)) existing = [];
+    if (item.imageUrl && !existing.some(it => (it && it.url) === item.imageUrl)) {
+      existing.unshift({ name: '대표사진', url: item.imageUrl, size: '' });
+    }
+    item.imageUrls = existing.length ? JSON.stringify(existing) : '';
+  }
   const fields = FIELDS[currentType].fields;
   modalFields.innerHTML = fields.map(f => {
     const val = item[f.name] !== undefined ? item[f.name] : (f.default || '');
@@ -919,18 +1128,170 @@ function buildForm(item) {
           ${hint}
         </div>`;
     }
+    if (f.type === 'upload-multi') {
+      const accept = f.accept || '';
+      const kind = f.kind || 'file';
+      let items = [];
+      try {
+        items = val ? JSON.parse(val) : [];
+        if (!Array.isArray(items)) items = [];
+      } catch (e) { items = []; }
+      return `
+        <div class="field" data-upload-multi="${f.name}" data-kind="${kind}">
+          <label>${escapeHtml(f.label)} ${req}</label>
+          <input type="hidden" name="${f.name}" value="${escapeHtml(val)}">
+          <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-bottom:10px">
+            <label class="upload-btn" style="display:inline-flex;align-items:center;gap:6px;padding:9px 14px;background:var(--bg-cream);border:1px solid var(--border);border-radius:9px;font-size:13px;font-weight:600;cursor:pointer;transition:all .15s var(--ease)">
+              ${kind === 'image' ? '🖼️ 이미지 추가' : '📎 파일 추가'}
+              <input type="file" accept="${escapeHtml(accept)}" multiple data-upload-multi-input="${f.name}" style="display:none">
+            </label>
+            <span class="upload-multi-status" data-upload-multi-status="${f.name}" style="font-size:12px;color:var(--text-muted)">${items.length}개 등록됨</span>
+          </div>
+          <div class="upload-multi-grid" data-upload-multi-grid="${f.name}" style="display:flex;flex-wrap:wrap;gap:10px">
+            ${renderUploadMultiItems(items, f.name, kind)}
+          </div>
+          ${hint}
+        </div>`;
+    }
     return `<div class="field"><label>${escapeHtml(f.label)} ${req}</label><input type="${f.type}" name="${f.name}" value="${escapeHtml(val)}" ${f.required ? 'required' : ''}>${hint}</div>`;
   }).join('');
 
-  // 업로드 input 이벤트 바인딩
+  // 단일 업로드 input 이벤트 바인딩
   modalFields.querySelectorAll('[data-upload-input]').forEach(input => {
     input.addEventListener('change', () => uploadFile(input));
   });
+  // 다중 업로드 input 이벤트 바인딩
+  modalFields.querySelectorAll('[data-upload-multi-input]').forEach(input => {
+    input.addEventListener('change', () => uploadMultiFiles(input));
+  });
+  // 다중 업로드 항목 삭제 버튼
+  bindUploadMultiDeleteHandlers();
+}
+
+function renderUploadMultiItems(items, fieldName, kind) {
+  if (!items.length) return '';
+  return items.map((item, idx) => {
+    if (kind === 'image') {
+      return `
+        <div class="upload-multi-item" style="position:relative">
+          <img src="${escapeHtml(item.url)}" alt="${escapeHtml(item.name || '')}" loading="lazy" style="width:88px;height:88px;object-fit:cover;border-radius:8px;border:1px solid var(--border-soft);display:block">
+          <button type="button" class="upload-multi-del" data-field="${fieldName}" data-idx="${idx}" aria-label="삭제" style="position:absolute;top:-7px;right:-7px;width:22px;height:22px;border-radius:50%;background:#E04848;color:#fff;border:none;cursor:pointer;font-size:13px;line-height:1;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 6px rgba(0,0,0,.2)">×</button>
+        </div>`;
+    }
+    return `
+      <div class="upload-multi-item" style="display:flex;align-items:center;gap:8px;padding:8px 12px;background:var(--bg-cream);border:1px solid var(--border-soft);border-radius:9px;max-width:320px;min-width:0">
+        <span style="font-size:18px">📎</span>
+        <a href="${escapeHtml(item.url)}" target="_blank" rel="noopener" style="font-size:13px;color:var(--text-primary);flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;text-decoration:none">${escapeHtml(item.name || '파일')}</a>
+        <span style="font-size:11px;color:var(--text-muted);white-space:nowrap">${escapeHtml(item.size || '')}</span>
+        <button type="button" class="upload-multi-del" data-field="${fieldName}" data-idx="${idx}" aria-label="삭제" style="width:20px;height:20px;border-radius:50%;background:#E04848;color:#fff;border:none;cursor:pointer;font-size:12px;line-height:1;display:flex;align-items:center;justify-content:center;flex-shrink:0">×</button>
+      </div>`;
+  }).join('');
+}
+
+function bindUploadMultiDeleteHandlers() {
+  modalFields.querySelectorAll('.upload-multi-del').forEach(btn => {
+    btn.onclick = () => removeUploadMultiItem(btn.dataset.field, Number(btn.dataset.idx));
+  });
+}
+
+function removeUploadMultiItem(fieldName, idx) {
+  const wrap = modalFields.querySelector(`[data-upload-multi="${fieldName}"]`);
+  if (!wrap) return;
+  const kind = wrap.dataset.kind;
+  const hiddenInput = modalForm.elements[fieldName];
+  const gridEl = modalFields.querySelector(`[data-upload-multi-grid="${fieldName}"]`);
+  const statusEl = modalFields.querySelector(`[data-upload-multi-status="${fieldName}"]`);
+
+  let items = [];
+  try { items = JSON.parse(hiddenInput.value || '[]'); } catch (e) { items = []; }
+  items.splice(idx, 1);
+  hiddenInput.value = JSON.stringify(items);
+  gridEl.innerHTML = renderUploadMultiItems(items, fieldName, kind);
+  statusEl.textContent = `${items.length}개 등록됨`;
+  statusEl.style.color = 'var(--text-muted)';
+  bindUploadMultiDeleteHandlers();
+}
+
+async function uploadMultiFiles(input) {
+  const files = Array.from(input.files);
+  if (!files.length) return;
+
+  const fieldName = input.dataset.uploadMultiInput;
+  const wrap = modalFields.querySelector(`[data-upload-multi="${fieldName}"]`);
+  const kind = wrap.dataset.kind;
+  const statusEl = modalFields.querySelector(`[data-upload-multi-status="${fieldName}"]`);
+  const gridEl = modalFields.querySelector(`[data-upload-multi-grid="${fieldName}"]`);
+  const hiddenInput = modalForm.elements[fieldName];
+
+  // 업로드 진행 중 저장 버튼 잠금
+  const saveBtnLock = document.getElementById('btn-save');
+  if (saveBtnLock) {
+    saveBtnLock.disabled = true;
+    saveBtnLock.dataset.uploading = (Number(saveBtnLock.dataset.uploading || 0) + 1).toString();
+    saveBtnLock.textContent = '업로드 중... 잠시만요';
+  }
+
+  let items = [];
+  try { items = JSON.parse(hiddenInput.value || '[]'); } catch (e) { items = []; }
+
+  for (let i = 0; i < files.length; i++) {
+    let file = files[i];
+    if (file.size > 20 * 1024 * 1024) {
+      toast(`「${file.name}」 파일이 너무 큽니다 (최대 20MB)`, true);
+      continue;
+    }
+    statusEl.textContent = `⏳ ${i + 1}/${files.length} 압축 중... (${file.name})`;
+    statusEl.style.color = 'var(--accent-blue)';
+    try {
+      const origSize = file.size;
+      file = await compressImageIfNeeded(file, 6000, 0.98);
+      const savedKB = Math.max(0, Math.round((origSize - file.size) / 1024));
+      statusEl.textContent = `⏳ ${i + 1}/${files.length} 업로드 중... (${file.name}${savedKB > 50 ? ` · -${savedKB}KB` : ''})`;
+      const base64 = await fileToBase64(file);
+      const res = await api('upload', { body: { base64, mimeType: file.type, filename: file.name } });
+      if (res.success) {
+        const url = file.type.startsWith('image/') ? res.imageUrl : res.downloadUrl;
+        items.push({
+          name: file.name,
+          url: url,
+          size: formatFileSize(file.size)
+        });
+      } else {
+        toast(`❌ ${file.name}: ${res.error || '업로드 실패'}`, true);
+      }
+    } catch (err) {
+      toast(`❌ ${file.name}: ${err.message}`, true);
+    }
+  }
+
+  hiddenInput.value = JSON.stringify(items);
+  gridEl.innerHTML = renderUploadMultiItems(items, fieldName, kind);
+  statusEl.textContent = `✅ ${items.length}개 등록됨`;
+  statusEl.style.color = '#3F8A5A';
+  bindUploadMultiDeleteHandlers();
+  input.value = ''; // 동일 파일 재선택 가능하게
+
+  // 업로드 카운터 차감, 0이면 저장 버튼 해제
+  if (saveBtnLock) {
+    const c = Math.max(0, Number(saveBtnLock.dataset.uploading || 1) - 1);
+    saveBtnLock.dataset.uploading = c.toString();
+    if (c === 0) {
+      saveBtnLock.disabled = false;
+      saveBtnLock.textContent = '저장';
+    }
+  }
+}
+
+function formatFileSize(bytes) {
+  if (!bytes && bytes !== 0) return '';
+  if (bytes < 1024) return bytes + ' B';
+  if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(1) + ' KB';
+  return (bytes / 1024 / 1024).toFixed(1) + ' MB';
 }
 
 // 파일 → base64 → Apps Script 업로드 → 결과 URL을 hidden input에 저장
 async function uploadFile(input) {
-  const file = input.files[0];
+  let file = input.files[0];
   if (!file) return;
 
   const fieldName = input.dataset.uploadInput;
@@ -945,10 +1306,22 @@ async function uploadFile(input) {
     return;
   }
 
-  statusEl.textContent = `⏳ 업로드 중... (${(file.size / 1024 / 1024).toFixed(1)} MB)`;
+  statusEl.textContent = `⏳ 압축 중... (${(file.size / 1024 / 1024).toFixed(1)} MB)`;
   statusEl.style.color = 'var(--accent-blue)';
 
+  const saveBtnLock = document.getElementById('btn-save');
+  if (saveBtnLock) {
+    saveBtnLock.disabled = true;
+    saveBtnLock.dataset.uploading = (Number(saveBtnLock.dataset.uploading || 0) + 1).toString();
+    saveBtnLock.textContent = '업로드 중... 잠시만요';
+  }
+
   try {
+    const origSize = file.size;
+    file = await compressImageIfNeeded(file, 6000, 0.98);
+    const savedKB = Math.max(0, Math.round((origSize - file.size) / 1024));
+    statusEl.textContent = `⏳ 업로드 중... (${(file.size / 1024 / 1024).toFixed(1)} MB${savedKB > 50 ? ` · -${savedKB}KB 절감` : ''})`;
+
     // base64 변환
     const base64 = await fileToBase64(file);
 
@@ -976,6 +1349,15 @@ async function uploadFile(input) {
   } catch (err) {
     statusEl.textContent = '❌ ' + err.message;
     statusEl.style.color = '#C53030';
+  } finally {
+    if (saveBtnLock) {
+      const c = Math.max(0, Number(saveBtnLock.dataset.uploading || 1) - 1);
+      saveBtnLock.dataset.uploading = c.toString();
+      if (c === 0) {
+        saveBtnLock.disabled = false;
+        saveBtnLock.textContent = '저장';
+      }
+    }
   }
 }
 
@@ -993,6 +1375,52 @@ function fileToBase64(file) {
   });
 }
 
+// 이미지 클라이언트 압축: 긴 변 maxSide 픽셀, JPEG quality 적용
+// 압축 후 용량이 원본보다 크거나 비이미지면 원본 반환
+async function compressImageIfNeeded(file, maxSide = 1800, quality = 0.85) {
+  if (!file.type.startsWith('image/')) return file;
+  if (file.type === 'image/gif' || file.type === 'image/svg+xml') return file;  // 애니/벡터 보존
+
+  const dataUrl = await new Promise((res, rej) => {
+    const r = new FileReader();
+    r.onload = () => res(r.result);
+    r.onerror = rej;
+    r.readAsDataURL(file);
+  });
+  const img = await new Promise((res, rej) => {
+    const im = new Image();
+    im.onload = () => res(im);
+    im.onerror = rej;
+    im.src = dataUrl;
+  });
+
+  let w = img.naturalWidth, h = img.naturalHeight;
+  const longest = Math.max(w, h);
+  if (longest > maxSide) {
+    const scale = maxSide / longest;
+    w = Math.round(w * scale);
+    h = Math.round(h * scale);
+  } else if (file.size < 600 * 1024) {
+    // 작은 이미지이면 압축 생략 (이미 가벼움)
+    return file;
+  }
+
+  const canvas = document.createElement('canvas');
+  canvas.width = w;
+  canvas.height = h;
+  const ctx = canvas.getContext('2d');
+  ctx.drawImage(img, 0, 0, w, h);
+
+  const blob = await new Promise(res => canvas.toBlob(res, 'image/jpeg', quality));
+  if (!blob || blob.size >= file.size) return file;  // 효과 없으면 원본 사용
+
+  // 확장자 .jpg로 통일
+  const baseName = file.name.replace(/\.(png|webp|heic|heif|bmp|tiff?)$/i, '');
+  const newName = baseName.endsWith('.jpg') || baseName.endsWith('.jpeg')
+    ? baseName : baseName + '.jpg';
+  return new File([blob], newName, { type: 'image/jpeg', lastModified: Date.now() });
+}
+
 modalForm.addEventListener('submit', async (e) => {
   e.preventDefault();
   const data = {};
@@ -1007,6 +1435,14 @@ modalForm.addEventListener('submit', async (e) => {
       toast(`「${f.label}」 항목을 입력해주세요.`, true);
       return;
     }
+  }
+
+  // 갤러리: imageUrls(통합 업로드 배열)의 첫 장을 imageUrl(카드 썸네일)로 자동 분리
+  if (currentType === 'gallery') {
+    let imgs = [];
+    try { imgs = data.imageUrls ? JSON.parse(data.imageUrls) : []; } catch (e2) { imgs = []; }
+    if (!Array.isArray(imgs)) imgs = [];
+    data.imageUrl = imgs.length && imgs[0] && imgs[0].url ? imgs[0].url : '';
   }
 
   const saveBtn = document.getElementById('btn-save');

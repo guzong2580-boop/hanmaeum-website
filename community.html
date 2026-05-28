@@ -3,8 +3,29 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="index,follow,max-image-preview:large">
+  <meta name="google-site-verification" content="ETT5IUIwavmAYFV8AWNkwmkY8qhBgdNcmAeRlFyyJm8" />
+  <meta name="naver-site-verification" content="094bdc31c68badbf107a9bf45c20e8ca3f5ee515" />
   <title>커뮤니티 — 한마음일터</title>
   <meta name="description" content="한마음일터 커뮤니티. 공지사항·갤러리·후원·자원봉사 안내.">
+  <!-- Open Graph / 카톡·페이스북 공유 -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="한마음일터">
+  <meta property="og:title" content="커뮤니티 — 한마음일터">
+  <meta property="og:description" content="공지사항·자료실·갤러리·후원·자원봉사 안내.">
+  <meta property="og:url" content="https://daprint.kr/community.html">
+  <meta property="og:image" content="https://daprint.kr/한마음일터전경.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:locale" content="ko_KR">
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="커뮤니티 — 한마음일터">
+  <meta name="twitter:description" content="공지사항·자료실·갤러리·후원·자원봉사 안내.">
+  <meta name="twitter:image" content="https://daprint.kr/한마음일터전경.jpg">
+  <link rel="canonical" href="https://daprint.kr/community.html">
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.css">
   <link rel="stylesheet" href="common.css">
 
   <style>
@@ -84,6 +105,270 @@
       .notice-row { grid-template-columns: 1fr; gap: 6px; }
       .notice-row .num { display: none; }
       .notice-row .author, .notice-row .date { text-align: left; font-size: 12px; }
+    }
+
+    /* 페이지네이션 */
+    .pagination {
+      display: flex;
+      justify-content: center;
+      gap: 4px;
+      margin-top: 32px;
+      flex-wrap: wrap;
+    }
+    .pagination button {
+      min-width: 36px;
+      height: 36px;
+      padding: 0 10px;
+      border: 1px solid var(--border-soft);
+      background: #fff;
+      color: var(--text-secondary);
+      font-size: 13px;
+      font-weight: 600;
+      border-radius: 8px;
+      cursor: pointer;
+      font-family: inherit;
+      transition: all .15s var(--ease);
+    }
+    .pagination button:hover:not(:disabled):not(.active) {
+      background: var(--bg-cream);
+      border-color: var(--text-primary);
+    }
+    .pagination button.active {
+      background: var(--text-primary);
+      color: #fff;
+      border-color: var(--text-primary);
+    }
+    .pagination button:disabled {
+      opacity: .4;
+      cursor: not-allowed;
+    }
+    .pagination .ellipsis {
+      display: flex;
+      align-items: center;
+      padding: 0 6px;
+      color: var(--text-muted);
+      font-size: 13px;
+    }
+
+    /* ══════════ 상세 페이지 (인라인 전환 — 공지/자료/갤러리 공용) ══════════ */
+    .entry-detail {
+      display: none;
+      /* 헤더(fixed 72px) 가림 방지 → 상단 충분한 여백 */
+      padding: 120px 0 80px;
+    }
+    body[class*="-detail-mode"] .page-hero,
+    body[class*="-detail-mode"] .tab-nav,
+    body[class*="-detail-mode"] .partners-marquee,
+    body[class*="-detail-mode"] #notice,
+    body[class*="-detail-mode"] #archive,
+    body[class*="-detail-mode"] #gallery,
+    body[class*="-detail-mode"] #donation,
+    body[class*="-detail-mode"] #volunteer { display: none !important; }
+    body.notice-detail-mode  #notice-detail,
+    body.archive-detail-mode #archive-detail,
+    body.gallery-detail-mode #gallery-detail { display: block; }
+    /* 상세 모드: body 배경을 footer 색과 일치시켜 푸터 아래 흰색 빈 영역 제거 */
+    body[class*="-detail-mode"] { background: var(--bg-navy); }
+    body[class*="-detail-mode"] .entry-detail { background: #fff; }
+
+    .entry-detail-back {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-family: inherit;
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--text-primary);
+      padding: 8px 4px;
+      margin-bottom: 28px;
+      letter-spacing: -.015em;
+      transition: color .15s var(--ease);
+    }
+    .entry-detail-back:hover { color: var(--text-purple-deep); }
+
+    .entry-detail-head {
+      max-width: 880px;
+      margin: 0 auto 36px;
+      padding: 0 4px 24px;
+      border-bottom: 1px solid var(--border-soft);
+    }
+    .entry-detail-head .badge {
+      font-size: 11px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      font-weight: 700;
+      letter-spacing: .04em;
+      display: inline-block;
+      margin-bottom: 14px;
+    }
+    .entry-detail-title {
+      font-family: 'Pretendard', sans-serif;
+      font-weight: 800;
+      font-size: clamp(24px, 3vw, 32px);
+      letter-spacing: -.025em;
+      line-height: 1.35;
+      color: var(--text-primary);
+      margin: 0 0 12px;
+    }
+    .entry-detail-meta {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin: 0;
+    }
+
+    .entry-detail-body {
+      max-width: 880px;
+      margin: 0 auto 32px;
+      padding: 0 4px;
+      font-size: 15.5px;
+      color: var(--text-secondary);
+      line-height: 1.85;
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
+
+    .entry-detail-hero {
+      max-width: 880px;
+      margin: 0 auto 28px;
+      padding: 0 4px;
+    }
+    .entry-detail-hero img {
+      width: 100%;
+      height: auto;
+      max-height: 560px;
+      object-fit: contain;
+      border-radius: 14px;
+      background: var(--bg-cream);
+      display: block;
+    }
+
+    .entry-detail-primary-file {
+      max-width: 880px;
+      margin: 0 auto 24px;
+      padding: 0 4px;
+    }
+    .entry-detail-primary-file a {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 24px;
+      background: var(--accent-blue);
+      color: #fff;
+      border-radius: 999px;
+      font-size: 14px;
+      font-weight: 700;
+      text-decoration: none;
+      letter-spacing: -.01em;
+      transition: background .15s var(--ease);
+    }
+    .entry-detail-primary-file a:hover { background: var(--accent-blue-2); }
+
+    .entry-detail-images {
+      max-width: 880px;
+      margin: 0 auto 28px;
+      padding: 0 4px;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 12px;
+    }
+    .entry-detail-images a {
+      display: block;
+      aspect-ratio: 1 / 1;
+      border-radius: 10px;
+      overflow: hidden;
+      border: 1px solid var(--border-soft);
+      background: var(--bg-cream);
+      transition: transform .15s var(--ease);
+    }
+    .entry-detail-images a:hover {
+      transform: scale(1.02);
+      border-color: var(--text-primary);
+    }
+    .entry-detail-images img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    /* 갤러리: 동일 너비 세로 스택 (원본 비율 유지) */
+    #gd-images.is-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    #gd-images.is-stack a {
+      aspect-ratio: auto;
+      border-radius: 12px;
+    }
+    #gd-images.is-stack img {
+      width: 100%;
+      height: auto;
+      object-fit: contain;
+    }
+
+    .entry-detail-files {
+      max-width: 880px;
+      margin: 0 auto 12px;
+      padding: 0 4px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .entry-detail-files-title {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--text-purple-deep);
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+    .notice-file-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 16px;
+      background: var(--bg-cream);
+      border: 1px solid var(--border-soft);
+      border-radius: 10px;
+      text-decoration: none;
+      color: var(--text-primary);
+      font-size: 14px;
+      transition: all .15s var(--ease);
+    }
+    .notice-file-item:hover {
+      background: #fff;
+      border-color: var(--text-primary);
+      transform: translateX(2px);
+    }
+    .notice-file-item .ico {
+      font-size: 22px;
+      flex-shrink: 0;
+    }
+    .notice-file-item .name {
+      flex: 1;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      font-weight: 600;
+    }
+    .notice-file-item .size {
+      font-size: 12px;
+      color: var(--text-muted);
+      white-space: nowrap;
+    }
+    .notice-file-item .arrow {
+      font-size: 14px;
+      color: var(--text-muted);
+    }
+    @media (max-width: 768px) {
+      .entry-detail { padding: 100px 0 64px; }
+      .entry-detail-head { margin-bottom: 24px; padding-bottom: 18px; }
+      .entry-detail-body { font-size: 14.5px; line-height: 1.78; }
+      .entry-detail-images { grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 10px; }
+      .entry-detail-hero img { max-height: 360px; }
     }
 
     /* 갤러리 */
@@ -315,7 +600,7 @@
 
     <nav class="desktop-nav" style="display:flex;align-items:center;gap:28px">
       <div class="nav-item">
-        <a href="about.html" class="nav-link">소개<svg class="nav-caret" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 5l3 3 3-3"/></svg></a>
+        <a href="about.html" class="nav-link">기관 소개<svg class="nav-caret" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 5l3 3 3-3"/></svg></a>
         <div class="nav-dropdown">
           <a href="about.html#greeting">인사말</a>
           <a href="about.html#history">설립목적 및 연혁</a>
@@ -327,19 +612,28 @@
         </div>
       </div>
       <div class="nav-item">
-        <a href="print.html" class="nav-link">인쇄<svg class="nav-caret" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 5l3 3 3-3"/></svg></a>
+        <a href="print.html" class="nav-link">포트폴리오<svg class="nav-caret" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 5l3 3 3-3"/></svg></a>
         <div class="nav-dropdown">
-          <a href="print.html#paper">인쇄물</a>
-          <a href="print.html#banner-bag">현수막 및 쇼핑백</a>
+          <a href="print.html?cat=leaflet">LEAFLET</a>
+          <a href="print.html?cat=book">BOOK</a>
+          <a href="print.html?cat=poster">POSTER</a>
+          <a href="print.html?cat=shoppingbag">SHOPPING BAG</a>
+          <a href="print.html?cat=banner">BANNER</a>
+          <a href="print.html?cat=etc">ETC</a>
+        </div>
+      </div>
+      <div class="nav-item">
+        <a href="quote.html" class="nav-link">견적 및 주문<svg class="nav-caret" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 5l3 3 3-3"/></svg></a>
+        <div class="nav-dropdown">
+          <a href="quote.html#faq">FAQ</a>
+          <a href="quote.html#form">온라인 견적 문의</a>
         </div>
       </div>
       <div class="nav-item">
         <a href="processing.html" class="nav-link">임가공<svg class="nav-caret" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 5l3 3 3-3"/></svg></a>
         <div class="nav-dropdown">
-          <a href="processing.html#fancom">팬콤</a>
-          <a href="processing.html#natural">네추럴밸리</a>
-          <a href="processing.html#feel">더필</a>
-          <a href="processing.html#scrubber">수세미</a>
+          <a href="processing.html#overview">사업개요</a>
+          <a href="processing.html#process">생산과정</a>
         </div>
       </div>
       <div class="nav-item">
@@ -352,7 +646,6 @@
           <a href="#volunteer">자원봉사</a>
         </div>
       </div>
-      <a href="quote.html" class="nav-link">견적요청</a>
     </nav>
 
     <div style="display:flex;align-items:center;gap:12px">
@@ -365,7 +658,7 @@
 
   <div id="mob-menu" class="hidden" style="border-top:1px solid var(--border-soft);background:#fff;max-height:calc(100vh - 72px);overflow-y:auto">
     <nav style="display:flex;flex-direction:column;padding:8px 24px 16px">
-      <button class="mob-group-toggle" data-target="mg-about">소개<svg class="nav-caret" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 5l3 3 3-3"/></svg></button>
+      <button class="mob-group-toggle" data-target="mg-about">기관 소개<svg class="nav-caret" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 5l3 3 3-3"/></svg></button>
       <div id="mg-about" class="mob-sub">
         <a href="about.html">전체 보기</a>
         <a href="about.html#greeting">인사말</a>
@@ -376,19 +669,27 @@
         <a href="about.html#org">조직도</a>
         <a href="about.html#location">찾아오시는 길</a>
       </div>
-      <button class="mob-group-toggle" data-target="mg-print">인쇄<svg class="nav-caret" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 5l3 3 3-3"/></svg></button>
-      <div id="mg-print" class="mob-sub">
+      <button class="mob-group-toggle" data-target="mg-portfolio">포트폴리오<svg class="nav-caret" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 5l3 3 3-3"/></svg></button>
+      <div id="mg-portfolio" class="mob-sub">
         <a href="print.html">전체 보기</a>
-        <a href="print.html#paper">인쇄물</a>
-        <a href="print.html#banner-bag">현수막 및 쇼핑백</a>
+        <a href="print.html?cat=leaflet">LEAFLET</a>
+        <a href="print.html?cat=book">BOOK</a>
+        <a href="print.html?cat=poster">POSTER</a>
+        <a href="print.html?cat=shoppingbag">SHOPPING BAG</a>
+        <a href="print.html?cat=banner">BANNER</a>
+        <a href="print.html?cat=etc">ETC</a>
+      </div>
+      <button class="mob-group-toggle" data-target="mg-order">견적 및 주문<svg class="nav-caret" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 5l3 3 3-3"/></svg></button>
+      <div id="mg-order" class="mob-sub">
+        <a href="quote.html">전체 보기</a>
+        <a href="quote.html#faq">FAQ</a>
+        <a href="quote.html#form">온라인 견적 문의</a>
       </div>
       <button class="mob-group-toggle" data-target="mg-proc">임가공<svg class="nav-caret" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 5l3 3 3-3"/></svg></button>
       <div id="mg-proc" class="mob-sub">
         <a href="processing.html">전체 보기</a>
-        <a href="processing.html#fancom">팬콤</a>
-        <a href="processing.html#natural">네추럴밸리</a>
-        <a href="processing.html#feel">더필</a>
-        <a href="processing.html#scrubber">수세미</a>
+        <a href="processing.html#overview">사업개요</a>
+        <a href="processing.html#process">생산과정</a>
       </div>
       <button class="mob-group-toggle" data-target="mg-comm">커뮤니티<svg class="nav-caret" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 5l3 3 3-3"/></svg></button>
       <div id="mg-comm" class="mob-sub">
@@ -399,16 +700,107 @@
         <a href="#donation">후원</a>
         <a href="#volunteer">자원봉사</a>
       </div>
-      <a href="quote.html" style="padding:14px 4px;font-size:14px;font-weight:600;color:var(--text-primary);text-decoration:none;border-top:1px solid var(--border-soft);margin-top:6px">견적요청</a>
       <a href="quote.html" class="btn-primary" style="margin-top:14px;justify-content:center;padding:12px 22px;font-size:12px">견적 요청하기</a>
     </nav>
   </div>
 </header>
 
+<!-- ══════════ 상세 페이지 (공지/자료/갤러리 공용 — 인라인 전환) ══════════ -->
+<!-- 헤더 직후 배치: 상세 모드 진입 시 다른 본문 섹션·partners-marquee 숨김 → 헤더 바로 아래 풀페이지 노출 → 그 아래 footer -->
+<section class="entry-detail section-block" id="notice-detail" aria-label="공지 상세">
+  <div class="container">
+    <button class="entry-detail-back" data-back="notice" type="button">
+      <svg width="18" height="18" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M10 3L4 8l6 5"/></svg>
+      목록으로
+    </button>
+
+    <header class="entry-detail-head">
+      <span class="badge notice" id="nd-badge">공지</span>
+      <h1 class="entry-detail-title" id="nd-title"></h1>
+      <p class="entry-detail-meta">
+        <span id="nd-date"></span>
+        <span> · 관리자</span>
+      </p>
+    </header>
+
+    <div class="entry-detail-body" id="nd-body"></div>
+    <div class="entry-detail-images" id="nd-images" hidden></div>
+    <div class="entry-detail-files" id="nd-files" hidden></div>
+  </div>
+</section>
+
+<section class="entry-detail section-block" id="archive-detail" aria-label="자료 상세">
+  <div class="container">
+    <button class="entry-detail-back" data-back="archive" type="button">
+      <svg width="18" height="18" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M10 3L4 8l6 5"/></svg>
+      목록으로
+    </button>
+
+    <header class="entry-detail-head">
+      <span class="badge notice" id="ad-badge">자료</span>
+      <h1 class="entry-detail-title" id="ad-title"></h1>
+      <p class="entry-detail-meta">
+        <span id="ad-date"></span>
+        <span> · 관리자</span>
+      </p>
+    </header>
+
+    <div class="entry-detail-primary-file" id="ad-primary" hidden></div>
+    <div class="entry-detail-body" id="ad-body"></div>
+    <div class="entry-detail-images" id="ad-images" hidden></div>
+    <div class="entry-detail-files" id="ad-files" hidden></div>
+  </div>
+</section>
+
+<section class="entry-detail section-block" id="gallery-detail" aria-label="사진 상세">
+  <div class="container">
+    <button class="entry-detail-back" data-back="gallery" type="button">
+      <svg width="18" height="18" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M10 3L4 8l6 5"/></svg>
+      목록으로
+    </button>
+
+    <header class="entry-detail-head">
+      <h1 class="entry-detail-title" id="gd-title"></h1>
+      <p class="entry-detail-meta">
+        <span id="gd-date"></span>
+        <span> · 관리자</span>
+      </p>
+    </header>
+
+    <div class="entry-detail-hero" id="gd-hero" hidden></div>
+    <div class="entry-detail-body" id="gd-body"></div>
+    <div class="entry-detail-images" id="gd-images" hidden></div>
+    <div class="entry-detail-files" id="gd-files" hidden></div>
+  </div>
+</section>
+
 <style>
   @media (max-width: 1023px) {
     .desktop-nav, .desktop-cta { display: none !important; }
     .mob-toggle { display: flex !important; }
+  }
+
+  /* ── 카테고리 페이지 히어로: 배경 이미지 오버라이드 ── */
+  .page-hero {
+    background:
+      linear-gradient(165deg, rgba(20,12,45,.62) 0%, rgba(50,35,100,.55) 100%),
+      url('images/인쇄카테고리배경대체.jpg') center/cover no-repeat;
+  }
+  /* common.css 검정 30% 오버레이 무력화 */
+  .page-hero::before { background: transparent; }
+  .page-hero .crumb {
+    background: rgba(255,255,255,.92);
+    color: #2A1E5C;
+  }
+  .page-hero h1 {
+    color: #FFFFFF;
+    font-size: clamp(41px, 5.5vw, 61px);
+    text-shadow: 0 2px 18px rgba(0,0,0,.45), 0 1px 3px rgba(0,0,0,.35);
+  }
+  .page-hero p.lead {
+    color: rgba(255,255,255,.95);
+    font-size: clamp(19px, 1.6vw, 22px);
+    text-shadow: 0 1px 8px rgba(0,0,0,.45);
   }
 </style>
 
@@ -455,6 +847,8 @@
       <li class="notice-row" style="justify-content:center;color:var(--text-muted);font-size:13px;padding:24px">불러오는 중...</li>
     </ul>
 
+    <div class="pagination" id="notice-pagination" style="display:none"></div>
+
     <div class="admin-hint">
       🔒 <b>비공개 글</b>은 관리자 로그인 후 열람·다운로드할 수 있습니다.
       &nbsp; <a href="admin.html">관리자 로그인 →</a>
@@ -484,9 +878,6 @@
   <div class="container reveal">
     <p class="section-eyebrow">ARCHIVE</p>
     <h2 class="section-title">자료실</h2>
-    <p class="section-lead">
-      한마음일터의 사업 안내서, 신청서, 제품 카탈로그 등 다양한 자료를 다운로드하실 수 있습니다.
-    </p>
 
     <div class="archive-list" id="archive-list" data-loading="true">
       <div style="text-align:center;color:var(--text-muted);font-size:13px;padding:40px 0">불러오는 중...</div>
@@ -574,24 +965,29 @@
 
 
 <!-- ══════════ FOOTER ══════════ -->
+<!-- 관련 기관 marquee (푸터 위, 투명 배경) -->
+<section class="partners-marquee" aria-label="관련 기관">
+  <div class="partners-track">
+    <a href="https://www.kead.or.kr/" class="partner-link" target="_blank" rel="noopener"><span class="partner-logo"><img src="images/partners/kead.svg" alt=""></span>한국장애인고용공단</a>
+    <a href="https://www.koddi.or.kr/" class="partner-link" target="_blank" rel="noopener"><span class="partner-logo"><img src="images/partners/koddi_h1_logo2.png" alt=""></span>한국장애인개발원</a>
+    <a href="https://www.gg.go.kr/" class="partner-link" target="_blank" rel="noopener"><span class="partner-logo"><img src="images/partners/gg.jpg" alt=""></span>경기도청</a>
+    <a href="https://www.icheon.go.kr/" class="partner-link" target="_blank" rel="noopener"><span class="partner-logo"><img src="images/partners/icheon_fav.ico" alt=""></span>이천시청</a>
+    <a href="https://www.bokjiro.go.kr/" class="partner-link" target="_blank" rel="noopener"><span class="partner-logo"><img src="images/partners/ssis_logo.png" alt=""></span>한국사회보장정보원</a>
+    <a href="https://www.kead.or.kr/" class="partner-link" target="_blank" rel="noopener" aria-hidden="true"><span class="partner-logo"><img src="images/partners/kead.svg" alt=""></span>한국장애인고용공단</a>
+    <a href="https://www.koddi.or.kr/" class="partner-link" target="_blank" rel="noopener" aria-hidden="true"><span class="partner-logo"><img src="images/partners/koddi_h1_logo2.png" alt=""></span>한국장애인개발원</a>
+    <a href="https://www.gg.go.kr/" class="partner-link" target="_blank" rel="noopener" aria-hidden="true"><span class="partner-logo"><img src="images/partners/gg.jpg" alt=""></span>경기도청</a>
+    <a href="https://www.icheon.go.kr/" class="partner-link" target="_blank" rel="noopener" aria-hidden="true"><span class="partner-logo"><img src="images/partners/icheon_fav.ico" alt=""></span>이천시청</a>
+    <a href="https://www.bokjiro.go.kr/" class="partner-link" target="_blank" rel="noopener" aria-hidden="true"><span class="partner-logo"><img src="images/partners/ssis_logo.png" alt=""></span>한국사회보장정보원</a>
+  </div>
+</section>
+
 <footer id="site-footer">
+
   <div class="footer-grid">
     <div>
-      <div style="margin-bottom:14px;background:#fff;padding:10px 14px;border-radius:10px;display:inline-block">
-        <img src="logo.png" alt="한마음일터" style="height:42px;width:auto;display:block">
-      </div>
+      <div style="margin-bottom:14px"><img src="한마음로고 하단위치로고.png" alt="한마음일터" style="height:56px;width:auto;display:block"></div>
       <p style="font-size:14px;line-height:1.7;color:var(--text-muted-dark);margin-bottom:18px">장애인의 자립과 사회 참여를 돕는 직업재활시설.<br>따뜻한 손길로 만든 인쇄·홍보물.</p>
       <a href="tel:031-631-6680" style="display:inline-flex;align-items:center;gap:8px;font-size:14px;font-weight:700;color:#fff !important">📞 031-631-6680</a>
-    </div>
-    <div>
-      <h4>사이트맵</h4>
-      <ul style="list-style:none;padding:0;display:flex;flex-direction:column;gap:10px;font-size:14px">
-        <li><a href="about.html">소개</a></li>
-        <li><a href="print.html">인쇄</a></li>
-        <li><a href="processing.html">임가공</a></li>
-        <li><a href="community.html">커뮤니티</a></li>
-        <li><a href="quote.html">견적요청</a></li>
-      </ul>
     </div>
     <div>
       <h4>연락처</h4>
@@ -615,15 +1011,15 @@
     <div class="footer-bottom-inner">
       <p>© 2026 한마음일터. All rights reserved.</p>
       <div style="display:flex;gap:18px;font-size:12px">
-        <a href="#">개인정보처리방침</a>
-        <a href="#">이용약관</a>
+        <a href="privacy.html">개인정보처리방침</a>
+        <a href="terms.html">이용약관</a>
         <a href="admin.html" style="opacity:.5">관리자</a>
       </div>
     </div>
   </div>
 </footer>
 
-<script src="common.js"></script>
+<script src="common.js" defer></script>
 <script>
   // ────────────────────────────────────────────
   // 콘텐츠 동적 로딩 (Apps Script + Google Sheets)
@@ -646,27 +1042,298 @@
   }
 
   // ─── 공지사항 ───
+  const NOTICE_PER_PAGE = 10;
+  let allNotices = [];
+  let noticePage = 1;
+
+  function renderNoticePage(page) {
+    const totalPages = Math.max(1, Math.ceil(allNotices.length / NOTICE_PER_PAGE));
+    page = Math.max(1, Math.min(page, totalPages));
+    noticePage = page;
+    const start = (page - 1) * NOTICE_PER_PAGE;
+    const slice = allNotices.slice(start, start + NOTICE_PER_PAGE);
+    const list = document.getElementById('notice-list');
+
+    list.innerHTML = slice.map((item, i) => {
+      const num = allNotices.length - (start + i);
+      const isPrivate = item.type === '비공개';
+      return `
+        <li class="notice-row" data-idx="${start + i}">
+          <span class="num">${num}</span>
+          <span class="title">
+            <span class="badge ${isPrivate ? 'private' : 'notice'}">${escapeHtml(item.type || '공지')}</span>
+            ${escapeHtml(item.title || '')}
+          </span>
+          <span class="author">관리자</span>
+          <span class="date">${escapeHtml(item.date || '')}</span>
+        </li>`;
+    }).join('');
+
+    list.querySelectorAll('.notice-row').forEach(row => {
+      row.addEventListener('click', () => {
+        const idx = Number(row.dataset.idx);
+        showEntryDetail('notice', allNotices[idx]);
+      });
+    });
+
+    renderPagination(page, totalPages);
+  }
+
+  function renderPagination(current, total) {
+    const pag = document.getElementById('notice-pagination');
+    if (total <= 1) { pag.style.display = 'none'; return; }
+    pag.style.display = 'flex';
+
+    const pages = new Set([1, total, current, current - 1, current + 1]);
+    if (current <= 3) { pages.add(2); pages.add(3); }
+    if (current >= total - 2) { pages.add(total - 1); pages.add(total - 2); }
+    const sorted = [...pages].filter(p => p >= 1 && p <= total).sort((a, b) => a - b);
+
+    const buttons = [];
+    buttons.push(`<button ${current === 1 ? 'disabled' : ''} data-page="${current - 1}" aria-label="이전">‹</button>`);
+    let prev = 0;
+    for (const p of sorted) {
+      if (p - prev > 1) buttons.push('<span class="ellipsis">…</span>');
+      buttons.push(`<button ${p === current ? 'class="active"' : ''} data-page="${p}">${p}</button>`);
+      prev = p;
+    }
+    buttons.push(`<button ${current === total ? 'disabled' : ''} data-page="${current + 1}" aria-label="다음">›</button>`);
+
+    pag.innerHTML = buttons.join('');
+    pag.querySelectorAll('button[data-page]').forEach(b => {
+      b.addEventListener('click', () => {
+        renderNoticePage(Number(b.dataset.page));
+        document.getElementById('notice').scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+    });
+  }
+
+  function parseJsonSafe(str) {
+    if (!str) return [];
+    if (Array.isArray(str)) return str;
+    try {
+      const v = JSON.parse(str);
+      return Array.isArray(v) ? v : [];
+    } catch (e) { return []; }
+  }
+
+  function fileIcon(name) {
+    const ext = (name || '').toLowerCase().split('.').pop();
+    if (['pdf'].includes(ext)) return '📄';
+    if (['hwp','hwpx','doc','docx'].includes(ext)) return '📝';
+    if (['xls','xlsx'].includes(ext)) return '📊';
+    if (['ppt','pptx'].includes(ext)) return '📈';
+    if (['zip','7z','rar'].includes(ext)) return '📦';
+    if (['png','jpg','jpeg','gif','webp'].includes(ext)) return '🖼️';
+    return '📎';
+  }
+
+  // ─── 상세 페이지 인라인 전환 (공지/자료/갤러리 공용) ───
+  let allArchive = [];
+  let allGallery = [];
+
+  const detailConfigs = {
+    notice: {
+      prefix: 'nd',
+      getItems: () => allNotices,
+      getBadge: (item) => {
+        const isPrivate = item.type === '비공개';
+        return { cls: isPrivate ? 'private' : 'notice', text: item.type || '공지' };
+      }
+    },
+    archive: {
+      prefix: 'ad',
+      getItems: () => allArchive,
+      getBadge: (item) => {
+        const t = (item.type || 'PDF').toUpperCase();
+        return { cls: 'notice', text: t };
+      },
+      primaryFile: true
+    },
+    gallery: {
+      prefix: 'gd',
+      getItems: () => allGallery,
+      hero: true,
+      noBadge: true
+    }
+  };
+
+  function renderEntryDetail(type, item) {
+    if (!item) return;
+    const cfg = detailConfigs[type];
+    const p = cfg.prefix;
+
+    if (!cfg.noBadge) {
+      const b = document.getElementById(p + '-badge');
+      if (b) {
+        const bd = cfg.getBadge(item);
+        b.className = 'badge ' + bd.cls;
+        b.textContent = bd.text;
+      }
+    }
+    document.getElementById(p + '-title').textContent = item.title || '';
+    document.getElementById(p + '-date').textContent = item.date || '';
+
+    // 갤러리: hero 사용 안 함 (모든 이미지를 아래 스택에서 동일 너비로 표시)
+    if (cfg.hero) {
+      const heroWrap = document.getElementById(p + '-hero');
+      if (heroWrap) {
+        heroWrap.hidden = true;
+        heroWrap.innerHTML = '';
+      }
+    }
+
+    // 자료실: 대표 파일 다운로드 버튼
+    if (cfg.primaryFile) {
+      const primaryWrap = document.getElementById(p + '-primary');
+      const url = item.fileUrl && String(item.fileUrl).trim();
+      if (primaryWrap) {
+        if (url) {
+          const sizeText = item.size ? ` (${escapeHtml(item.size)})` : '';
+          primaryWrap.hidden = false;
+          primaryWrap.innerHTML = `<a href="${escapeHtml(url)}" target="_blank" rel="noopener">⬇ 대표 파일 다운로드${sizeText}</a>`;
+        } else {
+          primaryWrap.hidden = true;
+          primaryWrap.innerHTML = '';
+        }
+      }
+    }
+
+    // 본문 (archive는 body 없으면 description fallback)
+    const bodyEl = document.getElementById(p + '-body');
+    let bodyText = item.body || '';
+    if (!bodyText && type === 'archive') bodyText = item.description || '';
+    bodyEl.textContent = bodyText || '(본문 없음)';
+
+    // 이미지 표시
+    let images = parseJsonSafe(item.imageUrls);
+    // 갤러리: imageUrls 가 비어있고 imageUrl(단수)만 있는 옛 데이터 호환
+    if (type === 'gallery' && !images.length && item.imageUrl) {
+      images = [{ url: item.imageUrl }];
+    }
+    const imgWrap = document.getElementById(p + '-images');
+    if (images.length) {
+      imgWrap.hidden = false;
+      imgWrap.classList.toggle('is-stack', type === 'gallery');
+      imgWrap.innerHTML = images.map(img => `
+        <a href="${escapeHtml(img.url || img)}" target="_blank" rel="noopener" title="${escapeHtml(img.name || '이미지')}">
+          <img src="${escapeHtml(img.url || img)}" alt="${escapeHtml(img.name || '')}" loading="lazy">
+        </a>`).join('');
+    } else {
+      imgWrap.hidden = true;
+      imgWrap.classList.remove('is-stack');
+      imgWrap.innerHTML = '';
+    }
+
+    // 첨부파일 목록
+    const files = parseJsonSafe(item.fileUrls);
+    const fileWrap = document.getElementById(p + '-files');
+    if (files.length) {
+      fileWrap.hidden = false;
+      fileWrap.innerHTML = `
+        <div class="entry-detail-files-title">📎 첨부파일 ${files.length}개</div>` +
+        files.map(f => `
+          <a class="notice-file-item" href="${escapeHtml(f.url || '')}" target="_blank" rel="noopener" download="${escapeHtml(f.name || '')}">
+            <span class="ico">${fileIcon(f.name)}</span>
+            <span class="name">${escapeHtml(f.name || '파일')}</span>
+            <span class="size">${escapeHtml(f.size || '')}</span>
+            <span class="arrow">↓</span>
+          </a>`).join('');
+    } else {
+      fileWrap.hidden = true;
+      fileWrap.innerHTML = '';
+    }
+  }
+
+  function showEntryDetail(type, item, pushState = true) {
+    if (!item || !detailConfigs[type]) return;
+    renderEntryDetail(type, item);
+    document.body.classList.add(type + '-detail-mode');
+    requestAnimationFrame(() => {
+      const dv = document.getElementById(type + '-detail');
+      const top = dv.getBoundingClientRect().top + window.scrollY - 80;
+      window.scrollTo({ top: Math.max(0, top), behavior: 'instant' });
+    });
+    if (pushState) {
+      const id = item.id != null ? String(item.id) : '';
+      if (id) {
+        const state = {}; state[type] = id;
+        history.pushState(state, '', `#${type}-${id}`);
+      }
+    }
+  }
+
+  function hideEntryDetail(type, pop = false) {
+    document.body.classList.remove(type + '-detail-mode');
+    if (!pop && new RegExp('^#' + type + '-').test(location.hash)) {
+      history.pushState({}, '', location.pathname + location.search);
+    }
+  }
+
+  // 뒤로가기 버튼들 (data-back="notice|archive|gallery")
+  document.querySelectorAll('.entry-detail-back[data-back]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const type = btn.dataset.back;
+      if (history.state && history.state[type]) history.back();
+      else hideEntryDetail(type);
+    });
+  });
+
+  window.addEventListener('popstate', (e) => {
+    // 활성 상세 모드 모두 닫고, state에 해당하는 타입만 다시 연다
+    const types = ['notice', 'archive', 'gallery'];
+    let opened = false;
+    if (e.state) {
+      for (const t of types) {
+        if (e.state[t]) {
+          const id = String(e.state[t]);
+          const item = detailConfigs[t].getItems().find(it => String(it.id) === id);
+          if (item) {
+            // 다른 모드 클래스는 우선 제거
+            types.forEach(o => { if (o !== t) document.body.classList.remove(o + '-detail-mode'); });
+            showEntryDetail(t, item, false);
+            opened = true;
+            break;
+          }
+        }
+      }
+    }
+    if (!opened) {
+      types.forEach(t => hideEntryDetail(t, true));
+    }
+  });
+
+  document.addEventListener('keydown', e => {
+    if (e.key !== 'Escape') return;
+    const types = ['notice', 'archive', 'gallery'];
+    for (const t of types) {
+      if (document.body.classList.contains(t + '-detail-mode')) {
+        const btn = document.querySelector(`.entry-detail-back[data-back="${t}"]`);
+        if (btn) btn.click();
+        break;
+      }
+    }
+  });
+
+  // URL hash 첫 진입 진입점 (모든 타입 데이터 로드 후 호출)
+  function maybeOpenFromHash() {
+    const m = location.hash.match(/^#(notice|archive|gallery)-(.+)$/);
+    if (!m) return;
+    const [, type, id] = m;
+    const item = detailConfigs[type].getItems().find(it => String(it.id) === id);
+    if (item) showEntryDetail(type, item, false);
+  }
+
   fetchList('notices')
     .then(items => {
-      const list = document.getElementById('notice-list');
-      if (!items.length) {
-        list.innerHTML = '<li class="notice-row" style="justify-content:center;color:var(--text-muted);font-size:13px;padding:24px">등록된 공지가 없습니다.</li>';
+      allNotices = items.sort((a, b) => Number(b.id || 0) - Number(a.id || 0));
+      if (!allNotices.length) {
+        document.getElementById('notice-list').innerHTML =
+          '<li class="notice-row" style="justify-content:center;color:var(--text-muted);font-size:13px;padding:24px">등록된 공지가 없습니다.</li>';
         return;
       }
-      list.innerHTML = items.map((item, i) => {
-        const num = items.length - i;
-        const isPrivate = item.type === '비공개';
-        return `
-          <li class="notice-row">
-            <span class="num">${num}</span>
-            <span class="title">
-              <span class="badge ${isPrivate ? 'private' : 'notice'}">${escapeHtml(item.type || '공지')}</span>
-              ${escapeHtml(item.title || '')}
-            </span>
-            <span class="author">관리자</span>
-            <span class="date">${escapeHtml(item.date || '')}</span>
-          </li>`;
-      }).join('');
+      renderNoticePage(1);
+      maybeOpenFromHash();
     })
     .catch(err => {
       console.error('공지사항 로드 실패:', err);
@@ -680,12 +1347,13 @@
 
   fetchList('archive')
     .then(items => {
+      allArchive = items;
       const list = document.getElementById('archive-list');
       if (!items.length) {
         list.innerHTML = '<div style="text-align:center;color:var(--text-muted);font-size:13px;padding:40px 0">등록된 자료가 없습니다.</div>';
         return;
       }
-      list.innerHTML = items.map(item => {
+      list.innerHTML = items.map((item, idx) => {
         const type = (item.type || 'PDF').toUpperCase();
         const cls = fileTypeClass[type] || 'pdf';
         const ico = fileTypeIcon[type] || '📄';
@@ -693,18 +1361,27 @@
         const url = item.fileUrl && String(item.fileUrl).trim();
         const dlAttr = url
           ? `href="${escapeHtml(url)}" target="_blank" rel="noopener"`
-          : `href="#" onclick="alert('파일 링크가 아직 등록되지 않았습니다.\\n관리자 페이지에서 파일 URL을 추가해주세요.'); return false;"`;
+          : `href="#" onclick="event.stopPropagation();alert('파일 링크가 아직 등록되지 않았습니다.\\n관리자 페이지에서 파일 URL을 추가해주세요.'); return false;"`;
         return `
-          <div class="archive-row ${cls}">
+          <div class="archive-row ${cls}" data-idx="${idx}" style="cursor:pointer">
             <div class="archive-ico">${ico}</div>
             <div class="archive-body">
               <h4>${escapeHtml(item.title || '')}</h4>
               <p>${escapeHtml(item.description || '')}</p>
             </div>
             <div class="archive-meta"><b>${escapeHtml(type)}</b>${escapeHtml(meta)}</div>
-            <a class="archive-dl" ${dlAttr}>⬇ 다운로드</a>
+            <a class="archive-dl" ${dlAttr} onclick="event.stopPropagation()">⬇ 다운로드</a>
           </div>`;
       }).join('');
+
+      list.querySelectorAll('.archive-row').forEach(row => {
+        row.addEventListener('click', () => {
+          const idx = Number(row.dataset.idx);
+          showEntryDetail('archive', allArchive[idx]);
+        });
+      });
+
+      maybeOpenFromHash();
     })
     .catch(err => {
       console.error('자료실 로드 실패:', err);
@@ -723,19 +1400,20 @@
 
   fetchList('gallery')
     .then(items => {
+      allGallery = items;
       const grid = document.getElementById('gallery-grid');
       if (!items.length) {
         grid.innerHTML = '<div style="grid-column:1/-1;text-align:center;color:var(--text-muted);font-size:13px;padding:40px 0">등록된 사진이 없습니다.</div>';
         return;
       }
-      grid.innerHTML = items.map(item => {
+      grid.innerHTML = items.map((item, idx) => {
         const url = item.imageUrl && String(item.imageUrl).trim();
         const bgStyle = url
           ? `background-image:url('${escapeHtml(url)}');background-size:cover;background-position:center`
           : `background:${galleryColors[item.color] || galleryColors.lavender}`;
         const ico = url ? '' : `<div class="ico">${escapeHtml(item.emoji || '📷')}</div>`;
         return `
-          <div class="gallery-tile" style="${bgStyle}">
+          <div class="gallery-tile" data-idx="${idx}" style="${bgStyle}">
             ${ico}
             <div class="info">
               <p>${escapeHtml(item.title || '')}</p>
@@ -743,6 +1421,15 @@
             </div>
           </div>`;
       }).join('');
+
+      grid.querySelectorAll('.gallery-tile').forEach(tile => {
+        tile.addEventListener('click', () => {
+          const idx = Number(tile.dataset.idx);
+          showEntryDetail('gallery', allGallery[idx]);
+        });
+      });
+
+      maybeOpenFromHash();
     })
     .catch(err => {
       console.error('갤러리 로드 실패:', err);
