@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>갤러리 세로 스택 미리보기</title>
+<style>
+  :root {
+    --bg-cream: #FAF7F2;
+    --border-soft: #E6E2DA;
+    --text-primary: #2A2A2A;
+    --text-muted: #8A857C;
+    --ease: cubic-bezier(.2,.7,.2,1);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, "Pretendard", sans-serif;
+    background: #FFF;
+    color: var(--text-primary);
+    padding: 40px 20px 80px;
+  }
+  .container { max-width: 960px; margin: 0 auto; }
+  h1 { font-size: 28px; margin-bottom: 6px; }
+  .meta { color: var(--text-muted); margin-bottom: 28px; font-size: 14px; }
+
+  .entry-detail-images {
+    max-width: 880px;
+    margin: 0 auto;
+    padding: 0 4px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .entry-detail-images a {
+    display: block;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid var(--border-soft);
+    background: var(--bg-cream);
+    transition: transform .15s var(--ease);
+    text-decoration: none;
+  }
+  .entry-detail-images a:hover {
+    transform: scale(1.005);
+    border-color: var(--text-primary);
+  }
+  .entry-detail-images img {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    display: block;
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <h1>갤러리 상세 — 세로 스택 (8장 예시)</h1>
+  <p class="meta">2026-05-28 · 동일 너비 880px · 원본 비율 유지 · 클릭 시 원본 새 탭</p>
+
+  <div class="entry-detail-images">
+    <a href="https://picsum.photos/seed/hm1/1600/900" target="_blank"><img src="https://picsum.photos/seed/hm1/1600/900" alt=""></a>
+    <a href="https://picsum.photos/seed/hm2/1600/1067" target="_blank"><img src="https://picsum.photos/seed/hm2/1600/1067" alt=""></a>
+    <a href="https://picsum.photos/seed/hm3/1200/1600" target="_blank"><img src="https://picsum.photos/seed/hm3/1200/1600" alt=""></a>
+    <a href="https://picsum.photos/seed/hm4/1600/900" target="_blank"><img src="https://picsum.photos/seed/hm4/1600/900" alt=""></a>
+    <a href="https://picsum.photos/seed/hm5/1600/1200" target="_blank"><img src="https://picsum.photos/seed/hm5/1600/1200" alt=""></a>
+    <a href="https://picsum.photos/seed/hm6/1600/900" target="_blank"><img src="https://picsum.photos/seed/hm6/1600/900" alt=""></a>
+    <a href="https://picsum.photos/seed/hm7/1600/1067" target="_blank"><img src="https://picsum.photos/seed/hm7/1600/1067" alt=""></a>
+    <a href="https://picsum.photos/seed/hm8/1600/900" target="_blank"><img src="https://picsum.photos/seed/hm8/1600/900" alt=""></a>
+  </div>
+</div>
+</body>
+</html>

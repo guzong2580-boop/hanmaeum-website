@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="robots" content="noindex,nofollow">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>결제 실패 — 한마음일터</title>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link rel="stylesheet" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.css">
+  <link rel="stylesheet" href="common.css">
+  <style>
+    body { background: #FAF9F6; min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 24px; }
+    .result-card {
+      max-width: 520px; width: 100%;
+      background: #fff;
+      border-radius: 18px;
+      box-shadow: 0 10px 32px rgba(0,0,0,.08);
+      padding: 44px 32px;
+      text-align: center;
+    }
+    .result-icon {
+      width: 80px; height: 80px;
+      background: #FFE0E0;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center; justify-content: center;
+      font-size: 40px;
+      margin-bottom: 20px;
+      color: #C84747;
+    }
+    .result-title {
+      font-family: 'Pretendard', sans-serif;
+      font-size: 24px; font-weight: 900;
+      color: var(--text-primary, #1F2027);
+      letter-spacing: -.025em;
+      margin-bottom: 8px;
+    }
+    .result-sub {
+      font-size: 14px; color: #666;
+      margin-bottom: 24px; line-height: 1.7;
+      white-space: pre-line;
+    }
+    .result-reason {
+      background: #FAF9F6;
+      border-radius: 10px;
+      padding: 14px 18px;
+      margin-bottom: 28px;
+      font-size: 13px;
+      color: #555;
+      text-align: left;
+    }
+    .result-btns { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
+    .result-btn {
+      display: inline-block;
+      padding: 12px 24px;
+      text-decoration: none;
+      border-radius: 10px;
+      font-weight: 700;
+      font-size: 14px;
+    }
+    .btn-primary { background: #4A6FE3; color: #fff; }
+    .btn-secondary { background: #F4F4F6; color: #555; border: 1px solid #E0E0E5; }
+    .result-info-text {
+      margin-top: 24px;
+      padding-top: 24px;
+      border-top: 1px solid #EEE;
+      font-size: 12px;
+      color: #888;
+      line-height: 1.7;
+    }
+  </style>
+</head>
+<body>
+
+<div class="result-card">
+  <div class="result-icon">!</div>
+  <h1 class="result-title">결제가 취소되었습니다</h1>
+  <p class="result-sub" id="result-sub">결제가 정상적으로 처리되지 않았습니다.</p>
+
+  <div class="result-reason" id="result-reason" hidden>
+    <div><b>사유:</b> <span id="fail-message"></span></div>
+    <div style="margin-top:6px;font-size:12px;color:#999"><b>주문번호:</b> <span id="fail-order"></span></div>
+  </div>
+
+  <div class="result-btns">
+    <a href="javascript:history.back()" class="result-btn btn-primary">다시 결제하기</a>
+    <a href="index.html" class="result-btn btn-secondary">홈으로</a>
+  </div>
+
+  <p class="result-info-text">
+    문제가 지속되면 한마음일터 <b>031-631-6680</b>으로 연락 주세요.
+  </p>
+</div>
+
+<script>
+  const params = new URLSearchParams(location.search);
+  const code      = params.get('code') || 'UNKNOWN';
+  const message   = params.get('message') || '결제가 중단되었습니다.';
+  const orderId   = params.get('orderId') || '';
+
+  // 한국어 사유
+  const reasonMap = {
+    'PAY_PROCESS_CANCELED':   '사용자가 결제를 취소했습니다.',
+    'PAY_PROCESS_ABORTED':    '결제가 중단되었습니다.',
+    'REJECT_CARD_COMPANY':    '카드사에서 결제가 거절되었습니다.',
+    'INVALID_CARD_NUMBER':    '카드 번호가 올바르지 않습니다.',
+    'NOT_AVAILABLE_BANK':     '은행 점검 시간입니다.',
+    'EXCEED_MAX_DAILY_PAYMENT_COUNT': '일일 결제 한도를 초과했습니다.'
+  };
+  const friendlyMessage = reasonMap[code] || message;
+
+  if (orderId || code) {
+    document.getElementById('fail-message').textContent = friendlyMessage;
+    document.getElementById('fail-order').textContent = orderId || '-';
+    document.getElementById('result-reason').hidden = false;
+  }
+</script>
+
+</body>
+</html>

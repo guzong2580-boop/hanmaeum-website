@@ -3,3 +3,35 @@ Thumbs.db
 .netlify/
 node_modules/
 *.log
+
+# 원본 사진 (이미 images/print/에 정리된 사본 있음 — 카카오톡 원본은 로컬 보관용)
+사진/
+
+# FTP 업로드용 빌드 폴더 (deploy.bat / cp 명령으로 재생성 가능)
+deploy/
+
+# 옛 daprint.kr 콘텐츠 백업 (이관 작업 시까지 로컬 보관)
+backup_daprint/
+backup_daprint.log
+backup_daprint.sh
+
+# 이미지 최적화 백업·스크립트
+images/print-original/
+optimize_images.py
+_archive/
+
+# 로컬 전용 (스크래치·캐시·세션설정)
+.claude/
+__pycache__/
+_convert_webp.py
+_logo_transparent.py
+_regen_hero1.py
+_preview_on_black.png
+_preview_on_white.png
+logo.original.png
+*.bak-*
+*.previous-hero*.jpg
+
+# 옛 호스팅 사이트 미러 (참고용 로컬 보관)
+www/
+mobile-diag/

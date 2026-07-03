@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="robots" content="noindex,nofollow">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>결제 — 한마음일터</title>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link rel="stylesheet" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.css">
+  <link rel="stylesheet" href="common.css">
+  <style>
+    body { background: #FAF9F6; min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 24px; }
+    .pay-card {
+      max-width: 520px;
+      width: 100%;
+      background: #fff;
+      border-radius: 18px;
+      box-shadow: 0 10px 32px rgba(0,0,0,.08);
+      padding: 40px 32px;
+    }
+    .pay-logo { text-align: center; margin-bottom: 28px; }
+    .pay-logo img { height: 44px; }
+    .pay-eyebrow {
+      font-size: 11px; font-weight: 800; letter-spacing: 2px;
+      color: var(--text-purple-deep, #5849B8);
+      text-align: center; margin-bottom: 6px;
+    }
+    .pay-title {
+      font-family: 'Pretendard', sans-serif;
+      font-size: 22px; font-weight: 900;
+      color: var(--text-primary, #1F2027);
+      letter-spacing: -.025em; text-align: center;
+      margin-bottom: 28px; word-break: keep-all;
+    }
+    .pay-amount-box {
+      background: #F4F6FB;
+      border-radius: 14px;
+      padding: 28px 24px;
+      text-align: center;
+      margin-bottom: 28px;
+    }
+    .pay-amount-label { font-size: 12px; color: #666; margin-bottom: 6px; }
+    .pay-amount-value {
+      font-size: 36px; font-weight: 900;
+      color: #4A6FE3;
+      letter-spacing: -1px;
+    }
+    .pay-order-id {
+      font-size: 11px; color: #999;
+      text-align: center; margin-bottom: 24px;
+      font-family: monospace;
+    }
+    .pay-btn {
+      display: block; width: 100%;
+      padding: 18px;
+      background: #4A6FE3;
+      color: #fff;
+      border: none;
+      border-radius: 12px;
+      font-size: 16px;
+      font-weight: 700;
+      letter-spacing: -.01em;
+      cursor: pointer;
+      transition: background .2s;
+    }
+    .pay-btn:hover:not(:disabled) { background: #3D5EC9; }
+    .pay-btn:disabled { background: #B0B7CB; cursor: not-allowed; }
+    .pay-info {
+      margin-top: 24px;
+      padding-top: 24px;
+      border-top: 1px solid #EEE;
+      font-size: 12px;
+      color: #888;
+      line-height: 1.7;
+      text-align: center;
+    }
+    .pay-info a { color: #4A6FE3; font-weight: 600; text-decoration: none; }
+    .pay-error {
+      padding: 14px 18px;
+      background: #FFF0F0;
+      border: 1px solid #FFD0D0;
+      border-radius: 10px;
+      font-size: 13px;
+      color: #B23A3A;
+      margin-bottom: 20px;
+    }
+    .pay-error[hidden] { display: none; }
+  </style>
+</head>
+<body>
+
+<div class="pay-card">
+  <div class="pay-logo">
+    <picture><source type="image/webp" srcset="logo.webp"><img src="logo.png" alt="한마음일터"></picture>
+  </div>
+
+  <p class="pay-eyebrow">PAYMENT</p>
+  <h1 class="pay-title" id="pay-title">결제 페이지</h1>
+
+  <div class="pay-error" id="pay-error" hidden></div>
+
+  <div class="pay-amount-box">
+    <p class="pay-amount-label">결제 금액</p>
+    <div class="pay-amount-value" id="pay-amount">-</div>
+  </div>
+
+  <p class="pay-order-id" id="pay-order-id">주문번호: -</p>
+
+  <button class="pay-btn" id="pay-btn" disabled>결제하기</button>
+
+  <div class="pay-info">
+    문의 · 한마음일터 <a href="tel:031-631-6680">031-631-6680</a><br>
+    안전한 결제 처리 by <b>토스페이먼츠</b>
+  </div>
+</div>
+
+<!-- 토스페이먼츠 SDK v1 -->
+<script src="https://js.tosspayments.com/v1/payment"></script>
+<script>
+  // ════════════════════════════════════════════════════════════
+  // 설정 — 가맹점 가입 후 본인 Client Key로 교체
+  // 테스트 키 동안은 실제 결제 안 됨 (카드 사용 시뮬레이션만)
+  // ════════════════════════════════════════════════════════════
+  const TOSS_CLIENT_KEY = 'test_ck_D5GePWvyJnrK0W0k6q8gLzN97Eoq';  // ← 가맹점 가입 후 live_ck_ 키로 교체
+
+  // URL 쿼리스트링에서 주문 정보 가져오기
+  const params = new URLSearchParams(location.search);
+  const orderId   = params.get('orderId');
+  const amount    = Number(params.get('amount'));
+  const orderName = params.get('name') || '한마음일터 견적 결제';
+
+  const errorEl  = document.getElementById('pay-error');
+  const btnEl    = document.getElementById('pay-btn');
+  const titleEl  = document.getElementById('pay-title');
+  const amountEl = document.getElementById('pay-amount');
+  const orderIdEl = document.getElementById('pay-order-id');
+
+  function showError(msg) {
+    errorEl.textContent = msg;
+    errorEl.hidden = false;
+    btnEl.disabled = true;
+  }
+
+  // 입력 검증
+  if (!orderId || !amount || amount < 100) {
+    showError('주문 정보가 올바르지 않습니다. 메일에서 받은 결제 링크를 다시 확인해주세요.');
+  } else {
+    titleEl.textContent = orderName;
+    amountEl.textContent = amount.toLocaleString('ko-KR') + '원';
+    orderIdEl.textContent = '주문번호: ' + orderId;
+    btnEl.disabled = false;
+  }
+
+  // 결제 버튼
+  btnEl.addEventListener('click', async () => {
+    if (!orderId || !amount) return;
+    btnEl.disabled = true;
+    btnEl.textContent = '결제창 여는 중...';
+    try {
+      const tossPayments = TossPayments(TOSS_CLIENT_KEY);
+      await tossPayments.requestPayment('카드', {
+        amount: amount,
+        orderId: orderId,
+        orderName: orderName.substring(0, 60),  // Toss 제약: 100자 이내
+        successUrl: location.origin + '/success.html',
+        failUrl:    location.origin + '/fail.html'
+      });
+    } catch (err) {
+      btnEl.disabled = false;
+      btnEl.textContent = '결제하기';
+      if (err.code === 'USER_CANCEL') {
+        // 사용자가 결제창 닫음 - 무시
+      } else {
+        showError('결제창 오류: ' + (err.message || err.code || '알 수 없음'));
+      }
+    }
+  });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,24 @@
+# pay/success/fail은 페이지 내 noindex 메타로 색인 차단
+# (Disallow하면 크롤러가 noindex를 못 읽으므로 여기서 제외)
+User-agent: *
+Allow: /
+Disallow: /admin.html
+Disallow: /backend/
+Disallow: /deploy/
+Disallow: /plan/
+Disallow: /reference/
+
+# 검색엔진별 명시
+User-agent: Googlebot
+Allow: /
+
+User-agent: Yeti
+Allow: /
+
+User-agent: Daum
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+Sitemap: https://daprint.kr/sitemap.xml

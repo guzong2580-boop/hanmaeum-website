@@ -15,8 +15,8 @@
   <meta property="og:description" content="장애인직업재활시설 한마음일터. 칼라인쇄·카탈로그·리플렛·전단지·명함부터 임가공까지 정성껏 제작합니다. 무료 견적.">
   <meta property="og:url" content="https://daprint.kr/">
   <meta property="og:image" content="https://daprint.kr/한마음일터전경.jpg">
-  <meta property="og:image:width" content="1200">
-  <meta property="og:image:height" content="630">
+  <meta property="og:image:width" content="1086">
+  <meta property="og:image:height" content="814">
   <meta property="og:locale" content="ko_KR">
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
@@ -40,7 +40,7 @@
     "email": "onemind6680@daum.net",
     "address": {
       "@type": "PostalAddress",
-      "streetAddress": "마장면 이장로 256번길",
+      "streetAddress": "마장면 이장로 256",
       "addressLocality": "이천시",
       "addressRegion": "경기도",
       "addressCountry": "KR"
@@ -67,26 +67,16 @@
   }
   </script>
 
-  <!-- LCP 핵심 자원 우선 로드 (responsive) -->
+  <!-- LCP 핵심 자원 우선 로드 (responsive, WebP) -->
   <link rel="preload" as="image"
-        imagesrcset="한마음일터전경-m.jpg 675w, 한마음일터전경.jpg 1086w"
+        imagesrcset="한마음일터전경-m.webp 675w, 한마음일터전경.webp 1086w"
         imagesizes="100vw"
+        type="image/webp"
         fetchpriority="high">
 
   <link rel="stylesheet" href="tailwind-built.css">
 
   <style>
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-
     /* ═══ DESIGN TOKENS ═══ */
     :root {
       /* Backgrounds */
@@ -132,7 +122,7 @@
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; }
     .mx-auto { margin-left: auto !important; margin-right: auto !important; }
-    html { scroll-behavior: smooth; }
+    html { scroll-behavior: smooth; overflow-x: hidden; }
 
     body {
       font-family: 'Pretendard',-apple-system,'Apple SD Gothic Neo','맑은 고딕',sans-serif;
@@ -141,6 +131,8 @@
       -webkit-font-smoothing: antialiased;
       word-break: keep-all;
       overflow-wrap: break-word;
+      overflow-x: hidden;
+      max-width: 100vw;
     }
     .font-display {
       font-family: 'Pretendard',sans-serif;
@@ -374,12 +366,17 @@
       inset: 0;
       width: 100%;
       height: 100%;
-      object-fit: cover;
-      object-position: center;
       display: block;
       opacity: 0;
       animation: heroFade 6s infinite ease-in-out;
       will-change: opacity;
+    }
+    .hero-slide img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      display: block;
     }
     .hero-slide:nth-of-type(1) { animation-delay: 0s; }
     .hero-slide:nth-of-type(2) { animation-delay: 3s; }
@@ -416,7 +413,6 @@
       letter-spacing: -0.01em;
       margin-bottom: 14px;
       line-height: 1.4;
-      text-shadow: 0 2px 8px rgba(0,0,0,.5);
     }
     /* ═══ ANIMATIONS ═══ */
     .fade-up {
@@ -451,8 +447,7 @@
       box-shadow: 0 12px 28px rgba(40,40,80,.08);
     }
 
-    /* ═══ MARQUEE 삭제됨 · 2026-05-27 ═══ */
-
+    
     /* ═══ MOBILE MENU ═══ */
     #mob-menu.open { display: block; }
 
@@ -473,9 +468,36 @@
     /* ═══ HERO RESPONSIVE ═══ */
     @media (max-width: 767px) {
       #hero {
+        width: 100%;
         aspect-ratio: 2 / 1;
         min-height: 350px;
+        max-width: 100vw;
         padding: 75px 0 40px;
+        box-sizing: border-box;
+      }
+      #hero h1 {
+        white-space: normal !important;
+        font-size: 56px !important;
+        letter-spacing: 0.08em !important;
+        text-indent: 0.08em !important;
+        line-height: 1.15 !important;
+      }
+      #hero .hero-tagline,
+      #hero p {
+        white-space: normal !important;
+        font-size: 18px !important;
+      }
+      #hero .hero-content { padding: 0 16px; }
+    }
+    @media (max-width: 480px) {
+      #hero h1 {
+        font-size: 36px !important;
+        letter-spacing: 0 !important;
+        text-indent: 0 !important;
+      }
+      #hero .hero-tagline,
+      #hero p {
+        font-size: 16px !important;
       }
     }
 
@@ -493,7 +515,7 @@
       display: flex;
       gap: 56px;
       width: max-content;
-      animation: partners-marquee 36s linear infinite;
+      animation: partners-marquee 58s linear infinite;
     }
     .partners-marquee:hover .partners-track { animation-play-state: paused; }
     .partner-link {
@@ -527,6 +549,16 @@
       object-fit: contain;
     }
     .partner-link:hover { transform: translateY(-2px); opacity: 1; }
+    /* 가로형 풀로고(이름 내장) — 정사각 아이콘 대신 통째 표시 */
+    .partner-logo--wide {
+      width: auto;
+      height: 38px;
+    }
+    .partner-logo--wide img {
+      max-width: none;
+      max-height: 38px;
+      width: auto;
+    }
     @keyframes partners-marquee {
       from { transform: translateX(0); }
       to   { transform: translateX(-50%); }
@@ -619,7 +651,7 @@
     }
   </style>
   <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
-  <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.css">
+  <link rel="stylesheet" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.css">
 </head>
 <body>
 
@@ -629,7 +661,7 @@
 <header id="site-header">
   <div class="max-w-7xl mx-auto px-6 lg:px-10 h-16 lg:h-[72px] flex items-center justify-between">
     <a href="index.html" class="flex items-center" aria-label="한마음일터 홈">
-      <img src="logo.png" alt="한마음일터 - 장애인직업재활시설" style="height:48px;width:auto;display:block">
+      <picture><source type="image/webp" srcset="logo.webp"><img src="logo.png" alt="한마음일터 - 장애인직업재활시설" style="height:48px;width:auto;display:block"></picture>
     </a>
 
     <nav class="hidden lg:flex items-center gap-7">
@@ -779,18 +811,24 @@
 ══════════════════════════════ -->
 <section id="hero">
   <div class="hero-bg-image">
-    <img class="hero-slide"
-         src="한마음일터전경.jpg"
-         srcset="한마음일터전경-m.jpg 675w, 한마음일터전경.jpg 1086w"
-         sizes="100vw"
-         alt=""
-         fetchpriority="high"
-         decoding="async">
-    <img class="hero-slide"
-         src="images/인쇄카테고리배경대체.jpg"
-         alt=""
-         loading="lazy"
-         decoding="async">
+    <picture class="hero-slide">
+      <source type="image/webp"
+              srcset="한마음일터전경-m.webp 675w, 한마음일터전경.webp 1086w"
+              sizes="100vw">
+      <img src="한마음일터전경.jpg"
+           srcset="한마음일터전경-m.jpg 675w, 한마음일터전경.jpg 1086w"
+           sizes="100vw"
+           alt=""
+           fetchpriority="high"
+           decoding="async">
+    </picture>
+    <picture class="hero-slide">
+      <source type="image/webp" srcset="images/인쇄카테고리배경대체.webp">
+      <img src="images/인쇄카테고리배경대체.jpg"
+           alt=""
+           loading="lazy"
+           decoding="async">
+    </picture>
   </div>
   <div class="hero-bg-overlay"></div>
 
@@ -800,8 +838,8 @@
       재활의 꿈을 인쇄하는 장애인직업재활시설
     </p>
 
-    <h1 class="fade-up font-display leading-[1.1] mb-9 whitespace-nowrap"
-        style="font-size:clamp(54px,10vw,118px);letter-spacing:0.3em;text-indent:0.3em;color:#FFF;animation-delay:.18s;text-shadow:0 2px 8px rgba(0,0,0,.5)">
+    <h1 class="fade-up font-display leading-[1.1] mb-9"
+        style="font-size:clamp(54px,10vw,118px);letter-spacing:0.3em;text-indent:0.3em;color:#FFF;animation-delay:.18s">
       한마음일터
     </h1>
 
@@ -962,16 +1000,22 @@
 ══════════════════════════════ -->
 <section class="partners-marquee" aria-label="관련 기관">
   <div class="partners-track">
-    <a href="https://www.kead.or.kr/" class="partner-link" target="_blank" rel="noopener"><span class="partner-logo"><img src="images/partners/kead.svg" alt=""></span>한국장애인고용공단</a>
-    <a href="https://www.koddi.or.kr/" class="partner-link" target="_blank" rel="noopener"><span class="partner-logo"><img src="images/partners/koddi_h1_logo2.png" alt=""></span>한국장애인개발원</a>
-    <a href="https://www.gg.go.kr/" class="partner-link" target="_blank" rel="noopener"><span class="partner-logo"><img src="images/partners/gg.jpg" alt=""></span>경기도청</a>
-    <a href="https://www.icheon.go.kr/" class="partner-link" target="_blank" rel="noopener"><span class="partner-logo"><img src="images/partners/icheon_fav.ico" alt=""></span>이천시청</a>
-    <a href="https://www.bokjiro.go.kr/" class="partner-link" target="_blank" rel="noopener"><span class="partner-logo"><img src="images/partners/ssis_logo.png" alt=""></span>한국사회보장정보원</a>
-    <a href="https://www.kead.or.kr/" class="partner-link" target="_blank" rel="noopener" aria-hidden="true"><span class="partner-logo"><img src="images/partners/kead.svg" alt=""></span>한국장애인고용공단</a>
-    <a href="https://www.koddi.or.kr/" class="partner-link" target="_blank" rel="noopener" aria-hidden="true"><span class="partner-logo"><img src="images/partners/koddi_h1_logo2.png" alt=""></span>한국장애인개발원</a>
-    <a href="https://www.gg.go.kr/" class="partner-link" target="_blank" rel="noopener" aria-hidden="true"><span class="partner-logo"><img src="images/partners/gg.jpg" alt=""></span>경기도청</a>
-    <a href="https://www.icheon.go.kr/" class="partner-link" target="_blank" rel="noopener" aria-hidden="true"><span class="partner-logo"><img src="images/partners/icheon_fav.ico" alt=""></span>이천시청</a>
-    <a href="https://www.bokjiro.go.kr/" class="partner-link" target="_blank" rel="noopener" aria-hidden="true"><span class="partner-logo"><img src="images/partners/ssis_logo.png" alt=""></span>한국사회보장정보원</a>
+    <a href="https://www.kead.or.kr/" class="partner-link" target="_blank" rel="noopener"><span class="partner-logo"><img loading="lazy" src="images/partners/kead.svg" alt=""></span>한국장애인고용공단</a>
+    <a href="https://www.koddi.or.kr/" class="partner-link" target="_blank" rel="noopener"><span class="partner-logo"><picture><source type="image/webp" srcset="images/partners/koddi_h1_logo2.webp"><img loading="lazy" src="images/partners/koddi_h1_logo2.png" alt=""></picture></span>한국장애인개발원</a>
+    <a href="https://www.gg.go.kr/" class="partner-link" target="_blank" rel="noopener"><span class="partner-logo"><picture><source type="image/webp" srcset="images/partners/gg.webp"><img loading="lazy" src="images/partners/gg.jpg" alt=""></picture></span>경기도청</a>
+    <a href="https://www.icheon.go.kr/" class="partner-link" target="_blank" rel="noopener"><span class="partner-logo"><img loading="lazy" src="images/partners/icheon_fav.ico" alt=""></span>이천시청</a>
+    <a href="https://www.bokjiro.go.kr/" class="partner-link" target="_blank" rel="noopener"><span class="partner-logo"><picture><source type="image/webp" srcset="images/partners/ssis_logo.webp"><img loading="lazy" src="images/partners/ssis_logo.png" alt=""></picture></span>한국사회보장정보원</a>
+    <a href="https://lel.or.kr/main/" class="partner-link" target="_blank" rel="noopener"><span class="partner-logo"><img loading="lazy" src="images/partners/lel_emblem.png" alt=""></span>엘리엘동산</a>
+    <a href="http://www.lovepeace.kr/" class="partner-link" target="_blank" rel="noopener" aria-label="호세아동산"><span class="partner-logo partner-logo--wide"><img loading="lazy" src="images/partners/hosea_logo.png" alt="호세아동산"></span></a>
+    <a href="http://shma.kr/" class="partner-link" target="_blank" rel="noopener" aria-label="신망애복지재단"><span class="partner-logo partner-logo--wide"><img loading="lazy" src="images/partners/shma_logo.jpg" alt="신망애복지재단"></span></a>
+    <a href="https://www.kead.or.kr/" class="partner-link" target="_blank" rel="noopener" aria-hidden="true"><span class="partner-logo"><img loading="lazy" src="images/partners/kead.svg" alt=""></span>한국장애인고용공단</a>
+    <a href="https://www.koddi.or.kr/" class="partner-link" target="_blank" rel="noopener" aria-hidden="true"><span class="partner-logo"><picture><source type="image/webp" srcset="images/partners/koddi_h1_logo2.webp"><img loading="lazy" src="images/partners/koddi_h1_logo2.png" alt=""></picture></span>한국장애인개발원</a>
+    <a href="https://www.gg.go.kr/" class="partner-link" target="_blank" rel="noopener" aria-hidden="true"><span class="partner-logo"><picture><source type="image/webp" srcset="images/partners/gg.webp"><img loading="lazy" src="images/partners/gg.jpg" alt=""></picture></span>경기도청</a>
+    <a href="https://www.icheon.go.kr/" class="partner-link" target="_blank" rel="noopener" aria-hidden="true"><span class="partner-logo"><img loading="lazy" src="images/partners/icheon_fav.ico" alt=""></span>이천시청</a>
+    <a href="https://www.bokjiro.go.kr/" class="partner-link" target="_blank" rel="noopener" aria-hidden="true"><span class="partner-logo"><picture><source type="image/webp" srcset="images/partners/ssis_logo.webp"><img loading="lazy" src="images/partners/ssis_logo.png" alt=""></picture></span>한국사회보장정보원</a>
+    <a href="https://lel.or.kr/main/" class="partner-link" target="_blank" rel="noopener" aria-hidden="true"><span class="partner-logo"><img loading="lazy" src="images/partners/lel_emblem.png" alt=""></span>엘리엘동산</a>
+    <a href="http://www.lovepeace.kr/" class="partner-link" target="_blank" rel="noopener" aria-hidden="true"><span class="partner-logo partner-logo--wide"><img loading="lazy" src="images/partners/hosea_logo.png" alt=""></span></a>
+    <a href="http://shma.kr/" class="partner-link" target="_blank" rel="noopener" aria-hidden="true"><span class="partner-logo partner-logo--wide"><img loading="lazy" src="images/partners/shma_logo.jpg" alt=""></span></a>
   </div>
 </section>
 
@@ -986,7 +1030,7 @@
 
       <div class="md:col-span-1">
         <div class="mb-4">
-          <img src="한마음로고 하단위치로고.png" alt="한마음일터" style="height:56px;width:auto;display:block">
+          <picture><source type="image/webp" srcset="한마음로고 하단위치로고.webp"><img src="한마음로고 하단위치로고.png" alt="한마음일터" style="height:56px;width:auto;display:block"></picture>
         </div>
         <p class="text-sm leading-[1.7] mb-5" style="color:var(--text-muted-dark)">
           장애인의 자립과 사회 참여를 돕는 직업재활시설.
@@ -1011,7 +1055,7 @@
             <span class="font-bold shrink-0" style="color:#fff">팩스</span>031-631-6634
           </li>
           <li class="flex gap-2">
-            <span class="font-bold shrink-0" style="color:#fff">주소</span>경기도 이천시 마장면 이장로 256번길 한마음일터
+            <span class="font-bold shrink-0" style="color:#fff">주소</span>경기도 이천시 마장면 이장로 256 한마음일터
           </li>
         </ul>
       </div>
@@ -1059,30 +1103,35 @@
 <script>
   // ── header scroll
   const header = document.getElementById('site-header');
-  window.addEventListener('scroll', () => {
-    if (window.scrollY > 30) header.classList.add('scrolled');
-    else header.classList.remove('scrolled');
-  });
+  if (header) {
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 30) header.classList.add('scrolled');
+      else header.classList.remove('scrolled');
+    });
+  }
 
   // ── mobile menu
   const mobToggle = document.getElementById('mob-toggle');
   const mobMenu   = document.getElementById('mob-menu');
-  mobToggle.addEventListener('click', () => {
-    const isOpen = mobMenu.classList.toggle('open');
-    mobMenu.classList.toggle('hidden', !isOpen);
-  });
-  mobMenu.querySelectorAll('a').forEach(a =>
-    a.addEventListener('click', () => {
-      mobMenu.classList.remove('open');
-      mobMenu.classList.add('hidden');
-    })
-  );
+  if (mobToggle && mobMenu) {
+    mobToggle.addEventListener('click', () => {
+      const isOpen = mobMenu.classList.toggle('open');
+      mobMenu.classList.toggle('hidden', !isOpen);
+    });
+    mobMenu.querySelectorAll('a').forEach(a =>
+      a.addEventListener('click', () => {
+        mobMenu.classList.remove('open');
+        mobMenu.classList.add('hidden');
+      })
+    );
+  }
 
   // ── mobile menu group accordion
   document.querySelectorAll('.mob-group-toggle').forEach(btn => {
     btn.addEventListener('click', () => {
       const targetId = btn.getAttribute('data-target');
       const sub = document.getElementById(targetId);
+      if (!sub) return;
       const isOpen = sub.classList.toggle('open');
       btn.classList.toggle('open', isOpen);
     });
@@ -1096,8 +1145,15 @@
         io.unobserve(e.target);
       }
     });
-  }, { threshold: .12 });
+  }, { threshold: .05, rootMargin: '0px 0px -10% 0px' });
   document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+  // 모션 감소 사용자 또는 폴백: 1.5초 후에도 미발동 시 강제 in
+  setTimeout(() => {
+    document.querySelectorAll('.reveal:not(.in)').forEach(el => {
+      const r = el.getBoundingClientRect();
+      if (r.top < window.innerHeight) el.classList.add('in');
+    });
+  }, 1500);
 </script>
 
 </body>

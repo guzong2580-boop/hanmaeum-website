@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="robots" content="noindex,nofollow">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>결제 완료 — 한마음일터</title>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link rel="stylesheet" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.css">
+  <link rel="stylesheet" href="common.css">
+  <style>
+    body { background: #FAF9F6; min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 24px; }
+    .result-card {
+      max-width: 520px; width: 100%;
+      background: #fff;
+      border-radius: 18px;
+      box-shadow: 0 10px 32px rgba(0,0,0,.08);
+      padding: 44px 32px;
+      text-align: center;
+    }
+    .result-icon {
+      width: 80px; height: 80px;
+      background: #DCF3E2;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center; justify-content: center;
+      font-size: 40px;
+      margin-bottom: 20px;
+    }
+    .result-icon.loading { background: #E0EAFB; animation: spin 1.5s linear infinite; }
+    .result-icon.error   { background: #FFE0E0; }
+    @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+    .result-title {
+      font-family: 'Pretendard', sans-serif;
+      font-size: 24px; font-weight: 900;
+      color: var(--text-primary, #1F2027);
+      letter-spacing: -.025em;
+      margin-bottom: 8px;
+    }
+    .result-sub {
+      font-size: 14px; color: #666;
+      margin-bottom: 28px; line-height: 1.7;
+    }
+    .result-info {
+      background: #FAF9F6;
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 28px;
+      font-size: 13px;
+      line-height: 1.9;
+      text-align: left;
+    }
+    .result-info .lbl { color: #888; min-width: 70px; display: inline-block; }
+    .result-info .val { color: #1F2027; font-weight: 600; }
+    .result-info .amount { color: #4A6FE3; font-weight: 800; font-size: 15px; }
+    .result-btn {
+      display: inline-block;
+      padding: 14px 32px;
+      background: #4A6FE3;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 10px;
+      font-weight: 700;
+      font-size: 14px;
+    }
+    .result-info-text {
+      margin-top: 24px;
+      padding-top: 24px;
+      border-top: 1px solid #EEE;
+      font-size: 12px;
+      color: #888;
+      line-height: 1.7;
+    }
+  </style>
+</head>
+<body>
+
+<div class="result-card">
+  <div class="result-icon loading" id="result-icon">⏳</div>
+  <h1 class="result-title" id="result-title">결제 승인 중...</h1>
+  <p class="result-sub" id="result-sub">잠시만 기다려주세요. 결제 검증을 진행하고 있습니다.</p>
+
+  <div class="result-info" id="result-info" hidden>
+    <div><span class="lbl">주문번호</span><span class="val" id="info-order"></span></div>
+    <div><span class="lbl">결제금액</span><span class="amount" id="info-amount"></span></div>
+    <div><span class="lbl">결제수단</span><span class="val">카드</span></div>
+  </div>
+
+  <a href="index.html" class="result-btn" id="result-btn" hidden>홈으로 →</a>
+
+  <p class="result-info-text">
+    영수증·세금계산서가 필요하시면 <b>031-631-6680</b>으로 연락 주세요.<br>
+    한마음일터 홈페이지에서 자동 발송된 안내입니다.
+  </p>
+</div>
+
+<script>
+  const API_URL = 'https://script.google.com/macros/s/AKfycbyajgu_KD48Ptqw3k0O0lRz6F_SDAsBh17aHRoJyFM-FNQyhXIAnMNKogZuRIX8Yij2PA/exec';
+
+  const params = new URLSearchParams(location.search);
+  const paymentKey = params.get('paymentKey');
+  const orderId    = params.get('orderId');
+  const amount     = Number(params.get('amount'));
+
+  const iconEl  = document.getElementById('result-icon');
+  const titleEl = document.getElementById('result-title');
+  const subEl   = document.getElementById('result-sub');
+  const infoEl  = document.getElementById('result-info');
+  const btnEl   = document.getElementById('result-btn');
+
+  function showSuccess() {
+    iconEl.className = 'result-icon';
+    iconEl.textContent = '✓';
+    titleEl.textContent = '결제가 완료되었습니다';
+    subEl.textContent = '주문이 정상적으로 접수되었습니다. 영수증은 결제 카드사에서 확인하실 수 있습니다.';
+    document.getElementById('info-order').textContent = orderId;
+    document.getElementById('info-amount').textContent = amount.toLocaleString('ko-KR') + '원';
+    infoEl.hidden = false;
+    btnEl.hidden = false;
+  }
+
+  function showError(msg) {
+    iconEl.className = 'result-icon error';
+    iconEl.textContent = '!';
+    titleEl.textContent = '결제 처리 실패';
+    subEl.textContent = msg + '\n\n문제가 지속되면 031-631-6680으로 연락 주세요.';
+    subEl.style.whiteSpace = 'pre-line';
+    btnEl.hidden = false;
+  }
+
+  if (!paymentKey || !orderId || !amount) {
+    showError('결제 정보가 누락되었습니다.');
+  } else {
+    // Apps Script에 승인 요청
+    fetch(API_URL + '?action=payment-confirm', {
+      method: 'POST',
+      body: JSON.stringify({ paymentKey, orderId, amount })
+    })
+    .then(res => res.json())
+    .then(data => {
+      if (data.success) showSuccess();
+      else showError(data.error || '승인 실패');
+    })
+    .catch(err => showError('서버 연결 실패: ' + err.message));
+  }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,8 @@
+@import "tailwindcss";
+@source "index.html";
+
+@theme {
+  --font-sans: "Pretendard", -apple-system, sans-serif;
+  --font-display: "Pretendard", -apple-system, sans-serif;
+  --font-gmarket: "Pretendard", -apple-system, sans-serif;
+}
