@@ -522,6 +522,7 @@
     </div>
     <div class="dash-tabs">
       <button class="dash-tab active" data-type="notices">📢 공지사항</button>
+      <button class="dash-tab" data-type="disclosure">📊 정보공개</button>
       <button class="dash-tab" data-type="archive">📁 자료실</button>
       <button class="dash-tab" data-type="gallery">📷 갤러리</button>
       <button class="dash-tab" data-type="print">🖨️ 인쇄물</button>
@@ -597,6 +598,29 @@ const FIELDS = {
       { name: 'fileUrls',  label: '첨부 파일',   type: 'upload-multi', required: false,
         accept: '.pdf,.hwp,.hwpx,.doc,.docx,.zip,.xlsx,.xls,.ppt,.pptx', kind: 'file',
         hint: 'PDF·HWP·DOC·ZIP 등 여러 파일. 다운로드 버튼으로 표시됩니다.' }
+    ]
+  },
+  disclosure: {
+    label: '정보공개',
+    title: (item) => item ? '정보공개 수정' : '새 정보공개',
+    fields: [
+      { name: 'category', label: '카테고리', type: 'select', required: true,
+        options: ['회의록','예산서','수입지출'], default: '회의록',
+        hint: '회의록 / 예산서 / 수입지출(수입·지출 내역)' },
+      { name: 'title',    label: '제목',  type: 'text', required: true },
+      { name: 'date',     label: '날짜',  type: 'text', required: false,
+        hint: '예: 2025-12 또는 2025-12-15' },
+      { name: 'body',     label: '내용',  type: 'textarea', required: false,
+        hint: '정보공개 상세 페이지에 표시될 설명 본문' },
+      { name: 'fileUrl',  label: '대표 파일', type: 'upload', required: false,
+        accept: '.pdf,.hwp,.hwpx,.doc,.docx,.xlsx,.xls,.zip',
+        hint: '회의록·예산서·수입지출 문서(PDF·HWP·엑셀 등). Drive에 자동 업로드' },
+      { name: 'imageUrls', label: '본문 이미지', type: 'upload-multi', required: false,
+        accept: 'image/*', kind: 'image',
+        hint: '여러 장 선택 가능 (Ctrl·Shift). 상세 페이지에 그리드로 표시' },
+      { name: 'fileUrls',  label: '추가 첨부파일', type: 'upload-multi', required: false,
+        accept: '.pdf,.hwp,.hwpx,.doc,.docx,.zip,.xlsx,.xls,.ppt,.pptx', kind: 'file',
+        hint: '대표 파일 외 추가 파일들. 상세 페이지에서 다운로드 버튼으로 표시' }
     ]
   },
   archive: {
@@ -715,6 +739,8 @@ async function api(action, opts = {}) {
   const params = new URLSearchParams({ action });
   if (opts.type) params.set('type', opts.type);
   if (opts.id) params.set('id', opts.id);
+  // 목록 조회(GET) 등에도 토큰 전달 — 자료실은 인증 필요
+  if (getToken()) params.set('token', getToken());
 
   const fetchOpts = { method: opts.method || 'POST' };
   if (opts.body || opts.method === 'POST' || !opts.method) {
@@ -849,6 +875,7 @@ function renderList() {
 
   listArea.innerHTML = currentItems.map(item => {
     if (currentType === 'notices')  return renderNotice(item);
+    if (currentType === 'disclosure') return renderDisclosure(item);
     if (currentType === 'archive')  return renderArchive(item);
     if (currentType === 'gallery')  return renderGallery(item);
     if (currentType === 'print')    return renderPrint(item);
@@ -922,6 +949,22 @@ function renderNotice(item) {
       <div class="item-info">
         <h4>${escapeHtml(item.title || '')}</h4>
         <p>${escapeHtml(item.date || '')}</p>
+      </div>
+      <div class="item-actions">
+        <button class="edit" data-id="${escapeHtml(item.id)}">수정</button>
+        <button class="del" data-id="${escapeHtml(item.id)}">삭제</button>
+      </div>
+    </div>`;
+}
+
+function renderDisclosure(item) {
+  const catLabel = { '수입지출': '수입·지출' }[item.category] || item.category || '정보공개';
+  return `
+    <div class="item-card">
+      <span class="item-badge notice">${escapeHtml(catLabel)}</span>
+      <div class="item-info">
+        <h4>${escapeHtml(item.title || '')}</h4>
+        <p>${escapeHtml(item.date || '')} ${item.fileUrl ? '· 📎 파일첨부' : ''}</p>
       </div>
       <div class="item-actions">
         <button class="edit" data-id="${escapeHtml(item.id)}">수정</button>

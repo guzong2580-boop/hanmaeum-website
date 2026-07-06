@@ -161,11 +161,13 @@
     body[class*="-detail-mode"] .tab-nav,
     body[class*="-detail-mode"] .partners-marquee,
     body[class*="-detail-mode"] #notice,
+    body[class*="-detail-mode"] #disclosure,
     body[class*="-detail-mode"] #archive,
     body[class*="-detail-mode"] #gallery,
     body[class*="-detail-mode"] #donation,
     body[class*="-detail-mode"] #volunteer { display: none !important; }
     body.notice-detail-mode  #notice-detail,
+    body.disclosure-detail-mode #disclosure-detail,
     body.archive-detail-mode #archive-detail,
     body.gallery-detail-mode #gallery-detail { display: block; }
     /* 상세 모드: body 배경을 footer 색과 일치시켜 푸터 아래 흰색 빈 영역 제거 */
@@ -496,6 +498,123 @@
       text-decoration: none;
     }
 
+    /* === 정보공개 카테고리 필터 칩 === */
+    .disc-filter {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 4px 0 20px;
+    }
+    .disc-chip {
+      border: 1px solid var(--border-soft);
+      background: #fff;
+      color: var(--text-muted);
+      font-size: 13px;
+      font-weight: 600;
+      padding: 8px 16px;
+      border-radius: 999px;
+      cursor: pointer;
+      transition: all .15s;
+    }
+    .disc-chip:hover { border-color: var(--accent-blue); color: var(--accent-blue); }
+    .disc-chip.active {
+      background: var(--accent-blue);
+      border-color: var(--accent-blue);
+      color: #fff;
+    }
+    /* 정보공개 카테고리 뱃지 색상 */
+    .badge.cat-minutes { background: #E0EDFF; color: #1D4ED8; }
+    .badge.cat-budget  { background: #E6F4EA; color: #1E7E44; }
+    .badge.cat-expense { background: #FCE9D6; color: #B45309; }
+
+    /* === 자료실 잠금 (직원 로그인 전용) === */
+    .archive-lock {
+      border: 1px solid var(--border-soft);
+      border-radius: 16px;
+      background: #fff;
+      padding: 40px 28px;
+      text-align: center;
+      max-width: 440px;
+      margin: 8px auto 0;
+    }
+    .archive-lock .lock-ico { font-size: 40px; }
+    .archive-lock h3 {
+      font-size: 17px;
+      font-weight: 700;
+      margin: 12px 0 6px;
+      color: var(--text-primary);
+    }
+    .archive-lock p {
+      font-size: 13px;
+      color: var(--text-muted);
+      line-height: 1.6;
+      margin-bottom: 20px;
+    }
+    .archive-login-form {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      max-width: 280px;
+      margin: 0 auto;
+    }
+    .archive-login-form input {
+      width: 100%;
+      padding: 11px 14px;
+      border: 1px solid var(--border-soft);
+      border-radius: 10px;
+      font-size: 14px;
+      font-family: inherit;
+    }
+    .archive-login-form input:focus {
+      outline: none;
+      border-color: var(--accent-blue);
+    }
+    .archive-login-form button {
+      padding: 11px 14px;
+      background: var(--accent-blue);
+      color: #fff;
+      border: none;
+      border-radius: 10px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background .15s;
+    }
+    .archive-login-form button:hover { background: var(--accent-blue-2); }
+    .archive-login-form button:disabled { opacity: .6; cursor: default; }
+    .archive-login-error {
+      color: #C0392B;
+      font-size: 12.5px;
+      min-height: 16px;
+      margin-top: 2px;
+    }
+    .archive-authed-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      background: #EAF3EC;
+      border: 1px solid #CDE6D4;
+      border-radius: 10px;
+      padding: 10px 16px;
+      font-size: 13px;
+      color: #1E7E44;
+      margin-bottom: 16px;
+    }
+    .archive-authed-bar button {
+      background: none;
+      border: 1px solid #CDE6D4;
+      color: #1E7E44;
+      border-radius: 8px;
+      padding: 5px 12px;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    /* display:flex 가 hidden 속성을 덮어쓰지 않도록 (자료실 잠금/해제 토글) */
+    .archive-authed-bar[hidden],
+    .archive-list[hidden] { display: none !important; }
+
     /* === 자료실 === */
     .archive-list {
       display: flex;
@@ -669,6 +788,7 @@
         <a href="community.html" class="nav-link active">커뮤니티<svg class="nav-caret" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 5l3 3 3-3"/></svg></a>
         <div class="nav-dropdown">
           <a href="#notice">공지사항</a>
+          <a href="#disclosure">정보공개</a>
           <a href="#gallery">갤러리</a>
           <a href="#archive">자료실</a>
           <a href="#donation">후원</a>
@@ -724,6 +844,7 @@
       <div id="mg-comm" class="mob-sub">
         <a href="community.html">전체 보기</a>
         <a href="#notice">공지사항</a>
+        <a href="#disclosure">정보공개</a>
         <a href="#gallery">갤러리</a>
         <a href="#archive">자료실</a>
         <a href="#donation">후원</a>
@@ -755,6 +876,29 @@
     <div class="entry-detail-body" id="nd-body"></div>
     <div class="entry-detail-images" id="nd-images" hidden></div>
     <div class="entry-detail-files" id="nd-files" hidden></div>
+  </div>
+</section>
+
+<section class="entry-detail section-block" id="disclosure-detail" aria-label="정보공개 상세">
+  <div class="container">
+    <button class="entry-detail-back" data-back="disclosure" type="button">
+      <svg width="18" height="18" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M10 3L4 8l6 5"/></svg>
+      목록으로
+    </button>
+
+    <header class="entry-detail-head">
+      <span class="badge" id="dd-badge">정보공개</span>
+      <h1 class="entry-detail-title" id="dd-title"></h1>
+      <p class="entry-detail-meta">
+        <span id="dd-date"></span>
+        <span> · 관리자</span>
+      </p>
+    </header>
+
+    <div class="entry-detail-primary-file" id="dd-primary" hidden></div>
+    <div class="entry-detail-body" id="dd-body"></div>
+    <div class="entry-detail-images" id="dd-images" hidden></div>
+    <div class="entry-detail-files" id="dd-files" hidden></div>
   </div>
 </section>
 
@@ -824,11 +968,12 @@
 <div class="tab-nav">
   <div class="container">
     <div class="tab-nav-inner">
-      <a href="#notice"    class="tab-link">공지사항</a>
-      <a href="#gallery"   class="tab-link">갤러리</a>
-      <a href="#archive"   class="tab-link">자료실</a>
-      <a href="#donation"  class="tab-link">후원</a>
-      <a href="#volunteer" class="tab-link">자원봉사</a>
+      <a href="#notice"     class="tab-link">공지사항</a>
+      <a href="#disclosure" class="tab-link">정보공개</a>
+      <a href="#gallery"    class="tab-link">갤러리</a>
+      <a href="#archive"    class="tab-link">자료실</a>
+      <a href="#donation"   class="tab-link">후원</a>
+      <a href="#volunteer"  class="tab-link">자원봉사</a>
     </div>
   </div>
 </div>
@@ -857,6 +1002,29 @@
 </section>
 
 
+<!-- ══════════ 정보공개 ══════════ -->
+<section id="disclosure" class="section-block" style="background:var(--bg-cream)">
+  <div class="container reveal">
+    <p class="section-eyebrow">DISCLOSURE</p>
+    <h2 class="section-title">정보공개</h2>
+    <p class="section-lead">
+      한마음일터의 운영 투명성을 위해 회의록·예산서·수입·지출 내역을 공개합니다.
+    </p>
+
+    <div class="disc-filter" id="disc-filter">
+      <button class="disc-chip active" data-cat="전체" type="button">전체</button>
+      <button class="disc-chip" data-cat="회의록" type="button">회의록</button>
+      <button class="disc-chip" data-cat="예산서" type="button">예산서</button>
+      <button class="disc-chip" data-cat="수입지출" type="button">수입·지출</button>
+    </div>
+
+    <div class="archive-list" id="disclosure-list" data-loading="true">
+      <div style="text-align:center;color:var(--text-muted);font-size:13px;padding:40px 0">불러오는 중...</div>
+    </div>
+  </div>
+</section>
+
+
 <!-- ══════════ 갤러리 ══════════ -->
 <section id="gallery" class="section-block" style="background:var(--bg-cream)">
   <div class="container reveal">
@@ -873,13 +1041,35 @@
 </section>
 
 
-<!-- ══════════ 자료실 ══════════ -->
+<!-- ══════════ 자료실 (직원 로그인 전용) ══════════ -->
 <section id="archive" class="section-block">
   <div class="container reveal">
     <p class="section-eyebrow">ARCHIVE</p>
     <h2 class="section-title">자료실</h2>
+    <p class="section-lead">
+      내부 자료실입니다. 직원 로그인 후 열람·다운로드할 수 있습니다.
+    </p>
 
-    <div class="archive-list" id="archive-list" data-loading="true">
+    <!-- 로그인 후 표시되는 상단바 -->
+    <div class="archive-authed-bar" id="archive-authed-bar" hidden>
+      <span id="archive-authed-name">✅ 직원 로그인됨</span>
+      <button type="button" id="archive-logout">로그아웃</button>
+    </div>
+
+    <!-- 비로그인 시 잠금 패널 -->
+    <div class="archive-lock" id="archive-lock" hidden>
+      <div class="lock-ico">🔒</div>
+      <h3>권한이 없습니다</h3>
+      <p>자료실은 <b>직원 전용</b>입니다.<br>열람하시려면 직원 계정으로 로그인해주세요.</p>
+      <form class="archive-login-form" id="archive-login-form" autocomplete="off">
+        <input type="text" id="archive-login-id" placeholder="아이디" autocomplete="username" required>
+        <input type="password" id="archive-login-pw" placeholder="비밀번호" autocomplete="current-password" required>
+        <button type="submit" id="archive-login-btn">로그인</button>
+        <div class="archive-login-error" id="archive-login-error"></div>
+      </form>
+    </div>
+
+    <div class="archive-list" id="archive-list" data-loading="true" hidden>
       <div style="text-align:center;color:var(--text-muted);font-size:13px;padding:40px 0">불러오는 중...</div>
     </div>
   </div>
@@ -1041,12 +1231,39 @@
     return url;
   }
 
+  // 직원 로그인 토큰 (admin.html과 동일 키 — 같은 탭에서 로그인 유지)
+  function getToken() { try { return sessionStorage.getItem('hm_token') || ''; } catch (e) { return ''; } }
+  function setToken(t) { try { t ? sessionStorage.setItem('hm_token', t) : sessionStorage.removeItem('hm_token'); } catch (e) {} }
+
+  // 최근 5년만 노출(롤링) — 방문자에게만 적용, 직원 로그인(토큰) 시 전체 열람
+  function filterRecent5y(items) {
+    const cut = new Date();
+    cut.setFullYear(cut.getFullYear() - 5);
+    const cutStr = cut.getFullYear() + '-' +
+      String(cut.getMonth() + 1).padStart(2, '0') + '-' +
+      String(cut.getDate()).padStart(2, '0');
+    return items.filter(it => {
+      const d = String(it.date || '').slice(0, 10);
+      if (!/^\d{4}-\d{2}-\d{2}$/.test(d)) return true; // 날짜 형식 불명 → 노출 유지
+      return d >= cutStr;
+    });
+  }
+
   function fetchList(type) {
-    return fetch(`${API_URL}?action=list&type=${type}`, { cache: 'no-store' })
+    const tok = getToken();
+    const url = `${API_URL}?action=list&type=${type}` + (tok ? `&token=${encodeURIComponent(tok)}` : '');
+    return fetch(url, { cache: 'no-store' })
       .then(r => r.json())
       .then(res => {
-        if (!res.success) throw new Error(res.error || 'Unknown error');
-        return res.items || [];
+        if (!res.success) {
+          const err = new Error(res.error || 'Unknown error');
+          err.authRequired = !!res.authRequired;
+          throw err;
+        }
+        let items = res.items || [];
+        // 공지사항만 최근 5년 필터(백엔드도 동일 정책). 정보공개·갤러리는 전체 공개.
+        if (!tok && type === 'notices') items = filterRecent5y(items);
+        return items;
       });
   }
 
@@ -1137,9 +1354,14 @@
     return '📎';
   }
 
-  // ─── 상세 페이지 인라인 전환 (공지/자료/갤러리 공용) ───
+  // ─── 상세 페이지 인라인 전환 (공지/정보공개/자료/갤러리 공용) ───
   let allArchive = [];
   let allGallery = [];
+  let allDisclosure = [];
+
+  // 정보공개 카테고리 → 뱃지 CSS 클래스 매핑 (한글 클래스명 회피)
+  const discCatClass = { '회의록': 'cat-minutes', '예산서': 'cat-budget', '수입지출': 'cat-expense' };
+  const discCatLabel = { '수입지출': '수입·지출' };
 
   const detailConfigs = {
     notice: {
@@ -1149,6 +1371,16 @@
         const isPrivate = item.type === '비공개';
         return { cls: isPrivate ? 'private' : 'notice', text: item.type || '공지' };
       }
+    },
+    disclosure: {
+      prefix: 'dd',
+      getItems: () => allDisclosure,
+      getBadge: (item) => {
+        const cat = item.category || '';
+        const cls = discCatClass[cat] || 'notice';
+        return { cls, text: discCatLabel[cat] || cat || '정보공개' };
+      },
+      primaryFile: true
     },
     archive: {
       prefix: 'ad',
@@ -1290,7 +1522,7 @@
 
   window.addEventListener('popstate', (e) => {
     // 활성 상세 모드 모두 닫고, state에 해당하는 타입만 다시 연다
-    const types = ['notice', 'archive', 'gallery'];
+    const types = ['notice', 'disclosure', 'archive', 'gallery'];
     let opened = false;
     if (e.state) {
       for (const t of types) {
@@ -1314,7 +1546,7 @@
 
   document.addEventListener('keydown', e => {
     if (e.key !== 'Escape') return;
-    const types = ['notice', 'archive', 'gallery'];
+    const types = ['notice', 'disclosure', 'archive', 'gallery'];
     for (const t of types) {
       if (document.body.classList.contains(t + '-detail-mode')) {
         const btn = document.querySelector(`.entry-detail-back[data-back="${t}"]`);
@@ -1326,77 +1558,224 @@
 
   // URL hash 첫 진입 진입점 (모든 타입 데이터 로드 후 호출)
   function maybeOpenFromHash() {
-    const m = location.hash.match(/^#(notice|archive|gallery)-(.+)$/);
+    const m = location.hash.match(/^#(notice|disclosure|archive|gallery)-(.+)$/);
     if (!m) return;
     const [, type, id] = m;
     const item = detailConfigs[type].getItems().find(it => String(it.id) === id);
     if (item) showEntryDetail(type, item, false);
   }
 
-  fetchList('notices')
-    .then(items => {
-      allNotices = items.sort((a, b) => Number(b.id || 0) - Number(a.id || 0));
-      if (!allNotices.length) {
+  function loadNotices() {
+    return fetchList('notices')
+      .then(items => {
+        allNotices = items.sort((a, b) => Number(b.id || 0) - Number(a.id || 0));
+        if (!allNotices.length) {
+          document.getElementById('notice-list').innerHTML =
+            '<li class="notice-row" style="justify-content:center;color:var(--text-muted);font-size:13px;padding:24px">등록된 공지가 없습니다.</li>';
+          return;
+        }
+        renderNoticePage(1);
+        maybeOpenFromHash();
+      })
+      .catch(err => {
+        console.error('공지사항 로드 실패:', err);
         document.getElementById('notice-list').innerHTML =
-          '<li class="notice-row" style="justify-content:center;color:var(--text-muted);font-size:13px;padding:24px">등록된 공지가 없습니다.</li>';
-        return;
-      }
-      renderNoticePage(1);
-      maybeOpenFromHash();
-    })
-    .catch(err => {
-      console.error('공지사항 로드 실패:', err);
-      document.getElementById('notice-list').innerHTML =
-        '<li class="notice-row" style="justify-content:center;color:var(--text-muted);font-size:13px;padding:24px">공지사항을 불러올 수 없습니다.</li>';
-    });
+          '<li class="notice-row" style="justify-content:center;color:var(--text-muted);font-size:13px;padding:24px">공지사항을 불러올 수 없습니다.</li>';
+      });
+  }
+  loadNotices();
 
-  // ─── 자료실 ───
+  // ─── 정보공개 ───
+  let discActiveCat = '전체';
+
+  function renderDisclosure() {
+    const list = document.getElementById('disclosure-list');
+    const items = discActiveCat === '전체'
+      ? allDisclosure
+      : allDisclosure.filter(it => String(it.category || '') === discActiveCat);
+
+    if (!allDisclosure.length) {
+      list.innerHTML = '<div style="text-align:center;color:var(--text-muted);font-size:13px;padding:40px 0">등록된 정보공개 자료가 없습니다.</div>';
+      return;
+    }
+    if (!items.length) {
+      list.innerHTML = '<div style="text-align:center;color:var(--text-muted);font-size:13px;padding:40px 0">해당 카테고리 자료가 없습니다.</div>';
+      return;
+    }
+
+    list.innerHTML = items.map((item) => {
+      const idx = allDisclosure.indexOf(item);
+      const cat = String(item.category || '');
+      const catCls = discCatClass[cat] || 'notice';
+      const catText = discCatLabel[cat] || cat || '정보공개';
+      const discFiles = parseJsonSafe(item.fileUrls);
+      const url = (item.fileUrl && String(item.fileUrl).trim())
+        || (discFiles[0] && (discFiles[0].url || discFiles[0])) || '';
+      const dlAttr = url
+        ? `href="${escapeHtml(url)}" target="_blank" rel="noopener"`
+        : `href="#" onclick="event.stopPropagation();alert('파일 링크가 아직 등록되지 않았습니다.'); return false;"`;
+      return `
+        <div class="archive-row" data-idx="${idx}" style="cursor:pointer">
+          <div class="archive-ico">📄</div>
+          <div class="archive-body">
+            <h4><span class="badge ${catCls}" style="margin-right:8px">${escapeHtml(catText)}</span>${escapeHtml(item.title || '')}</h4>
+            <p>${escapeHtml(item.body ? String(item.body).slice(0, 80) : '')}</p>
+          </div>
+          <div class="archive-meta">${escapeHtml(item.date || '')}</div>
+          <a class="archive-dl" ${dlAttr} onclick="event.stopPropagation()">⬇ 다운로드</a>
+        </div>`;
+    }).join('');
+
+    list.querySelectorAll('.archive-row').forEach(row => {
+      row.addEventListener('click', () => {
+        const idx = Number(row.dataset.idx);
+        showEntryDetail('disclosure', allDisclosure[idx]);
+      });
+    });
+  }
+
+  document.querySelectorAll('#disc-filter .disc-chip').forEach(chip => {
+    chip.addEventListener('click', () => {
+      document.querySelectorAll('#disc-filter .disc-chip').forEach(c => c.classList.remove('active'));
+      chip.classList.add('active');
+      discActiveCat = chip.dataset.cat;
+      renderDisclosure();
+    });
+  });
+
+  function loadDisclosure() {
+    return fetchList('disclosure')
+      .then(items => {
+        allDisclosure = items;
+        renderDisclosure();
+        maybeOpenFromHash();
+      })
+      .catch(err => {
+        console.error('정보공개 로드 실패:', err);
+        document.getElementById('disclosure-list').innerHTML =
+          '<div style="text-align:center;color:var(--text-muted);font-size:13px;padding:40px 0">정보공개 자료를 불러올 수 없습니다.</div>';
+      });
+  }
+  loadDisclosure();
+
+  // ─── 자료실 (직원 로그인 전용) ───
   const fileTypeIcon = { PDF: '📄', HWP: '📝', DOC: '📝', ZIP: '📦', IMG: '🖼️' };
   const fileTypeClass = { PDF: 'pdf', HWP: 'hwp', DOC: 'doc', ZIP: 'zip', IMG: 'img' };
 
-  fetchList('archive')
-    .then(items => {
-      allArchive = items;
-      const list = document.getElementById('archive-list');
-      if (!items.length) {
-        list.innerHTML = '<div style="text-align:center;color:var(--text-muted);font-size:13px;padding:40px 0">등록된 자료가 없습니다.</div>';
-        return;
-      }
-      list.innerHTML = items.map((item, idx) => {
-        const type = (item.type || 'PDF').toUpperCase();
-        const cls = fileTypeClass[type] || 'pdf';
-        const ico = fileTypeIcon[type] || '📄';
-        const meta = [item.size, item.date].filter(Boolean).join(' · ');
-        const url = item.fileUrl && String(item.fileUrl).trim();
-        const dlAttr = url
-          ? `href="${escapeHtml(url)}" target="_blank" rel="noopener"`
-          : `href="#" onclick="event.stopPropagation();alert('파일 링크가 아직 등록되지 않았습니다.\\n관리자 페이지에서 파일 URL을 추가해주세요.'); return false;"`;
-        return `
-          <div class="archive-row ${cls}" data-idx="${idx}" style="cursor:pointer">
-            <div class="archive-ico">${ico}</div>
-            <div class="archive-body">
-              <h4>${escapeHtml(item.title || '')}</h4>
-              <p>${escapeHtml(item.description || '')}</p>
-            </div>
-            <div class="archive-meta"><b>${escapeHtml(type)}</b>${escapeHtml(meta)}</div>
-            <a class="archive-dl" ${dlAttr} onclick="event.stopPropagation()">⬇ 다운로드</a>
-          </div>`;
-      }).join('');
+  const archiveListEl  = document.getElementById('archive-list');
+  const archiveLockEl  = document.getElementById('archive-lock');
+  const archiveAuthBar = document.getElementById('archive-authed-bar');
 
-      list.querySelectorAll('.archive-row').forEach(row => {
-        row.addEventListener('click', () => {
-          const idx = Number(row.dataset.idx);
-          showEntryDetail('archive', allArchive[idx]);
-        });
+  function showArchiveLocked() {
+    archiveLockEl.hidden = false;
+    archiveAuthBar.hidden = true;
+    archiveListEl.hidden = true;
+  }
+  function showArchiveUnlocked() {
+    archiveLockEl.hidden = true;
+    archiveAuthBar.hidden = false;
+    archiveListEl.hidden = false;
+  }
+
+  function renderArchiveList(items) {
+    allArchive = items;
+    if (!items.length) {
+      archiveListEl.innerHTML = '<div style="text-align:center;color:var(--text-muted);font-size:13px;padding:40px 0">등록된 자료가 없습니다.</div>';
+      return;
+    }
+    archiveListEl.innerHTML = items.map((item, idx) => {
+      const type = (item.type || 'PDF').toUpperCase();
+      const cls = fileTypeClass[type] || 'pdf';
+      const ico = fileTypeIcon[type] || '📄';
+      const meta = [item.size, item.date].filter(Boolean).join(' · ');
+      const url = item.fileUrl && String(item.fileUrl).trim();
+      const dlAttr = url
+        ? `href="${escapeHtml(url)}" target="_blank" rel="noopener"`
+        : `href="#" onclick="event.stopPropagation();alert('파일 링크가 아직 등록되지 않았습니다.\\n관리자 페이지에서 파일 URL을 추가해주세요.'); return false;"`;
+      return `
+        <div class="archive-row ${cls}" data-idx="${idx}" style="cursor:pointer">
+          <div class="archive-ico">${ico}</div>
+          <div class="archive-body">
+            <h4>${escapeHtml(item.title || '')}</h4>
+            <p>${escapeHtml(item.description || '')}</p>
+          </div>
+          <div class="archive-meta"><b>${escapeHtml(type)}</b>${escapeHtml(meta)}</div>
+          <a class="archive-dl" ${dlAttr} onclick="event.stopPropagation()">⬇ 다운로드</a>
+        </div>`;
+    }).join('');
+
+    archiveListEl.querySelectorAll('.archive-row').forEach(row => {
+      row.addEventListener('click', () => {
+        const idx = Number(row.dataset.idx);
+        showEntryDetail('archive', allArchive[idx]);
       });
-
-      maybeOpenFromHash();
-    })
-    .catch(err => {
-      console.error('자료실 로드 실패:', err);
-      document.getElementById('archive-list').innerHTML =
-        '<div style="text-align:center;color:var(--text-muted);font-size:13px;padding:40px 0">자료실을 불러올 수 없습니다.</div>';
     });
+  }
+
+  function loadArchive() {
+    fetchList('archive')
+      .then(items => {
+        showArchiveUnlocked();
+        renderArchiveList(items);
+        maybeOpenFromHash();
+      })
+      .catch(err => {
+        if (err.authRequired) {
+          showArchiveLocked();       // 비로그인 → "권한이 없습니다" 패널
+        } else {
+          console.error('자료실 로드 실패:', err);
+          showArchiveUnlocked();
+          archiveListEl.innerHTML =
+            '<div style="text-align:center;color:var(--text-muted);font-size:13px;padding:40px 0">자료실을 불러올 수 없습니다.</div>';
+        }
+      });
+  }
+
+  // 자료실 직원 로그인
+  const archiveLoginForm = document.getElementById('archive-login-form');
+  archiveLoginForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const id = document.getElementById('archive-login-id').value.trim();
+    const pw = document.getElementById('archive-login-pw').value;
+    const btn = document.getElementById('archive-login-btn');
+    const errEl = document.getElementById('archive-login-error');
+    if (!id || !pw) return;
+    errEl.textContent = '';
+    btn.disabled = true;
+    btn.textContent = '로그인 중...';
+
+    fetch(`${API_URL}?action=login`, {
+      method: 'POST',
+      body: JSON.stringify({ id, password: pw })
+    })
+      .then(r => r.json())
+      .then(res => {
+        if (res.success && res.token) {
+          setToken(res.token);
+          document.getElementById('archive-authed-name').textContent =
+            `✅ ${res.name || '직원'} 님 로그인됨`;
+          document.getElementById('archive-login-pw').value = '';
+          loadArchive();
+          loadNotices();     // 직원 로그인 시 전체(5년 이전 포함) 열람
+          loadDisclosure();
+        } else {
+          errEl.textContent = res.error || '아이디 또는 비밀번호를 확인해주세요.';
+        }
+      })
+      .catch(() => { errEl.textContent = '서버 오류 — 잠시 후 다시 시도해주세요.'; })
+      .finally(() => { btn.disabled = false; btn.textContent = '로그인'; });
+  });
+
+  document.getElementById('archive-logout').addEventListener('click', () => {
+    setToken('');
+    // 자료실 상세가 열려 있으면 닫기
+    if (document.body.classList.contains('archive-detail-mode')) hideEntryDetail('archive');
+    loadArchive();
+    loadNotices();     // 로그아웃 시 최근 5년만 노출로 복귀
+    loadDisclosure();
+  });
+
+  loadArchive();
 
   // ─── 갤러리 ───
   const galleryColors = {

@@ -18,6 +18,10 @@ const TYPE_CONFIG = {
     sheet: '갤러리',
     headers: ['id', 'title', 'date', 'imageUrl', 'color', 'emoji', 'body', 'imageUrls', 'fileUrls', 'createdAt']
   },
+  disclosure: {
+    sheet: '정보공개',
+    headers: ['id', 'category', 'title', 'date', 'body', 'fileUrl', 'imageUrls', 'fileUrls', 'createdAt']
+  },
   print: {
     sheet: '인쇄물',
     headers: ['id', 'category', 'title', 'tag', 'color', 'imageUrl', 'imagesJson', 'bg', 'design', 'info', 'sortOrder', 'createdAt']
@@ -79,7 +83,7 @@ function route(e, method) {
 
     switch (action) {
       case 'login':       return jsonResp(handleLogin(body));
-      case 'list':        return jsonResp(handleList(e.parameter.type, body.token));
+      case 'list':        return jsonResp(handleList(e.parameter.type, body.token || e.parameter.token));
       case 'create':      return jsonResp(handleCreate(e.parameter.type, body));
       case 'update':      return jsonResp(handleUpdate(e.parameter.type, e.parameter.id, body));
       case 'delete':      return jsonResp(handleDelete(e.parameter.type, e.parameter.id, body));
@@ -192,11 +196,23 @@ function handleVerifyToken(token) {
 // 콘텐츠 CRUD
 // ════════════════════════════════════════════════════════════
 
+// 시트가 없으면 헤더와 함께 자동 생성 (신규 타입 최초 접근 시)
+function getOrCreateSheet(cfg) {
+  const ss = SpreadsheetApp.getActive();
+  let sheet = ss.getSheetByName(cfg.sheet);
+  if (!sheet) {
+    sheet = ss.insertSheet(cfg.sheet);
+    sheet.getRange(1, 1, 1, cfg.headers.length).setValues([cfg.headers]);
+    sheet.setFrozenRows(1);
+  }
+  return sheet;
+}
+
 function handleList(type, token) {
   const cfg = TYPE_CONFIG[type];
   if (!cfg) return { success: false, error: 'Unknown type: ' + type };
 
-  const sheet = SpreadsheetApp.getActive().getSheetByName(cfg.sheet);
+  const sheet = getOrCreateSheet(cfg);
   if (!sheet) return { success: false, error: '시트를 찾을 수 없습니다: ' + cfg.sheet };
 
   const data = sheet.getDataRange().getValues();
@@ -218,9 +234,29 @@ function handleList(type, token) {
     items.push(obj);
   }
 
+  const authed = !!verifyToken(token);
+
+  // 자료실(archive)은 직원(관리자) 로그인 시에만 열람 가능 — 비로그인 시 목록·파일 URL 미노출
+  if (type === 'archive' && !authed) {
+    return { success: false, error: 'AUTH_REQUIRED', authRequired: true };
+  }
+
   // 비공개 글은 관리자 토큰이 있을 때만 내려준다
-  if (!verifyToken(token)) {
+  if (!authed) {
     items = items.filter(it => String(it.type) !== '비공개');
+  }
+
+  // 공지사항: 비로그인 방문자에겐 최근 5년(롤링)만 반환 — 오래된 글은 시트에 보관하되 JSON 자체를 미전송.
+  // 직원 로그인(authed) 시 전체 반환. 정보공개·갤러리는 전체 공개, 자료실은 위에서 로그인 잠금.
+  if (type === 'notices' && !authed) {
+    const cut = new Date();
+    cut.setFullYear(cut.getFullYear() - 5);
+    const cutStr = Utilities.formatDate(cut, Session.getScriptTimeZone(), 'yyyy-MM-dd');
+    items = items.filter(it => {
+      const d = String(it.date || '').substring(0, 10);
+      if (!/^\d{4}-\d{2}-\d{2}$/.test(d)) return true; // 날짜 형식 불명 → 노출 유지
+      return d >= cutStr;
+    });
   }
 
   // 최신순 정렬 (배열 뒤집기 — appendRow는 항상 끝에 추가하므로)
@@ -235,7 +271,7 @@ function handleCreate(type, body) {
   const auth = verifyToken(body.token);
   if (!auth) return { success: false, error: '로그인이 필요합니다.' };
 
-  const sheet = SpreadsheetApp.getActive().getSheetByName(cfg.sheet);
+  const sheet = getOrCreateSheet(cfg);
   const id = Utilities.getUuid().substring(0, 8);
   const createdAt = new Date();
 
